@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LinksPlatform API Documentation - Comprehensive guide for managing links and data relationships">
+    <title>LinksPlatform API Documentation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .endpoint { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .method { font-weight: bold; color: #007acc; }
+        .path { font-family: monospace; background: #f5f5f5; padding: 2px 5px; }
+        .parameter { margin: 5px 0 5px 20px; }
+    </style>
+</head>
+<body>
+    <h1>LinksPlatform API Documentation</h1>
+
+    <p>This API provides access to the LinksPlatform data management system, allowing you to manage links and their relationships.</p>
+
+    <h2>Base URL</h2>
+    <p>https://api.linksplatform.com/v1</p>
+
+    <h2>Authentication</h2>
+    <p>API key required in header: <code>X-API-Key: your_api_key</code></p>
+
+    <h2>Endpoints</h2>
+
+    <div class="endpoint">
+        <h3><span class="method">GET</span> <span class="path">/links</span></h3>
+        <p><strong>Summary:</strong> Retrieve all links</p>
+        <p><strong>Description:</strong> Returns a list of all links in the system with their properties and relationships.</p>
+
+        <h4>Parameters:</h4>
+        <div class="parameter">
+            <strong>id:</strong> Optional link identifier to filter results (integer)
+        </div>
+        <div class="parameter">
+            <strong>limit:</strong> Maximum number of results to return (integer, default: 100)
+        </div>
+        <div class="parameter">
+            <strong>offset:</strong> Number of results to skip for pagination (integer, default: 0)
+        </div>
+
+        <h4>Response:</h4>
+        <p>Returns JSON array of link objects with id, source, target, and metadata.</p>
+    </div>
+
+    <div class="endpoint">
+        <h3><span class="method">GET</span> <span class="path">/links/{id}</span></h3>
+        <p><strong>Summary:</strong> Get specific link by ID</p>
+        <p><strong>Description:</strong> Retrieves detailed information about a specific link including all its properties and related links.</p>
+
+        <h4>Path Parameters:</h4>
+        <div class="parameter">
+            <strong>id:</strong> Unique identifier of the link (integer, required)
+        </div>
+
+        <h4>Response:</h4>
+        <p>Returns detailed link object with all properties and relationships.</p>
+    </div>
+
+    <div class="endpoint">
+        <h3><span class="method">POST</span> <span class="path">/links</span></h3>
+        <p><strong>Summary:</strong> Create new link</p>
+        <p><strong>Description:</strong> Creates a new link relationship between two entities in the system.</p>
+
+        <h4>Request Body:</h4>
+        <div class="parameter">
+            <strong>source:</strong> Source entity ID (integer, required)
+        </div>
+        <div class="parameter">
+            <strong>target:</strong> Target entity ID (integer, required)
+        </div>
+        <div class="parameter">
+            <strong>type:</strong> Link type identifier (integer, optional)
+        </div>
+
+        <h4>Response:</h4>
+        <p>Returns created link object with assigned ID and timestamps.</p>
+    </div>
+
+    <div class="endpoint">
+        <h3><span class="method">PUT</span> <span class="path">/links/{id}</span></h3>
+        <p><strong>Summary:</strong> Update existing link</p>
+        <p><strong>Description:</strong> Updates properties of an existing link relationship.</p>
+
+        <h4>Path Parameters:</h4>
+        <div class="parameter">
+            <strong>id:</strong> Unique identifier of the link to update (integer, required)
+        </div>
+
+        <h4>Request Body:</h4>
+        <div class="parameter">
+            <strong>source:</strong> New source entity ID (integer, optional)
+        </div>
+        <div class="parameter">
+            <strong>target:</strong> New target entity ID (integer, optional)
+        </div>
+        <div class="parameter">
+            <strong>type:</strong> New link type identifier (integer, optional)
+        </div>
+
+        <h4>Response:</h4>
+        <p>Returns updated link object with new values and timestamps.</p>
+    </div>
+
+    <div class="endpoint">
+        <h3><span class="method">DELETE</span> <span class="path">/links/{id}</span></h3>
+        <p><strong>Summary:</strong> Delete link</p>
+        <p><strong>Description:</strong> Permanently removes a link relationship from the system.</p>
+
+        <h4>Path Parameters:</h4>
+        <div class="parameter">
+            <strong>id:</strong> Unique identifier of the link to delete (integer, required)
+        </div>
+
+        <h4>Response:</h4>
+        <p>Returns confirmation of deletion with status code 204.</p>
+    </div>
+
+    <h2>Error Responses</h2>
+    <p>All endpoints may return the following error responses:</p>
+    <ul>
+        <li><strong>400 Bad Request:</strong> Invalid request parameters</li>
+        <li><strong>401 Unauthorized:</strong> Missing or invalid API key</li>
+        <li><strong>404 Not Found:</strong> Requested resource not found</li>
+        <li><strong>500 Internal Server Error:</strong> Server processing error</li>
+    </ul>
+
+    <h2>Rate Limiting</h2>
+    <p>API requests are limited to 1000 requests per hour per API key.</p>
+
+</body>
+</html>
