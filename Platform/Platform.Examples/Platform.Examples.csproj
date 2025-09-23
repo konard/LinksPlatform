@@ -7,6 +7,7 @@
     <VersionPrefix>0.0.1</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <LangVersion>9.0</LangVersion>
     <AssemblyName>Platform.Examples</AssemblyName>
     <PackageId>Platform.Examples</PackageId>
     <PackageTags>LinksPlatform;Examples</PackageTags>
@@ -25,6 +26,7 @@
     <PackageReference Include="Platform.Counters" Version="0.0.2" />
     <PackageReference Include="Platform.Communication" Version="0.2.0" />
     <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

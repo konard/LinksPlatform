@@ -1,0 +1,16 @@
+{
+  "id": 2,
+  "name": "Jane Smith",
+  "email": "jane.smith@email.com",
+  "age": 25,
+  "isActive": false,
+  "address": {
+    "street": "456 Oak Ave",
+    "city": "Somewhere",
+    "zipCode": "67890",
+    "country": "Canada"
+  },
+  "hobbies": ["painting", "hiking"],
+  "lastLogin": "2023-11-28T15:45:30Z",
+  "phone": "+1-555-0123"
+}
