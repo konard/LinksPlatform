@@ -1,0 +1,105 @@
+@{
+    ViewData["Title"] = "Error Formatter";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Error Formatting Tool</h2>
+        <p>This tool helps format error messages and JSON for better readability.</p>
+
+        <form asp-action="FormatText" method="post">
+            <div class="form-group">
+                <label for="inputText">Input Text:</label>
+                <textarea id="inputText" name="inputText" class="form-control" rows="8" placeholder="Paste your error message or JSON here...">@ViewBag.InputText</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="formatType">Format Type:</label>
+                <select id="formatType" name="formatType" class="form-control">
+                    <option value="error" selected="@(ViewBag.FormatType == "error" ? "selected" : null)">Error Message Formatting</option>
+                    <option value="json" selected="@(ViewBag.FormatType == "json" ? "selected" : null)">JSON Formatting</option>
+                    <option value="jsonstrings" selected="@(ViewBag.FormatType == "jsonstrings" ? "selected" : null)">JSON with String Formatting</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Format Text</button>
+            <button type="button" class="btn btn-secondary" onclick="clearText()">Clear</button>
+        </form>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.FormattedText))
+{
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h4>Formatted Output:</h4>
+            <div class="card">
+                <div class="card-body">
+                    <pre id="outputText" class="mb-0" style="white-space: pre-wrap; background-color: #f8f9fa; padding: 15px; border-radius: 5px; max-height: 400px; overflow-y: auto;">@ViewBag.FormattedText</pre>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary mt-2" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
+    </div>
+}
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>How to Use</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Error Message Formatting:</strong> Converts single-line error messages into properly formatted multi-line text with appropriate line breaks.</li>
+                    <li><strong>JSON Formatting:</strong> Pretty-prints JSON with proper indentation and formatting.</li>
+                    <li><strong>JSON with String Formatting:</strong> Formats JSON and also applies error formatting to string values that contain error messages.</li>
+                </ul>
+
+                <h6>Example Input (Error Formatting):</h6>
+                <code>The .NET Core SDK cannot be located: Error running dotnet --info: Error: Command failed: dotnet --info /bin/sh: 1: dotnet: not found /bin/sh: 1: dotnet: not found . .NET Core debugging will not be enabled. Make sure the .NET Core SDK is installed and is on the path.</code>
+
+                <h6>Example Output:</h6>
+                <pre style="font-size: 0.9em;">The .NET Core SDK cannot be located:
+Error running dotnet --info:
+Error: Command failed: dotnet --info
+/bin/sh: 1: dotnet: not found
+/bin/sh: 1: dotnet: not found
+.
+.NET Core debugging will not be enabled
+Make sure the .NET Core SDK is installed and is on the path.</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function clearText() {
+        document.getElementById('inputText').value = '';
+        var outputElement = document.getElementById('outputText');
+        if (outputElement) {
+            outputElement.parentElement.parentElement.parentElement.style.display = 'none';
+        }
+    }
+
+    function copyToClipboard() {
+        var outputText = document.getElementById('outputText');
+        if (outputText) {
+            navigator.clipboard.writeText(outputText.textContent).then(function() {
+                var button = event.target;
+                var originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.remove('btn-outline-secondary');
+                button.classList.add('btn-success');
+
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-outline-secondary');
+                }, 2000);
+            }).catch(function() {
+                alert('Failed to copy to clipboard. Please select the text manually.');
+            });
+        }
+    }
+</script>
