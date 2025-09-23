@@ -1,0 +1,202 @@
+[
+  {
+    "EventId": "79749901-6984-207a-8083-222d8e7b9fe2",
+    "EventType": "Application.Start",
+    "Message": "Demo application started",
+    "ProcessId": "MainProcess",
+    "Timestamp": "2025-09-23T02:49:04.8752837Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-df8c-fc79-add8-936d96a58d28",
+    "EventType": "Database.Connect",
+    "Message": "Connected to event database",
+    "ProcessId": "MainProcess",
+    "Timestamp": "2025-09-23T02:49:07.0394586Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-e58c-9c78-8d48-18c4009cb055",
+    "EventType": "Info",
+    "Message": "System initialized successfully",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.0459347Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-ec8c-6f7e-8e22-47528a334c35",
+    "EventType": "Warning",
+    "Message": "This is a warning message",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.0525389Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "b202ef57-f25f-49c6-9575-94823c1a48a4",
+    "EventType": "Command.Start",
+    "Message": "Starting: echo Hello from Unix Command",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.0755484Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "b202ef57-f25f-49c6-9575-94823c1a48a4",
+    "EventType": "Command.Output",
+    "Message": "Hello from Unix Command\n",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.3587612Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "b202ef57-f25f-49c6-9575-94823c1a48a4",
+    "EventType": "Command.Complete",
+    "Message": "Completed with exit code 0 in 274ms",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.4396911Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "2d15c24a-8459-46bd-9ea5-fdc0cd9f9634",
+    "EventType": "Command.Start",
+    "Message": "Starting: date",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.4414281Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "2d15c24a-8459-46bd-9ea5-fdc0cd9f9634",
+    "EventType": "Command.Output",
+    "Message": "Tue Sep 23 05:49:07 AM MSK 2025\n",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.4556347Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "2d15c24a-8459-46bd-9ea5-fdc0cd9f9634",
+    "EventType": "Command.Complete",
+    "Message": "Completed with exit code 0 in 12ms",
+    "ProcessId": "DemoProcess",
+    "Timestamp": "2025-09-23T02:49:07.4599221Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-b38e-0771-95b0-5410050525e2",
+    "EventType": "Worker.Start",
+    "Message": "Worker Worker2 started",
+    "ProcessId": "Worker2",
+    "Timestamp": "2025-09-23T02:49:07.5071457Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-b38e-e073-a47f-9386c97665b1",
+    "EventType": "Worker.Start",
+    "Message": "Worker Worker1 started",
+    "ProcessId": "Worker1",
+    "Timestamp": "2025-09-23T02:49:07.5077582Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-1b8f-aa76-9b57-c7ae6a48ff63",
+    "EventType": "Task.Execute",
+    "Message": "Executing task 1/3",
+    "ProcessId": "Worker1",
+    "Timestamp": "2025-09-23T02:49:07.6117687Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-1c8f-0b73-b67d-dd301e68d694",
+    "EventType": "Task.Execute",
+    "Message": "Executing task 1/2",
+    "ProcessId": "Worker2",
+    "Timestamp": "2025-09-23T02:49:07.6125552Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-848f-1e7a-ad0b-2269f0ae5e0c",
+    "EventType": "Task.Execute",
+    "Message": "Executing task 2/3",
+    "ProcessId": "Worker1",
+    "Timestamp": "2025-09-23T02:49:07.7161516Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-868f-ed76-b705-abb12a90a7cf",
+    "EventType": "Task.Execute",
+    "Message": "Executing task 2/2",
+    "ProcessId": "Worker2",
+    "Timestamp": "2025-09-23T02:49:07.7183056Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-878f-e579-951a-be1127b40390",
+    "EventType": "Worker.Complete",
+    "Message": "Worker Worker2 completed 2 tasks",
+    "ProcessId": "Worker2",
+    "Timestamp": "2025-09-23T02:49:07.7197066Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-908f-197d-a021-045b81dde2b7",
+    "EventType": "Background.Start",
+    "Message": "Background task BackgroundTask started",
+    "ProcessId": "BackgroundTask",
+    "Timestamp": "2025-09-23T02:49:07.7281501Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-dd8f-aa71-b5e0-d7ec392e20ef",
+    "EventType": "Background.Cycle",
+    "Message": "Background cycle 1 completed",
+    "ProcessId": "BackgroundTask",
+    "Timestamp": "2025-09-23T02:49:07.8056112Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-ea8f-ba74-aa13-397d1337d597",
+    "EventType": "Task.Execute",
+    "Message": "Executing task 3/3",
+    "ProcessId": "Worker1",
+    "Timestamp": "2025-09-23T02:49:07.8188348Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-ed8f-b479-a790-71a486cfccfc",
+    "EventType": "Worker.Complete",
+    "Message": "Worker Worker1 completed 3 tasks",
+    "ProcessId": "Worker1",
+    "Timestamp": "2025-09-23T02:49:07.8215863Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-2b90-567b-a661-f8e0622dc241",
+    "EventType": "Background.Cycle",
+    "Message": "Background cycle 2 completed",
+    "ProcessId": "BackgroundTask",
+    "Timestamp": "2025-09-23T02:49:07.8832003Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-7890-cc7a-acb9-6c2903e8f18a",
+    "EventType": "Background.Cycle",
+    "Message": "Background cycle 3 completed",
+    "ProcessId": "BackgroundTask",
+    "Timestamp": "2025-09-23T02:49:07.9604414Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-c890-9e71-8bdc-7433dd56ae61",
+    "EventType": "Background.Cycle",
+    "Message": "Background cycle 4 completed",
+    "ProcessId": "BackgroundTask",
+    "Timestamp": "2025-09-23T02:49:08.0404641Z",
+    "Metadata": {}
+  },
+  {
+    "EventId": "79749901-c990-af74-9add-e3aa09fad187",
+    "EventType": "Background.Stop",
+    "Message": "Background task BackgroundTask stopped",
+    "ProcessId": "BackgroundTask",
+    "Timestamp": "2025-09-23T02:49:08.0418203Z",
+    "Metadata": {}
+  }
+]
