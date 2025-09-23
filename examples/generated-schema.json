@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Generated Schema",
+  "description": "Schema generated from JSON samples",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "street",
+        "city",
+        "zipCode",
+        "country",
+        "region"
+      ]
+    },
+    "hobbies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lastLogin": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri"
+    },
+    "productId": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "inStock": {
+      "type": "boolean"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "specifications": {
+      "type": "object",
+      "properties": {
+        "processor": {
+          "type": "string"
+        },
+        "memory": {
+          "type": "string"
+        },
+        "storage": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "processor",
+        "memory",
+        "storage",
+        "display"
+      ]
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rating": {
+            "type": "integer"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "reviewer": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "rating",
+          "comment",
+          "reviewer"
+        ]
+      }
+    },
+    "phone": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "email",
+    "age",
+    "isActive",
+    "address",
+    "hobbies",
+    "lastLogin",
+    "website",
+    "productId",
+    "price",
+    "inStock",
+    "categories",
+    "specifications",
+    "reviews",
+    "phone"
+  ]
+}

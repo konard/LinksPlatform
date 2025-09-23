@@ -1,0 +1,17 @@
+{
+  "id": 3,
+  "name": "Bob Johnson",
+  "email": "bob.johnson@company.org",
+  "age": 45.5,
+  "isActive": true,
+  "address": {
+    "street": "789 Pine Rd",
+    "city": "Elsewhere",
+    "zipCode": "54321",
+    "country": "UK",
+    "region": "England"
+  },
+  "hobbies": ["photography", "travel", "music", "gardening"],
+  "lastLogin": "2023-12-02T08:15:45Z",
+  "website": "https://bobphotography.com"
+}

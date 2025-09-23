@@ -1,0 +1,25 @@
+{
+  "productId": "P001",
+  "name": "Laptop Computer",
+  "price": 999.99,
+  "inStock": true,
+  "categories": ["electronics", "computers"],
+  "specifications": {
+    "processor": "Intel Core i7",
+    "memory": "16GB",
+    "storage": "512GB SSD",
+    "display": "15.6 inch"
+  },
+  "reviews": [
+    {
+      "rating": 5,
+      "comment": "Excellent laptop!",
+      "reviewer": "Alice"
+    },
+    {
+      "rating": 4,
+      "comment": "Good performance",
+      "reviewer": "Bob"
+    }
+  ]
+}
