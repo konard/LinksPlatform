@@ -1,0 +1,311 @@
+openapi: 3.0.0
+info:
+  title: LinksPlatform API Documentation
+  version: 1.0.0
+  description: LinksPlatform API Documentation - Comprehensive guide for managing links and data relationships
+paths:
+  /links:
+    get:
+      summary: Retrieve all links
+      description: Returns a list of all links in the system with their properties and relationships.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Response data
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+      parameters:
+        - 
+        name: id
+          in: query
+          description: Optional link identifier to filter results (integer)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: limit
+          in: query
+          description: Maximum number of results to return (integer, default: 100)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: offset
+          in: query
+          description: Number of results to skip for pagination (integer, default: 0)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: source
+          in: query
+          description: Source entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: target
+          in: query
+          description: Target entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: type
+          in: query
+          description: Link type identifier (integer, optional)
+          required: false
+          schema:
+            type: integer
+    post:
+      summary: Retrieve all links
+      description: Returns a list of all links in the system with their properties and relationships.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Response data
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+      parameters:
+        - 
+        name: id
+          in: query
+          description: Optional link identifier to filter results (integer)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: limit
+          in: query
+          description: Maximum number of results to return (integer, default: 100)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: offset
+          in: query
+          description: Number of results to skip for pagination (integer, default: 0)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: source
+          in: query
+          description: Source entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: target
+          in: query
+          description: Target entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: type
+          in: query
+          description: Link type identifier (integer, optional)
+          required: false
+          schema:
+            type: integer
+  /links/{id}:
+    get:
+      summary: Retrieve all links
+      description: Returns a list of all links in the system with their properties and relationships.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Response data
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+      parameters:
+        - 
+        name: id
+          in: query
+          description: Optional link identifier to filter results (integer)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: limit
+          in: query
+          description: Maximum number of results to return (integer, default: 100)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: offset
+          in: query
+          description: Number of results to skip for pagination (integer, default: 0)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: source
+          in: query
+          description: Source entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: target
+          in: query
+          description: Target entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: type
+          in: query
+          description: Link type identifier (integer, optional)
+          required: false
+          schema:
+            type: integer
+    put:
+      summary: Get specific link by ID
+      description: Retrieves detailed information about a specific link including all its properties and related links.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Response data
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+      parameters:
+        - 
+        name: id
+          in: query
+          description: Optional link identifier to filter results (integer)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: limit
+          in: query
+          description: Maximum number of results to return (integer, default: 100)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: offset
+          in: query
+          description: Number of results to skip for pagination (integer, default: 0)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: source
+          in: query
+          description: Source entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: target
+          in: query
+          description: Target entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: type
+          in: query
+          description: Link type identifier (integer, optional)
+          required: false
+          schema:
+            type: integer
+    delete:
+      summary: Create new link
+      description: Creates a new link relationship between two entities in the system.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Response data
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+      parameters:
+        - 
+        name: source
+          in: query
+          description: Source entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: target
+          in: query
+          description: Target entity ID (integer, required)
+          required: true
+          schema:
+            type: integer
+        - 
+        name: type
+          in: query
+          description: Link type identifier (integer, optional)
+          required: false
+          schema:
+            type: integer
+        - 
+        name: id
+          in: query
+          description: Unique identifier of the link to update (integer, required)
+          required: true
+          schema:
+            type: integer
+components:
+  schemas: {}
