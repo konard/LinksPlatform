@@ -1,0 +1,28 @@
+Manual Test Plan for Error Formatting Tool
+
+1. Test Input (from the issue):
+"The .NET Core SDK cannot be located: Error running dotnet --info: Error: Command failed: dotnet --info /bin/sh: 1: dotnet: not found /bin/sh: 1: dotnet: not found . .NET Core debugging will not be enabled. Make sure the .NET Core SDK is installed and is on the path."
+
+Expected Output:
+"The .NET Core SDK cannot be located:
+Error running dotnet --info:
+Error: Command failed: dotnet --info
+/bin/sh: 1: dotnet: not found
+/bin/sh: 1: dotnet: not found
+.
+.NET Core debugging will not be enabled
+Make sure the .NET Core SDK is installed and is on the path."
+
+2. JSON Test:
+Input: {"error": "Some error", "details": "More details"}
+Expected: Properly indented JSON
+
+3. JSON with strings test:
+Input: {"errorMessage": "Error: Command failed /bin/sh: 1: dotnet: not found"}
+Expected: JSON with formatted error message within the string
+
+Test Status: ✓ Code compiles successfully
+Test Status: ✓ All dependencies resolved
+Test Status: ✓ Service properly registered in DI container
+Test Status: ✓ Controller routes configured
+Test Status: ✓ View created with proper form handling
