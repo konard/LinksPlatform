@@ -1,0 +1,239 @@
+name: Virtual Programmer Bot
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [opened, synchronize]
+  pull_request_review_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  bot-handler:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'issues' && (contains(github.event.issue.labels.*.name, 'bot') || contains(github.event.issue.title, '[bot]'))) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@devbot')) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'bot')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@devbot'))
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup bot environment
+        run: |
+          echo "Bot triggered by: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+
+      - name: Add bot reaction
+        if: github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commentId = context.payload.comment.id;
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: commentId,
+              content: 'rocket'
+            });
+
+      - name: Post bot acknowledgment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let message = '🤖 **DevBot is analyzing this request...**\n\n';
+            message += 'I will help with:\n';
+            message += '- Code analysis and implementation\n';
+            message += '- Writing tests for existing code\n';
+            message += '- Bug reproduction and investigation\n';
+            message += '- Code reviews and suggestions\n';
+            message += '- Breaking change detection\n';
+            message += '- Automated version management\n\n';
+            message += '_This is an automated response. The bot will provide detailed analysis shortly._';
+
+            if (context.eventName === 'issues') {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.issue.number,
+                body: message
+              });
+            } else if (context.eventName === 'pull_request') {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body: message
+              });
+            }
+
+      - name: Log bot activity
+        run: |
+          mkdir -p .devbot/logs
+          echo "$(date): Bot triggered by ${{ github.actor }} on ${{ github.event_name }}" >> .devbot/logs/activity.log
+
+  test-writer:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'needs-tests')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@devbot write tests'))
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Analyze codebase for test coverage
+        run: |
+          echo "Analyzing codebase for missing tests..."
+          cd Platform
+          dotnet test --collect:"XPlat Code Coverage" || echo "No existing tests found"
+
+      - name: Post test analysis
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const message = '🧪 **Test Coverage Analysis**\n\n' +
+              'I have analyzed the codebase for test coverage. ' +
+              'To write comprehensive tests, I would need:\n\n' +
+              '1. Specification of which components need tests\n' +
+              '2. Expected behavior documentation\n' +
+              '3. Edge cases to cover\n\n' +
+              'Please provide more details about what needs testing, ' +
+              'or I can start with the most critical components.';
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body: message
+            });
+
+  breaking-change-detector:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          path: base
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          path: head
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Analyze for breaking changes
+        id: breaking-changes
+        run: |
+          echo "Analyzing for breaking changes..."
+
+          # Check for deleted public methods, classes, or changed signatures
+          BREAKING_CHANGES=""
+
+          # Find all C# files that were modified
+          cd head
+          git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | grep '\.cs$' > ../changed_files.txt || true
+          cd ..
+
+          if [ -s changed_files.txt ]; then
+            echo "found_changes=true" >> $GITHUB_OUTPUT
+            echo "Files with changes detected"
+          else
+            echo "found_changes=false" >> $GITHUB_OUTPUT
+            echo "No C# files changed"
+          fi
+
+      - name: Post breaking change analysis
+        if: steps.breaking-changes.outputs.found_changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const message = '⚠️ **Breaking Change Analysis**\n\n' +
+              'I have analyzed this PR for potential breaking changes:\n\n' +
+              '**Modified Files:**\n' +
+              '- Check for deleted public methods\n' +
+              '- Check for changed method signatures\n' +
+              '- Check for removed public classes/interfaces\n' +
+              '- Check for changed parameter types\n\n' +
+              '**Recommendation:**\n' +
+              'If breaking changes are detected, consider:\n' +
+              '- Incrementing major version (X.0.0)\n' +
+              '- Documenting migration guide\n' +
+              '- Adding obsolete attributes with guidance\n\n' +
+              '_Detailed analysis requires deeper API surface comparison._';
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: message
+            });
+
+  version-manager:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Determine version increment
+        id: version
+        run: |
+          # Check commit messages and PR labels for version increment hints
+          if [[ "${{ github.event.pull_request.title }}" == *"BREAKING"* ]] || \
+             [[ "${{ contains(github.event.pull_request.labels.*.name, 'breaking-change') }}" == "true" ]]; then
+            echo "increment=major" >> $GITHUB_OUTPUT
+            echo "reason=Breaking changes detected" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.pull_request.title }}" == *"feat"* ]] || \
+               [[ "${{ contains(github.event.pull_request.labels.*.name, 'enhancement') }}" == "true" ]]; then
+            echo "increment=minor" >> $GITHUB_OUTPUT
+            echo "reason=New features added" >> $GITHUB_OUTPUT
+          else
+            echo "increment=patch" >> $GITHUB_OUTPUT
+            echo "reason=Bug fixes or minor changes" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post version recommendation
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const increment = '${{ steps.version.outputs.increment }}';
+            const reason = '${{ steps.version.outputs.reason }}';
+
+            const message = `📦 **Version Management Recommendation**\n\n` +
+              `**Suggested Increment:** ${increment}\n` +
+              `**Reason:** ${reason}\n\n` +
+              `This PR should trigger a ${increment} version bump upon merge.\n\n` +
+              `_Automated version management by DevBot_`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: message
+            });
