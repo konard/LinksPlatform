@@ -94,7 +94,7 @@ namespace Platform.Sandbox
 
             try
             {
-                //TerminalExperiment.Run();
+                //new TerminalExperiment().Run();
 
                 //OperationsExperiments.RunExperiment();
             }

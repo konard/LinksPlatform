@@ -7,8 +7,12 @@ using Platform.Communication.Protocol.Udp;
 
 namespace Platform.Examples
 {
-    public class TerminalCLI : ICommandLineInterface
+    public class TerminalCLI : Terminal, ICommandLineInterface
     {
+        public TerminalCLI(string databaseFilePath = null) : base(databaseFilePath)
+        {
+        }
+
         public void Run(params string[] args)
         {
             try
