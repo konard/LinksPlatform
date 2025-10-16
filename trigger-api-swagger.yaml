@@ -1,0 +1,389 @@
+openapi: 3.0.3
+info:
+  title: IUniLinks Trigger Function API
+  description: |
+    OpenAPI specification for the Trigger function of the IUniLinks interface.
+
+    The IUniLinks interface provides a minimal sufficient universal Links API for bulk and step-by-step operations.
+    The Trigger function is the core operation that allows pattern matching and substitution on links.
+
+    ## Function Signatures
+
+    The Trigger function has three overloads:
+
+    1. **Bulk Operation**: `Trigger(condition, substitution)` - Returns matching and substituted links
+    2. **Step-by-Step with Read Handler**: `Trigger(patternOrCondition, matchHandler, substitution, substitutionHandler)` - With callbacks for matched links
+    3. **Step-by-Step with Write Handler**: `Trigger(restriction, matchedHandler, substitution, substitutedHandler)` - With callbacks for matched and substituted links
+
+    ## Use Cases
+
+    - **Create**: `{ 0, 0, 0 } => { itself, itself, itself }`
+    - **Update**: `{ 1, any, any } => { itself, any, 3 }`
+    - **Delete**: `{ 3, any, any } => { 0, 0, 0 }`
+
+    Based on the IUniLinks interface from linksplatform/Data repository.
+  version: 1.0.0
+  contact:
+    name: LinksPlatform
+    url: https://github.com/linksplatform
+  license:
+    name: Unlicense
+    url: https://github.com/linksplatform/Data/blob/main/LICENSE
+
+servers:
+  - url: https://api.linksplatform.github.com/v1
+    description: Production server
+  - url: http://localhost:5000/api/v1
+    description: Development server
+
+tags:
+  - name: Trigger
+    description: Pattern matching and substitution operations on links
+
+paths:
+  /trigger/bulk:
+    post:
+      tags:
+        - Trigger
+      summary: Trigger bulk operation
+      description: |
+        Executes a bulk trigger operation that matches links based on a condition and applies substitution.
+        Returns a nested list of matched and substituted links.
+
+        This corresponds to the signature:
+        `IList<IList<IList<TLinkAddress>?>> Trigger(IList<TLinkAddress>? condition, IList<TLinkAddress>? substitution)`
+      operationId: triggerBulk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerBulkRequest'
+            examples:
+              createLink:
+                summary: Create a new link
+                value:
+                  condition: [0, 0, 0]
+                  substitution: null
+              updateLink:
+                summary: Update a link
+                value:
+                  condition: [1, null, null]
+                  substitution: [1, null, 3]
+              deleteLink:
+                summary: Delete a link
+                value:
+                  condition: [3, null, null]
+                  substitution: [0, 0, 0]
+              matchLinks:
+                summary: Match links with specific source
+                value:
+                  condition: [5, null, null]
+                  substitution: null
+      responses:
+        '200':
+          description: Successfully executed trigger operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerBulkResponse'
+              examples:
+                success:
+                  summary: Successful trigger with results
+                  value:
+                    results: [
+                      [[1, 2, 3], [1, 2, 4]],
+                      [[5, 6, 7], [5, 6, 8]]
+                    ]
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /trigger/step-by-step:
+    post:
+      tags:
+        - Trigger
+      summary: Trigger step-by-step operation with handlers
+      description: |
+        Executes a step-by-step trigger operation that matches links based on a pattern/condition
+        and applies substitution, calling handlers for matched and substituted links.
+
+        Returns a TLinkAddress representing True (fully finished) or False (stopped).
+
+        This corresponds to the signatures:
+        - `TLinkAddress Trigger(IList<TLinkAddress>? patternOrCondition, ReadHandler<TLinkAddress>? matchHandler, IList<TLinkAddress>? substitution, WriteHandler<TLinkAddress>? substitutionHandler)`
+        - `TLinkAddress Trigger(IList<TLinkAddress>? restriction, WriteHandler<TLinkAddress>? matchedHandler, IList<TLinkAddress>? substitution, WriteHandler<TLinkAddress>? substitutedHandler)`
+
+        Note: In HTTP/REST context, handlers are replaced with callback URLs or webhook endpoints.
+      operationId: triggerStepByStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerStepByStepRequest'
+            examples:
+              withCallbacks:
+                summary: Trigger with callback URLs
+                value:
+                  restriction: [1, null, null]
+                  matchedCallbackUrl: "https://example.com/webhooks/matched"
+                  substitution: [1, 2, 3]
+                  substitutedCallbackUrl: "https://example.com/webhooks/substituted"
+              simpleMatch:
+                summary: Simple pattern match
+                value:
+                  restriction: [5, 6, null]
+                  substitution: null
+      responses:
+        '200':
+          description: Successfully executed trigger operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerStepByStepResponse'
+              examples:
+                completed:
+                  summary: Operation completed successfully
+                  value:
+                    result: 1
+                    status: "completed"
+                stopped:
+                  summary: Operation stopped
+                  value:
+                    result: 0
+                    status: "stopped"
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /trigger/count:
+    post:
+      tags:
+        - Trigger
+      summary: Count links matching restrictions
+      description: |
+        Counts the number of links that match the given restrictions.
+
+        This corresponds to the signature:
+        `TLinkAddress Count(IList<TLinkAddress>? restrictions)`
+
+        This is a small optimization for common counting operations.
+      operationId: count
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountRequest'
+            examples:
+              countAll:
+                summary: Count all links
+                value:
+                  restrictions: null
+              countBySource:
+                summary: Count links with specific source
+                value:
+                  restrictions: [5, null, null]
+              countBySourceAndLinker:
+                summary: Count links with source and linker
+                value:
+                  restrictions: [5, 6, null]
+      responses:
+        '200':
+          description: Successfully counted matching links
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountResponse'
+              examples:
+                result:
+                  summary: Count result
+                  value:
+                    count: 42
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    LinkAddress:
+      type: integer
+      format: int64
+      description: |
+        A link address (TLinkAddress). Typically a 64-bit unsigned integer.
+        - 0 represents null or "any" in patterns
+        - Positive values represent specific link IDs
+      example: 12345
+
+    LinkAddressArray:
+      type: array
+      items:
+        oneOf:
+          - type: integer
+            format: int64
+          - type: "null"
+      description: |
+        An array of link addresses, where null represents "any" in patterns.
+        Typically contains [source, linker, target] for triplets.
+      example: [1, 2, 3]
+      nullable: true
+
+    TriggerBulkRequest:
+      type: object
+      properties:
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddressArray'
+          description: |
+            The condition pattern to match against links.
+            Use null values for "any" matching.
+            Examples:
+            - [0, 0, 0] for creating new links
+            - [1, null, null] for matching links with source=1
+            - null for matching all links
+        substitution:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddressArray'
+          description: |
+            The substitution pattern to apply to matched links.
+            Use null to only query without modification.
+            Examples:
+            - [1, 2, 3] to update matched links to these values
+            - [0, 0, 0] to delete matched links
+            - null for read-only operations
+
+    TriggerBulkResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/LinkAddressArray'
+          description: |
+            A nested list of results: IList<IList<IList<TLinkAddress>>>.
+            Outer list: different match groups
+            Middle list: [before, after] pairs for each match
+            Inner list: [source, linker, target] for each link state
+          example: [
+            [[1, 2, 3], [1, 2, 4]],
+            [[5, 6, 7], [5, 6, 8]]
+          ]
+
+    TriggerStepByStepRequest:
+      type: object
+      properties:
+        restriction:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddressArray'
+          description: |
+            The restriction/pattern/condition to match against links.
+            Use null values for "any" matching.
+        matchedCallbackUrl:
+          type: string
+          format: uri
+          description: |
+            Optional webhook URL to call for each matched link.
+            The callback will receive the matched link as JSON.
+          nullable: true
+          example: "https://example.com/webhooks/matched"
+        substitution:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddressArray'
+          description: |
+            The substitution pattern to apply to matched links.
+            Use null for read-only operations.
+        substitutedCallbackUrl:
+          type: string
+          format: uri
+          description: |
+            Optional webhook URL to call for each substituted link.
+            The callback will receive both before and after states as JSON.
+          nullable: true
+          example: "https://example.com/webhooks/substituted"
+
+    TriggerStepByStepResponse:
+      type: object
+      properties:
+        result:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddress'
+          description: |
+            Result value representing completion status:
+            - Non-zero (typically 1): Operation completed fully (True)
+            - Zero (0): Operation was stopped (False)
+        status:
+          type: string
+          enum: [completed, stopped]
+          description: Human-readable status
+          example: "completed"
+
+    CountRequest:
+      type: object
+      properties:
+        restrictions:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddressArray'
+          description: |
+            Optional restrictions to filter which links to count.
+            Use null to count all links.
+            Use null values in array for "any" matching.
+
+    CountResponse:
+      type: object
+      properties:
+        count:
+          allOf:
+            - $ref: '#/components/schemas/LinkAddress'
+          description: The number of links matching the restrictions
+          example: 42
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Error code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Invalid condition pattern"
+        fields:
+          type: string
+          description: Field name that caused the error (if applicable)
+          nullable: true
+          example: "condition"
+      required:
+        - code
+        - message
