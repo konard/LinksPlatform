@@ -29,14 +29,20 @@ namespace Platform.Examples
                 using (var links = new UInt64Links(memoryAdapter))
                 {
                     var syncLinks = new SynchronizedLinks<ulong>(links);
+                    var eventLogLinks = new EventLoggingLinks<ulong>(syncLinks, message =>
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine(message);
+                        Console.ResetColor();
+                    });
                     var unicodeMap = new UnicodeMap(syncLinks);
                     unicodeMap.Init();
                     var sequences = new Sequences(syncLinks, new SequencesOptions<ulong> { UseSequenceMarker = true, SequenceMarkerLink = 65537, UseCompression = true });
-                    Console.WriteLine("Links server started.");
+                    Console.WriteLine("Links server started with event logging enabled.");
                     Console.WriteLine("Press CTRL+C or ESC to stop server.");
                     using (var sender = new UdpSender(8888))
                     {
-                        var masterServer = new MasterServer(links, sequences, sender);
+                        var masterServer = new MasterServer(eventLogLinks, sequences, sender);
                         masterServer.PrintContents(Console.WriteLine);
                         void handleMessage(string message)
                         {
