@@ -1,0 +1,50 @@
+using System;
+using System.IO;
+using Platform.IO;
+using Platform.Data.Doublets;
+using Platform.Data.Doublets.Memory.United.Specific;
+using Platform.Data.Doublets.Decorators;
+
+namespace Platform.Examples
+{
+    /// <summary>
+    /// Command-line interface for exporting links to Universal Links String Format.
+    /// </summary>
+    public class UniversalLinksStringFormatExporterCLI : ICommandLineInterface
+    {
+        public void Run(params string[] args)
+        {
+            var i = 0;
+            var linksFile = ConsoleHelpers.GetOrReadArgument(i++, "Links file", args);
+            var exportTo = ConsoleHelpers.GetOrReadArgument(i++, "Export to", args);
+            var unicodeMapped = ConsoleHelpers.GetOrReadArgument(i++, "Unicode is mapped", args);
+            var convertUnicodeLinksToCharacters = ConsoleHelpers.GetOrReadArgument(i++, "Convert each unicode-link to a corresponding character", args);
+            var referenceByLines = ConsoleHelpers.GetOrReadArgument(i++, "Reference by row (line) number", args);
+            bool.TryParse(unicodeMapped, out bool isUnicodeMapped);
+            bool.TryParse(convertUnicodeLinksToCharacters, out bool doConvertUnicodeLinksToCharacters);
+            bool.TryParse(referenceByLines, out bool doReferenceByLines);
+            File.Create(exportTo).Dispose();
+            if (!File.Exists(linksFile))
+            {
+                Console.WriteLine("Entered links file does not exists.");
+            }
+            else if (!File.Exists(exportTo))
+            {
+                Console.WriteLine("Entered exported file cannot be created.");
+            }
+            else
+            {
+                using (var cancellation = new ConsoleCancellation())
+                using (var memoryAdapter = new UInt64UnitedMemoryLinks(linksFile))
+                using (var links = new UInt64Links(memoryAdapter))
+                {
+                    Console.WriteLine("Press CTRL+C to stop.");
+                    var syncLinks = new SynchronizedLinks<ulong>(links);
+                    var exporter = new UniversalLinksStringFormatExporter();
+                    exporter.Export(syncLinks, exportTo, isUnicodeMapped, doConvertUnicodeLinksToCharacters, doReferenceByLines, cancellation.Token);
+                    Console.WriteLine($"Export completed. File saved to: {exportTo}");
+                }
+            }
+        }
+    }
+}
