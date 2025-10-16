@@ -53,3 +53,16 @@
 #### [Platform.Disposables](https://linksplatform.github.io/Disposables)
 #### [Platform.Exceptions](https://linksplatform.github.io/Exceptions)
 #### [Platform.Interfaces](https://linksplatform.github.io/Interfaces)
+
+#### [Platform.Protocols.Lino](https://github.com/konard/Protocols.Lino)
+Platform.Protocols.Lino - это парсер/генератор для Нотации Связей (Links Notation, LiNo) - гибкого формата представления данных, аналогичного JSON, но специально разработанного для представления ассоциативных связей. Доступен для нескольких платформ:
+* **NPM пакет**: [@linksplatform/protocols-lino](https://www.npmjs.com/package/@linksplatform/protocols-lino) - реализация для JavaScript/TypeScript с использованием Peggy.js
+* **NuGet пакет**: [Platform.Protocols.Lino](https://www.nuget.org/packages/Platform.Protocols.Lino) - реализация для C# с использованием Pegasus PEG парсера
+* **Rust**: Нативная реализация на Rust доступна в репозитории
+
+Нотация Связей позволяет естественным образом представлять дуплеты, триплеты и N-кортежи с поддержкой иерархических структур. Пример:
+```
+papa (lovesMama: loves mama)
+son lovesMama
+daughter lovesMama
+```
