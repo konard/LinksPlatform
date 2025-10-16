@@ -60,7 +60,7 @@ namespace Platform.Data.Core
             // Read: Out operation to extract a specific part
             _links.Out(linkParts =>
             {
-                if (linkParts.Length > partType)
+                if (linkParts.Length > (int)partType)
                 {
                     result = linkParts[partType];
                 }

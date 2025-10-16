@@ -77,12 +77,12 @@ namespace Platform.Data.Core
         {
             var links = new MockUniLinksIO();
 
-            // Semantic operations as extension methods
-            var linkId = links.CreateLink(1, 2);
-            var source = links.GetSource(linkId);
-            var target = links.GetTarget(linkId);
-            links.UpdateLink(linkId, 3, 4);
-            links.DeleteLink(linkId);
+            // Semantic operations as extension methods with explicit type specification
+            var linkId = links.CreateLink<ulong>(1, 2);
+            var source = links.GetSource<ulong>(linkId);
+            var target = links.GetTarget<ulong>(linkId);
+            links.UpdateLink<ulong>(linkId, 3, 4);
+            links.DeleteLink<ulong>(linkId);
         }
 
         /// <summary>
