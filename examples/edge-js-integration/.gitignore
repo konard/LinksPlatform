@@ -1,0 +1,7 @@
+node_modules/
+*.links
+bin/
+obj/
+*.log
+.vs/
+.vscode/
