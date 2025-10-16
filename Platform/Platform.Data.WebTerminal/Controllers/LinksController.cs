@@ -28,5 +28,27 @@ namespace Platform.Data.WebTerminal.Controllers
             var model = LinkModel.CreateLinkModel(link);
             return View("Infinite", model);
         }
+
+        public IActionResult EventLog(long id = 0)
+        {
+            if (id == 0)
+            {
+                id = Net.Link;
+            }
+            var link = Link.Restore(id);
+            var model = LinkModel.CreateLinkModel(link);
+            return View("EventLog", model);
+        }
+
+        public IActionResult Graph(long id = 0)
+        {
+            if (id == 0)
+            {
+                id = Net.Link;
+            }
+            var link = Link.Restore(id);
+            var model = LinkModel.CreateLinkModel(link);
+            return View("Graph", model);
+        }
     }
 }
