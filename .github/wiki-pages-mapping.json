@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wiki Pages Language Mapping",
+  "description": "Mapping between English and Russian wiki pages to help keep them in sync",
+  "pairs": [
+    {
+      "english": "FAQ.md",
+      "russian": "ЧАВО.md",
+      "description": "Frequently Asked Questions"
+    },
+    {
+      "english": "How-it-all-began.md",
+      "russian": "О-том,-как-всё-начиналось.md",
+      "description": "About the beginning - philosophical introduction"
+    },
+    {
+      "english": "Coding-conventions.md",
+      "russian": "Соглашения-о-коде.md",
+      "description": "Coding style and conventions"
+    },
+    {
+      "english": "Visualization-primes.md",
+      "russian": "Примитивы-визуализации.md",
+      "description": "Visualization primitives"
+    }
+  ],
+  "unpaired": [
+    {
+      "file": "Home.md",
+      "language": "bilingual",
+      "description": "Wiki home page with links in both languages"
+    },
+    {
+      "file": "Ideas,-идеи.md",
+      "language": "bilingual",
+      "description": "Ideas page in both languages"
+    },
+    {
+      "file": "Состав-проекта.md",
+      "language": "russian",
+      "description": "Project composition (Russian only)"
+    }
+  ],
+  "notes": [
+    "When updating an English page, remember to update its Russian counterpart",
+    "When updating a Russian page, remember to update its English counterpart",
+    "Use the check-wiki-sync.sh script to verify if pages are in sync",
+    "Pages should have cross-references to their translations at the top"
+  ]
+}
