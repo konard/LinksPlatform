@@ -1,0 +1,9 @@
+/// <scaffold type="class" name="DataProcessor" />
+
+/// <scaffold type="class" name="ConfigurationManager" />
+
+/// <scaffold type="method" name="Initialize" />
+
+/// <scaffold type="method" name="ProcessInput" />
+
+/// <scaffold type="class" name="ResultHandler" />
