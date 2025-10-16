@@ -154,6 +154,81 @@ namespace Platform.Sandbox
             _currentFileSizeInBytes = sizeInBytes;
         }
 
+        /// <summary>
+        /// Compacts the transaction log by removing redundant transitions.
+        /// For each link, only the final state (latest transaction) is kept.
+        /// Timestamps of the last action are preserved.
+        /// </summary>
+        /// <remarks>
+        /// This method reduces the log size by removing intermediate states
+        /// (e.g., if a link is created and deleted 20 times, only the final state remains).
+        /// </remarks>
+        public static void CompactLog()
+        {
+            OpenFile();
+
+            // Read all transaction items from the log
+            var items = new System.Collections.Generic.List<TransactionItem>();
+            var currentOffset = _basicTransactionsOffset;
+
+            while (currentOffset < _currentState.FileEndOffset)
+            {
+                _logAccessor.Read(currentOffset, out TransactionItem item);
+                items.Add(item);
+                currentOffset += _transactionItemSize;
+            }
+
+            // Group by link identity (Source, Linker, Target) and keep only the latest transaction for each
+            var compactedItems = new System.Collections.Generic.Dictionary<string, TransactionItem>();
+
+            foreach (var item in items)
+            {
+                // Create a unique key for each link based on its Source, Linker, and Target
+                // Using hash codes since Link objects may not be directly comparable after reload
+                string key = $"{item.Source.GetHashCode()}_{item.Linker.GetHashCode()}_{item.Target.GetHashCode()}";
+
+                // If we haven't seen this link before, or this transaction is newer, keep it
+                if (!compactedItems.ContainsKey(key) ||
+                    compactedItems[key].DateTime < item.DateTime ||
+                    (compactedItems[key].DateTime == item.DateTime && compactedItems[key].TransactionId < item.TransactionId))
+                {
+                    compactedItems[key] = item;
+                }
+            }
+
+            // Write compacted items back to the log
+            var compactedList = new System.Collections.Generic.List<TransactionItem>(compactedItems.Values);
+
+            // Sort by transaction ID to maintain chronological order
+            compactedList.Sort((a, b) => a.TransactionId.CompareTo(b.TransactionId));
+
+            // Reset state for writing
+            _currentState.FileEndOffset = _basicTransactionsOffset;
+            _currentState.LastTransactionItemsCount = 0;
+
+            // Write compacted items
+            currentOffset = _basicTransactionsOffset;
+            for (int i = 0; i < compactedList.Count; i++)
+            {
+                EnsureFileSize();
+                var item = compactedList[i];
+                _logAccessor.Write(currentOffset, ref item);
+                currentOffset += _transactionItemSize;
+                _currentState.FileEndOffset = currentOffset;
+            }
+
+            // Update last transaction information
+            if (compactedList.Count > 0)
+            {
+                var lastItem = compactedList[compactedList.Count - 1];
+                _currentState.LastTransactionId = lastItem.TransactionId;
+                _currentState.LastTransactionOffset = currentOffset - _transactionItemSize;
+            }
+
+            StoreState();
+            CloseFile();
+        }
+
         public static void Run()
         {
         }
