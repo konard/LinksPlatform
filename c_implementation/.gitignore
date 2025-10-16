@@ -1,0 +1,10 @@
+# Compiled object files
+*.o
+
+# Executables
+examples/basic_usage
+
+# Build artifacts
+*.a
+*.so
+*.dylib
