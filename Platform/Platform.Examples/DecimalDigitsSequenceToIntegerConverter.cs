@@ -49,11 +49,20 @@ namespace Platform.Examples
         /// <returns>The reconstructed integer.</returns>
         public BigInteger Convert(TLink sequenceLink)
         {
-            var link = _links[sequenceLink];
+            TLink source = default(TLink);
+            TLink target = default(TLink);
 
-            // Check for negative marker
-            var source = link[_links.Constants.SourcePart];
-            var target = link[_links.Constants.TargetPart];
+            // Read the link to get source and target
+            _links.Each(link =>
+            {
+                if (EqualityComparer<TLink>.Default.Equals(link[_links.Constants.IndexPart], sequenceLink))
+                {
+                    source = link[_links.Constants.SourcePart];
+                    target = link[_links.Constants.TargetPart];
+                    return _links.Constants.Break;
+                }
+                return _links.Constants.Continue;
+            }, _links.Constants.Any, sequenceLink);
 
             bool isNegative = false;
             TLink actualSequenceLink = sequenceLink;
@@ -63,9 +72,16 @@ namespace Platform.Examples
                 isNegative = true;
                 actualSequenceLink = target;
                 // Re-read the link for the actual sequence
-                link = _links[actualSequenceLink];
-                source = link[_links.Constants.SourcePart];
-                target = link[_links.Constants.TargetPart];
+                _links.Each(link =>
+                {
+                    if (EqualityComparer<TLink>.Default.Equals(link[_links.Constants.IndexPart], actualSequenceLink))
+                    {
+                        source = link[_links.Constants.SourcePart];
+                        target = link[_links.Constants.TargetPart];
+                        return _links.Constants.Break;
+                    }
+                    return _links.Constants.Continue;
+                }, _links.Constants.Any, actualSequenceLink);
             }
 
             // Check if this is a marked decimal digits sequence

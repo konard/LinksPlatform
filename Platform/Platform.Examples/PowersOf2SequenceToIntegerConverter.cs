@@ -44,12 +44,22 @@ namespace Platform.Examples
         /// <returns>The reconstructed integer.</returns>
         public BigInteger Convert(TLink sequenceLink)
         {
-            var link = _links[sequenceLink];
+            TLink source = default(TLink);
+            TLink target = default(TLink);
+
+            // Read the link to get source and target
+            _links.Each(link =>
+            {
+                if (EqualityComparer<TLink>.Default.Equals(link[_links.Constants.IndexPart], sequenceLink))
+                {
+                    source = link[_links.Constants.SourcePart];
+                    target = link[_links.Constants.TargetPart];
+                    return _links.Constants.Break;
+                }
+                return _links.Constants.Continue;
+            }, _links.Constants.Any, sequenceLink);
 
             // Check if this is a marked powers-of-2 sequence
-            var source = link[_links.Constants.SourcePart];
-            var target = link[_links.Constants.TargetPart];
-
             TLink actualSequence;
             if (EqualityComparer<TLink>.Default.Equals(source, _powersOf2SequenceMarker))
             {
