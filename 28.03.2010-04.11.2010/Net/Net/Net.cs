@@ -25,6 +25,12 @@ namespace Net
 		static public Dictionary<long, Link> PowerOf2Links { get; private set; }
 		static public Dictionary<Link, long> PowerOf2Numbers { get; private set; }
 
+		/// <summary>
+		/// The first link used for storing startup/mapping information.
+		/// This link serves as the root of the mapping sequence.
+		/// </summary>
+		static public Link FirstLink { get; private set; }
+
 		static Net()
 		{
 			#region Core
@@ -55,6 +61,20 @@ namespace Net
 
 			InitNumbers();
 			SetNames();
+			InitFirstLink();
+		}
+
+		private static void InitFirstLink()
+		{
+			// Initialize the first link as a mapping sequence with initial size of 2
+			FirstLink = MappingSequence.EnlargeMappingSequence(null);
+
+			// Store references to commonly used links in the mapping sequence
+			// Index 0: Reserved for the Link (core concept)
+			FirstLink = MappingSequence.SetMappingSequenceElement(FirstLink, 0, Net.Link);
+
+			// Index 1: Reserved for the Thing (core concept)
+			FirstLink = MappingSequence.SetMappingSequenceElement(FirstLink, 1, Net.Thing);
 		}
 
 		private static void SetNames()
