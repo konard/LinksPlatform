@@ -52,49 +52,49 @@ A `Serializer` class to help with XML serialization and deserialization.
 Platform.Collections.Methods class library contains classes with storage/state agnostic implementation of lists and trees.
 
 #### [Platform.IO](https://linksplatform.github.io/IO)
-Platform.Collections.Methods class library contains classes ... .
+Platform.IO class library provides I/O related functionality and utilities for file operations and I/O management.
 
 #### [Platform.Unsafe](https://linksplatform.github.io/Unsafe)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Unsafe class library provides low-level unsafe programming utilities for direct memory manipulation and performance-critical operations.
 
 #### [Platform.Numbers](https://linksplatform.github.io/Numbers)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Numbers class library provides numerical utility functions and type conversion capabilities for working with numbers.
 
 #### [Platform.Converters](https://linksplatform.github.io/Converters)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Converters class library provides functionality for converting data between different formats and types.
 
 #### [Platform.Scopes](https://linksplatform.github.io/Scopes)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Scopes class library provides utilities for managing scope-based object lifetimes and dependency injection contexts.
 
 #### [Platform.Singletons](https://linksplatform.github.io/Singletons)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Singletons class library provides utilities for managing singleton objects and ensuring single instance patterns across the application.
 
 #### [Platform.Reflection](https://linksplatform.github.io/Reflection)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Reflection class library provides enhanced reflection capabilities for runtime type inspection and manipulation.
 
 #### [Platform.Threading](https://linksplatform.github.io/Threading)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Threading class library provides threading-related functionality and utilities for concurrent programming.
 
 #### [Platform.Collections](https://linksplatform.github.io/Collections)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Collections class library provides collection implementations and utilities for managing data structures.
 
 #### [Platform.Diagnostics](https://linksplatform.github.io/Diagnostics)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Diagnostics class library provides diagnostics and debugging utilities for monitoring and troubleshooting applications.
 
-#### [Platform.Counters](https://linksplatform.github.io/Counters)
-Platform.Collections.Methods class library contains classes ... .
+#### [Platform.Incrementers](https://linksplatform.github.io/Incrementers)
+Platform.Incrementers class library provides incrementer utilities for generating sequential values and counters.
 
 #### [Platform.Setters](https://linksplatform.github.io/Setters)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Setters class library provides setter utilities for modifying and assigning values to objects and properties.
 
 #### [Platform.Comparers](https://linksplatform.github.io/Comparers)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Comparers class library provides comparison utilities and custom comparers for ordering and equality operations.
 
 #### [Platform.Random](https://linksplatform.github.io/Random)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Random class library provides random number generation utilities and helpers for generating random values.
 
 #### [Platform.Timestamps](https://linksplatform.github.io/Timestamps)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Timestamps class library provides timestamp handling utilities for working with time-based data and operations.
 
 #### [Platform.Ranges](https://linksplatform.github.io/Ranges)
 Platform.Collections.Methods class library contains `Range` struct with Minimum and Maximum fields.
@@ -109,7 +109,7 @@ Platform.Collections.Methods class library contains classes and interfaces that 
 The `Platform.Disposables.IDisposable` interface extends the `System.IDisposable` with `IsDisposed` property and `Destruct` method.
 
 #### [Platform.Exceptions](https://linksplatform.github.io/Exceptions)
-Platform.Collections.Methods class library contains classes ... .
+Platform.Exceptions class library provides exception handling utilities and custom exception types for error management.
 
 #### [Platform.Interfaces](https://linksplatform.github.io/Interfaces)
 Platform.Collections.Methods class library contains common interfaces that did not fit in any major category.
