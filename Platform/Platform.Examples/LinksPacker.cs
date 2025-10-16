@@ -49,8 +49,13 @@ namespace Platform.Examples
                 writer.Write(PairsFormat);
                 writer.Write(bytesPerIndex);
 
-                // Write total count (for validation/progress)
-                var totalCount = _links.Count();
+                // Count total links by iterating
+                ulong totalCount = 0;
+                _links.Each(link =>
+                {
+                    totalCount++;
+                    return _links.Constants.Continue;
+                });
                 WriteUInt64(writer, totalCount, bytesPerIndex);
 
                 // Write all links

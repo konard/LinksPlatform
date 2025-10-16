@@ -41,7 +41,11 @@ namespace Platform.Examples
                     var syncLinks = new SynchronizedLinks<ulong>(links);
                     var packer = new LinksPacker();
 
-                    Console.WriteLine($"Packing {syncLinks.Count()} links...");
+                    // Count links
+                    ulong linkCount = 0;
+                    syncLinks.Each(link => { linkCount++; return syncLinks.Constants.Continue; });
+
+                    Console.WriteLine($"Packing {linkCount} links...");
                     var startTime = DateTime.Now;
 
                     packer.Pack(syncLinks, packTo, bytesPerIndex, cancellation.Token);
