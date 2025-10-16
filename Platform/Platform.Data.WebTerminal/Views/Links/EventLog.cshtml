@@ -1,0 +1,75 @@
+@model LinkModel
+@{
+    ViewData["Title"] = "Event Log - " + Model.Link.ToString();
+}
+<div class="event-log-view">
+    <h2>Event Log</h2>
+    <div class="event-log-info">
+        <p>Root Link: <strong>@Model.Link.ToString()</strong></p>
+        <p>Monitoring link events in real-time</p>
+    </div>
+    <div id="event-log-container" class="event-log-list">
+        <div class="event-item event-header">
+            <div class="event-time">Time</div>
+            <div class="event-type">Type</div>
+            <div class="event-source">Source</div>
+            <div class="event-target">Target</div>
+            <div class="event-linker">Linker</div>
+        </div>
+        @foreach (var referer in Model.ReferersModels)
+        {
+            <div class="event-item">
+                <div class="event-time">@DateTime.Now.ToString("HH:mm:ss")</div>
+                <div class="event-type">Link</div>
+                <div class="event-source">@referer.Link.Source</div>
+                <div class="event-target">@referer.Link.Target</div>
+                <div class="event-linker">@referer.Link.Linker</div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/eventlog.js" asp-append-version="true"></script>
+}
+
+<style>
+    .event-log-view {
+        padding: 20px;
+    }
+    .event-log-info {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .event-log-list {
+        background: #000;
+        color: #0f0;
+        font-family: 'Courier New', monospace;
+        padding: 10px;
+        border-radius: 5px;
+        max-height: 600px;
+        overflow-y: auto;
+    }
+    .event-item {
+        display: grid;
+        grid-template-columns: 100px 80px 1fr 1fr 1fr;
+        gap: 10px;
+        padding: 8px;
+        border-bottom: 1px solid #0a0;
+        animation: fadeIn 0.5s;
+    }
+    .event-header {
+        font-weight: bold;
+        color: #0ff;
+        border-bottom: 2px solid #0ff;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .event-item:hover {
+        background: #001100;
+    }
+</style>
