@@ -94,7 +94,6 @@ namespace Platform.Sandbox
 
         private static void SetPoints(ILinks<ulong> links, ulong[] digits)
         {
-            // Создадим точки в графе для каждой цифры
             for (int i = 0; i < digits.Length; i++)
             {
                 digits[i] = links.CreatePoint();

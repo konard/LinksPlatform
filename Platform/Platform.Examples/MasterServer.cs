@@ -38,7 +38,6 @@ namespace Platform.Examples
                 messageHandler("Contents:");
                 var linksTotalLength = _links.Count().ToString("0").Length;
                 var printFormatBase = new string('0', linksTotalLength);
-                // Выделить код по печати одной связи в Extensions
                 var printFormat = string.Format("\t[{{0:{0}}}]: {{1:{0}}} -> {{2:{0}}} {{3}}", printFormatBase);
                 for (var link = UnicodeMap.LastCharLink + 1; link <= _links.Count(); link++)
                 {
