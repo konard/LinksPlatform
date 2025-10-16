@@ -1,0 +1,124 @@
+name: Wiki Sync Check
+
+on:
+  schedule:
+    # Run every Monday at 9:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    # Allow manual triggering
+
+jobs:
+  check-wiki-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install -y jq
+
+    - name: Check wiki pages sync status
+      id: check-sync
+      continue-on-error: true
+      run: |
+        bash .github/scripts/check-wiki-sync.sh | tee sync-report.txt
+        echo "EXIT_CODE=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+
+    - name: Upload sync report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: wiki-sync-report
+        path: sync-report.txt
+        retention-days: 30
+
+    - name: Create issue if pages are out of sync
+      if: steps.check-sync.outputs.EXIT_CODE != '0'
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('sync-report.txt', 'utf8');
+
+          // Check if an issue already exists
+          const issues = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'wiki-sync',
+            per_page: 1
+          });
+
+          const issueBody = `## Wiki Pages Synchronization Report
+
+This is an automated report showing that some wiki pages may be out of sync between English and Russian versions.
+
+### Sync Check Results
+
+\`\`\`
+${report}
+\`\`\`
+
+### What to do
+
+Please review the pages marked as out of sync and update them accordingly. See [.github/WIKI_SYNC_GUIDE.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/master/.github/WIKI_SYNC_GUIDE.md) for instructions on how to keep wiki pages in sync.
+
+### Manual Check
+
+You can also run the sync check script manually:
+
+\`\`\`bash
+bash .github/scripts/check-wiki-sync.sh
+\`\`\`
+
+---
+*This issue was automatically created by the Wiki Sync Check workflow.*
+*Related to issue #70*`;
+
+          if (issues.data.length === 0) {
+            // Create a new issue
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Wiki pages need synchronization',
+              body: issueBody,
+              labels: ['wiki-sync', 'documentation']
+            });
+            console.log('Created new wiki sync issue');
+          } else {
+            // Update existing issue
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issues.data[0].number,
+              body: issueBody
+            });
+            console.log('Updated existing wiki sync issue #' + issues.data[0].number);
+          }
+
+    - name: Close wiki sync issue if all pages are in sync
+      if: steps.check-sync.outputs.EXIT_CODE == '0'
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const issues = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'wiki-sync',
+            per_page: 1
+          });
+
+          if (issues.data.length > 0) {
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issues.data[0].number,
+              state: 'closed',
+              body: issues.data[0].body + '\n\n---\n\n✅ **All wiki pages are now in sync!** (Automatically closed)'
+            });
+            console.log('Closed wiki sync issue #' + issues.data[0].number);
+          }
