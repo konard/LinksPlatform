@@ -97,6 +97,8 @@ namespace Platform.Sandbox
                 //TerminalExperiment.Run();
 
                 //OperationsExperiments.RunExperiment();
+
+                //SemanticLinks.RunDemo();
             }
             catch (Exception ex)
             {
