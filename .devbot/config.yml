@@ -1,0 +1,142 @@
+# Virtual Programmer Bot (DevBot) Configuration
+# This file configures the behavior of the automated development bot
+
+version: "1.0"
+
+# Bot activation triggers
+triggers:
+  # Labels that activate the bot
+  issue_labels:
+    - "bot"
+    - "needs-tests"
+    - "auto-fix"
+
+  # Keywords in comments that activate the bot
+  mention_keywords:
+    - "@devbot"
+    - "@gnobot"
+
+  # PR labels that trigger automated analysis
+  pr_labels:
+    - "bot"
+    - "needs-review"
+
+# Bot capabilities
+capabilities:
+  # Automatic test generation
+  test_writer:
+    enabled: true
+    frameworks:
+      - "xunit"
+      - "nunit"
+      - "mstest"
+    coverage_threshold: 80
+
+  # Breaking change detection
+  breaking_change_detector:
+    enabled: true
+    check_on_pr: true
+    notify_on_detection: true
+
+  # Version management
+  version_manager:
+    enabled: true
+    auto_increment: false  # Set to true for automatic version bumps
+    versioning_scheme: "semver"  # semantic versioning
+    rules:
+      major:
+        - "BREAKING CHANGE"
+        - "breaking-change label"
+      minor:
+        - "feat:"
+        - "enhancement label"
+      patch:
+        - "fix:"
+        - "bug label"
+
+  # Bug reproduction
+  bug_reproducer:
+    enabled: true
+    create_test_cases: true
+    ask_for_clarification: true
+    max_questions: 3
+
+  # Code review assistance
+  code_reviewer:
+    enabled: true
+    check_style: true
+    check_complexity: true
+    suggest_improvements: true
+
+  # Documentation generator
+  doc_generator:
+    enabled: true
+    formats:
+      - "markdown"
+      - "xml"
+    auto_update: false
+
+# Integration settings
+integrations:
+  github:
+    # Auto-create branches for fixes
+    auto_create_branch: true
+    branch_prefix: "devbot/"
+
+    # Auto-create PRs
+    auto_create_pr: false
+
+    # Auto-merge PRs (requires approval)
+    auto_merge: false
+
+  # CI/CD integration
+  ci_cd:
+    run_tests_before_commit: true
+    run_linter_before_commit: true
+
+# Behavioral settings
+behavior:
+  # How the bot responds
+  response_style:
+    tone: "professional"
+    verbosity: "detailed"
+
+  # Politeness settings
+  always_ask_before:
+    - "merging code"
+    - "closing issues"
+    - "making breaking changes"
+
+  # Learning from feedback
+  learn_from_corrections: true
+
+# Related issues tracking
+related_issues:
+  # Link to related bot feature requests
+  - 471  # TypoBot
+  - 477  # Code translator bot
+  - 479  # Automated issue management
+  - 480  # PR auto-reviewer
+  - 565  # Line ending consistency bot
+  - 579  # Automated testing bot
+  - 533  # Documentation bot
+
+# Exclusions
+exclusions:
+  # Directories to ignore
+  ignore_paths:
+    - "node_modules/"
+    - "bin/"
+    - "obj/"
+    - ".git/"
+
+  # Files to never modify
+  protected_files:
+    - "LICENSE"
+    - ".gitignore"
+
+# Logging and monitoring
+logging:
+  level: "info"
+  log_file: ".devbot/logs/activity.log"
+  retain_days: 30
