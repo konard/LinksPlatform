@@ -100,6 +100,10 @@ links.Delete(link);
 
 ## Support
 
+[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WEQAZXFHZTY76)
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](https://flattr.com/@konard)
+[![Bitcoin donate button](https://img.shields.io/badge/bitcoin-donate-yellow.svg)](https://github.com/konard)
+
 Задавайте вопросы по адресу [stackoverflow.com/tags/links-platform](https://stackoverflow.com/tags/links-platform) (или с тегом `links-platform`) чтобы получить нашу бесплатную поддержку.
 
 Вы так же можете получить поддержку в режиме реального времени на [нашем официальном Discord сервере](https://discord.gg/eEXJyjWv5e).
