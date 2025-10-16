@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+  <members name="QueryExecutorExtensions">
+    <QueryExecutorExtensions>
+      <summary>
+        Представляет класс-контейнер расширений для выполнения произвольных запросов над Links
+      </summary>
+    </QueryExecutorExtensions>
+    <Execute>
+      <summary>
+        Выполняет запрос query над links и возвращает результат запроса в виде перечисляемого объекта с элементами типа T.
+      </summary>
+      <typeparam name="T">Тип элемента запроса.</typeparam>
+      <param name="links">База данных связей, над которой будет выполняться запрос.</param>
+      <param name="query">Запрос в виде Linq-выражения.</param>
+      <returns>Результат запроса в виде перечисляемого объекта с элементами типа T.</returns>
+    </Execute>
+  </members>
+</docs>

@@ -6,18 +6,10 @@ using Platform.Data.Doublets;
 
 namespace Platform.Sandbox
 {
-    /// <summary>
-    ///     Представляет класс-контейнер расширений для выполнения произвольных запросов над Links
-    /// </summary>
+    /// <include file='../Documentation/API/QueryExecutorExtensions.xml' path='docs/members[@name="QueryExecutorExtensions"]/QueryExecutorExtensions/*'/>
     public static class QueryExecutorExtensions
     {
-        /// <summary>
-        ///     Выполняет запрос query над links и возвращает результат запроса в виде перечисляемого объекта с элементами типа T.
-        /// </summary>
-        /// <typeparam name="T">Тип элемента запроса.</typeparam>
-        /// <param name="links">База данных связей, над которой будет выполняться запрос.</param>
-        /// <param name="query">Запрос в виде Linq-выражения.</param>
-        /// <returns>Результат запроса в виде перечисляемого объекта с элементами типа T.</returns>
+        /// <include file='../Documentation/API/QueryExecutorExtensions.xml' path='docs/members[@name="QueryExecutorExtensions"]/Execute/*'/>
         public static IEnumerable<T> Execute<T>(this SynchronizedLinks<ulong> links,
             Expression<Func<SynchronizedLinks<ulong>, IEnumerable<T>>> query)
         {
