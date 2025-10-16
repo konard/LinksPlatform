@@ -149,7 +149,7 @@ namespace Platform.Sandbox
 
         private static string FormatLink(this UInt64UnitedMemoryLinks links, IList<ulong> link)
         {
-            const string format = "{1} {0} {2}"; // "{0}: {1} -> {2}"
+            const string format = "{1} {0} {2}";
 
             return string.Format(format, link[links.Constants.IndexPart], link[links.Constants.SourcePart], link[links.Constants.TargetPart]);
         }

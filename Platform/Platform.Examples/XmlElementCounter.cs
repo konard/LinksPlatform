@@ -37,7 +37,7 @@ namespace Platform.Examples
         {
             var rootContext = (RootElementContext)context;
             var parentContexts = new Stack<XmlElementContext>();
-            var elements = new Stack<string>(); // Path
+            var elements = new Stack<string>();
             // TODO: If path was loaded previously, skip it.
             while (reader.Read())
             {
@@ -54,7 +54,7 @@ namespace Platform.Examples
                         if (!reader.IsEmptyElement)
                         {
                             elements.Push(elementName);
-                            ConsoleHelpers.Debug("{0} starting...", elements.Count <= 20 ? ToXPath(elements) : elementName); // XPath
+                            ConsoleHelpers.Debug("{0} starting...", elements.Count <= 20 ? ToXPath(elements) : elementName);
                             parentContexts.Push(context);
                             context = new XmlElementContext();
                         }
@@ -65,9 +65,8 @@ namespace Platform.Examples
                         break;
 
                     case XmlNodeType.EndElement:
-                        ConsoleHelpers.Debug("{0} finished.", elements.Count <= 20 ? ToXPath(elements) : elements.Peek()); // XPath
+                        ConsoleHelpers.Debug("{0} finished.", elements.Count <= 20 ? ToXPath(elements) : elements.Peek());
                         var topElement = elements.Pop();
-                        // Restoring scope
                         context = parentContexts.Pop();
                         if (topElement.StartsWith(elementNameToCount))
                         {

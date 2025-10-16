@@ -63,7 +63,7 @@ namespace Platform.Examples
 
         private string FormatLink(IList<TLink> link)
         {
-            const string format = "{1} {0} {2}"; // "{0}: {1} -> {2}"
+            const string format = "{1} {0} {2}";
             return string.Format(format, link[_links.Constants.IndexPart], link[_links.Constants.SourcePart], link[_links.Constants.TargetPart]);
         }
     }

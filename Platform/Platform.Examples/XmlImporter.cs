@@ -40,7 +40,7 @@ namespace Platform.Examples
         private void Read(XmlReader reader, CancellationToken token, ElementContext context)
         {
             var parentContexts = new Stack<ElementContext>();
-            var elements = new Stack<string>(); // Path
+            var elements = new Stack<string>();
             // TODO: If path was loaded previously, skip it.
             while (reader.Read())
             {
@@ -57,7 +57,7 @@ namespace Platform.Examples
                         if (!reader.IsEmptyElement)
                         {
                             elements.Push(elementName);
-                            ConsoleHelpers.Debug("{0} starting...", elements.Count <= 20 ? ToXPath(elements) : elementName); // XPath
+                            ConsoleHelpers.Debug("{0} starting...", elements.Count <= 20 ? ToXPath(elements) : elementName);
                             var element = _storage.CreateElement(name: elementName);
                             parentContexts.Push(context);
                             _storage.AttachElementToParent(elementToAttach: element, parent: context.Parent);
@@ -69,9 +69,8 @@ namespace Platform.Examples
                         }
                         break;
                     case XmlNodeType.EndElement:
-                        ConsoleHelpers.Debug("{0} finished.", elements.Count <= 20 ? ToXPath(elements) : elements.Peek()); // XPath
+                        ConsoleHelpers.Debug("{0} finished.", elements.Count <= 20 ? ToXPath(elements) : elements.Peek());
                         elements.Pop();
-                        // Restoring scope
                         context = parentContexts.Pop();
                         if (elements.Count == 1)
                         {

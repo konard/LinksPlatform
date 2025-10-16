@@ -10,11 +10,8 @@ namespace Platform.Examples
     /// </remarks>
     public class XUnitTestsRunnerCLI : ICommandLineInterface
     {
-        // We use consoleLock because messages can arrive in parallel, so we want to make sure we get
-        // consistent console output.
         private readonly object _consoleLock = new object();
 
-        // Use an event to know when we're done
         private readonly ManualResetEvent _finished = new ManualResetEvent(false);
 
         public bool Succeed { get; private set; }
