@@ -97,6 +97,27 @@ namespace Platform.Sandbox
             }
         }
 
+        static void ValidateTransactionTimestamps()
+        {
+            var currentTime = DateTime.UtcNow;
+            var offset = _basicTransactionsOffset;
+            var endOffset = _currentState.FileEndOffset;
+
+            while (offset < endOffset)
+            {
+                _logAccessor.Read(offset, out TransactionItem item);
+
+                if (item.DateTime > currentTime)
+                {
+                    throw new InvalidOperationException(
+                        $"Transaction log consistency check failed: Found timestamp {item.DateTime:O} in the future at offset {offset}. " +
+                        $"Current time: {currentTime:O}. This indicates corrupted data or clock issues.");
+                }
+
+                offset += _transactionItemSize;
+            }
+        }
+
         static void StoreState() => _logAccessor.Write(0, ref _currentState);
 
         static void EnsureFileSize()
@@ -139,7 +160,8 @@ namespace Platform.Sandbox
                 sizeInBytes = _basicTransactionsOffset;
             }
             long savedSizeInBytes = 0;
-            if (File.Exists(TransactionsFileName))
+            bool isExistingFile = File.Exists(TransactionsFileName);
+            if (isExistingFile)
             {
                 var fileInfo = new FileInfo(TransactionsFileName);
                 savedSizeInBytes = fileInfo.Length;
@@ -151,6 +173,13 @@ namespace Platform.Sandbox
             _log = MemoryMappedFile.CreateFromFile(TransactionsFileName, FileMode.OpenOrCreate, TransactionsMapName, sizeInBytes);
             _logAccessor = _log.CreateViewAccessor();
             LoadState();
+
+            // Validate timestamps if opening an existing transaction log
+            if (isExistingFile && savedSizeInBytes > _basicTransactionsOffset)
+            {
+                ValidateTransactionTimestamps();
+            }
+
             _currentFileSizeInBytes = sizeInBytes;
         }
 
