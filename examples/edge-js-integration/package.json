@@ -1,0 +1,26 @@
+{
+  "name": "@linksplatform/edge-js-integration",
+  "version": "0.1.0",
+  "description": "JavaScript integration for LinksPlatform using edge-js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "example": "node example.js"
+  },
+  "keywords": [
+    "linksplatform",
+    "links",
+    "doublets",
+    "edge-js",
+    "dotnet",
+    "interop"
+  ],
+  "author": "LinksPlatform Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "edge-js": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
