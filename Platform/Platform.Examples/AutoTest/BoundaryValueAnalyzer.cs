@@ -112,9 +112,9 @@ namespace Platform.Examples.AutoTest
         /// <summary>
         /// Generates random test values for a parameter type.
         /// </summary>
-        public object GenerateRandomValue(Type parameterType, Random random = null)
+        public object GenerateRandomValue(Type parameterType, System.Random random = null)
         {
-            random = random ?? new Random();
+            random = random ?? new System.Random();
 
             if (parameterType == typeof(int))
             {

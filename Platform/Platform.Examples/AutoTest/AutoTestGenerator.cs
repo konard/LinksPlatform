@@ -112,7 +112,7 @@ namespace Platform.Examples.AutoTest
         private List<TestResult> GenerateRandomTests(ITestableFunction function)
         {
             var results = new List<TestResult>();
-            var random = new Random();
+            var random = new System.Random();
 
             for (int i = 0; i < _randomTestsPerFunction; i++)
             {
