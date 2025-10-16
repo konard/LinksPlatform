@@ -1,0 +1,23 @@
+=== Performance Comparison: Func<T, bool> vs Action<T> with CancellationToken ===
+
+Iterations: 10,000,000
+Warmup iterations: 1,000,000
+
+Warming up...
+Warmup complete.
+
+
+=== Results ===
+Func<T, bool>:                       86.043 ms
+Action<T> with CancellationToken:    115.021 ms
+
+Func<T, bool> is faster by 28.978 ms (33.68%)
+
+Throughput:
+  Func<T, bool>:                     116,221,094 ops/sec
+  Action<T> with CancellationToken:  86,940,419 ops/sec
+
+Press any key to exit...
+Unhandled exception. System.InvalidOperationException: Cannot read keys when either application does not have a console or when console input has been redirected. Try Console.Read.
+   at System.ConsolePal.ReadKey(Boolean intercept)
+   at PerformanceComparison.FuncVsActionPerformance.Main(String[] args) in /tmp/gh-issue-solver-1760655585776/experiments/FuncVsActionPerformance.cs:line 133
