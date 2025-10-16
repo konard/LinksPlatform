@@ -113,3 +113,16 @@ Platform.Collections.Methods class library contains classes ... .
 
 #### [Platform.Interfaces](https://linksplatform.github.io/Interfaces)
 Platform.Collections.Methods class library contains common interfaces that did not fit in any major category.
+
+#### [Platform.Protocols.Lino](https://github.com/konard/Protocols.Lino)
+Platform.Protocols.Lino is a parser/generator for Links Notation (LiNo) - a flexible data representation format similar to JSON but designed specifically for representing associative links. Available for multiple platforms:
+* **NPM Package**: [@linksplatform/protocols-lino](https://www.npmjs.com/package/@linksplatform/protocols-lino) - JavaScript/TypeScript implementation using Peggy.js
+* **NuGet Package**: [Platform.Protocols.Lino](https://www.nuget.org/packages/Platform.Protocols.Lino) - C# implementation using Pegasus PEG parser
+* **Rust**: Native Rust implementation available in the repository
+
+Links Notation allows natural representation of doublets, triplets, and N-tuples with support for hierarchical structures. Example:
+```
+papa (lovesMama: loves mama)
+son lovesMama
+daughter lovesMama
+```
