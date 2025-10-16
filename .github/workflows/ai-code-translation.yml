@@ -1,0 +1,203 @@
+name: AI-Powered Code Translation
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_file:
+        description: 'Path to source file to translate'
+        required: true
+        type: string
+      target_language:
+        description: 'Target programming language'
+        required: true
+        type: choice
+        options:
+          - 'Python'
+          - 'JavaScript'
+          - 'TypeScript'
+          - 'Java'
+          - 'C#'
+          - 'C++'
+          - 'Go'
+          - 'Rust'
+          - 'Ruby'
+          - 'PHP'
+          - 'Swift'
+          - 'Kotlin'
+          - 'VB.NET'
+      use_openai:
+        description: 'Use OpenAI API for translation (requires OPENAI_API_KEY secret)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  ai-translate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install openai anthropic
+
+    - name: Read source file
+      id: read_source
+      run: |
+        if [ ! -f "${{ inputs.source_file }}" ]; then
+          echo "Error: Source file not found: ${{ inputs.source_file }}"
+          exit 1
+        fi
+        echo "Source file exists and will be translated"
+
+    - name: Translate with OpenAI
+      if: inputs.use_openai
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        python3 << 'EOF'
+        import os
+        import openai
+
+        openai.api_key = os.environ.get('OPENAI_API_KEY')
+
+        if not openai.api_key:
+            print("Error: OPENAI_API_KEY not set")
+            exit(1)
+
+        source_file = "${{ inputs.source_file }}"
+        target_language = "${{ inputs.target_language }}"
+
+        with open(source_file, 'r') as f:
+            source_code = f.read()
+
+        prompt = f"""Translate the following code to {target_language}.
+        Preserve all functionality, logic, and comments.
+        Provide only the translated code without explanations.
+
+        Source code:
+        ```
+        {source_code}
+        ```
+        """
+
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are an expert code translator. Translate code between programming languages while preserving functionality and style."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.1
+        )
+
+        translated_code = response.choices[0].message.content
+
+        # Extract code from markdown if present
+        if "```" in translated_code:
+            lines = translated_code.split('\n')
+            code_lines = []
+            in_code_block = False
+            for line in lines:
+                if line.strip().startswith('```'):
+                    in_code_block = not in_code_block
+                    continue
+                if in_code_block:
+                    code_lines.append(line)
+            translated_code = '\n'.join(code_lines)
+
+        # Determine file extension
+        ext_map = {
+            'Python': 'py',
+            'JavaScript': 'js',
+            'TypeScript': 'ts',
+            'Java': 'java',
+            'C#': 'cs',
+            'C++': 'cpp',
+            'Go': 'go',
+            'Rust': 'rs',
+            'Ruby': 'rb',
+            'PHP': 'php',
+            'Swift': 'swift',
+            'Kotlin': 'kt',
+            'VB.NET': 'vb'
+        }
+
+        ext = ext_map.get(target_language, 'txt')
+        output_file = f"translated-output/translated.{ext}"
+
+        os.makedirs('translated-output', exist_ok=True)
+        with open(output_file, 'w') as f:
+            f.write(translated_code)
+
+        print(f"Translation completed: {output_file}")
+        EOF
+
+    - name: Manual translation instructions
+      if: "!inputs.use_openai"
+      run: |
+        echo "=========================================="
+        echo "AI translation not enabled."
+        echo "=========================================="
+        echo ""
+        echo "To use AI-powered translation:"
+        echo "1. Add OPENAI_API_KEY to repository secrets"
+        echo "2. Re-run workflow with 'use_openai' set to true"
+        echo ""
+        echo "Alternatively, use the 'Code Translation' workflow for C#/VB.NET conversion"
+        echo "or manually translate using tools like:"
+        echo "  - GitHub Copilot"
+        echo "  - https://github.com/icsharpcode/CodeConverter (C#/VB.NET)"
+        echo "  - https://github.com/AmrHendy/programming-language-translator"
+        echo "=========================================="
+
+    - name: Upload translated code
+      if: inputs.use_openai
+      uses: actions/upload-artifact@v3
+      with:
+        name: ai-translated-code-${{ inputs.target_language }}
+        path: translated-output/
+        retention-days: 30
+
+    - name: Create Pull Request
+      if: inputs.use_openai
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: |
+          AI-powered translation to ${{ inputs.target_language }}
+
+          Automated translation using OpenAI GPT-4
+          Source file: ${{ inputs.source_file }}
+        branch: ai-translation-${{ inputs.target_language }}-${{ github.run_number }}
+        delete-branch: true
+        title: '[AI Translation] Code translated to ${{ inputs.target_language }}'
+        body: |
+          ## AI-Powered Code Translation
+
+          This PR contains automatically translated code using OpenAI GPT-4.
+
+          **Translation Details:**
+          - Source File: `${{ inputs.source_file }}`
+          - Target Language: `${{ inputs.target_language }}`
+          - Workflow Run: #${{ github.run_number }}
+
+          **⚠️ Important:**
+          This code was translated using AI. Please review carefully before merging:
+          - Verify functionality is preserved
+          - Check for language-specific idioms
+          - Test the translated code thoroughly
+          - Review comments and documentation
+          - Validate dependencies and imports
+
+          Related to issue #168
+        labels: |
+          automated
+          code-translation
+          ai-generated

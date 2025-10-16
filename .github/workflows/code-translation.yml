@@ -1,0 +1,118 @@
+name: Code Translation
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_language:
+        description: 'Source programming language'
+        required: true
+        type: choice
+        options:
+          - 'csharp'
+          - 'vb'
+      target_language:
+        description: 'Target programming language'
+        required: true
+        type: choice
+        options:
+          - 'csharp'
+          - 'vb'
+      source_path:
+        description: 'Path to source file or directory to translate'
+        required: true
+        default: 'Platform'
+      create_pr:
+        description: 'Create a pull request with translated code'
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Install CodeConverter tool
+      run: dotnet tool install --global ICSharpCode.CodeConverter.CLI
+
+    - name: Validate input languages
+      run: |
+        if [ "${{ inputs.source_language }}" == "${{ inputs.target_language }}" ]; then
+          echo "Error: Source and target languages must be different"
+          exit 1
+        fi
+
+    - name: Translate C# to VB.NET
+      if: inputs.source_language == 'csharp' && inputs.target_language == 'vb'
+      run: |
+        echo "Translating C# to VB.NET..."
+        mkdir -p translated-output
+        codeconverter --source "${{ inputs.source_path }}" --target-language vb --output translated-output
+
+    - name: Translate VB.NET to C#
+      if: inputs.source_language == 'vb' && inputs.target_language == 'csharp'
+      run: |
+        echo "Translating VB.NET to C#..."
+        mkdir -p translated-output
+        codeconverter --source "${{ inputs.source_path }}" --target-language cs --output translated-output
+
+    - name: Display translation summary
+      run: |
+        echo "Translation completed!"
+        echo "Source: ${{ inputs.source_language }}"
+        echo "Target: ${{ inputs.target_language }}"
+        echo "Path: ${{ inputs.source_path }}"
+        ls -R translated-output
+
+    - name: Upload translated code as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: translated-code-${{ inputs.source_language }}-to-${{ inputs.target_language }}
+        path: translated-output/
+        retention-days: 30
+
+    - name: Create Pull Request
+      if: inputs.create_pr
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: |
+          Translate code from ${{ inputs.source_language }} to ${{ inputs.target_language }}
+
+          Automated translation using ICSharpCode.CodeConverter
+          Source path: ${{ inputs.source_path }}
+        branch: code-translation/${{ inputs.source_language }}-to-${{ inputs.target_language }}-${{ github.run_number }}
+        delete-branch: true
+        title: '[Code Translation] ${{ inputs.source_language }} → ${{ inputs.target_language }}'
+        body: |
+          ## Automated Code Translation
+
+          This PR contains automatically translated code using ICSharpCode.CodeConverter.
+
+          **Translation Details:**
+          - Source Language: `${{ inputs.source_language }}`
+          - Target Language: `${{ inputs.target_language }}`
+          - Source Path: `${{ inputs.source_path }}`
+          - Workflow Run: #${{ github.run_number }}
+
+          **⚠️ Important:**
+          Please review the translated code carefully before merging. Automated translation may require manual adjustments for:
+          - Language-specific idioms and patterns
+          - Framework-specific features
+          - Comments and documentation
+          - Edge cases and complex logic
+
+          **Tool Used:** [ICSharpCode.CodeConverter](https://github.com/icsharpcode/CodeConverter)
+
+          Related to issue #168
+        labels: |
+          automated
+          code-translation
