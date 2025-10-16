@@ -82,35 +82,34 @@ namespace Platform.Examples.AutoTest
         {
             if (parameterType == typeof(int))
             {
-                var min = BinarySearchMinValue(function, parameterIndex, baseParameters, int.MinValue, 0);
-                var max = BinarySearchMaxValue(function, parameterIndex, baseParameters, 0, int.MaxValue);
+                var min = BinarySearchMinValueInt(function, parameterIndex, baseParameters, int.MinValue, 0);
+                var max = BinarySearchMaxValueInt(function, parameterIndex, baseParameters, 0, int.MaxValue);
                 return (min, max);
             }
             else if (parameterType == typeof(long))
             {
-                var min = BinarySearchMinValue(function, parameterIndex, baseParameters, long.MinValue, 0L);
-                var max = BinarySearchMaxValue(function, parameterIndex, baseParameters, 0L, long.MaxValue);
+                var min = BinarySearchMinValueLong(function, parameterIndex, baseParameters, long.MinValue, 0L);
+                var max = BinarySearchMaxValueLong(function, parameterIndex, baseParameters, 0L, long.MaxValue);
                 return (min, max);
             }
 
             return (null, null);
         }
 
-        private T BinarySearchMinValue<T>(
+        private int BinarySearchMinValueInt(
             ITestableFunction function,
             int parameterIndex,
             object[] baseParameters,
-            T min,
-            T max) where T : IComparable<T>
+            int min,
+            int max)
         {
-            // Binary search to find minimum executable value
-            dynamic left = min;
-            dynamic right = max;
-            dynamic result = max;
+            int left = min;
+            int right = max;
+            int result = max;
 
-            while (left.CompareTo(right) < 0)
+            while (left < right)
             {
-                dynamic mid = (left + right) / 2;
+                int mid = left + (right - left) / 2;
                 var testParams = (object[])baseParameters.Clone();
                 testParams[parameterIndex] = mid;
 
@@ -129,21 +128,84 @@ namespace Platform.Examples.AutoTest
             return result;
         }
 
-        private T BinarySearchMaxValue<T>(
+        private int BinarySearchMaxValueInt(
             ITestableFunction function,
             int parameterIndex,
             object[] baseParameters,
-            T min,
-            T max) where T : IComparable<T>
+            int min,
+            int max)
         {
-            // Binary search to find maximum executable value
-            dynamic left = min;
-            dynamic right = max;
-            dynamic result = min;
+            int left = min;
+            int right = max;
+            int result = min;
 
-            while (left.CompareTo(right) < 0)
+            while (left < right)
             {
-                dynamic mid = (left + right) / 2;
+                int mid = left + (right - left) / 2;
+                var testParams = (object[])baseParameters.Clone();
+                testParams[parameterIndex] = mid;
+
+                var testResult = ExecuteTest(function, testParams, TestType.BoundaryMax);
+                if (testResult.Success && testResult.ExecutionTimeMs <= _timeoutMs)
+                {
+                    result = mid;
+                    left = mid + 1;
+                }
+                else
+                {
+                    right = mid;
+                }
+            }
+
+            return result;
+        }
+
+        private long BinarySearchMinValueLong(
+            ITestableFunction function,
+            int parameterIndex,
+            object[] baseParameters,
+            long min,
+            long max)
+        {
+            long left = min;
+            long right = max;
+            long result = max;
+
+            while (left < right)
+            {
+                long mid = left + (right - left) / 2;
+                var testParams = (object[])baseParameters.Clone();
+                testParams[parameterIndex] = mid;
+
+                var testResult = ExecuteTest(function, testParams, TestType.BoundaryMin);
+                if (testResult.Success && testResult.ExecutionTimeMs <= _timeoutMs)
+                {
+                    result = mid;
+                    right = mid;
+                }
+                else
+                {
+                    left = mid + 1;
+                }
+            }
+
+            return result;
+        }
+
+        private long BinarySearchMaxValueLong(
+            ITestableFunction function,
+            int parameterIndex,
+            object[] baseParameters,
+            long min,
+            long max)
+        {
+            long left = min;
+            long right = max;
+            long result = min;
+
+            while (left < right)
+            {
+                long mid = left + (right - left) / 2;
                 var testParams = (object[])baseParameters.Clone();
                 testParams[parameterIndex] = mid;
 
