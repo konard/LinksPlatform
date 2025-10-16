@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>LinksPlatform's Platform.Data.EntityFramework Examples</Description>
+    <Copyright>Konstantin Diachenko</Copyright>
+    <AssemblyTitle>Platform.Data.EntityFramework.Examples</AssemblyTitle>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Konstantin Diachenko</Authors>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <AssemblyName>Platform.Data.EntityFramework.Examples</AssemblyName>
+    <PackageId>Platform.Data.EntityFramework.Examples</PackageId>
+    <PackageTags>LinksPlatform;EntityFramework;Examples</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Avatar-rainbow.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Konard/LinksPlatform/tree/master/Platform/Platform.Data.EntityFramework.Examples</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/Konard/LinksPlatform</RepositoryUrl>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Platform.Data.EntityFramework\Platform.Data.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

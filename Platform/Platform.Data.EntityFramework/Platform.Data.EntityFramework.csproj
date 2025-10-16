@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>LinksPlatform's EntityFramework Core Database Provider for Links</Description>
+    <Copyright>Konstantin Diachenko</Copyright>
+    <AssemblyTitle>Platform.Data.EntityFramework</AssemblyTitle>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Konstantin Diachenko</Authors>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <AssemblyName>Platform.Data.EntityFramework</AssemblyName>
+    <PackageId>Platform.Data.EntityFramework</PackageId>
+    <PackageTags>LinksPlatform;EntityFramework;EFCore;ORM;Database;Provider</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Avatar-rainbow.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Konard/LinksPlatform/tree/master/Platform/Platform.Data.EntityFramework</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/Konard/LinksPlatform</RepositoryUrl>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
+  </ItemGroup>
+
+</Project>
