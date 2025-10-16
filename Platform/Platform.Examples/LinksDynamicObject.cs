@@ -49,14 +49,14 @@ namespace Platform.Examples
                 if (!EqualityComparer<TLink>.Default.Equals(propertyLink, default(TLink)))
                 {
                     // Found a link from object to property, now get its value
-                    _links.Each(new[] { propertyLink }, link =>
+                    _links.Each(link =>
                     {
                         if (link != null && link.Count >= 3)
                         {
                             result = link[_links.Constants.TargetPart];
                         }
                         return _links.Constants.Break;
-                    });
+                    }, propertyLink);
                 }
 
                 return result;

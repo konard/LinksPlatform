@@ -87,28 +87,28 @@ namespace Platform.Examples
         public bool IsType(TLink linkAddress)
         {
             bool result = false;
-            _links.Each(new[] { linkAddress }, link =>
+            _links.Each(link =>
             {
                 if (link != null && link.Count >= 3)
                 {
                     result = EqualityComparer<TLink>.Default.Equals(link[_links.Constants.SourcePart], _typeMarker);
                 }
                 return _links.Constants.Break;
-            });
+            }, linkAddress);
             return result;
         }
 
         public bool IsProperty(TLink linkAddress)
         {
             bool result = false;
-            _links.Each(new[] { linkAddress }, link =>
+            _links.Each(link =>
             {
                 if (link != null && link.Count >= 3)
                 {
                     result = EqualityComparer<TLink>.Default.Equals(link[_links.Constants.SourcePart], _propertyMarker);
                 }
                 return _links.Constants.Break;
-            });
+            }, linkAddress);
             return result;
         }
 
@@ -118,7 +118,7 @@ namespace Platform.Examples
                 return cachedName;
 
             string name = null;
-            _links.Each(new[] { typeMarker }, link =>
+            _links.Each(link =>
             {
                 if (link != null && link.Count >= 3)
                 {
@@ -126,7 +126,7 @@ namespace Platform.Examples
                     name = ConvertSequenceToString(nameSequence);
                 }
                 return _links.Constants.Break;
-            });
+            }, typeMarker);
 
             if (name != null)
             {
@@ -143,7 +143,7 @@ namespace Platform.Examples
                 return cachedName;
 
             string name = null;
-            _links.Each(new[] { propertyMarker }, link =>
+            _links.Each(link =>
             {
                 if (link != null && link.Count >= 3)
                 {
@@ -151,7 +151,7 @@ namespace Platform.Examples
                     name = ConvertSequenceToString(nameSequence);
                 }
                 return _links.Constants.Break;
-            });
+            }, propertyMarker);
 
             if (name != null)
             {
@@ -194,11 +194,11 @@ namespace Platform.Examples
                 // Try to traverse the sequence
                 // Simplified string conversion - for full implementation would need proper sequence traversal
                 // This is a placeholder that acknowledges the string is stored but doesn't fully decode it
-                _links.Each(new[] { sequence }, link =>
+                _links.Each(link =>
                 {
                     // Just check if it exists - full conversion would require sequence walking
                     return _links.Constants.Break;
-                });
+                }, sequence);
 
                 return chars.Count > 0 ? new string(chars.ToArray()) : null;
             }

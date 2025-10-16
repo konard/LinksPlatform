@@ -289,7 +289,7 @@ namespace Platform.Examples
 
             // Read the link to determine its type
             bool handled = false;
-            _links.Each(new[] { linkAddress }, link =>
+            _links.Each(link =>
             {
                 if (link != null && link.Count >= 3)
                 {
@@ -328,7 +328,7 @@ namespace Platform.Examples
                     }
                 }
                 return _links.Constants.Break;
-            });
+            }, linkAddress);
 
             if (!handled)
             {
