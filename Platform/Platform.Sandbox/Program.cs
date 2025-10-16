@@ -55,6 +55,8 @@ namespace Platform.Sandbox
 
             //CompressionExperiments.Test();
 
+            //SequenceIndexingTest.Run();
+
             return;
 
             //Sequences.TestSimplify();
