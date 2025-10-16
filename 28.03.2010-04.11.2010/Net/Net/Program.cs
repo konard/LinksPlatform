@@ -53,6 +53,32 @@ namespace Net
 
 			GC.Collect();
 
+			// Demonstration of MappingSequence functionality (Issue #22)
+			Console.WriteLine("\n=== MappingSequence Demonstration ===");
+
+			// Access the first link initialized with mapping sequence
+			Console.WriteLine($"FirstLink initial size: {MappingSequence.GetMappingSequenceSize(Net.FirstLink)}");
+
+			// Get stored values
+			Link storedLink = MappingSequence.GetMappingSequenceElement(Net.FirstLink, 0);
+			Link storedThing = MappingSequence.GetMappingSequenceElement(Net.FirstLink, 1);
+			Console.WriteLine($"FirstLink[0] == Net.Link: {storedLink == Net.Link}");
+			Console.WriteLine($"FirstLink[1] == Net.Thing: {storedThing == Net.Thing}");
+
+			// Enlarge the mapping sequence
+			Net.FirstLink = MappingSequence.EnlargeMappingSequence(Net.FirstLink);
+			Console.WriteLine($"After enlarging, size: {MappingSequence.GetMappingSequenceSize(Net.FirstLink)}");
+
+			// Set additional values
+			Net.FirstLink = MappingSequence.SetMappingSequenceElement(Net.FirstLink, 2, Net.IsA);
+			Net.FirstLink = MappingSequence.SetMappingSequenceElement(Net.FirstLink, 3, Net.And);
+
+			// Retrieve and verify
+			Link storedIsA = MappingSequence.GetMappingSequenceElement(Net.FirstLink, 2);
+			Link storedAnd = MappingSequence.GetMappingSequenceElement(Net.FirstLink, 3);
+			Console.WriteLine($"FirstLink[2] == Net.IsA: {storedIsA == Net.IsA}");
+			Console.WriteLine($"FirstLink[3] == Net.And: {storedAnd == Net.And}");
+
 			// Magic
 			if (LinkConverter.FromNumber(10) == LinkConverter.FromNumber(12 - 2))
 			{

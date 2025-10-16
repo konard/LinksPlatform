@@ -57,6 +57,7 @@
     <Compile Include="LinkConverter.cs" />
     <Compile Include="LinkExtensions.cs" />
     <Compile Include="LinkHelpers.cs" />
+    <Compile Include="MappingSequence.cs" />
     <Compile Include="Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
