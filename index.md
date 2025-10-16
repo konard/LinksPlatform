@@ -1,4 +1,4 @@
-# Links Platform ([русская версия](index.ru.md))
+# Linkform ([русская версия](index.ru.md))
 Holistic system for storage and transformation of information (in development) based on associative model of data.
 
 ## Prerequisites
@@ -6,7 +6,7 @@ Holistic system for storage and transformation of information (in development) b
 * [.NET Core](https://www.microsoft.com/net) SDK with version 2.2 or later.
 * [MonoDevelop](https://www.monodevelop.com/), [Visual Studio](https://visualstudio.microsoft.com) or any other [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) or just a [text editor](https://en.wikipedia.org/wiki/Text_editor).
 
-## Links Platform's NuGet packages
+## Linkform's NuGet packages
 
 ### Main packages
 
