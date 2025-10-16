@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "id": "sequence-create-basic-001",
+    "name": "Basic Sequence Creation",
+    "description": "Creating a simple sequence from multiple elements",
+    "category": "sequences",
+    "difficulty": "basic",
+    "tags": ["sequence", "create", "list"],
+    "author": "LinksPlatform Team",
+    "created": "2025-10-17T00:00:00Z",
+    "verified": true,
+    "verifiedBy": "LinksPlatform Maintainer",
+    "verifiedDate": "2025-10-17T00:00:00Z",
+    "version": "1.0.0"
+  },
+  "input": {
+    "description": "Create a sequence from elements [A, B, C, D]",
+    "data": {
+      "operation": "createSequence",
+      "elements": ["A", "B", "C", "D"]
+    }
+  },
+  "expectedOutput": {
+    "description": "A sequence represented as nested links",
+    "data": {
+      "sequenceId": 10,
+      "structure": {
+        "type": "nested-links",
+        "representation": "((A, B), (C, D))"
+      },
+      "elements": ["A", "B", "C", "D"],
+      "success": true
+    }
+  },
+  "rules": [
+    "Sequences are represented as balanced binary trees of links",
+    "Each pair of elements forms a link",
+    "Pairs are then linked together recursively"
+  ],
+  "notes": "The actual internal representation may vary based on the sequence implementation used."
+}

@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "id": "community-example-001",
+    "name": "Community Test Data Example",
+    "description": "An example of a community-submitted test case for link deletion",
+    "category": "link-operations",
+    "difficulty": "basic",
+    "tags": ["delete", "crud", "community"],
+    "author": "Community Contributor",
+    "created": "2025-10-17T00:00:00Z",
+    "verified": false,
+    "version": "1.0.0"
+  },
+  "input": {
+    "description": "Delete an existing link with ID 5",
+    "data": {
+      "operation": "delete",
+      "linkId": 5
+    }
+  },
+  "expectedOutput": {
+    "description": "Confirmation that link 5 was deleted successfully",
+    "data": {
+      "linkId": 5,
+      "deleted": true,
+      "success": true
+    }
+  },
+  "rules": [
+    "Link must exist before deletion",
+    "Deletion should be confirmed",
+    "References to deleted link should be handled appropriately"
+  ],
+  "notes": "This is an example of a community-submitted test case. It awaits verification before being promoted to the standard collection."
+}
