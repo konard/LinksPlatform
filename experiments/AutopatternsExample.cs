@@ -1,4 +1,5 @@
 using System;
+using Platform.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Examples;
 

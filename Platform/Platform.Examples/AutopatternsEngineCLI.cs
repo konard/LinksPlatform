@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using Platform.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
 
 namespace Platform.Examples
