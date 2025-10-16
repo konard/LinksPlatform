@@ -1,0 +1,26 @@
+{
+  "name": "LinksPlatform Test Data",
+  "version": "1.0.0",
+  "features": [
+    "JSON Import",
+    "XML Import",
+    "FileSystem Import"
+  ],
+  "metadata": {
+    "author": "LinksPlatform",
+    "description": "Sample JSON data for testing the JSON importer",
+    "tags": ["test", "example", "import"]
+  },
+  "numbers": [1, 2, 3, 4, 5],
+  "nested": {
+    "level1": {
+      "level2": {
+        "value": "deeply nested value"
+      }
+    }
+  },
+  "booleans": {
+    "isTest": true,
+    "isProduction": false
+  }
+}
