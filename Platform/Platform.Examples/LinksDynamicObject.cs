@@ -43,26 +43,21 @@ namespace Platform.Examples
 
                 var property = _typeSystem.GetOrCreateProperty(propertyName);
 
-                // Search for property in object's links
+                // Search for property in object's links: object -> property -> value
                 TLink result = default;
-                _links.Each(link =>
+                var propertyLink = _links.SearchOrDefault(_objectLink, property);
+                if (!EqualityComparer<TLink>.Default.Equals(propertyLink, default(TLink)))
                 {
-                    var linkArray = _links.GetLink(link);
-                    if (linkArray != null && linkArray.Count >= 3)
+                    // Found a link from object to property, now get its value
+                    _links.Each(new[] { propertyLink }, link =>
                     {
-                        var source = linkArray[_links.Constants.SourcePart];
-                        var linker = linkArray[_links.Constants.IndexPart];
-
-                        // Check if this link connects our object to a value via the property
-                        if (EqualityComparer<TLink>.Default.Equals(source, _objectLink) &&
-                            EqualityComparer<TLink>.Default.Equals(linker, property))
+                        if (link != null && link.Count >= 3)
                         {
-                            result = linkArray[_links.Constants.TargetPart];
-                            return _links.Constants.Break;
+                            result = link[_links.Constants.TargetPart];
                         }
-                    }
-                    return _links.Constants.Continue;
-                });
+                        return _links.Constants.Break;
+                    });
+                }
 
                 return result;
             }
@@ -73,33 +68,12 @@ namespace Platform.Examples
 
                 var property = _typeSystem.GetOrCreateProperty(propertyName);
 
-                // Remove existing property value if any
-                TLink existingPropertyLink = default;
-                _links.Each(link =>
-                {
-                    var linkArray = _links.GetLink(link);
-                    if (linkArray != null && linkArray.Count >= 3)
-                    {
-                        var source = linkArray[_links.Constants.SourcePart];
-                        var linker = linkArray[_links.Constants.IndexPart];
-
-                        if (EqualityComparer<TLink>.Default.Equals(source, _objectLink) &&
-                            EqualityComparer<TLink>.Default.Equals(linker, property))
-                        {
-                            existingPropertyLink = linkArray[_links.Constants.IndexPart];
-                            return _links.Constants.Break;
-                        }
-                    }
-                    return _links.Constants.Continue;
-                });
-
-                if (!EqualityComparer<TLink>.Default.Equals(existingPropertyLink, default(TLink)))
-                {
-                    _links.Delete(existingPropertyLink);
-                }
-
-                // Create new property link: object --[property]--> value
-                _links.GetOrCreate(_objectLink, property, value);
+                // Create link: object -> property as intermediate, then property -> value
+                // Simplified: just create object -> value with property as "type"
+                var propertyLink = _links.GetOrCreate(_objectLink, property);
+                // Store the actual value as target of the property link
+                // For simplicity: property points to value
+                _links.GetOrCreate(propertyLink, value);
             }
         }
 
@@ -107,23 +81,23 @@ namespace Platform.Examples
         {
             var properties = new Dictionary<string, TLink>();
 
+            // Find all links where source is our object
             _links.Each(link =>
             {
-                var linkArray = _links.GetLink(link);
-                if (linkArray != null && linkArray.Count >= 3)
+                if (link != null && link.Count >= 3)
                 {
-                    var source = linkArray[_links.Constants.SourcePart];
-                    var linker = linkArray[_links.Constants.IndexPart];
-                    var target = linkArray[_links.Constants.TargetPart];
+                    var source = link[_links.Constants.SourcePart];
+                    var target = link[_links.Constants.TargetPart];
 
                     if (EqualityComparer<TLink>.Default.Equals(source, _objectLink))
                     {
-                        // Check if linker is a property marker
-                        if (_typeSystem.IsProperty(linker))
+                        // Check if target is a property marker
+                        if (_typeSystem.IsProperty(target))
                         {
-                            var propertyName = _typeSystem.GetPropertyName(linker);
+                            var propertyName = _typeSystem.GetPropertyName(target);
                             if (propertyName != null)
                             {
+                                // Get the value - simplified
                                 properties[propertyName] = target;
                             }
                         }
@@ -141,41 +115,20 @@ namespace Platform.Examples
                 return false;
 
             var property = _typeSystem.GetOrCreateProperty(propertyName);
-
-            bool found = false;
-            _links.Each(link =>
-            {
-                var linkArray = _links.GetLink(link);
-                if (linkArray != null && linkArray.Count >= 3)
-                {
-                    var source = linkArray[_links.Constants.SourcePart];
-                    var linker = linkArray[_links.Constants.IndexPart];
-
-                    if (EqualityComparer<TLink>.Default.Equals(source, _objectLink) &&
-                        EqualityComparer<TLink>.Default.Equals(linker, property))
-                    {
-                        found = true;
-                        return _links.Constants.Break;
-                    }
-                }
-                return _links.Constants.Continue;
-            });
-
-            return found;
+            var propertyLink = _links.SearchOrDefault(_objectLink, property);
+            return !EqualityComparer<TLink>.Default.Equals(propertyLink, default(TLink));
         }
 
         public TLink GetType()
         {
-            // Search for type link: object --[typeMarker]--> type
+            // Search for type link where object points to a type marker
             TLink result = default;
             _links.Each(link =>
             {
-                var linkArray = _links.GetLink(link);
-                if (linkArray != null && linkArray.Count >= 3)
+                if (link != null && link.Count >= 3)
                 {
-                    var source = linkArray[_links.Constants.SourcePart];
-                    var linker = linkArray[_links.Constants.IndexPart];
-                    var target = linkArray[_links.Constants.TargetPart];
+                    var source = link[_links.Constants.SourcePart];
+                    var target = link[_links.Constants.TargetPart];
 
                     if (EqualityComparer<TLink>.Default.Equals(source, _objectLink))
                     {
@@ -195,40 +148,14 @@ namespace Platform.Examples
 
         public void SetType(TLink typeMarker)
         {
-            if (typeMarker == null)
+            if (EqualityComparer<TLink>.Default.Equals(typeMarker, default(TLink)))
                 throw new ArgumentNullException(nameof(typeMarker));
 
             if (!_typeSystem.IsType(typeMarker))
                 throw new ArgumentException("The provided link is not a type marker.", nameof(typeMarker));
 
-            // Remove existing type if any
-            TLink existingTypeLink = default;
-            _links.Each(link =>
-            {
-                var linkArray = _links.GetLink(link);
-                if (linkArray != null && linkArray.Count >= 3)
-                {
-                    var source = linkArray[_links.Constants.SourcePart];
-                    var target = linkArray[_links.Constants.TargetPart];
-
-                    if (EqualityComparer<TLink>.Default.Equals(source, _objectLink) &&
-                        _typeSystem.IsType(target))
-                    {
-                        existingTypeLink = linkArray[_links.Constants.IndexPart];
-                        return _links.Constants.Break;
-                    }
-                }
-                return _links.Constants.Continue;
-            });
-
-            if (!EqualityComparer<TLink>.Default.Equals(existingTypeLink, default(TLink)))
-            {
-                _links.Delete(existingTypeLink);
-            }
-
-            // Create type link
-            var typeSystemMarker = ((LinksTypeSystem<TLink>)_typeSystem).TypeMarker;
-            _links.GetOrCreate(_objectLink, typeSystemMarker, typeMarker);
+            // Create type link: object -> typeMarker
+            _links.GetOrCreate(_objectLink, typeMarker);
         }
     }
 }

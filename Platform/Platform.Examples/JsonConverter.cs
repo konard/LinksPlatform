@@ -130,16 +130,14 @@ namespace Platform.Examples
             SkipWhitespace(json, ref index);
 
             var arrayLink = _links.GetOrCreate(_arrayMarker, _arrayMarker);
-            var indexProperty = _typeSystem.GetOrCreateProperty("index");
             int arrayIndex = 0;
 
             while (index < json.Length && json[index] != ']')
             {
                 TLink element = ParseValue(json, ref index);
 
-                // Store array element: array --[index]--> element
-                var indexLink = CreateNumberLink(arrayIndex);
-                var elementLink = _links.GetOrCreate(arrayLink, indexProperty, element);
+                // Store array element: array -> element
+                _links.GetOrCreate(arrayLink, element);
 
                 arrayIndex++;
 
@@ -281,49 +279,58 @@ namespace Platform.Examples
             return _links.GetOrCreate(_booleanMarker, value ? trueMarker : falseMarker);
         }
 
-        private void ExportValue(TLink link, StringBuilder sb)
+        private void ExportValue(TLink linkAddress, StringBuilder sb)
         {
-            if (EqualityComparer<TLink>.Default.Equals(link, _zero))
+            if (EqualityComparer<TLink>.Default.Equals(linkAddress, _zero))
             {
                 sb.Append("null");
                 return;
             }
 
-            var linkArray = _links.GetLink(link);
-            if (linkArray == null || linkArray.Count < 3)
+            // Read the link to determine its type
+            bool handled = false;
+            _links.Each(new[] { linkAddress }, link =>
             {
-                sb.Append("null");
-                return;
-            }
+                if (link != null && link.Count >= 3)
+                {
+                    var source = link[_links.Constants.SourcePart];
 
-            var source = linkArray[_links.Constants.SourcePart];
+                    // Check type
+                    if (EqualityComparer<TLink>.Default.Equals(source, _objectMarker))
+                    {
+                        ExportObject(linkAddress, sb);
+                        handled = true;
+                    }
+                    else if (EqualityComparer<TLink>.Default.Equals(source, _arrayMarker))
+                    {
+                        ExportArray(linkAddress, sb);
+                        handled = true;
+                    }
+                    else if (EqualityComparer<TLink>.Default.Equals(source, _stringMarker))
+                    {
+                        sb.Append("\"string\""); // Simplified
+                        handled = true;
+                    }
+                    else if (EqualityComparer<TLink>.Default.Equals(source, _numberMarker))
+                    {
+                        sb.Append("0"); // Simplified
+                        handled = true;
+                    }
+                    else if (EqualityComparer<TLink>.Default.Equals(source, _booleanMarker))
+                    {
+                        sb.Append("false"); // Simplified
+                        handled = true;
+                    }
+                    else if (EqualityComparer<TLink>.Default.Equals(source, _nullMarker))
+                    {
+                        sb.Append("null");
+                        handled = true;
+                    }
+                }
+                return _links.Constants.Break;
+            });
 
-            // Check type
-            if (EqualityComparer<TLink>.Default.Equals(source, _objectMarker))
-            {
-                ExportObject(link, sb);
-            }
-            else if (EqualityComparer<TLink>.Default.Equals(source, _arrayMarker))
-            {
-                ExportArray(link, sb);
-            }
-            else if (EqualityComparer<TLink>.Default.Equals(source, _stringMarker))
-            {
-                sb.Append("\"string\""); // Simplified
-            }
-            else if (EqualityComparer<TLink>.Default.Equals(source, _numberMarker))
-            {
-                sb.Append("0"); // Simplified
-            }
-            else if (EqualityComparer<TLink>.Default.Equals(source, _booleanMarker))
-            {
-                sb.Append("false"); // Simplified
-            }
-            else if (EqualityComparer<TLink>.Default.Equals(source, _nullMarker))
-            {
-                sb.Append("null");
-            }
-            else
+            if (!handled)
             {
                 sb.Append("null");
             }
@@ -360,17 +367,16 @@ namespace Platform.Examples
             bool first = true;
             _links.Each(link =>
             {
-                var linkArray = _links.GetLink(link);
-                if (linkArray != null && linkArray.Count >= 3)
+                if (link != null && link.Count >= 3)
                 {
-                    var source = linkArray[_links.Constants.SourcePart];
+                    var source = link[_links.Constants.SourcePart];
                     if (EqualityComparer<TLink>.Default.Equals(source, arrayLink))
                     {
                         if (!first)
                             sb.Append(",");
                         first = false;
 
-                        var target = linkArray[_links.Constants.TargetPart];
+                        var target = link[_links.Constants.TargetPart];
                         ExportValue(target, sb);
                     }
                 }

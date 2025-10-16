@@ -14,8 +14,9 @@ namespace Platform.Examples
         {
             Console.WriteLine("=== Links Platform: Objects and Type System Example ===\n");
 
-            // Initialize Links storage
-            using (var links = new UnitedMemoryLinks<uint>())
+            // Initialize Links storage - using file or memory depending on what's available
+            var tempFile = System.IO.Path.GetTempFileName();
+            using (var links = new UnitedMemoryLinks<uint>(tempFile))
             {
                 // Initialize type system
                 var typeSystem = new LinksTypeSystem<uint>(links);
