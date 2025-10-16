@@ -44,11 +44,7 @@ namespace Platform.Examples
         /// <returns>The reconstructed integer.</returns>
         public BigInteger Convert(TLink sequenceLink)
         {
-            var link = _links.GetLink(sequenceLink);
-            if (link == null || link.Count == 0)
-            {
-                throw new ArgumentException("Invalid sequence link.", nameof(sequenceLink));
-            }
+            var link = _links[sequenceLink];
 
             // Check if this is a marked powers-of-2 sequence
             var source = link[_links.Constants.SourcePart];
@@ -75,13 +71,16 @@ namespace Platform.Examples
             BigInteger result = BigInteger.Zero;
 
             // Walk through the sequence and sum the powers of 2
-            _sequenceWalker.Walk(actualSequence, powerLink =>
+            foreach (var step in _sequenceWalker.Walk(actualSequence))
             {
-                var power = _linkToPowerConverter.Convert(powerLink);
-                var powerValue = (int)(object)power;
-                result += BigInteger.Pow(2, powerValue);
-                return true; // Continue walking
-            });
+                if (step != null && step.Count > 0)
+                {
+                    var powerLink = step[0]; // Get the first element
+                    var power = _linkToPowerConverter.Convert(powerLink);
+                    var powerValue = (int)(object)power;
+                    result += BigInteger.Pow(2, powerValue);
+                }
+            }
 
             return result;
         }

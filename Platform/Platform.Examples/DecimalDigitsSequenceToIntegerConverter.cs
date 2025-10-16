@@ -49,11 +49,7 @@ namespace Platform.Examples
         /// <returns>The reconstructed integer.</returns>
         public BigInteger Convert(TLink sequenceLink)
         {
-            var link = _links.GetLink(sequenceLink);
-            if (link == null || link.Count == 0)
-            {
-                throw new ArgumentException("Invalid sequence link.", nameof(sequenceLink));
-            }
+            var link = _links[sequenceLink];
 
             // Check for negative marker
             var source = link[_links.Constants.SourcePart];
@@ -67,7 +63,7 @@ namespace Platform.Examples
                 isNegative = true;
                 actualSequenceLink = target;
                 // Re-read the link for the actual sequence
-                link = _links.GetLink(actualSequenceLink);
+                link = _links[actualSequenceLink];
                 source = link[_links.Constants.SourcePart];
                 target = link[_links.Constants.TargetPart];
             }
@@ -88,13 +84,16 @@ namespace Platform.Examples
             BigInteger result = BigInteger.Zero;
 
             // Walk through the sequence and reconstruct the number
-            _sequenceWalker.Walk(actualSequence, digitLink =>
+            foreach (var step in _sequenceWalker.Walk(actualSequence))
             {
-                var digit = _linkToDigitConverter.Convert(digitLink);
-                var digitValue = (int)(object)digit;
-                result = result * 10 + digitValue;
-                return true; // Continue walking
-            });
+                if (step != null && step.Count > 0)
+                {
+                    var digitLink = step[0]; // Get the first element
+                    var digit = _linkToDigitConverter.Convert(digitLink);
+                    var digitValue = (int)(object)digit;
+                    result = result * 10 + digitValue;
+                }
+            }
 
             if (isNegative)
             {
