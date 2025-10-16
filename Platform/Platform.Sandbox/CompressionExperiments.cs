@@ -17,6 +17,7 @@ using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 using Platform.Data.Doublets.Sequences.Converters;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Unicode;
+using Platform.Examples;
 
 namespace Platform.Sandbox
 {
@@ -24,12 +25,10 @@ namespace Platform.Sandbox
     {
         public static void Test()
         {
-            File.Delete("web.links");
-
-            using (var memoryManager = new UInt64UnitedMemoryLinks("web.links", 8 * 1024 * 1024))
-            using (var links = new UInt64Links(memoryManager))
+            using (var scope = new LinksTestScope(deleteFiles: true, fileSizeStep: 8 * 1024 * 1024))
             {
-                var syncLinks = new SynchronizedLinks<ulong>(links);
+                var links = scope.Links.Unsync;
+                var syncLinks = scope.Links;
                 links.UseUnicode();
 
                 var sequences = new Sequences(syncLinks);
@@ -147,12 +146,10 @@ namespace Platform.Sandbox
 
             for (var i = 0; i < 3; i++)
             {
-                File.Delete("stats.links");
-
-                using (var memoryManager = new UInt64UnitedMemoryLinks("stats.links", 8 * 1024 * 1024))
-                using (var links = new UInt64Links(memoryManager))
+                using (var scope = new LinksTestScope(deleteFiles: true, fileSizeStep: 8 * 1024 * 1024))
                 {
-                    var syncLinks = new SynchronizedLinks<ulong>(links);
+                    var links = scope.Links.Unsync;
+                    var syncLinks = scope.Links;
                     links.UseUnicode();
 
                     var sequences = new Sequences(syncLinks);
@@ -173,12 +170,10 @@ namespace Platform.Sandbox
             {
                 minFrequency += (ulong)(1 + Math.Log(i));
 
-                File.Delete("stats.links");
-
-                using (var memoryManager = new UInt64UnitedMemoryLinks("stats.links", 8 * 1024 * 1024))
-                using (var links = new UInt64Links(memoryManager))
+                using (var scope = new LinksTestScope(deleteFiles: true, fileSizeStep: 8 * 1024 * 1024))
                 {
-                    var syncLinks = new SynchronizedLinks<ulong>(links);
+                    var links = scope.Links.Unsync;
+                    var syncLinks = scope.Links;
                     links.UseUnicode();
 
                     var sequences = new Sequences(syncLinks);

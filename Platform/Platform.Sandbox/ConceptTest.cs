@@ -5,6 +5,7 @@ using Platform.Data.Doublets;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Data.Doublets.Sequences;
+using Platform.Examples;
 
 namespace Platform.Sandbox
 {
@@ -12,13 +13,10 @@ namespace Platform.Sandbox
     {
         public static void TestGexf(string filename)
         {
-            using (var memoryManager = new UInt64UnitedMemoryLinks(filename, 512 * 1024 * 1024))
-            using (var links = new UInt64Links(memoryManager))
+            using (var scope = new LinksTestScope(deleteFiles: false))
             {
-                //var options = new LinksOptions<ulong>();
-                //options.MemoryManager = memoryManager;
-                //var linksFactory = new LinksFactory<ulong>(options);
-                //var links = linksFactory.Create();
+                var memoryManager = scope.MemoryAdapter;
+                var links = scope.Links.Unsync;
 
                 const int linksToCreate = 1024;
 
@@ -34,10 +32,10 @@ namespace Platform.Sandbox
         {
             //try
             {
-                using (var memoryManager = new UInt64UnitedMemoryLinks(filename, 512 * 1024 * 1024))
-                using (var links = new UInt64Links(memoryManager))
+                using (var scope = new LinksTestScope(deleteFiles: false))
                 {
-                    var syncLinks = new SynchronizedLinks<ulong>(links);
+                    var memoryManager = scope.MemoryAdapter;
+                    var syncLinks = scope.Links;
                     //links.EnterTransaction();
 
                     var link = memoryManager.Create();
