@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Platform.Data.Doublets;
-using Platform.Data.Doublets.Memory.United.Generic;
+using Platform.Data.Doublets.Memory.United.Specific;
 
 namespace Platform.Examples
 {
@@ -20,8 +20,8 @@ namespace Platform.Examples
             Console.WriteLine($"Database: {dbPath}");
             Console.WriteLine();
 
-            using (var memory = new FileMappedResizableDirectMemory(dbPath))
-            using (var links = new UnitedMemoryLinks<ulong>(memory))
+            using (var memoryAdapter = new UInt64UnitedMemoryLinks(dbPath))
+            using (var links = new UInt64Links(memoryAdapter))
             {
                 var tfs = new TagFileSystem(links);
 
@@ -196,7 +196,8 @@ namespace Platform.Examples
 
                             case "stats":
                                 Console.WriteLine("Database Statistics:");
-                                Console.WriteLine($"  Total links: {links.Count()}");
+                                var totalLinks = memoryAdapter.Count();
+                                Console.WriteLine($"  Total links: {totalLinks}");
                                 break;
 
                             case "help":

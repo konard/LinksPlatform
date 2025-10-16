@@ -1,6 +1,6 @@
 using System;
 using Platform.Data.Doublets;
-using Platform.Data.Doublets.Memory.United.Generic;
+using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Examples;
 
 /// <summary>
@@ -20,8 +20,8 @@ namespace TagFileSystemExample
 
             // Create or open the database file
             var dbPath = "example-tagfs.links";
-            using (var memory = new FileMappedResizableDirectMemory(dbPath))
-            using (var links = new UnitedMemoryLinks<ulong>(memory))
+            using (var memoryAdapter = new UInt64UnitedMemoryLinks(dbPath))
+            using (var links = new UInt64Links(memoryAdapter))
             {
                 var tfs = new TagFileSystem(links);
 
@@ -112,7 +112,7 @@ namespace TagFileSystemExample
                 }
                 Console.WriteLine();
 
-                Console.WriteLine($"Total links in database: {links.Count()}");
+                Console.WriteLine($"Total links in database: {memoryAdapter.Count()}");
                 Console.WriteLine("\nExample completed successfully!");
                 Console.WriteLine($"Database saved to: {dbPath}");
             }
