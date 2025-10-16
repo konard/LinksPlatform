@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>LinksPlatform</ShortName>
+  <Description>Search LinksPlatform repositories on GitHub</Description>
+  <Tags>linksplatform github code</Tags>
+  <Contact>admin@linksplatform.github.io</Contact>
+  <Url type="text/html" template="https://github.com/search?q=org%3Alinksplatform+org%3Akonard+{searchTerms}&amp;type=code"/>
+  <Url type="application/x-suggestions+json" template="https://api.github.com/search/code?q=org:linksplatform+org:konard+{searchTerms}"/>
+  <Image height="16" width="16" type="image/x-icon">https://github.com/favicon.ico</Image>
+  <InputEncoding>UTF-8</InputEncoding>
+  <SearchForm>https://github.com/linksplatform</SearchForm>
+</OpenSearchDescription>
