@@ -4,20 +4,23 @@
     <Description>LinksPlatform's Platform.Examples Class Library</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Platform.Examples</AssemblyTitle>
-    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix>0.1.0</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <AssemblyName>Platform.Examples</AssemblyName>
     <PackageId>Platform.Examples</PackageId>
-    <PackageTags>LinksPlatform;Examples</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Avatar-rainbow.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/Konard/LinksPlatform/tree/master/Platform/Platform.Tests</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/LICENSE</PackageLicenseUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>LinksPlatform;Examples;CSVExporter;FileIndexer;GEXFExporter;XMLImporter;ConsoleTerminal;MasterServer;TestsRunner</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/linksplatform/Documentation/18469f4d033ee9a5b7b84caab9c585acab2ac519/doc/Avatar-rainbow-icon-64x64.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Konard/LinksPlatform/tree/master/Platform/Platform.Examples</PackageProjectUrl>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/Konard/LinksPlatform</RepositoryUrl>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
