@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>SelfDescribingLinksDatabase</AssemblyName>
+    <RootNamespace>LinksPlatform.Experiments</RootNamespace>
+    <Description>Proof-of-concept experiment demonstrating a self-describing Links database (Issue #32)</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
+  </ItemGroup>
+
+</Project>
