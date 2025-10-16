@@ -75,6 +75,13 @@ Platform.Collections.Methods class library contains classes ... .
 #### [Platform.Threading](https://linksplatform.github.io/Threading)
 Platform.Collections.Methods class library contains classes ... .
 
+## API Bridge Architecture
+
+Links Platform includes a [universal API Bridge architecture](doc/articles/api-bridge-architecture.md) that enables interaction with any API through multiple modalities (text, voice, gestures, etc.). This architecture allows users to access APIs from various sources including public internet, databases, services, libraries, and frameworks through a unified interface.
+
+- [API Bridge Architecture Documentation](doc/articles/api-bridge-architecture.md) - Comprehensive architecture overview
+- [API Bridge Practical Examples](doc/articles/api-bridge-examples.md) - Real-world usage examples
+
 #### [Platform.Collections](https://linksplatform.github.io/Collections)
 Platform.Collections.Methods class library contains classes ... .
 

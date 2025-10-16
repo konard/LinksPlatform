@@ -53,3 +53,10 @@
 #### [Platform.Disposables](https://linksplatform.github.io/Disposables)
 #### [Platform.Exceptions](https://linksplatform.github.io/Exceptions)
 #### [Platform.Interfaces](https://linksplatform.github.io/Interfaces)
+
+## Архитектура API-Моста
+
+Платформа Связей включает [универсальную архитектуру API-Моста](doc/articles/api-bridge-architecture.md), которая позволяет взаимодействовать с любым API через различные модальности (текст, голос, жесты и т.д.). Эта архитектура позволяет пользователям получать доступ к API из различных источников, включая публичный интернет, базы данных, сервисы, библиотеки и фреймворки через единый интерфейс.
+
+- [Документация по архитектуре API-Моста](doc/articles/api-bridge-architecture.md) - Полный обзор архитектуры
+- [Практические примеры API-Моста](doc/articles/api-bridge-examples.md) - Примеры использования в реальных задачах
