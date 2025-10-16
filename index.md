@@ -1,9 +1,9 @@
 # Links Platform ([русская версия](index.ru.md))
-Holistic system for storage and transformation of information (in development) based on associative model of data.
+Holistic system for storage and transformation of information (in development) based on [associative model of data](https://en.wikipedia.org/wiki/Associative_model_of_data).
 
 ## Prerequisites
-* Linux, macOS or Windows operating system.
-* [.NET Core](https://www.microsoft.com/net) SDK with version 2.2 or later.
+* [Linux](https://en.wikipedia.org/wiki/Linux), [macOS](https://en.wikipedia.org/wiki/MacOS) or [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) [operating system](https://en.wikipedia.org/wiki/Operating_system).
+* [.NET Core](https://www.microsoft.com/net) [SDK](https://en.wikipedia.org/wiki/Software_development_kit) with version 2.2 or later.
 * [MonoDevelop](https://www.monodevelop.com/), [Visual Studio](https://visualstudio.microsoft.com) or any other [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) or just a [text editor](https://en.wikipedia.org/wiki/Text_editor).
 
 ## Links Platform's NuGet packages
@@ -25,31 +25,31 @@ A native Triplets implementation.
 ### Auxiliary packages
 
 #### [Platform.Data.Memory](https://linksplatform.github.io/Memory)
-Platform.Data.Memory class library contains classes for memory management simplification. There you can find multiple implementations of [IMemory](https://linksplatform.github.io/Memory/api/Platform.Memory.IMemory.html) interface.
+Platform.Data.Memory [class library](https://en.wikipedia.org/wiki/Library_(computing)) contains classes for [memory management](https://en.wikipedia.org/wiki/Memory_management) simplification. There you can find multiple implementations of [IMemory](https://linksplatform.github.io/Memory/api/Platform.Memory.IMemory.html) [interface](https://en.wikipedia.org/wiki/Interface_(computing)).
 
-The data can be accessed using [the raw pointer](https://linksplatform.github.io/Memory/api/Platform.Memory.IDirectMemory.html) or [by element's index](https://linksplatform.github.io/Memory/api/Platform.Memory.IArrayMemory-1.html) and can be stored in volatile memory:
+The data can be accessed using [the raw pointer](https://linksplatform.github.io/Memory/api/Platform.Memory.IDirectMemory.html) or [by element's index](https://linksplatform.github.io/Memory/api/Platform.Memory.IArrayMemory-1.html) and can be stored in [volatile memory](https://en.wikipedia.org/wiki/Volatile_memory):
 * [HeapResizableDirect](https://linksplatform.github.io/Memory/api/Platform.Memory.HeapResizableDirectMemory.html),
 * [ArrayMemory](https://linksplatform.github.io/Memory/api/Platform.Memory.ArrayMemory-1.html)
 
-or in non-volatile memory:
+or in [non-volatile memory](https://en.wikipedia.org/wiki/Non-volatile_memory):
 * [FileMappedResizableDirectMemory](https://linksplatform.github.io/Memory/api/Platform.Memory.FileMappedResizableDirectMemory.html),
 * [TemporaryFileMappedResizableDirectMemory](https://linksplatform.github.io/Memory/api/Platform.Memory.TemporaryFileMappedResizableDirectMemory.html),
 * [FileArrayMemory](https://linksplatform.github.io/Memory/api/Platform.Memory.FileArrayMemory-1.html).
 
 #### [Platform.Data.Communication](https://linksplatform.github.io/Communication)
-Platform.Data.Communication class library contains classes for communication simplification supporting different protocols.
+Platform.Data.Communication class library contains classes for [communication](https://en.wikipedia.org/wiki/Communication_protocol) simplification supporting different [protocols](https://en.wikipedia.org/wiki/Communication_protocol).
 
 ##### Gexf
-XML-mapping classes for [Graph Exchange XML Format](https://gephi.org/gexf/format/).
+[XML](https://en.wikipedia.org/wiki/XML)-mapping classes for [Graph Exchange XML Format](https://gephi.org/gexf/format/).
 
 ##### Udp
-`UdpSender` and `UdpReceiver` classes to simplify implementation of different roles of `UdpClient`.
+`UdpSender` and `UdpReceiver` classes to simplify implementation of different roles of `UdpClient` using [UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol).
 
 ##### Xml
-A `Serializer` class to help with XML serialization and deserialization.
+A `Serializer` class to help with [XML serialization](https://en.wikipedia.org/wiki/XML) and [deserialization](https://en.wikipedia.org/wiki/Serialization).
 
 #### [Platform.Collections.Methods](https://linksplatform.github.io/Collections.Methods)
-Platform.Collections.Methods class library contains classes with storage/state agnostic implementation of lists and trees.
+Platform.Collections.Methods class library contains classes with storage/state agnostic implementation of [lists](https://en.wikipedia.org/wiki/List_(abstract_data_type)) and [trees](https://en.wikipedia.org/wiki/Tree_(data_structure)).
 
 #### [Platform.IO](https://linksplatform.github.io/IO)
 Platform.Collections.Methods class library contains classes ... .
@@ -100,13 +100,13 @@ Platform.Collections.Methods class library contains classes ... .
 Platform.Collections.Methods class library contains `Range` struct with Minimum and Maximum fields.
 
 #### [Platform.Disposables](https://linksplatform.github.io/Disposables)
-Platform.Collections.Methods class library contains classes and interfaces that help to make objects disposable in a fast, short, easy and safe way.
+Platform.Collections.Methods class library contains classes and [interfaces](https://en.wikipedia.org/wiki/Interface_(computing)) that help to make [objects](https://en.wikipedia.org/wiki/Object_(computer_science)) [disposable](https://en.wikipedia.org/wiki/Dispose_pattern) in a fast, short, easy and safe way.
 
 ##### DisposableBase
-`Platform.Disposables.DisposableBase` abstract class tries to dispose the object at both on instance destruction and `OnProcessExit` whatever comes first even if `Dispose` method was not called anywhere by user.
+`Platform.Disposables.DisposableBase` [abstract class](https://en.wikipedia.org/wiki/Abstract_type) tries to dispose the object at both on instance destruction and `OnProcessExit` whatever comes first even if `Dispose` method was not called anywhere by user.
 
 ##### Yet another IDisposable
-The `Platform.Disposables.IDisposable` interface extends the `System.IDisposable` with `IsDisposed` property and `Destruct` method.
+The `Platform.Disposables.IDisposable` interface extends the `System.IDisposable` with `IsDisposed` [property](https://en.wikipedia.org/wiki/Property_(programming)) and `Destruct` [method](https://en.wikipedia.org/wiki/Method_(computer_programming)).
 
 #### [Platform.Exceptions](https://linksplatform.github.io/Exceptions)
 Platform.Collections.Methods class library contains classes ... .
