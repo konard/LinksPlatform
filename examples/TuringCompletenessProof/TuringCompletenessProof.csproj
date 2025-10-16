@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>Demonstrates that Triggers in the Links Platform are Turing complete by emulating five well-known computational models: Markov Algorithm, Turing Machine, SKI Calculus, Y Combinator, and Lambda Calculus.</Description>
+    <Authors>Links Platform</Authors>
+  </PropertyGroup>
+
+</Project>
