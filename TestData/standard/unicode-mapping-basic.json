@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "id": "unicode-mapping-basic-001",
+    "name": "Basic Unicode Character Mapping",
+    "description": "Mapping a Unicode character to its link representation",
+    "category": "unicode",
+    "difficulty": "basic",
+    "tags": ["unicode", "mapping", "character"],
+    "author": "LinksPlatform Team",
+    "created": "2025-10-17T00:00:00Z",
+    "verified": true,
+    "verifiedBy": "LinksPlatform Maintainer",
+    "verifiedDate": "2025-10-17T00:00:00Z",
+    "version": "1.0.0"
+  },
+  "input": {
+    "description": "Map the character 'A' (Unicode U+0041, decimal 65) to a link",
+    "data": {
+      "operation": "unicodeToLink",
+      "character": "A",
+      "unicodeCodePoint": 65
+    }
+  },
+  "expectedOutput": {
+    "description": "Link ID representing the character 'A'",
+    "data": {
+      "linkId": 65,
+      "character": "A",
+      "unicodeCodePoint": 65,
+      "success": true
+    }
+  },
+  "rules": [
+    "Each Unicode character maps to a unique link ID",
+    "The link ID typically corresponds to the Unicode code point value",
+    "Character links are preallocated in the Unicode map"
+  ],
+  "notes": "The Unicode map must be initialized before character mapping operations."
+}

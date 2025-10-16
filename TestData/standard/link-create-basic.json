@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "id": "link-create-basic-001",
+    "name": "Basic Link Creation",
+    "description": "Demonstrates the creation of a basic link between two points",
+    "category": "link-operations",
+    "difficulty": "basic",
+    "tags": ["create", "basic", "crud"],
+    "author": "LinksPlatform Team",
+    "created": "2025-10-17T00:00:00Z",
+    "verified": true,
+    "verifiedBy": "LinksPlatform Maintainer",
+    "verifiedDate": "2025-10-17T00:00:00Z",
+    "version": "1.0.0"
+  },
+  "input": {
+    "description": "Create a link from point A (value: 1) to point B (value: 2)",
+    "data": {
+      "operation": "create",
+      "source": 1,
+      "target": 2
+    }
+  },
+  "expectedOutput": {
+    "description": "A new link with ID 3 connecting source 1 to target 2",
+    "data": {
+      "linkId": 3,
+      "source": 1,
+      "target": 2,
+      "success": true
+    }
+  },
+  "rules": [
+    "A link must have a source and a target",
+    "The system assigns a unique ID to each new link",
+    "Source and target can be any valid link ID or point ID"
+  ],
+  "notes": "This is the most basic operation in the Links system. The actual link ID may vary depending on the state of the system."
+}

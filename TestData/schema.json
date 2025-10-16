@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://linksplatform.github.io/testdata-schema-v1.json",
+  "title": "LinksPlatform Test Data Schema",
+  "description": "Schema for test and example data in the LinksPlatform project",
+  "type": "object",
+  "required": ["metadata", "input", "expectedOutput"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "name", "category", "author", "created"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this test data entry",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the test case",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the test case"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "link-operations",
+            "sequences",
+            "transformations",
+            "indexing",
+            "unicode",
+            "import-export",
+            "performance",
+            "other"
+          ],
+          "description": "Category of the test data"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["basic", "intermediate", "advanced"],
+          "description": "Complexity level of the test case"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags for categorization and search"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author name or system identifier"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp in ISO 8601 format"
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Whether this test data has been verified by a human reviewer"
+        },
+        "verifiedBy": {
+          "type": "string",
+          "description": "Name of the person who verified this test data"
+        },
+        "verifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Verification timestamp in ISO 8601 format"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of this test data entry"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "required": ["data"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the input data"
+        },
+        "data": {
+          "description": "Input data in appropriate format (can be any valid JSON type)"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "csv", "xml", "binary", "text"],
+          "description": "Format of the input data"
+        }
+      }
+    },
+    "expectedOutput": {
+      "type": "object",
+      "required": ["data"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the expected output"
+        },
+        "data": {
+          "description": "Expected output data (can be any valid JSON type)"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["json", "csv", "xml", "binary", "text"],
+          "description": "Format of the output data"
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of rules or algorithms that should be applied to solve this problem"
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "maxTime": {
+          "type": "number",
+          "description": "Maximum execution time in milliseconds"
+        },
+        "maxMemory": {
+          "type": "number",
+          "description": "Maximum memory usage in bytes"
+        },
+        "requiresOptimization": {
+          "type": "boolean",
+          "description": "Whether this test case specifically tests optimization"
+        }
+      },
+      "description": "Constraints that should be satisfied when solving this problem"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or considerations for this test case"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "References to related documentation, papers, or discussions"
+    }
+  }
+}
