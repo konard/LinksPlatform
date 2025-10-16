@@ -5,14 +5,17 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    
+
 env:
   TOKEN: ${{ secrets.TOKEN }}
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
@@ -21,6 +24,15 @@ jobs:
         cd Platform
         dotnet build
         cd ..
+    - name: Test IdServer
+      shell: bash
+      run: |
+        if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
+          bash ./examples/test-idserver.sh
+        else
+          echo "Running basic build verification on Windows"
+          dotnet build Platform/Platform.Data.IdServer/Platform.Data.IdServer.csproj -c Release
+        fi
     - name: Publish Docs
-      if: github.event_name == 'push'
+      if: github.event_name == 'push' && matrix.os == 'ubuntu-latest'
       run: bash ./publish-docs.sh
