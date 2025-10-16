@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Memory.United.Specific;
+using Platform.Data.Doublets.Decorators;
 
 namespace Platform.Examples
 {
@@ -21,8 +22,9 @@ namespace Platform.Examples
             Console.WriteLine();
 
             using (var memoryAdapter = new UInt64UnitedMemoryLinks(dbPath))
-            using (var links = new UInt64Links(memoryAdapter))
+            using (var linksDecorator = new UInt64Links(memoryAdapter))
             {
+                var links = new SynchronizedLinks<ulong>(linksDecorator);
                 var tfs = new TagFileSystem(links);
 
                 Console.WriteLine("Commands:");
@@ -196,7 +198,7 @@ namespace Platform.Examples
 
                             case "stats":
                                 Console.WriteLine("Database Statistics:");
-                                var totalLinks = memoryAdapter.Count();
+                                var totalLinks = links.Count();
                                 Console.WriteLine($"  Total links: {totalLinks}");
                                 break;
 
