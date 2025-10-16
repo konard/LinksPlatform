@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" fill="#0366d6"/>
+  <circle cx="40" cy="64" r="12" fill="white"/>
+  <circle cx="88" cy="64" r="12" fill="white"/>
+  <line x1="52" y1="64" x2="76" y2="64" stroke="white" stroke-width="4"/>
+  <text x="64" y="105" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">LP</text>
+</svg>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>LP Docs</ShortName>
+  <Description>Search LinksPlatform documentation sites</Description>
+  <Tags>linksplatform documentation docs</Tags>
+  <Contact>admin@linksplatform.github.io</Contact>
+  <Url type="text/html" template="https://www.google.com/search?q=site%3Alinksplatform.github.io+{searchTerms}"/>
+  <Image height="16" width="16" type="image/x-icon">https://linksplatform.github.io/favicon.ico</Image>
+  <InputEncoding>UTF-8</InputEncoding>
+  <SearchForm>https://linksplatform.github.io</SearchForm>
+</OpenSearchDescription>
