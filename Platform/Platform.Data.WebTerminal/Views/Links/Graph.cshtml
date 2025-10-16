@@ -42,7 +42,7 @@
 
     <script type="text/javascript">
         // Pass model data to JavaScript
-        var linkModelData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+        var linkModelData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
     </script>
 </body>
 </html>
