@@ -52,12 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILinkVisitor.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="Link.Debug.cs" />
     <Compile Include="LinkConverter.cs" />
     <Compile Include="LinkExtensions.cs" />
     <Compile Include="LinkHelpers.cs" />
+    <Compile Include="LinkWalker.cs" />
+    <Compile Include="LinkWalkerExample.cs" />
     <Compile Include="Net.cs" />
+    <Compile Include="PathTrackingMode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
