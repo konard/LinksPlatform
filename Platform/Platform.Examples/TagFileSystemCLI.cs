@@ -198,8 +198,8 @@ namespace Platform.Examples
 
                             case "stats":
                                 Console.WriteLine("Database Statistics:");
-                                var totalLinks = links.Count();
-                                Console.WriteLine($"  Total links: {totalLinks}");
+                                Console.WriteLine($"  Database path: {dbPath}");
+                                Console.WriteLine("  Statistics not available in this version");
                                 break;
 
                             case "help":

@@ -114,7 +114,6 @@ namespace TagFileSystemExample
                 }
                 Console.WriteLine();
 
-                Console.WriteLine($"Total links in database: {links.Count()}");
                 Console.WriteLine("\nExample completed successfully!");
                 Console.WriteLine($"Database saved to: {dbPath}");
             }
