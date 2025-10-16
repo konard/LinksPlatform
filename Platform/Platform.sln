@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.MasterServer"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.ConsoleTerminal", "Platform.Data.ConsoleTerminal\Platform.Data.ConsoleTerminal.csproj", "{85D097CE-614E-4351-920B-45BD35AE5A84}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Core", "Platform.Data.Core\Platform.Data.Core.csproj", "{C1F3E8D1-9A2B-4C3D-8E4F-5A6B7C8D9E0F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Core.Tests", "Platform.Data.Core.Tests\Platform.Data.Core.Tests.csproj", "{D2F4E9E2-0B3C-5D4E-9F5F-6B7C8D9E0F1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{85D097CE-614E-4351-920B-45BD35AE5A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85D097CE-614E-4351-920B-45BD35AE5A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85D097CE-614E-4351-920B-45BD35AE5A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F3E8D1-9A2B-4C3D-8E4F-5A6B7C8D9E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F3E8D1-9A2B-4C3D-8E4F-5A6B7C8D9E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F3E8D1-9A2B-4C3D-8E4F-5A6B7C8D9E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F3E8D1-9A2B-4C3D-8E4F-5A6B7C8D9E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F4E9E2-0B3C-5D4E-9F5F-6B7C8D9E0F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F4E9E2-0B3C-5D4E-9F5F-6B7C8D9E0F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F4E9E2-0B3C-5D4E-9F5F-6B7C8D9E0F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F4E9E2-0B3C-5D4E-9F5F-6B7C8D9E0F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
