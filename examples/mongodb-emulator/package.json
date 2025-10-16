@@ -1,0 +1,32 @@
+{
+  "name": "linksplatform-mongodb-emulator",
+  "version": "1.0.0",
+  "description": "MongoDB-compatible interface for LinksPlatform, enabling easy integration with Node.js and Meteor applications",
+  "main": "linksplatform-mongodb.js",
+  "scripts": {
+    "example": "node nodejs-example.js"
+  },
+  "keywords": [
+    "linksplatform",
+    "mongodb",
+    "emulator",
+    "associative",
+    "triplets",
+    "doublets",
+    "database",
+    "meteor",
+    "nodejs"
+  ],
+  "author": "LinksPlatform Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konard/LinksPlatform.git"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
