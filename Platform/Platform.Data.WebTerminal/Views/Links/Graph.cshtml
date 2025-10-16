@@ -1,0 +1,122 @@
+@model LinkModel
+@{
+    ViewData["Title"] = "Graph View - " + Model.Link.ToString();
+}
+<div class="graph-view">
+    <h2>Graph Visualization</h2>
+    <div class="graph-controls">
+        <p>Root Link: <strong>@Model.Link.ToString()</strong></p>
+        <div class="control-buttons">
+            <button id="zoom-in" class="btn btn-sm btn-primary">Zoom In</button>
+            <button id="zoom-out" class="btn btn-sm btn-primary">Zoom Out</button>
+            <button id="reset-view" class="btn btn-sm btn-secondary">Reset View</button>
+            <button id="toggle-labels" class="btn btn-sm btn-info">Toggle Labels</button>
+        </div>
+    </div>
+    <div id="graph-container"></div>
+    <div class="graph-legend">
+        <h4>Legend</h4>
+        <div class="legend-item">
+            <span class="legend-color" style="background: #4CAF50;"></span>
+            <span>Root Link</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background: #2196F3;"></span>
+            <span>Direct Referers</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color" style="background: #9E9E9E;"></span>
+            <span>Nested Links</span>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // Graph data from model
+        var graphData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new {
+            root = new {
+                id = Model.Link.ToInt(),
+                label = Model.Link.ToString()
+            },
+            nodes = new[] {
+                new {
+                    id = Model.Link.ToInt(),
+                    label = Model.Link.ToString(),
+                    level = 0
+                }
+            }.Concat(Model.ReferersModels.SelectMany((r, i) => new[] {
+                new {
+                    id = r.Link.ToInt(),
+                    label = r.Link.ToString(),
+                    level = 1
+                }
+            })).ToArray(),
+            links = Model.ReferersModels.Select(r => new {
+                source = r.Link.ToInt(),
+                target = Model.Link.ToInt()
+            }).ToArray()
+        }));
+    </script>
+    <script src="~/js/graph.js" asp-append-version="true"></script>
+}
+
+<style>
+    .graph-view {
+        padding: 20px;
+    }
+    .graph-controls {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .control-buttons {
+        margin-top: 10px;
+    }
+    .control-buttons button {
+        margin-right: 5px;
+    }
+    #graph-container {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #fff;
+        min-height: 600px;
+        position: relative;
+    }
+    .graph-legend {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+    }
+    .legend-color {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .node {
+        cursor: pointer;
+    }
+    .node circle {
+        stroke: #fff;
+        stroke-width: 2px;
+    }
+    .node text {
+        font-size: 12px;
+        font-family: Arial, sans-serif;
+    }
+    .link {
+        stroke: #999;
+        stroke-opacity: 0.6;
+        stroke-width: 2px;
+    }
+</style>
