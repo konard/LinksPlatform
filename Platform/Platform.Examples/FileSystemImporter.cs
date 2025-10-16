@@ -128,23 +128,25 @@ namespace Platform.Examples
         private bool IsTextFile(string filePath)
         {
             var extension = Path.GetExtension(filePath).ToLowerInvariant();
-            return extension switch
+            switch (extension)
             {
-                ".txt" => true,
-                ".cs" => true,
-                ".json" => true,
-                ".xml" => true,
-                ".md" => true,
-                ".html" => true,
-                ".css" => true,
-                ".js" => true,
-                ".ts" => true,
-                ".yaml" => true,
-                ".yml" => true,
-                ".config" => true,
-                ".ini" => true,
-                _ => false
-            };
+                case ".txt":
+                case ".cs":
+                case ".json":
+                case ".xml":
+                case ".md":
+                case ".html":
+                case ".css":
+                case ".js":
+                case ".ts":
+                case ".yaml":
+                case ".yml":
+                case ".config":
+                case ".ini":
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

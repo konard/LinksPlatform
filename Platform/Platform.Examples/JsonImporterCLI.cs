@@ -26,7 +26,7 @@ namespace Platform.Examples
                 {
                     Console.WriteLine("Press CTRL+C to stop.");
                     var links = memoryAdapter.DecorateWithAutomaticUniquenessAndUsagesResolution();
-                    var indexer = new XmlIndexer<uint>(links);
+                    var indexer = new HierarchicalIndexer<uint>(links);
                     var indexingImporter = new JsonImporter<uint>(indexer);
                     indexingImporter.Import(file, cancellation.Token).Wait();
                     if (cancellation.NotRequested)

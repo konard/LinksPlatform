@@ -28,7 +28,7 @@ namespace Platform.Examples
                 {
                     Console.WriteLine("Press CTRL+C to stop.");
                     var links = memoryAdapter.DecorateWithAutomaticUniquenessAndUsagesResolution();
-                    var indexer = new XmlIndexer<uint>(links);
+                    var indexer = new HierarchicalIndexer<uint>(links);
                     var cache = indexer.Cache;
                     Console.WriteLine("Frequencies cache ready.");
                     var storage = new LinksHierarchicalStorage<uint>(links, false, cache);
