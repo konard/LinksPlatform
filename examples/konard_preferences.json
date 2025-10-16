@@ -1,0 +1,98 @@
+Analyzing code in: Platform
+
+================================================================================
+EXTRACTED CODE PREFERENCES
+================================================================================
+{
+  "summary": {
+    "files_analyzed": 61,
+    "total_lines": 31260
+  },
+  "indentation": {
+    "style": "spaces_4",
+    "size": 4,
+    "confidence": 20.84
+  },
+  "naming_conventions": {
+    "classes": {
+      "preferred_style": "PascalCase",
+      "confidence": 83.54,
+      "distribution": {
+        "PascalCase": 66,
+        "lowercase": 11,
+        "UPPERCASE": 2
+      }
+    },
+    "methods": {
+      "preferred_style": "lowercase",
+      "confidence": 56.36,
+      "distribution": {
+        "PascalCase": 2467,
+        "lowercase": 8799,
+        "UPPERCASE": 174,
+        "camelCase": 3527,
+        "snake_case": 646
+      }
+    },
+    "variables": {
+      "preferred_style": "lowercase",
+      "confidence": 59.5,
+      "distribution": {
+        "camelCase": 809,
+        "lowercase": 1919,
+        "PascalCase": 219,
+        "SCREAMING_SNAKE_CASE": 112,
+        "snake_case": 116,
+        "UPPERCASE": 50
+      }
+    }
+  },
+  "brace_style": {
+    "style": "same_line",
+    "confidence": 81.51
+  },
+  "line_length": {
+    "average": 62.0,
+    "median": 42,
+    "p95": 94,
+    "max": 86841
+  },
+  "comment_style": {
+    "preferred_style": "single_line_slashes",
+    "confidence": 90.22,
+    "distribution": {
+      "hash": 6,
+      "single_line_slashes": 3137,
+      "multi_line_start": 334
+    }
+  },
+  "using_organization": {
+    "organized": "unsorted",
+    "confidence": 85.29
+  },
+  "blank_lines": {
+    "typical": "1_lines",
+    "distribution": {
+      "1_lines": 4912,
+      "2_lines": 173,
+      "3_lines": 12,
+      "4_lines": 24,
+      "5_lines": 1
+    }
+  },
+  "string_quotes": {
+    "style": "unknown",
+    "confidence": 0
+  }
+}
+
+================================================================================
+SUMMARY
+================================================================================
+Files analyzed: 61
+Total lines: 31260
+
+Indentation: spaces_4 (confidence: 20.84%)
+Class naming: PascalCase (confidence: 83.54%)
+Brace style: same_line (confidence: 81.51%)
+Average line length: 62.0 characters
