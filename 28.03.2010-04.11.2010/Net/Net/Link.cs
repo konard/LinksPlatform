@@ -8,6 +8,9 @@ namespace Net
 {
 	public partial class Link
 	{
+		private static readonly HashSet<Link> AllLinks = new HashSet<Link>();
+		private static readonly object AllLinksLock = new object();
+
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private Link m_Source;
 
@@ -244,6 +247,10 @@ namespace Net
 					Linker = linker,
 					Target = target,
 				};
+				lock (AllLinksLock)
+				{
+					AllLinks.Add(link);
+				}
 			}
 			return link;
 		}
@@ -254,6 +261,10 @@ namespace Net
 			link.Source = link;
 			link.Linker = linker;
 			link.Target = target;
+			lock (AllLinksLock)
+			{
+				AllLinks.Add(link);
+			}
 			return link;
 		}
 
@@ -263,6 +274,10 @@ namespace Net
 			link.Source = link;
 			link.Linker = link;
 			link.Target = target;
+			lock (AllLinksLock)
+			{
+				AllLinks.Add(link);
+			}
 			return link;
 		}
 
@@ -272,6 +287,10 @@ namespace Net
 			link.Source = source;
 			link.Linker = linker;
 			link.Target = link;
+			lock (AllLinksLock)
+			{
+				AllLinks.Add(link);
+			}
 			return link;
 		}
 
@@ -281,6 +300,10 @@ namespace Net
 			link.Source = source;
 			link.Linker = link;
 			link.Target = target;
+			lock (AllLinksLock)
+			{
+				AllLinks.Add(link);
+			}
 			return link;
 		}
 
@@ -290,6 +313,10 @@ namespace Net
 			link.Source = link;
 			link.Linker = linker;
 			link.Target = link;
+			lock (AllLinksLock)
+			{
+				AllLinks.Add(link);
+			}
 			return link;
 		}
 
@@ -299,6 +326,10 @@ namespace Net
 			link.Source = link;
 			link.Linker = link;
 			link.Target = link;
+			lock (AllLinksLock)
+			{
+				AllLinks.Add(link);
+			}
 			return link;
 		}
 
@@ -393,6 +424,80 @@ namespace Net
 			while (m_FirstRefererBySource != null) m_FirstRefererBySource.Delete();
 			while (m_FirstRefererByLinker != null) m_FirstRefererByLinker.Delete();
 			while (m_FirstRefererByTarget != null) m_FirstRefererByTarget.Delete();
+			lock (AllLinksLock)
+			{
+				AllLinks.Remove(this);
+			}
+		}
+
+		/// <summary>
+		/// Iterates through all links matching the specified restriction and invokes the handler for each matching link.
+		/// </summary>
+		/// <param name="source">Source restriction. Null means any source.</param>
+		/// <param name="linker">Linker restriction. Null means any linker.</param>
+		/// <param name="target">Target restriction. Null means any target.</param>
+		/// <param name="handler">Handler function that receives each matching link. Return true to continue iteration, false to break.</param>
+		/// <returns>True if iteration completed without interruption, false if iteration was stopped by handler.</returns>
+		static public bool Each(Link source, Link linker, Link target, Func<Link, bool> handler)
+		{
+			if (handler == null)
+			{
+				return true;
+			}
+
+			lock (AllLinksLock)
+			{
+				foreach (var link in AllLinks)
+				{
+					// Check if link matches the restriction
+					bool matches = true;
+
+					if (source != null && link.Source != source)
+					{
+						matches = false;
+					}
+
+					if (linker != null && link.Linker != linker)
+					{
+						matches = false;
+					}
+
+					if (target != null && link.Target != target)
+					{
+						matches = false;
+					}
+
+					if (matches)
+					{
+						if (!handler(link))
+						{
+							return false; // Handler returned false, stop iteration
+						}
+					}
+				}
+			}
+
+			return true; // Completed iteration
+		}
+
+		/// <summary>
+		/// Iterates through all links and invokes the handler for each link.
+		/// </summary>
+		/// <param name="handler">Handler action that receives each link.</param>
+		static public void Each(Action<Link> handler)
+		{
+			if (handler == null)
+			{
+				return;
+			}
+
+			lock (AllLinksLock)
+			{
+				foreach (var link in AllLinks)
+				{
+					handler(link);
+				}
+			}
 		}
 
 		public override string ToString()
