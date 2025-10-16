@@ -1,0 +1,805 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Multilingual dictionary of semantic primes - universal concepts that exist across all languages",
+    "source": "Based on Natural Semantic Metalanguage (NSM) theory by Anna Wierzbicka and Cliff Goddard",
+    "reference": "https://en.wikipedia.org/wiki/Semantic_primes"
+  },
+  "categories": {
+    "substantives": {
+      "description": "Basic concepts referring to entities",
+      "primes": {
+        "I": {
+          "definition": "First person singular - the self",
+          "languages": {
+            "en": "I",
+            "ru": "я",
+            "es": "yo",
+            "fr": "je",
+            "de": "ich",
+            "zh": "我"
+          }
+        },
+        "you": {
+          "definition": "Second person - the addressee",
+          "languages": {
+            "en": "you",
+            "ru": "ты",
+            "es": "tú",
+            "fr": "tu",
+            "de": "du",
+            "zh": "你"
+          }
+        },
+        "someone": {
+          "definition": "Indefinite person",
+          "languages": {
+            "en": "someone",
+            "ru": "кто-то",
+            "es": "alguien",
+            "fr": "quelqu'un",
+            "de": "jemand",
+            "zh": "某人"
+          }
+        },
+        "people": {
+          "definition": "Human beings in general",
+          "languages": {
+            "en": "people",
+            "ru": "люди",
+            "es": "gente",
+            "fr": "gens",
+            "de": "Leute",
+            "zh": "人们"
+          }
+        },
+        "something": {
+          "definition": "Indefinite thing",
+          "languages": {
+            "en": "something",
+            "ru": "что-то",
+            "es": "algo",
+            "fr": "quelque chose",
+            "de": "etwas",
+            "zh": "某物"
+          }
+        },
+        "body": {
+          "definition": "Physical body",
+          "languages": {
+            "en": "body",
+            "ru": "тело",
+            "es": "cuerpo",
+            "fr": "corps",
+            "de": "Körper",
+            "zh": "身体"
+          }
+        }
+      }
+    },
+    "relational_substantives": {
+      "description": "Concepts expressing relations between entities",
+      "primes": {
+        "kind": {
+          "definition": "Type or category",
+          "languages": {
+            "en": "kind",
+            "ru": "вид",
+            "es": "tipo",
+            "fr": "sorte",
+            "de": "Art",
+            "zh": "种类"
+          }
+        },
+        "part": {
+          "definition": "Component of a whole",
+          "languages": {
+            "en": "part",
+            "ru": "часть",
+            "es": "parte",
+            "fr": "partie",
+            "de": "Teil",
+            "zh": "部分"
+          }
+        }
+      }
+    },
+    "determiners": {
+      "description": "Words that specify or identify",
+      "primes": {
+        "this": {
+          "definition": "Proximal demonstrative",
+          "languages": {
+            "en": "this",
+            "ru": "это",
+            "es": "esto",
+            "fr": "ceci",
+            "de": "dies",
+            "zh": "这"
+          }
+        },
+        "the_same": {
+          "definition": "Identity marker",
+          "languages": {
+            "en": "the same",
+            "ru": "тот же",
+            "es": "el mismo",
+            "fr": "le même",
+            "de": "derselbe",
+            "zh": "同样"
+          }
+        },
+        "other": {
+          "definition": "Alternative or different",
+          "languages": {
+            "en": "other",
+            "ru": "другой",
+            "es": "otro",
+            "fr": "autre",
+            "de": "andere",
+            "zh": "其他"
+          }
+        }
+      }
+    },
+    "quantifiers": {
+      "description": "Concepts expressing quantity",
+      "primes": {
+        "one": {
+          "definition": "Single unit",
+          "languages": {
+            "en": "one",
+            "ru": "один",
+            "es": "uno",
+            "fr": "un",
+            "de": "eins",
+            "zh": "一"
+          }
+        },
+        "two": {
+          "definition": "Pair or couple",
+          "languages": {
+            "en": "two",
+            "ru": "два",
+            "es": "dos",
+            "fr": "deux",
+            "de": "zwei",
+            "zh": "二"
+          }
+        },
+        "some": {
+          "definition": "Indefinite quantity",
+          "languages": {
+            "en": "some",
+            "ru": "некоторые",
+            "es": "algunos",
+            "fr": "quelques",
+            "de": "einige",
+            "zh": "一些"
+          }
+        },
+        "all": {
+          "definition": "Total quantity",
+          "languages": {
+            "en": "all",
+            "ru": "все",
+            "es": "todos",
+            "fr": "tous",
+            "de": "alle",
+            "zh": "全部"
+          }
+        },
+        "much": {
+          "definition": "Large quantity",
+          "languages": {
+            "en": "much",
+            "ru": "много",
+            "es": "mucho",
+            "fr": "beaucoup",
+            "de": "viel",
+            "zh": "很多"
+          }
+        },
+        "little": {
+          "definition": "Small quantity",
+          "languages": {
+            "en": "little",
+            "ru": "мало",
+            "es": "poco",
+            "fr": "peu",
+            "de": "wenig",
+            "zh": "少"
+          }
+        }
+      }
+    },
+    "evaluators": {
+      "description": "Concepts expressing evaluation",
+      "primes": {
+        "good": {
+          "definition": "Positive evaluation",
+          "languages": {
+            "en": "good",
+            "ru": "хороший",
+            "es": "bueno",
+            "fr": "bon",
+            "de": "gut",
+            "zh": "好"
+          }
+        },
+        "bad": {
+          "definition": "Negative evaluation",
+          "languages": {
+            "en": "bad",
+            "ru": "плохой",
+            "es": "malo",
+            "fr": "mauvais",
+            "de": "schlecht",
+            "zh": "坏"
+          }
+        }
+      }
+    },
+    "descriptors": {
+      "description": "Physical property descriptors",
+      "primes": {
+        "big": {
+          "definition": "Large in size",
+          "languages": {
+            "en": "big",
+            "ru": "большой",
+            "es": "grande",
+            "fr": "grand",
+            "de": "groß",
+            "zh": "大"
+          }
+        },
+        "small": {
+          "definition": "Small in size",
+          "languages": {
+            "en": "small",
+            "ru": "маленький",
+            "es": "pequeño",
+            "fr": "petit",
+            "de": "klein",
+            "zh": "小"
+          }
+        }
+      }
+    },
+    "mental_predicates": {
+      "description": "Concepts related to mental states and processes",
+      "primes": {
+        "think": {
+          "definition": "Mental process of considering",
+          "languages": {
+            "en": "think",
+            "ru": "думать",
+            "es": "pensar",
+            "fr": "penser",
+            "de": "denken",
+            "zh": "想"
+          }
+        },
+        "know": {
+          "definition": "Possess knowledge",
+          "languages": {
+            "en": "know",
+            "ru": "знать",
+            "es": "saber",
+            "fr": "savoir",
+            "de": "wissen",
+            "zh": "知道"
+          }
+        },
+        "want": {
+          "definition": "Desire or wish",
+          "languages": {
+            "en": "want",
+            "ru": "хотеть",
+            "es": "querer",
+            "fr": "vouloir",
+            "de": "wollen",
+            "zh": "想要"
+          }
+        },
+        "dont_want": {
+          "definition": "Lack of desire",
+          "languages": {
+            "en": "don't want",
+            "ru": "не хотеть",
+            "es": "no querer",
+            "fr": "ne pas vouloir",
+            "de": "nicht wollen",
+            "zh": "不想要"
+          }
+        },
+        "feel": {
+          "definition": "Experience emotion or sensation",
+          "languages": {
+            "en": "feel",
+            "ru": "чувствовать",
+            "es": "sentir",
+            "fr": "sentir",
+            "de": "fühlen",
+            "zh": "感觉"
+          }
+        },
+        "see": {
+          "definition": "Visual perception",
+          "languages": {
+            "en": "see",
+            "ru": "видеть",
+            "es": "ver",
+            "fr": "voir",
+            "de": "sehen",
+            "zh": "看见"
+          }
+        },
+        "hear": {
+          "definition": "Auditory perception",
+          "languages": {
+            "en": "hear",
+            "ru": "слышать",
+            "es": "oír",
+            "fr": "entendre",
+            "de": "hören",
+            "zh": "听见"
+          }
+        }
+      }
+    },
+    "speech": {
+      "description": "Concepts related to communication",
+      "primes": {
+        "say": {
+          "definition": "Verbal communication",
+          "languages": {
+            "en": "say",
+            "ru": "говорить",
+            "es": "decir",
+            "fr": "dire",
+            "de": "sagen",
+            "zh": "说"
+          }
+        },
+        "words": {
+          "definition": "Units of language",
+          "languages": {
+            "en": "words",
+            "ru": "слова",
+            "es": "palabras",
+            "fr": "mots",
+            "de": "Wörter",
+            "zh": "词"
+          }
+        },
+        "true": {
+          "definition": "Correspondence with reality",
+          "languages": {
+            "en": "true",
+            "ru": "правда",
+            "es": "verdad",
+            "fr": "vrai",
+            "de": "wahr",
+            "zh": "真"
+          }
+        }
+      }
+    },
+    "actions_events_movement": {
+      "description": "Concepts related to actions and change",
+      "primes": {
+        "do": {
+          "definition": "Perform action",
+          "languages": {
+            "en": "do",
+            "ru": "делать",
+            "es": "hacer",
+            "fr": "faire",
+            "de": "tun",
+            "zh": "做"
+          }
+        },
+        "happen": {
+          "definition": "Occur or take place",
+          "languages": {
+            "en": "happen",
+            "ru": "случаться",
+            "es": "suceder",
+            "fr": "arriver",
+            "de": "geschehen",
+            "zh": "发生"
+          }
+        },
+        "move": {
+          "definition": "Change location",
+          "languages": {
+            "en": "move",
+            "ru": "двигаться",
+            "es": "mover",
+            "fr": "bouger",
+            "de": "bewegen",
+            "zh": "移动"
+          }
+        }
+      }
+    },
+    "existence_possession": {
+      "description": "Concepts related to being and having",
+      "primes": {
+        "be_somewhere": {
+          "definition": "Exist at a location",
+          "languages": {
+            "en": "be (somewhere)",
+            "ru": "быть (где-то)",
+            "es": "estar (en algún lugar)",
+            "fr": "être (quelque part)",
+            "de": "sein (irgendwo)",
+            "zh": "在(某处)"
+          }
+        },
+        "there_is": {
+          "definition": "Existential marker",
+          "languages": {
+            "en": "there is",
+            "ru": "есть",
+            "es": "hay",
+            "fr": "il y a",
+            "de": "es gibt",
+            "zh": "有"
+          }
+        },
+        "be_something": {
+          "definition": "Identity or classification",
+          "languages": {
+            "en": "be (something)",
+            "ru": "быть (чем-то)",
+            "es": "ser (algo)",
+            "fr": "être (quelque chose)",
+            "de": "sein (etwas)",
+            "zh": "是(某物)"
+          }
+        },
+        "mine": {
+          "definition": "Possession",
+          "languages": {
+            "en": "mine",
+            "ru": "мой",
+            "es": "mío",
+            "fr": "à moi",
+            "de": "mein",
+            "zh": "我的"
+          }
+        }
+      }
+    },
+    "life_and_death": {
+      "description": "Concepts related to living and dying",
+      "primes": {
+        "live": {
+          "definition": "Be alive",
+          "languages": {
+            "en": "live",
+            "ru": "жить",
+            "es": "vivir",
+            "fr": "vivre",
+            "de": "leben",
+            "zh": "活"
+          }
+        },
+        "die": {
+          "definition": "Cease to live",
+          "languages": {
+            "en": "die",
+            "ru": "умирать",
+            "es": "morir",
+            "fr": "mourir",
+            "de": "sterben",
+            "zh": "死"
+          }
+        }
+      }
+    },
+    "time": {
+      "description": "Temporal concepts",
+      "primes": {
+        "when": {
+          "definition": "Time interrogative",
+          "languages": {
+            "en": "when",
+            "ru": "когда",
+            "es": "cuándo",
+            "fr": "quand",
+            "de": "wann",
+            "zh": "什么时候"
+          }
+        },
+        "now": {
+          "definition": "Present moment",
+          "languages": {
+            "en": "now",
+            "ru": "сейчас",
+            "es": "ahora",
+            "fr": "maintenant",
+            "de": "jetzt",
+            "zh": "现在"
+          }
+        },
+        "before": {
+          "definition": "Earlier in time",
+          "languages": {
+            "en": "before",
+            "ru": "до",
+            "es": "antes",
+            "fr": "avant",
+            "de": "vorher",
+            "zh": "之前"
+          }
+        },
+        "after": {
+          "definition": "Later in time",
+          "languages": {
+            "en": "after",
+            "ru": "после",
+            "es": "después",
+            "fr": "après",
+            "de": "nachher",
+            "zh": "之后"
+          }
+        },
+        "a_long_time": {
+          "definition": "Extended duration",
+          "languages": {
+            "en": "a long time",
+            "ru": "долго",
+            "es": "mucho tiempo",
+            "fr": "longtemps",
+            "de": "lange Zeit",
+            "zh": "很长时间"
+          }
+        },
+        "a_short_time": {
+          "definition": "Brief duration",
+          "languages": {
+            "en": "a short time",
+            "ru": "недолго",
+            "es": "poco tiempo",
+            "fr": "peu de temps",
+            "de": "kurze Zeit",
+            "zh": "短时间"
+          }
+        },
+        "for_some_time": {
+          "definition": "Duration marker",
+          "languages": {
+            "en": "for some time",
+            "ru": "некоторое время",
+            "es": "durante un tiempo",
+            "fr": "pendant un certain temps",
+            "de": "für einige Zeit",
+            "zh": "一段时间"
+          }
+        },
+        "moment": {
+          "definition": "Point in time",
+          "languages": {
+            "en": "moment",
+            "ru": "момент",
+            "es": "momento",
+            "fr": "moment",
+            "de": "Moment",
+            "zh": "瞬间"
+          }
+        }
+      }
+    },
+    "space": {
+      "description": "Spatial concepts",
+      "primes": {
+        "where": {
+          "definition": "Location interrogative",
+          "languages": {
+            "en": "where",
+            "ru": "где",
+            "es": "dónde",
+            "fr": "où",
+            "de": "wo",
+            "zh": "哪里"
+          }
+        },
+        "here": {
+          "definition": "Proximal location",
+          "languages": {
+            "en": "here",
+            "ru": "здесь",
+            "es": "aquí",
+            "fr": "ici",
+            "de": "hier",
+            "zh": "这里"
+          }
+        },
+        "above": {
+          "definition": "Higher position",
+          "languages": {
+            "en": "above",
+            "ru": "над",
+            "es": "arriba",
+            "fr": "au-dessus",
+            "de": "über",
+            "zh": "上面"
+          }
+        },
+        "below": {
+          "definition": "Lower position",
+          "languages": {
+            "en": "below",
+            "ru": "под",
+            "es": "abajo",
+            "fr": "en-dessous",
+            "de": "unter",
+            "zh": "下面"
+          }
+        },
+        "far": {
+          "definition": "Distant",
+          "languages": {
+            "en": "far",
+            "ru": "далеко",
+            "es": "lejos",
+            "fr": "loin",
+            "de": "weit",
+            "zh": "远"
+          }
+        },
+        "near": {
+          "definition": "Close in distance",
+          "languages": {
+            "en": "near",
+            "ru": "близко",
+            "es": "cerca",
+            "fr": "près",
+            "de": "nah",
+            "zh": "近"
+          }
+        },
+        "side": {
+          "definition": "Lateral position",
+          "languages": {
+            "en": "side",
+            "ru": "сторона",
+            "es": "lado",
+            "fr": "côté",
+            "de": "Seite",
+            "zh": "旁边"
+          }
+        },
+        "inside": {
+          "definition": "Interior position",
+          "languages": {
+            "en": "inside",
+            "ru": "внутри",
+            "es": "dentro",
+            "fr": "dedans",
+            "de": "innen",
+            "zh": "里面"
+          }
+        },
+        "touch": {
+          "definition": "Physical contact",
+          "languages": {
+            "en": "touch",
+            "ru": "касаться",
+            "es": "tocar",
+            "fr": "toucher",
+            "de": "berühren",
+            "zh": "接触"
+          }
+        }
+      }
+    },
+    "logical_concepts": {
+      "description": "Logical and conditional concepts",
+      "primes": {
+        "not": {
+          "definition": "Negation",
+          "languages": {
+            "en": "not",
+            "ru": "не",
+            "es": "no",
+            "fr": "ne...pas",
+            "de": "nicht",
+            "zh": "不"
+          }
+        },
+        "maybe": {
+          "definition": "Possibility",
+          "languages": {
+            "en": "maybe",
+            "ru": "может быть",
+            "es": "quizás",
+            "fr": "peut-être",
+            "de": "vielleicht",
+            "zh": "也许"
+          }
+        },
+        "can": {
+          "definition": "Ability or possibility",
+          "languages": {
+            "en": "can",
+            "ru": "мочь",
+            "es": "poder",
+            "fr": "pouvoir",
+            "de": "können",
+            "zh": "能"
+          }
+        },
+        "because": {
+          "definition": "Causation",
+          "languages": {
+            "en": "because",
+            "ru": "потому что",
+            "es": "porque",
+            "fr": "parce que",
+            "de": "weil",
+            "zh": "因为"
+          }
+        },
+        "if": {
+          "definition": "Conditional",
+          "languages": {
+            "en": "if",
+            "ru": "если",
+            "es": "si",
+            "fr": "si",
+            "de": "wenn",
+            "zh": "如果"
+          }
+        }
+      }
+    },
+    "intensifier_augmentor": {
+      "description": "Concepts expressing degree",
+      "primes": {
+        "very": {
+          "definition": "High degree",
+          "languages": {
+            "en": "very",
+            "ru": "очень",
+            "es": "muy",
+            "fr": "très",
+            "de": "sehr",
+            "zh": "很"
+          }
+        },
+        "more": {
+          "definition": "Increased quantity or degree",
+          "languages": {
+            "en": "more",
+            "ru": "больше",
+            "es": "más",
+            "fr": "plus",
+            "de": "mehr",
+            "zh": "更多"
+          }
+        }
+      }
+    },
+    "similarity": {
+      "description": "Concepts expressing likeness",
+      "primes": {
+        "like": {
+          "definition": "Similarity or manner",
+          "languages": {
+            "en": "like",
+            "ru": "как",
+            "es": "como",
+            "fr": "comme",
+            "de": "wie",
+            "zh": "像"
+          }
+        }
+      }
+    }
+  }
+}
