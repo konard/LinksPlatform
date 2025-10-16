@@ -11,7 +11,7 @@ namespace Platform.Sandbox
         private const string TransactionsFileName = "transactions.log";
         private const string TransactionsMapName = "Links.Net.Transactions";
 
-        private enum TransactionItemType
+        public enum TransactionItemType
         {
             Creation,
             UpdateOf,
@@ -19,7 +19,7 @@ namespace Platform.Sandbox
             Deletion
         }
 
-        private struct TransactionItem
+        public struct TransactionItem
         {
             public long TransactionId;
             public DateTime DateTime;
@@ -152,6 +152,120 @@ namespace Platform.Sandbox
             _logAccessor = _log.CreateViewAccessor();
             LoadState();
             _currentFileSizeInBytes = sizeInBytes;
+        }
+
+        /// <summary>
+        /// Represents an event with its time and position for lazy event loop iteration.
+        /// </summary>
+        public struct LogEvent
+        {
+            public DateTime Time;
+            public long Position;
+            public TransactionItem Item;
+        }
+
+        /// <summary>
+        /// Gets the next log event from the specified position (lazy event loop).
+        /// </summary>
+        /// <param name="position">The current position in the log.</param>
+        /// <returns>The next log event if available, null otherwise.</returns>
+        public static LogEvent? GetNextEvent(long position)
+        {
+            OpenFile();
+
+            if (position < _basicTransactionsOffset || position >= _currentState.FileEndOffset)
+            {
+                CloseFile();
+                return null;
+            }
+
+            TransactionItem item;
+            _logAccessor.Read(position, out item);
+
+            CloseFile();
+
+            return new LogEvent
+            {
+                Time = item.DateTime,
+                Position = position,
+                Item = item
+            };
+        }
+
+        /// <summary>
+        /// Finds a log event by time using binary search.
+        /// </summary>
+        /// <param name="targetTime">The target time to search for.</param>
+        /// <returns>The log event closest to the target time, or null if log is empty.</returns>
+        public static LogEvent? FindEventByTime(DateTime targetTime)
+        {
+            OpenFile();
+
+            long start = _basicTransactionsOffset;
+            long end = _currentState.FileEndOffset;
+
+            if (start >= end)
+            {
+                CloseFile();
+                return null;
+            }
+
+            long itemCount = (end - start) / _transactionItemSize;
+            long left = 0;
+            long right = itemCount - 1;
+            long resultPosition = start;
+
+            while (left <= right)
+            {
+                long mid = left + (right - left) / 2;
+                long position = start + mid * _transactionItemSize;
+
+                TransactionItem item;
+                _logAccessor.Read(position, out item);
+
+                if (item.DateTime == targetTime)
+                {
+                    resultPosition = position;
+                    break;
+                }
+                else if (item.DateTime < targetTime)
+                {
+                    resultPosition = position;
+                    left = mid + 1;
+                }
+                else
+                {
+                    right = mid - 1;
+                }
+            }
+
+            TransactionItem resultItem;
+            _logAccessor.Read(resultPosition, out resultItem);
+
+            CloseFile();
+
+            return new LogEvent
+            {
+                Time = resultItem.DateTime,
+                Position = resultPosition,
+                Item = resultItem
+            };
+        }
+
+        /// <summary>
+        /// Gets the next event position in the log.
+        /// </summary>
+        /// <param name="currentPosition">The current position.</param>
+        /// <returns>The next position, or -1 if there is no next event.</returns>
+        public static long GetNextEventPosition(long currentPosition)
+        {
+            long nextPosition = currentPosition + _transactionItemSize;
+
+            OpenFile();
+            bool hasNext = nextPosition < _currentState.FileEndOffset;
+            CloseFile();
+
+            return hasNext ? nextPosition : -1;
         }
 
         public static void Run()
