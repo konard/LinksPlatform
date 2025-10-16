@@ -13,7 +13,6 @@ namespace Platform.Examples
     /// </summary>
     /// <typeparam name="TLink">The type of link addresses.</typeparam>
     public class PowersOf2SequenceToIntegerConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink, BigInteger>
-        where TLink : struct, IUnsignedNumber<TLink>, IComparisonOperators<TLink, TLink, bool>
     {
         private readonly IConverter<TLink> _linkToPowerConverter;
         private readonly ISequenceWalker<TLink> _sequenceWalker;
@@ -79,12 +78,18 @@ namespace Platform.Examples
             _sequenceWalker.Walk(actualSequence, powerLink =>
             {
                 var power = _linkToPowerConverter.Convert(powerLink);
-                var powerValue = int.CreateTruncating(power);
+                var powerValue = (int)(object)power;
                 result += BigInteger.Pow(2, powerValue);
                 return true; // Continue walking
             });
 
             return result;
+        }
+
+        private static class EqualityComparer<T>
+        {
+            public static bool Equals(T a, T b) => System.Collections.Generic.EqualityComparer<T>.Default.Equals(a, b);
+            public static System.Collections.Generic.IEqualityComparer<T> Default => System.Collections.Generic.EqualityComparer<T>.Default;
         }
     }
 }

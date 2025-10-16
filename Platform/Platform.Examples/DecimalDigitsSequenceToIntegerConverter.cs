@@ -14,7 +14,6 @@ namespace Platform.Examples
     /// </summary>
     /// <typeparam name="TLink">The type of link addresses.</typeparam>
     public class DecimalDigitsSequenceToIntegerConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink, BigInteger>
-        where TLink : struct, IUnsignedNumber<TLink>, IComparisonOperators<TLink, TLink, bool>
     {
         private readonly IConverter<TLink> _linkToDigitConverter;
         private readonly ISequenceWalker<TLink> _sequenceWalker;
@@ -92,7 +91,7 @@ namespace Platform.Examples
             _sequenceWalker.Walk(actualSequence, digitLink =>
             {
                 var digit = _linkToDigitConverter.Convert(digitLink);
-                var digitValue = int.CreateTruncating(digit);
+                var digitValue = (int)(object)digit;
                 result = result * 10 + digitValue;
                 return true; // Continue walking
             });
@@ -103,6 +102,12 @@ namespace Platform.Examples
             }
 
             return result;
+        }
+
+        private static class EqualityComparer<T>
+        {
+            public static bool Equals(T a, T b) => System.Collections.Generic.EqualityComparer<T>.Default.Equals(a, b);
+            public static System.Collections.Generic.IEqualityComparer<T> Default => System.Collections.Generic.EqualityComparer<T>.Default;
         }
     }
 }

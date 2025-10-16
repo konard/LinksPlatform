@@ -13,7 +13,6 @@ namespace Platform.Examples
     /// </summary>
     /// <typeparam name="TLink">The type of link addresses.</typeparam>
     public class IntegerToPowersOf2SequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<BigInteger, TLink>
-        where TLink : struct, IUnsignedNumber<TLink>, IComparisonOperators<TLink, TLink, bool>
     {
         private readonly IConverter<TLink> _powerToLinkConverter;
         private readonly IConverter<IList<TLink>, TLink> _listToSequenceConverter;
@@ -65,7 +64,7 @@ namespace Platform.Examples
                 if ((number & 1) == 1)
                 {
                     // Convert bit position to link
-                    var powerLink = _powerToLinkConverter.Convert(TLink.CreateTruncating(bitPosition));
+                    var powerLink = _powerToLinkConverter.Convert((TLink)(object)bitPosition);
                     powers.Add(powerLink);
                 }
                 number >>= 1;

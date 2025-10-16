@@ -13,7 +13,6 @@ namespace Platform.Examples
     /// </summary>
     /// <typeparam name="TLink">The type of link addresses.</typeparam>
     public class IntegerToDecimalDigitsSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<BigInteger, TLink>
-        where TLink : struct, IUnsignedNumber<TLink>, IComparisonOperators<TLink, TLink, bool>
     {
         private readonly IConverter<TLink> _digitToLinkConverter;
         private readonly IConverter<IList<TLink>, TLink> _listToSequenceConverter;
@@ -58,7 +57,7 @@ namespace Platform.Examples
             if (number == 0)
             {
                 // Zero is represented as a single digit
-                var zeroLink = _digitToLinkConverter.Convert(TLink.Zero);
+                var zeroLink = _digitToLinkConverter.Convert(default(TLink));
                 var zeroSequence = _listToSequenceConverter.Convert(new List<TLink> { zeroLink });
                 return _links.GetOrCreate(_decimalDigitsSequenceMarker, zeroSequence);
             }
@@ -70,7 +69,7 @@ namespace Platform.Examples
             foreach (char digitChar in numberString)
             {
                 int digitValue = digitChar - '0';
-                var digitLink = _digitToLinkConverter.Convert(TLink.CreateTruncating(digitValue));
+                var digitLink = _digitToLinkConverter.Convert((TLink)(object)digitValue);
                 digits.Add(digitLink);
             }
 
