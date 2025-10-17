@@ -53,6 +53,10 @@ links.Delete(link);
 
 [![Изображение с результатом сравнения производительности SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Результат сравнения производительности SQLite и Дуплетов")](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets)
 
+## [PostgreSQL против Дуплетов](https://github.com/linksplatform/Comparisons.PostgreSQLVSDoublets)
+
+Дуплеты работают от 1746 до 15745 раз быстрее PostgreSQL в операциях записи, и от 100 до 9694 раз быстрее в операциях чтения.
+
 ## Описание
 
 Вдохновлено работой Симона Вильямса ([Ассоциативная модель данных - англ.](https://web.archive.org/web/20210814063207/https://en.wikipedia.org/wiki/Associative_model_of_data)), [книга (англ.)](https://web.archive.org/web/20181219134621/http://sentences.com/docs/amd.pdf), [сравнение с реляционными моделями данных (англ.)](http://iacis.org/iis/2009/P2009_1301.pdf).
