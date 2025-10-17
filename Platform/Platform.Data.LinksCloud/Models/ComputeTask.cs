@@ -6,7 +6,7 @@ namespace Platform.Data.LinksCloud.Models
     /// <summary>
     /// Status of a computational task.
     /// </summary>
-    public enum TaskStatus
+    public enum ComputeTaskStatus
     {
         Pending,
         Assigned,
@@ -48,7 +48,7 @@ namespace Platform.Data.LinksCloud.Models
         /// <summary>
         /// Current status of the task.
         /// </summary>
-        public TaskStatus Status { get; set; }
+        public ComputeTaskStatus Status { get; set; }
 
         /// <summary>
         /// Node ID that created the task.
@@ -94,7 +94,7 @@ namespace Platform.Data.LinksCloud.Models
         {
             TaskId = Guid.NewGuid();
             CreatedAt = DateTime.UtcNow;
-            Status = TaskStatus.Pending;
+            Status = ComputeTaskStatus.Pending;
             Priority = 0;
             ComputeCost = 1;
         }

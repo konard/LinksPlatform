@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Platform.Data;
+using Platform.Data.Doublets;
 using Platform.Data.LinksCloud.Compute;
 using Platform.Data.LinksCloud.Models;
 using Platform.Data.LinksCloud.Network;
@@ -16,7 +17,7 @@ namespace Platform.Data.LinksCloud.Core
     /// </summary>
     public class LinksCloudNode : IDisposable
     {
-        private readonly ILinks<ulong> _links;
+        private readonly ILinks<ulong, LinksConstants<ulong>> _links;
         private readonly IP2PNetworkManager _networkManager;
         private readonly IDistributedKnowledgeStore _knowledgeStore;
         private readonly ITaskScheduler _taskScheduler;
@@ -27,7 +28,7 @@ namespace Platform.Data.LinksCloud.Core
         public ITaskScheduler TaskScheduler => _taskScheduler;
 
         public LinksCloudNode(
-            ILinks<ulong> links,
+            ILinks<ulong, LinksConstants<ulong>> links,
             string nodeName,
             int port,
             int computeCapacity = 100,

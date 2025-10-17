@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Platform.Data.LinksCloud.Models;
 using Platform.Data.LinksCloud.Network;
+using TaskStatus = Platform.Data.LinksCloud.Models.ComputeTaskStatus;
 
 namespace Platform.Data.LinksCloud.Compute
 {

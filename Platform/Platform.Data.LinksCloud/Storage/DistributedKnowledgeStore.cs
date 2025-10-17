@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Platform.Data;
+using Platform.Data.Doublets;
 using Platform.Data.LinksCloud.Models;
 using Platform.Data.LinksCloud.Network;
 
@@ -16,7 +17,7 @@ namespace Platform.Data.LinksCloud.Storage
     /// </summary>
     public class DistributedKnowledgeStore : IDistributedKnowledgeStore
     {
-        private readonly ILinks<ulong> _links;
+        private readonly ILinks<ulong, LinksConstants<ulong>> _links;
         private readonly IP2PNetworkManager _networkManager;
         private readonly Dictionary<ulong, KnowledgeEntry> _localCache;
         private readonly object _cacheLock = new();
@@ -26,7 +27,7 @@ namespace Platform.Data.LinksCloud.Storage
         public event EventHandler<KnowledgeEntry>? EntryUpdated;
         public event EventHandler<ulong>? EntryDeleted;
 
-        public DistributedKnowledgeStore(ILinks<ulong> links, IP2PNetworkManager networkManager)
+        public DistributedKnowledgeStore(ILinks<ulong, LinksConstants<ulong>> links, IP2PNetworkManager networkManager)
         {
             _links = links ?? throw new ArgumentNullException(nameof(links));
             _networkManager = networkManager ?? throw new ArgumentNullException(nameof(networkManager));
@@ -109,8 +110,8 @@ namespace Platform.Data.LinksCloud.Storage
             lock (_cacheLock)
             {
                 var results = _localCache.Values
-                    .Where(e => e.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                               e.Content.Contains(query, StringComparison.OrdinalIgnoreCase))
+                    .Where(e => e.Title.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                               e.Content.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0)
                     .ToList();
                 return Task.FromResult(results);
             }
@@ -121,7 +122,7 @@ namespace Platform.Data.LinksCloud.Storage
             lock (_cacheLock)
             {
                 var results = _localCache.Values
-                    .Where(e => e.Tags.Contains(tag, StringComparer.OrdinalIgnoreCase))
+                    .Where(e => e.Tags.Any(t => string.Equals(t, tag, StringComparison.OrdinalIgnoreCase)))
                     .ToList();
                 return Task.FromResult(results);
             }
