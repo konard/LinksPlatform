@@ -17,12 +17,12 @@ namespace Platform.Sandbox
             //    new XmlElementCounterCLI().Run(args);
             //});
 
-            ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
-            {
-                args = new string[] { @"F:\Архив Википедии\ru\xml\wikipedia-2019-09-17.links", @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml" };
+            //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
+            //{
+            //    args = new string[] { @"F:\Архив Википедии\ru\xml\wikipedia-2019-09-17.links", @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml" };
 
-                new XmlImporterCLI().Run(args);
-            });
+            //    new XmlImporterCLI().Run(args);
+            //});
 
             //StringTests.CapitalizeFirstLetterTest();
 
