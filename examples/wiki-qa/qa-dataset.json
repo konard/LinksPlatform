@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "name": "LinksPlatform Wiki-QA Dataset",
+    "version": "0.1.0",
+    "description": "A collaborative dataset of high-quality question-answer pairs, editable like Wikipedia, for training AI systems and serving as authoritative knowledge base.",
+    "license": "CC-BY-SA-4.0",
+    "created": "2025-10-17",
+    "format": "wiki-qa-v1"
+  },
+  "categories": [
+    {
+      "id": "links-platform",
+      "name": "Links Platform",
+      "description": "Questions about Links Platform architecture, theory, and implementation"
+    },
+    {
+      "id": "associative-memory",
+      "name": "Associative Memory",
+      "description": "Questions about associative memory models and data structures"
+    },
+    {
+      "id": "general-cs",
+      "name": "General Computer Science",
+      "description": "General computer science concepts and algorithms"
+    }
+  ],
+  "qa_pairs": [
+    {
+      "id": "lp-001",
+      "category": "links-platform",
+      "question": "What is Links Platform?",
+      "answer": "Links Platform is an associative data storage system based on the theory of links (doublets). It represents data as binary connections (links) where each link consists of two references to other links. This minimal structure allows representing any data structure including sequences, trees, and graphs, while enabling efficient compression through link reuse.",
+      "tags": ["basics", "introduction", "theory"],
+      "references": [
+        "https://github.com/linksplatform",
+        "doc/articles/links-theory.md"
+      ],
+      "confidence": "high",
+      "last_updated": "2025-10-17",
+      "contributors": ["AI Assistant"]
+    },
+    {
+      "id": "lp-002",
+      "category": "links-platform",
+      "question": "What are doublets in Links Platform?",
+      "answer": "Doublets are binary links consisting of exactly two references. Each doublet points to two other links (or itself), forming the fundamental unit of data storage in Links Platform. A doublet can represent: a point (both references point to itself), a pair (references point to two different links), or a partial point (one reference to itself, one to another link).",
+      "tags": ["doublets", "data-structure", "theory"],
+      "references": [
+        "doc/articles/links-theory.md"
+      ],
+      "confidence": "high",
+      "last_updated": "2025-10-17",
+      "contributors": ["AI Assistant"]
+    },
+    {
+      "id": "lp-003",
+      "category": "associative-memory",
+      "question": "How are sequences represented in associative memory?",
+      "answer": "In associative memory built from doublets, sequences are represented as binary tree structures. Each sequence is either an element itself, or consists of two sub-sequences (left and right). For example, the sequence 'abc' can be represented as: (a → (b → c)) or ((a → b) → c). The system can achieve compression when identical sub-sequences are reused across multiple sequences.",
+      "tags": ["sequences", "data-structure", "compression"],
+      "references": [
+        "doc/articles/links-theory.md"
+      ],
+      "confidence": "high",
+      "last_updated": "2025-10-17",
+      "contributors": ["AI Assistant"]
+    },
+    {
+      "id": "lp-004",
+      "category": "associative-memory",
+      "question": "What is compression degree in sequence storage?",
+      "answer": "Compression degree (степень сжатия) measures how efficiently sequences are stored by reusing identical sub-sequences. It's calculated as the ratio of links used versus the worst-case scenario where no pairs are reused. When sequences share common parts, the system saves space by storing each unique pair only once. The best compression occurs when sequences contain many repeated patterns.",
+      "tags": ["compression", "optimization", "theory"],
+      "references": [
+        "doc/articles/links-theory.md"
+      ],
+      "confidence": "high",
+      "last_updated": "2025-10-17",
+      "contributors": ["AI Assistant"]
+    },
+    {
+      "id": "cs-001",
+      "category": "general-cs",
+      "question": "What are Catalan numbers?",
+      "answer": "Catalan numbers form a sequence of natural numbers that appear in various counting problems, particularly in combinatorics. The nth Catalan number counts: binary tree structures with n+1 leaves, ways to parenthesize n+1 factors, paths in a grid that don't cross the diagonal, and many other combinatorial structures. In Links Platform context, they represent the number of possible tree structures for sequences of a given length.",
+      "tags": ["mathematics", "combinatorics", "catalan"],
+      "references": [
+        "https://en.wikipedia.org/wiki/Catalan_number"
+      ],
+      "confidence": "high",
+      "last_updated": "2025-10-17",
+      "contributors": ["AI Assistant"]
+    }
+  ],
+  "contributing": {
+    "guidelines": "This dataset follows Wikipedia-style collaborative editing principles. Contributors should: provide accurate, well-sourced answers; include references where applicable; maintain high quality and clarity; tag appropriately for discoverability; update confidence levels based on verification.",
+    "quality_criteria": [
+      "Accuracy: Information must be factually correct",
+      "Clarity: Answers should be understandable to the target audience",
+      "Completeness: Answers should adequately address the question",
+      "References: Include sources for verification",
+      "Relevance: Stay focused on the question asked"
+    ]
+  }
+}
