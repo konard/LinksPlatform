@@ -81,15 +81,31 @@ namespace Platform.Examples
                 case JsonValueKind.True:
                 case JsonValueKind.False:
                 case JsonValueKind.Null:
-                    var valueString = element.ValueKind switch
+                    string valueString;
+                    if (element.ValueKind == JsonValueKind.String)
                     {
-                        JsonValueKind.String => element.GetString(),
-                        JsonValueKind.Number => element.GetRawText(),
-                        JsonValueKind.True => "true",
-                        JsonValueKind.False => "false",
-                        JsonValueKind.Null => "null",
-                        _ => ""
-                    };
+                        valueString = element.GetString();
+                    }
+                    else if (element.ValueKind == JsonValueKind.Number)
+                    {
+                        valueString = element.GetRawText();
+                    }
+                    else if (element.ValueKind == JsonValueKind.True)
+                    {
+                        valueString = "true";
+                    }
+                    else if (element.ValueKind == JsonValueKind.False)
+                    {
+                        valueString = "false";
+                    }
+                    else if (element.ValueKind == JsonValueKind.Null)
+                    {
+                        valueString = "null";
+                    }
+                    else
+                    {
+                        valueString = "";
+                    }
                     ConsoleHelpers.Debug("Content: {0}", valueString.Truncate(50));
                     var textElement = _storage.CreateTextElement(content: valueString);
                     _storage.AttachElementToParent(textElement, context.Parent);

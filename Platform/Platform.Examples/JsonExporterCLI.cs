@@ -10,10 +10,13 @@ namespace Platform.Examples
     {
         public void Run(params string[] args)
         {
-            var linksFile = ConsoleHelpers.GetOrReadArgument(0, "Links file", args);
-            var jsonFile = ConsoleHelpers.GetOrReadArgument(1, "Json file", args);
-            var unicodeMapped = ConsoleHelpers.GetOrDefaultArgument(2, "Unicode mapped", false, args);
-            var convertUnicodeLinksToCharacters = ConsoleHelpers.GetOrDefaultArgument(3, "Convert unicode links to characters", false, args);
+            var i = 0;
+            var linksFile = ConsoleHelpers.GetOrReadArgument(i++, "Links file", args);
+            var jsonFile = ConsoleHelpers.GetOrReadArgument(i++, "Json file", args);
+            var unicodeMapped = ConsoleHelpers.GetOrReadArgument(i++, "Unicode mapped", args);
+            var convertUnicodeLinksToCharacters = ConsoleHelpers.GetOrReadArgument(i++, "Convert unicode links to characters", args);
+            bool.TryParse(unicodeMapped, out bool isUnicodeMapped);
+            bool.TryParse(convertUnicodeLinksToCharacters, out bool doConvertUnicodeLinksToCharacters);
 
             using (var cancellation = new ConsoleCancellation())
             using (var links = new UnitedMemoryLinks<ulong>(linksFile))
@@ -21,7 +24,7 @@ namespace Platform.Examples
                 var synchronizedLinks = new SynchronizedLinks<ulong>(links);
                 var exporter = new JsonExporter();
                 Console.WriteLine("Exporting to JSON...");
-                exporter.Export(synchronizedLinks, jsonFile, unicodeMapped, convertUnicodeLinksToCharacters, cancellation.Token);
+                exporter.Export(synchronizedLinks, jsonFile, isUnicodeMapped, doConvertUnicodeLinksToCharacters, cancellation.Token);
                 Console.WriteLine($"Export completed: {jsonFile}");
             }
         }
