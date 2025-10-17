@@ -31,8 +31,27 @@
     ],
     "globalMetadata": {
       "_appTitle": "LinksPlatform",
-      "_enableSearch": true
+      "_enableSearch": true,
+      "pdf": true
     },
     "dest": "doc/generated/site"
+  },
+  "pdf": {
+    "content": [
+      {
+        "files": [ "**/*.yml" ],
+        "src": "obj/api",
+        "dest": "api"
+      },
+      {
+        "files": [ "doc/articles/**/*.md", "*.md", "toc.yml" ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "doc/articles/images/**"]
+      }
+    ],
+    "dest": "doc/generated/pdf"
   }
 }
