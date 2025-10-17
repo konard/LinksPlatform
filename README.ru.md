@@ -49,9 +49,15 @@ link = links.Update(link, newSource: default, newTarget: default);
 links.Delete(link);
 ```
 
-## [SQLite против Дуплетов](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets)
+## Сравнения с традиционными СУБД
+
+### [SQLite против Дуплетов](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets)
 
 [![Изображение с результатом сравнения производительности SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Результат сравнения производительности SQLite и Дуплетов")](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets)
+
+### [MySQL против Дуплетов](https://github.com/linksplatform/Comparisons.MySQLVSDoublets)
+
+MySQL является одной из самых популярных реляционных СУБД с открытым исходным кодом. Сравнение производительности и характеристик MySQL с Дуплетами демонстрирует преимущества ассоциативной модели данных для определённых типов задач, особенно связанных с графовыми структурами и сетевыми данными.
 
 ## Описание
 
