@@ -4,6 +4,10 @@
 }
 <div class="link-view">
     <h2>@ViewData["Title"]</h2>
+    <div class="view-options" style="margin-bottom: 15px;">
+        <a href='@Url.Action("SourceGraph", "Links", new { Id = Model.Link.ToInt() })' class="btn btn-info">View Source Graph</a>
+        <a href='@Url.Action("Infinite", "Links", new { Id = Model.Link.ToInt() })' class="btn btn-secondary">Infinite View</a>
+    </div>
     <div class="link-description">
         <partial name="LinkDescription" model='Model.Link' />
     </div>
@@ -11,3 +15,26 @@
         <partial name="LinkReferersList" model='Model.ReferersModels' />
     </div>
 </div>
+
+<style>
+    .view-options .btn {
+        margin-right: 10px;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 4px;
+        display: inline-block;
+        color: white;
+    }
+
+    .view-options .btn-info {
+        background-color: #17a2b8;
+    }
+
+    .view-options .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .view-options .btn:hover {
+        opacity: 0.8;
+    }
+</style>

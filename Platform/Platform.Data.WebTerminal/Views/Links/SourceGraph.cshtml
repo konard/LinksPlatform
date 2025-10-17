@@ -1,0 +1,101 @@
+@model LinkModel
+@{
+    ViewData["Title"] = "Source Graph - " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Model.Link.ToString());
+}
+<div class="source-graph-view">
+    <h2>Source References Graph</h2>
+    <p class="subtitle">Visualizing all references and copies for this link</p>
+
+    <div class="current-link">
+        <h3>Current Link</h3>
+        <div class="link-description">
+            <partial name="LinkDescription" model='Model.Link' />
+        </div>
+    </div>
+
+    <div class="references-section">
+        <h3>All References to This Source (@Model.ReferersModels.Count direct references)</h3>
+        <div class="graph-container">
+            <partial name="SourceGraphTree" model='Model.ReferersModels' />
+        </div>
+    </div>
+
+    <div class="navigation-links">
+        <a href='@Url.Action("Index", "Links", new { Id = Model.Link.ToInt() })' class="btn btn-primary">Standard View</a>
+        <a href='@Url.Action("Infinite", "Links", new { Id = Model.Link.ToInt() })' class="btn btn-secondary">Infinite View</a>
+    </div>
+</div>
+
+<style>
+    .source-graph-view {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .subtitle {
+        color: #666;
+        font-style: italic;
+        margin-bottom: 30px;
+    }
+
+    .current-link {
+        background-color: #f0f8ff;
+        border: 2px solid #4a90e2;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .current-link h3 {
+        margin-top: 0;
+        color: #4a90e2;
+    }
+
+    .references-section {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .references-section h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .graph-container {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 4px;
+    }
+
+    .navigation-links {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .navigation-links .btn {
+        margin: 0 10px;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    .navigation-links .btn-primary {
+        background-color: #4a90e2;
+        color: white;
+    }
+
+    .navigation-links .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .navigation-links .btn:hover {
+        opacity: 0.8;
+    }
+</style>
