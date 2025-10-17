@@ -27,20 +27,20 @@ namespace Platform.Examples.GrammarInference
             _ruleUsageCount = new Dictionary<TLinkAddress, int>();
 
             // Create marker links for grammar structure
-            _grammarMarker = CreateMarker("Grammar");
-            _ruleMarker = CreateMarker("Rule");
-            _sequenceMarker = CreateMarker("Sequence");
+            _grammarMarker = CreateMarker();
+            _ruleMarker = CreateMarker();
+            _sequenceMarker = CreateMarker();
         }
 
         /// <summary>
         /// Creates a marker link for organizing grammar structure
         /// </summary>
-        private TLinkAddress CreateMarker(string name)
+        private TLinkAddress CreateMarker()
         {
-            // In a real implementation, this would create a unique marker
-            // For now, we create a self-referencing link
+            // Create a self-referencing link as a unique marker
             var marker = _links.Create();
-            return _links.Update(marker, marker, marker);
+            _links.Update(marker, marker, marker);
+            return marker;
         }
 
         /// <summary>
@@ -80,9 +80,8 @@ namespace Platform.Examples.GrammarInference
         /// </summary>
         private void ProcessDigram(TLinkAddress currentLink)
         {
-            var linkValue = _links.GetLink(currentLink);
-            var source = linkValue[_links.Constants.SourcePart];
-            var target = linkValue[_links.Constants.TargetPart];
+            var source = _links.GetSource(currentLink);
+            var target = _links.GetTarget(currentLink);
 
             // Check if this digram has been seen before
             var digram = (source, target);
@@ -117,9 +116,9 @@ namespace Platform.Examples.GrammarInference
             int count = 0;
             _links.Each(link =>
             {
-                var linkValue = _links.GetLink(link);
-                if (linkValue[_links.Constants.SourcePart].Equals(source) &&
-                    linkValue[_links.Constants.TargetPart].Equals(target))
+                var linkIndex = link[_links.Constants.IndexPart];
+                if (_links.GetSource(linkIndex).Equals(source) &&
+                    _links.GetTarget(linkIndex).Equals(target))
                 {
                     count++;
                     if (count > 1)
@@ -152,8 +151,7 @@ namespace Platform.Examples.GrammarInference
             // In a full implementation, this would update the sequence structure
             // to replace the digram with a reference to the rule
             // For simplicity, we create a new link referencing the rule
-            var linkValue = _links.GetLink(digramLink);
-            var source = linkValue[_links.Constants.SourcePart];
+            var source = _links.GetSource(digramLink);
 
             // Create new link that uses the rule instead
             var ruleRef = _links.GetOrCreate(source, rule);
@@ -170,10 +168,10 @@ namespace Platform.Examples.GrammarInference
             var rules = new List<TLinkAddress>();
             _links.Each(link =>
             {
-                var linkValue = _links.GetLink(link);
-                if (linkValue[_links.Constants.SourcePart].Equals(_ruleMarker))
+                var linkIndex = link[_links.Constants.IndexPart];
+                if (_links.GetSource(linkIndex).Equals(_ruleMarker))
                 {
-                    rules.Add(link);
+                    rules.Add(linkIndex);
                 }
                 return _links.Constants.Continue;
             });
@@ -224,18 +222,17 @@ namespace Platform.Examples.GrammarInference
         private void ExpandRule(TLinkAddress rule)
         {
             // Get the rule body
-            var ruleValue = _links.GetLink(rule);
-            var ruleBody = ruleValue[_links.Constants.TargetPart];
+            var ruleBody = _links.GetTarget(rule);
 
             // Find all references to this rule and replace them with the rule body
             _links.Each(link =>
             {
-                var linkValue = _links.GetLink(link);
-                if (linkValue[_links.Constants.TargetPart].Equals(rule))
+                var linkIndex = link[_links.Constants.IndexPart];
+                if (_links.GetTarget(linkIndex).Equals(rule))
                 {
                     // Replace rule reference with rule body
-                    var source = linkValue[_links.Constants.SourcePart];
-                    _links.Update(link, source, ruleBody);
+                    var source = _links.GetSource(linkIndex);
+                    _links.Update(linkIndex, source, ruleBody);
                 }
                 return _links.Constants.Continue;
             });
@@ -253,12 +250,12 @@ namespace Platform.Examples.GrammarInference
             for (int i = 0; i < rules.Count; i++)
             {
                 var rule = rules[i];
-                var ruleValue = _links.GetLink(rule);
-                var ruleBody = ruleValue[_links.Constants.TargetPart];
-                var bodyValue = _links.GetLink(ruleBody);
+                var ruleBody = _links.GetTarget(rule);
+                var bodySource = _links.GetSource(ruleBody);
+                var bodyTarget = _links.GetTarget(ruleBody);
 
                 var usageCount = GetRuleUsageCount(rule);
-                Console.WriteLine($"Rule {i}: {rule} -> ({bodyValue[_links.Constants.SourcePart]}, {bodyValue[_links.Constants.TargetPart]}) [Used {usageCount} times]");
+                Console.WriteLine($"Rule {i}: {rule} -> ({bodySource}, {bodyTarget}) [Used {usageCount} times]");
             }
         }
     }

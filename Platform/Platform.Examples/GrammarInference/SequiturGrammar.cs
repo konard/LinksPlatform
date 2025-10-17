@@ -77,7 +77,15 @@ namespace Platform.Examples.GrammarInference
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(First.Value, Second.Value, First.IsTerminal, Second.IsTerminal);
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 31 + First.Value.GetHashCode();
+                hash = hash * 31 + Second.Value.GetHashCode();
+                hash = hash * 31 + First.IsTerminal.GetHashCode();
+                hash = hash * 31 + Second.IsTerminal.GetHashCode();
+                return hash;
+            }
         }
 
         public override bool Equals(object obj)

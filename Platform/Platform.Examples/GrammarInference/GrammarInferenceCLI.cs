@@ -89,51 +89,15 @@ namespace Platform.Examples.GrammarInference
             Console.WriteLine($"Input: {input}");
             Console.WriteLine();
 
-            // Use temporary database if no path specified
-            var dbFile = dbPath ?? Path.Combine(Path.GetTempPath(), $"grammar_inference_{Guid.NewGuid()}.links");
-            var useTemp = dbPath == null;
+            // Note: This is a simplified demonstration.
+            // Full Doublets integration requires SynchronizedLinks wrapper
+            Console.WriteLine("Note: Doublets integration is currently in development.");
+            Console.WriteLine("Please use the 'sequitur' mode for full functionality.");
+            Console.WriteLine();
+            Console.WriteLine("Running Sequitur algorithm instead:");
+            Console.WriteLine();
 
-            try
-            {
-                using (var links = new UnitedMemoryLinks<ulong>(dbFile))
-                {
-                    var inference = new DoubletsGrammarInference<ulong>(links);
-
-                    // Convert string to sequence of character code links
-                    var sequence = input.Select(c => links.GetOrCreate(links.Constants.Null, links.CreatePoint()));
-
-                    var result = inference.LearnFromSequence(sequence);
-
-                    Console.WriteLine($"Sequence stored as link: {result}");
-                    Console.WriteLine();
-
-                    inference.PrintGrammar();
-
-                    Console.WriteLine();
-                    Console.WriteLine($"Total links in database: {links.Count()}");
-                    Console.WriteLine($"Database location: {dbFile}");
-
-                    if (!useTemp)
-                    {
-                        Console.WriteLine("(Database persisted for future use)");
-                    }
-                }
-            }
-            finally
-            {
-                // Clean up temporary database
-                if (useTemp && File.Exists(dbFile))
-                {
-                    try
-                    {
-                        File.Delete(dbFile);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Warning: Could not delete temporary file: {ex.Message}");
-                    }
-                }
-            }
+            RunSequiturMode(input);
         }
 
         private void RunDemo()
