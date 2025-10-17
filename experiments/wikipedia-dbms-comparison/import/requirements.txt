@@ -1,0 +1,14 @@
+# Python dependencies for Wikipedia DBMS comparison
+
+# Database drivers
+psycopg2-binary>=2.9.9  # PostgreSQL
+PyMySQL>=1.1.0          # MySQL
+# SQLite is built into Python
+
+# XML parsing
+lxml>=4.9.3            # Fast XML parsing
+mwxml>=0.3.3           # MediaWiki XML dump parsing
+
+# Utilities
+tqdm>=4.66.1           # Progress bars
+python-dateutil>=2.8.2 # Date parsing
