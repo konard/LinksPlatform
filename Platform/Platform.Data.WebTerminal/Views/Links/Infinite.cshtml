@@ -23,9 +23,9 @@
         <ul>
             <li>
                 <div class="item">
-                    <partial name="LinkDescription" model="Model.Link" />
+                    @await Html.PartialAsync("LinkDescription", Model.Link)
                 </div>
-                <partial name="InfiniteLinkReferersList" model="Model.ReferersModels" />
+                @await Html.PartialAsync("InfiniteLinkReferersList", Model.ReferersModels)
             </li>
         </ul>
     </div>

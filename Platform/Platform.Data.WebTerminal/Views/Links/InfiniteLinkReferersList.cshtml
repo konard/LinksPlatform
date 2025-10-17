@@ -7,12 +7,12 @@
             <li>
                 <div class="item">
                     <a href='@Url.Action("Index", "Links", new {Id = item.Link.ToInt()})'>
-                        <partial name="LinkRefererDescription" model="item.Link" />
+                        @await Html.PartialAsync("LinkRefererDescription", item.Link)
                     </a>
                 </div>
                 @if (item.ReferersModels.Count > 0)
                 {
-                    <partial name="InfiniteLinkReferersList" model="item.ReferersModels" />
+                    @await Html.PartialAsync("InfiniteLinkReferersList", item.ReferersModels)
                 }
             </li>
         }

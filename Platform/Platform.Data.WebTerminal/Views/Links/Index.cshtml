@@ -5,9 +5,9 @@
 <div class="link-view">
     <h2>@ViewData["Title"]</h2>
     <div class="link-description">
-        <partial name="LinkDescription" model='Model.Link' />
+        @await Html.PartialAsync("LinkDescription", Model.Link)
     </div>
     <div>
-        <partial name="LinkReferersList" model='Model.ReferersModels' />
+        @await Html.PartialAsync("LinkReferersList", Model.ReferersModels)
     </div>
 </div>
