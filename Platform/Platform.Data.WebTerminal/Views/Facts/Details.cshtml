@@ -1,0 +1,93 @@
+@model FactModel
+@{
+    ViewData["Title"] = $"Fact #{Model.Id}";
+}
+
+<div class="fact-details">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (Model.IsDraft)
+    {
+        <div class="alert alert-warning">
+            <strong>Draft Fact:</strong> This fact has no references and is not visible to the public.
+        </div>
+    }
+
+    <div class="fact-content">
+        <h3>Content</h3>
+        <p>@Model.Content</p>
+    </div>
+
+    <div class="fact-references">
+        <h3>Supporting References</h3>
+        @if (Model.References.Any())
+        {
+            <ul>
+                @foreach (var reference in Model.References)
+                {
+                    <li>@reference</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="text-muted">No references provided. This is a draft fact.</p>
+        }
+    </div>
+
+    <div class="fact-actions">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+
+    <div class="fact-metadata">
+        <hr />
+        <p class="text-muted">
+            <small>
+                This fact is in the <strong>Public Domain</strong>.
+                Copyright is not applied to facts.
+            </small>
+        </p>
+    </div>
+</div>
+
+<style>
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffc107;
+        color: #856404;
+    }
+    .fact-content, .fact-references {
+        margin-bottom: 20px;
+    }
+    .fact-actions {
+        margin-top: 20px;
+    }
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 5px;
+        text-decoration: none;
+        border-radius: 4px;
+        color: white;
+    }
+    .btn-primary {
+        background-color: #007bff;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+    .text-muted {
+        color: #6c757d;
+    }
+</style>
