@@ -138,6 +138,22 @@ $(document).ready(function () {
         }
     });
 
+    $(window).on('wheel', function (e) {
+        if (ignoreScrollEvent)
+            return;
+
+        // Use a small delay to ensure the scroll position has updated
+        setTimeout(function() {
+            var element = document.elementFromPoint(document.body.clientWidth / 2, document.body.clientHeight / 2);
+
+            if ($(element).is(".item"))
+            {
+                var item = $(element);
+                MoveToItem(item, true);
+            }
+        }, 50);
+    });
+
     $(window).scroll(function () {
         if (ignoreScrollEvent)
             return;
