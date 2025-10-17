@@ -1,0 +1,144 @@
+@model SearchViewModel
+@{
+    ViewData["Title"] = string.IsNullOrWhiteSpace(Model.Query) ? "Search" : $"Results for: {Model.Query}";
+}
+
+<div class="search-page">
+    <div class="search-box-container">
+        <form asp-action="Index" method="get" class="search-form">
+            <input type="text" name="q" value="@Model.Query" placeholder="Search for anything..." class="search-input" autofocus />
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Query))
+    {
+        <div class="results-section">
+            @if (Model.HasResults)
+            {
+                <div class="results-list">
+                    @foreach (var result in Model.Results)
+                    {
+                        <div class="result-item" data-result-id="@result.Id">
+                            <div class="result-voting">
+                                <button class="vote-btn upvote" data-vote="up">▲</button>
+                                <span class="vote-score">@result.Score</span>
+                                <button class="vote-btn downvote" data-vote="down">▼</button>
+                            </div>
+                            <div class="result-content">
+                                @if (!string.IsNullOrWhiteSpace(result.Title))
+                                {
+                                    <h3 class="result-title">@result.Title</h3>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(result.Url))
+                                {
+                                    <a href="@result.Url" class="result-url" target="_blank">@result.Url</a>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(result.Content))
+                                {
+                                    <p class="result-description">@result.Content</p>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(result.CodeSnippet))
+                                {
+                                    <pre class="code-snippet"><code>@result.CodeSnippet</code></pre>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(result.ImageUrl))
+                                {
+                                    <img src="@result.ImageUrl" alt="Result image" class="result-image" />
+                                }
+                                <div class="result-meta">
+                                    <span>Added @result.CreatedAt.ToString("MMM dd, yyyy")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="no-results">
+                    <p>No results found for "<strong>@Model.Query</strong>"</p>
+                    <p>Be the first to add a result!</p>
+                </div>
+            }
+
+            <div class="add-result-section">
+                <h3>Add a Search Result</h3>
+                <form asp-action="AddResult" method="post" class="add-result-form">
+                    <input type="hidden" name="query" value="@Model.Query" />
+
+                    <div class="form-group">
+                        <label for="resultType">Result Type:</label>
+                        <select name="resultType" id="resultType" class="form-control">
+                            <option value="Link">Link</option>
+                            <option value="LinkWithQuote">Link with Quote</option>
+                            <option value="Image">Image</option>
+                            <option value="CodeSnippet">Code Snippet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Title (optional):</label>
+                        <input type="text" name="title" id="title" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="url">URL:</label>
+                        <input type="url" name="url" id="url" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Description/Quote (optional):</label>
+                        <textarea name="content" id="content" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group" id="imageUrlGroup" style="display:none;">
+                        <label for="imageUrl">Image URL:</label>
+                        <input type="url" name="imageUrl" id="imageUrl" class="form-control" />
+                    </div>
+
+                    <div class="form-group" id="codeSnippetGroup" style="display:none;">
+                        <label for="codeSnippet">Code Snippet:</label>
+                        <textarea name="codeSnippet" id="codeSnippet" class="form-control" rows="5" style="font-family: monospace;"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Add Result</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('resultType').addEventListener('change', function() {
+            const imageGroup = document.getElementById('imageUrlGroup');
+            const codeGroup = document.getElementById('codeSnippetGroup');
+
+            imageGroup.style.display = this.value === 'Image' ? 'block' : 'none';
+            codeGroup.style.display = this.value === 'CodeSnippet' ? 'block' : 'none';
+        });
+
+        document.querySelectorAll('.vote-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const resultItem = this.closest('.result-item');
+                const resultId = resultItem.dataset.resultId;
+                const isUpvote = this.classList.contains('upvote');
+
+                fetch('/Search/Vote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        resultId: resultId,
+                        upvote: isUpvote
+                    })
+                }).then(() => {
+                    location.reload();
+                });
+            });
+        });
+    </script>
+}

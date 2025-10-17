@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.MasterServer"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.ConsoleTerminal", "Platform.Data.ConsoleTerminal\Platform.Data.ConsoleTerminal.csproj", "{85D097CE-614E-4351-920B-45BD35AE5A84}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.SearchResults", "Platform.Data.SearchResults\Platform.Data.SearchResults.csproj", "{B8C3E4F6-1A2D-4E5F-9B3C-7D8A9F4E6B5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{85D097CE-614E-4351-920B-45BD35AE5A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85D097CE-614E-4351-920B-45BD35AE5A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85D097CE-614E-4351-920B-45BD35AE5A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C3E4F6-1A2D-4E5F-9B3C-7D8A9F4E6B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8C3E4F6-1A2D-4E5F-9B3C-7D8A9F4E6B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8C3E4F6-1A2D-4E5F-9B3C-7D8A9F4E6B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8C3E4F6-1A2D-4E5F-9B3C-7D8A9F4E6B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

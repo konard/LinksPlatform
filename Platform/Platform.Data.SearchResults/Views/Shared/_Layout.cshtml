@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Anonymous Search Results</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a asp-area="" asp-controller="Search" asp-action="Index" class="logo">Anonymous Search</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container main-content">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="container">
+            &copy; 2023 - Anonymous Search Results - A collaborative search platform
+        </div>
+    </footer>
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
