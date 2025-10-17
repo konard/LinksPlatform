@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "age": 30,
+  "isActive": true,
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "zipCode": "10001"
+  },
+  "tags": ["developer", "engineer"]
+}
