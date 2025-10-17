@@ -1,8 +1,10 @@
-# Non-Directed Links Implementation
+# Non-Directed Links Design
 
 ## Overview
 
-This document describes the experimental implementation of non-directed (undirected) links for both doublets and triplets, addressing issue #315.
+This document describes the conceptual design for non-directed (undirected) links for both doublets and triplets, addressing issue #315.
+
+**Note**: This is a design document and conceptual specification. Actual implementation would require updating to compatible Platform.Data package versions.
 
 ## Background
 
@@ -80,77 +82,60 @@ private (TLinkAddress source, TLinkAddress linker, TLinkAddress target) Normaliz
 - `Each()` returns links in their stored (normalized) form
 - Applications interpret these as non-directed relationships
 
-## Files
+## Design Files
 
-### Implementation Files
+### Documentation
 
-1. **NonDirectedDoubletsExperiment.cs**
-   - Wrapper class for non-directed doublets
-   - Implements normalization logic
-   - Provides standard `ILinks<TLinkAddress>` interface
+1. **NON_DIRECTED_LINKS.md** (this file)
+   - Design specification and conceptual overview
+   - Implementation approach and rationale
+   - Design decisions and use cases
 
-2. **NonDirectedTripletsExperiment.cs**
-   - Wrapper class for non-directed triplets
-   - Normalizes source and target while preserving linker semantics
-   - Extends triplet operations
+## Conceptual Usage Example
 
-3. **NonDirectedLinksExample.cs**
-   - Usage examples demonstrating both implementations
-   - Comparison between directed and non-directed approaches
-   - Educational examples for understanding the concepts
-
-4. **NON_DIRECTED_LINKS.md** (this file)
-   - Documentation explaining the implementation
-   - Design decisions and rationale
-
-## Usage Example
-
-### Non-Directed Doublets
+### Non-Directed Doublets (Pseudocode)
 
 ```csharp
-using Platform.Data.Doublets.Memory.United.Generic;
-using Platform.Memory;
-using Platform.Sandbox;
+// Conceptual example - actual implementation would depend on
+// specific Platform.Data.Doublets version API
 
 // Create underlying directed links storage
-using var memory = new HeapResizableDirectMemory();
-using var innerLinks = new UnitedMemoryLinks<uint>(memory);
+var innerLinks = CreateDoubletsStorage();
 
 // Wrap with non-directed decorator
-var links = new NonDirectedDoublets<uint>(innerLinks);
+var links = new NonDirectedDoublets(innerLinks);
 
 // Create points
-var pointA = links.Create();
-var pointB = links.Create();
+var pointA = links.CreatePoint();
+var pointB = links.CreatePoint();
 
-// Create non-directed link
-var link = links.Create();
-link = links.Update(link, pointA, pointB);
+// Create non-directed link between A and B
+// Stored as (min(A,B), max(A,B))
+var link = links.CreateLink(pointA, pointB);
 
-// Both searches return the same link
-var found1 = links.SearchOrDefault(pointA, pointB);  // Returns link
-var found2 = links.SearchOrDefault(pointB, pointA);  // Also returns link
+// Both searches would return the same link
+var found1 = links.Search(pointA, pointB);  // Returns link
+var found2 = links.Search(pointB, pointA);  // Also returns link
 // found1 == found2 (same link in normalized form)
 ```
 
-### Non-Directed Triplets
+### Non-Directed Triplets (Pseudocode)
 
 ```csharp
-using Platform.Data.Triplets;
-using Platform.Sandbox;
+// Conceptual example for non-directed triplets
 
-// Assume tripletLinks is an ILinks implementation for triplets
-var nonDirectedTriplets = new NonDirectedTriplets<ulong>(tripletLinks);
+var tripletLinks = CreateTripletsStorage();
+var nonDirectedTriplets = new NonDirectedTriplets(tripletLinks);
 
 // Create entities
-var person1 = nonDirectedTriplets.Create();
-var person2 = nonDirectedTriplets.Create();
-var friendshipType = nonDirectedTriplets.Create();
+var person1 = tripletLinks.CreatePoint();
+var person2 = tripletLinks.CreatePoint();
+var friendshipType = tripletLinks.CreatePoint();
 
 // Create non-directed relationship
-// "person1 friend-of person2" is the same as "person2 friend-of person1"
-var friendship = nonDirectedTriplets.Create();
-friendship = nonDirectedTriplets.Update(friendship, person1, friendshipType, person2);
+// Stored as (min(person1,person2), friendshipType, max(person1,person2))
+// "person1 friend-of person2" == "person2 friend-of person1"
+var friendship = nonDirectedTriplets.CreateTriplet(person1, friendshipType, person2);
 ```
 
 ## Use Cases
@@ -179,29 +164,44 @@ friendship = nonDirectedTriplets.Update(friendship, person1, friendshipType, per
 - **Wrapper layer**: Additional indirection (minimal performance impact)
 - **Limited to comparable types**: Requires `IComparable<TLinkAddress>`
 
+## Implementation Roadmap
+
+To implement this design:
+
+1. **API Analysis**: Study the current Platform.Data.Doublets and Platform.Data.Triplets APIs
+2. **Decorator Implementation**: Create decorator classes following the normalization strategy
+3. **Extension Methods**: Implement convenience methods for common operations
+4. **Testing**: Comprehensive test suite covering all use cases
+5. **Documentation**: Examples and migration guides
+6. **Package**: Consider separate NuGet package for non-directed link support
+
 ## Future Enhancements
 
-Potential improvements for this implementation:
+Potential improvements:
 
-1. **Bidirectional Query Support**: Add methods to query in both normalized and original order
-2. **Mixed Mode**: Support for storage containing both directed and non-directed links
-3. **Type Markers**: Use special linker values to distinguish directed from non-directed triplets
+1. **Bidirectional Query Support**: Methods to query in both normalized and original order
+2. **Mixed Mode**: Storage containing both directed and non-directed links
+3. **Type Markers**: Special linker values to distinguish directed from non-directed triplets
 4. **Index Optimization**: Custom indexing strategies optimized for non-directed queries
-5. **Package Separation**: Move to dedicated `Platform.Data.Doublets.NonDirected` package
+5. **Package Separation**: Dedicated `Platform.Data.Doublets.NonDirected` NuGet package
+6. **Query Language Extensions**: Support for non-directed semantics in query languages
 
-## Testing
+## Implementation Considerations
 
-To run the examples:
+### Package Compatibility
 
-```csharp
-var example = new NonDirectedLinksExample();
-example.RunAll();
-```
+Actual implementation requires:
+- Compatible Platform.Data.Doublets version (with current ILinks API)
+- Compatible Platform.Data.Triplets version
+- Understanding of the specific API surface for the target version
 
-This will demonstrate:
-- Basic non-directed doublets operations
-- Comparison with directed doublets
-- Storage efficiency differences
+### Testing Strategy
+
+A complete implementation would include:
+- Unit tests for normalization logic
+- Integration tests with actual link storage
+- Performance benchmarks comparing directed vs non-directed
+- Edge case tests (self-loops, duplicate prevention)
 
 ## References
 
