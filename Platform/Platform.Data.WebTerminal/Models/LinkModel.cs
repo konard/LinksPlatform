@@ -19,14 +19,14 @@ namespace Platform.Data.WebTerminal.Models
 
         public static LinkModel CreateLinkModel(Link link, int nestingLevel = 5)
         {
-            LinkModel result = null;
+            LinkModel? result = null;
             ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             {
                 const int currentLevel = 0;
                 var visitedLinks = new HashSet<Link>();
                 result = CreateLinkModel(link, visitedLinks, currentLevel, nestingLevel);
             });
-            return result;
+            return result!;
         }
 
         private static LinkModel CreateLinkModel(Link link, HashSet<Link> visitedLinks, int currentLevel, int maxLevel)
