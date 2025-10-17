@@ -1,25 +1,44 @@
 ﻿using System.Reflection;
-using System.IO;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
 using Platform.Data.Triplets;
 
-namespace Platform.Data.WebTerminal
+namespace Platform.Data.WebTerminal;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var databaseFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"data.dat");
+        var databaseFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location ?? string.Empty) ?? string.Empty, "data.dat");
 #if DEBUG
-            File.Delete(databaseFile);
+        File.Delete(databaseFile);
 #endif
-            Link.StartMemoryManager(databaseFile);
-            CreateWebHostBuilder(args).Build().Run();
-            Link.StopMemoryManager();
+        Link.StartMemoryManager(databaseFile);
+
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container
+        builder.Services.AddControllersWithViews();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Links}/{action=Infinite}/{id?}");
+
+        app.Run();
+
+        Link.StopMemoryManager();
     }
 }
