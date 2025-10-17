@@ -25,6 +25,8 @@
     <PackageReference Include="Platform.Counters" Version="0.0.2" />
     <PackageReference Include="Platform.Communication" Version="0.2.0" />
     <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
 </Project>

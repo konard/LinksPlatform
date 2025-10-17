@@ -1,0 +1,15 @@
+{
+  "name": "LinksPlatform",
+  "description": "A platform for universal data storage and conversion",
+  "version": "1.0.0",
+  "features": [
+    "JSON support",
+    "YAML support",
+    "XML support",
+    "CSV support"
+  ],
+  "metadata": {
+    "author": "Konstantin Diachenko",
+    "license": "MIT"
+  }
+}
