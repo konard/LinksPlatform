@@ -1,0 +1,24 @@
+@model LinkModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Links Canvas - Interactive Visualization";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/canvas/canvas.css">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/canvas.js"></script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="info">
+        <div class="instruction">Click to create a point-link</div>
+        <div class="instruction">Draw a line to create a link</div>
+        <div class="instruction">Press ESC to cancel drawing</div>
+    </div>
+</body>
+</html>
