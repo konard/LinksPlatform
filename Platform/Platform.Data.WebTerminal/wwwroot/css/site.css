@@ -54,3 +54,97 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Knowledge Base Styles
+-------------------------------------------------- */
+.knowledge-base {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.knowledge-base .subtitle {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.knowledge-base .actions {
+  margin-bottom: 1.5rem;
+}
+
+.request-item {
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.request-item:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.response-item {
+  border-left: 4px solid #007bff;
+}
+
+.response-item .vote-section {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.response-content {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.references {
+  background-color: #f8f9fa;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.edit-history .timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.edit-history .edit-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.edit-history .edit-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #dee2e6;
+}
+
+.edit-comparison .content-box {
+  min-height: 100px;
+  border-radius: 0.25rem;
+  word-wrap: break-word;
+}
+
+.infinite-scroll-info {
+  text-align: center;
+  padding: 1rem;
+}
+
+.info-section {
+  background-color: #e7f3ff;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+  border-left: 4px solid #007bff;
+}
+
+.info-section h4 {
+  color: #004085;
+  margin-bottom: 1rem;
+}
+
+.info-section ul {
+  margin-bottom: 0;
+}

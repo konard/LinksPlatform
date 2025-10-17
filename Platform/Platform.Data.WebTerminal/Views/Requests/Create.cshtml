@@ -1,0 +1,49 @@
+@model Platform.Data.WebTerminal.Models.RequestModel
+@{
+    ViewData["Title"] = Model.ParentRequestId.HasValue ? "Suggest Interpretation" : "Create New Request";
+}
+
+<div class="create-request">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (Model.ParentRequestId.HasValue)
+    {
+        <div class="alert alert-info">
+            <p>You are creating an interpretation request for <a asp-action="Details" asp-route-id="@Model.ParentRequestId">Request #@Model.ParentRequestId</a></p>
+        </div>
+    }
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        @if (Model.ParentRequestId.HasValue)
+        {
+            <input type="hidden" asp-for="ParentRequestId" />
+        }
+
+        <div class="form-group">
+            <label asp-for="Content">Your Question/Request</label>
+            <textarea asp-for="Content" class="form-control" rows="5" placeholder="Enter your question or request..." required></textarea>
+            <small class="form-text text-muted">
+                Ask clearly and concisely. This will be stored in the public knowledge base.
+            </small>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+
+    <div class="info-section mt-4">
+        <h4>About the Knowledge Base</h4>
+        <ul>
+            <li>All data is Public Domain</li>
+            <li>No author attribution by default</li>
+            <li>Data cannot be deleted, only hidden by governmental requests</li>
+            <li>Full data dumps are available</li>
+            <li>Each response can be voted up by verified users</li>
+            <li>Only supportive statements are allowed (no negative feedback)</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+@model List<Platform.Data.WebTerminal.Models.RequestModel>
+@{
+    ViewData["Title"] = "Knowledge Base - All Requests";
+}
+
+<div class="knowledge-base">
+    <h1>Open Knowledge Base</h1>
+    <p class="subtitle">Each request has responses from users and bots. All data is Public Domain.</p>
+
+    <div class="actions">
+        <a asp-action="Create" class="btn btn-primary">Ask New Question</a>
+        <a asp-action="Export" class="btn btn-secondary">Download Full Data Dump</a>
+    </div>
+
+    <div class="search-box mt-4 mb-4">
+        <form asp-action="Search" method="get" class="form-inline">
+            <input type="text" name="query" class="form-control mr-2" placeholder="Search requests..." style="width: 400px;" />
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </form>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="requests-list">
+            @foreach (var request in Model)
+            {
+                <div class="request-item card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a asp-action="Details" asp-route-id="@request.Id">@request.Content</a>
+                        </h5>
+                        <div class="card-text">
+                            <small class="text-muted">
+                                Created: @request.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                                | Responses: @request.Responses.Count
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="pagination">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item active">
+                        <span class="page-link">@ViewBag.CurrentPage</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <p>No requests found. Be the first to ask a question!</p>
+        </div>
+    }
+</div>
+
+<div class="infinite-scroll-info mt-4">
+    <p><small class="text-muted">Note: Infinite scroll can be enabled for endless page expansion.</small></p>
+</div>

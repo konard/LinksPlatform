@@ -1,0 +1,105 @@
+@model Platform.Data.WebTerminal.Models.ResponseModel
+@{
+    ViewData["Title"] = "Response Details";
+}
+
+<div class="response-details">
+    <h2>Response Details</h2>
+
+    <div class="response-content card">
+        <div class="card-body">
+            <h4>Content</h4>
+            <p>@Model.Content</p>
+
+            <div class="meta-info mt-3">
+                <p>
+                    <strong>Created:</strong> @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")<br />
+                    @if (Model.LastEditedAt.HasValue)
+                    {
+                        <strong>Last Edited:</strong> @Model.LastEditedAt.Value.ToString("yyyy-MM-dd HH:mm")<br />
+                    }
+                    <strong>Votes:</strong> @Model.VoteCount<br />
+                    <strong>For Request:</strong> <a asp-controller="Requests" asp-action="Details" asp-route-id="@Model.RequestId">View Request</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.References.Any())
+    {
+        <div class="references-section mt-4">
+            <h4>References & Facts</h4>
+            <div class="list-group">
+                @foreach (var reference in Model.References)
+                {
+                    <div class="list-group-item">
+                        <h5 class="mb-1">
+                            <a href="@reference.Url" target="_blank">@reference.Title</a>
+                            <span class="badge badge-secondary">@reference.Type</span>
+                        </h5>
+                        @if (!string.IsNullOrWhiteSpace(reference.Description))
+                        {
+                            <p class="mb-1">@reference.Description</p>
+                        }
+                        <small class="text-muted">Added: @reference.CreatedAt.ToString("yyyy-MM-dd HH:mm")</small>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="add-reference mt-4">
+        <h4>Add Reference/Fact</h4>
+        <form asp-controller="References" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="responseId" value="@Model.Id" />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>URL</label>
+                    <input type="url" name="url" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Type</label>
+                    <select name="type" class="form-control">
+                        <option value="Book">Book</option>
+                        <option value="Website">Website</option>
+                        <option value="Article">Article</option>
+                        <option value="Paper">Paper</option>
+                        <option value="Fact">Fact</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Description (Optional)</label>
+                    <input type="text" name="description" class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Reference</button>
+        </form>
+    </div>
+
+    <div class="edit-section mt-4">
+        <h4>Edit Response</h4>
+        <p class="text-muted">Note: Edits are only allowed if the meaning is not changed. All edits are recorded.</p>
+        <form asp-controller="Responses" asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="userId" value="1" /> @* TODO: Get real user ID *@
+            <div class="form-group">
+                <textarea name="content" class="form-control" rows="5">@Model.Content</textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Save Edit</button>
+            <a asp-action="EditHistory" asp-route-id="@Model.Id" class="btn btn-info">View Edit History</a>
+        </form>
+    </div>
+
+    <div class="navigation mt-4">
+        <a asp-controller="Requests" asp-action="Details" asp-route-id="@Model.RequestId" class="btn btn-outline-primary">Back to Request</a>
+    </div>
+</div>

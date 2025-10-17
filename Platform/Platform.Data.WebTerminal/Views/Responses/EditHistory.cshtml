@@ -1,0 +1,67 @@
+@model List<Platform.Data.WebTerminal.Models.EditHistoryModel>
+@{
+    ViewData["Title"] = "Edit History";
+}
+
+<div class="edit-history">
+    <h2>Edit History for Response #@ViewBag.ResponseId</h2>
+
+    @if (Model.Any())
+    {
+        <div class="timeline">
+            @foreach (var edit in Model.OrderByDescending(e => e.EditedAt))
+            {
+                <div class="edit-item card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit on @edit.EditedAt.ToString("yyyy-MM-dd HH:mm")</h5>
+
+                        <div class="edit-comparison">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Previous Content</h6>
+                                    <div class="content-box bg-light p-3">
+                                        @edit.PreviousContent
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>New Content</h6>
+                                    <div class="content-box bg-success text-white p-3">
+                                        @edit.NewContent
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(edit.EditReason))
+                        {
+                            <div class="edit-reason mt-2">
+                                <strong>Reason:</strong> @edit.EditReason
+                            </div>
+                        }
+
+                        <div class="edit-actions mt-2">
+                            <form asp-controller="Responses" asp-action="Revert" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@ViewBag.ResponseId" />
+                                <input type="hidden" name="editHistoryId" value="@edit.Id" />
+                                <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Are you sure you want to revert to this version?')">
+                                    Revert to This Version
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <p>No edits have been made to this response yet.</p>
+        </div>
+    }
+
+    <div class="navigation mt-4">
+        <a asp-controller="Responses" asp-action="Details" asp-route-id="@ViewBag.ResponseId" class="btn btn-outline-primary">Back to Response</a>
+    </div>
+</div>
