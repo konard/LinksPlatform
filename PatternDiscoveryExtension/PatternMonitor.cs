@@ -125,7 +125,7 @@ namespace PatternDiscoveryExtension
                         var wellFormedPatterns = _detector.AddChangeAndDetectPatterns(astChange);
 
                         // Show suggestions for well-formed patterns
-                        if (wellFormedPatterns.Any())
+                        if (wellFormedPatterns.Count > 0)
                         {
                             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
                             await _ui.ShowPatternSuggestionAsync(wellFormedPatterns, newDocument);

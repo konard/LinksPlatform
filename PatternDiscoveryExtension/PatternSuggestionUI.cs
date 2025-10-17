@@ -97,7 +97,7 @@ namespace PatternDiscoveryExtension
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
             var wellFormed = patterns.Where(p => p.IsWellFormed).ToList();
-            var message = wellFormed.Any()
+            var message = wellFormed.Count > 0
                 ? $"Detected {wellFormed.Count} well-formed pattern(s):\n\n" +
                   string.Join("\n", wellFormed.Select(p => $"• {p}"))
                 : "No well-formed patterns detected yet.\n\n" +
