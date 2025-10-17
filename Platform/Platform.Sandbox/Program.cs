@@ -38,6 +38,9 @@ namespace Platform.Sandbox
 
             //AllRepeatingSubstringsInString.Run();
 
+            // Uncomment to run frequency-based pattern recognition example (issue #652)
+            //FrequencyBasedPatternRecognition.RunExample();
+
             //ReadSequenceTests.ReadSequenceTest();
 
             //SequencesTests.CompressionEfficiencyTest();
