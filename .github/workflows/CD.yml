@@ -21,6 +21,19 @@ jobs:
         cd Platform
         dotnet build
         cd ..
+    - name: Run Tests
+      continue-on-error: true
+      run: |
+        cd Platform
+        dotnet test --collect:"XPlat Code Coverage" --results-directory ./TestResults || true
+        cd ..
+    - name: Generate Coverage Report
+      if: github.event_name == 'push'
+      run: |
+        cd Platform
+        dotnet tool install -g dotnet-reportgenerator-globaltool || true
+        reportgenerator -reports:./TestResults/**/coverage.cobertura.xml -targetdir:./CoverageReport -reporttypes:Html || true
+        cd ..
     - name: Publish Docs
       if: github.event_name == 'push'
       run: bash ./publish-docs.sh
