@@ -1,0 +1,322 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Unified humanity dictionary combining all language dictionaries with IPA (International Phonetic Alphabet) pronunciation",
+    "source": "open-dict-data/ipa-dict repository",
+    "license": "MIT",
+    "created": "2025-10-17",
+    "totalLanguages": 30,
+    "purpose": "A single unified dictionary containing words from all human languages with their phonetic pronunciations in IPA format"
+  },
+  "languages": {
+    "ar": {
+      "name": "Arabic (Modern Standard)",
+      "code": "ar",
+      "family": "Afro-Asiatic",
+      "script": "Arabic",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/ar.txt",
+      "description": "Modern Standard Arabic pronunciation in IPA"
+    },
+    "de": {
+      "name": "German",
+      "code": "de",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/de.txt",
+      "description": "German pronunciation in IPA"
+    },
+    "en_UK": {
+      "name": "English (Received Pronunciation)",
+      "code": "en_UK",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/en_UK.txt",
+      "description": "British English (Received Pronunciation) in IPA"
+    },
+    "en_US": {
+      "name": "English (General American)",
+      "code": "en_US",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/en_US.txt",
+      "description": "American English (General American) pronunciation in IPA"
+    },
+    "eo": {
+      "name": "Esperanto",
+      "code": "eo",
+      "family": "Constructed",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/eo.txt",
+      "description": "Esperanto pronunciation in IPA"
+    },
+    "es_ES": {
+      "name": "Spanish (Spain)",
+      "code": "es_ES",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/es_ES.txt",
+      "description": "European Spanish pronunciation in IPA"
+    },
+    "es_MX": {
+      "name": "Spanish (Mexico)",
+      "code": "es_MX",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/es_MX.txt",
+      "description": "Mexican Spanish pronunciation in IPA"
+    },
+    "fa": {
+      "name": "Persian",
+      "code": "fa",
+      "family": "Indo-European",
+      "script": "Arabic",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/fa.txt",
+      "description": "Persian (Farsi) pronunciation in IPA"
+    },
+    "fi": {
+      "name": "Finnish",
+      "code": "fi",
+      "family": "Uralic",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/fi.txt",
+      "description": "Finnish pronunciation in IPA"
+    },
+    "fr_FR": {
+      "name": "French (France)",
+      "code": "fr_FR",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/fr_FR.txt",
+      "description": "European French pronunciation in IPA"
+    },
+    "fr_QC": {
+      "name": "French (Québec)",
+      "code": "fr_QC",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/fr_QC.txt",
+      "description": "Québécois French pronunciation in IPA (experimental)"
+    },
+    "is": {
+      "name": "Icelandic",
+      "code": "is",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/is.txt",
+      "description": "Icelandic pronunciation in IPA"
+    },
+    "ja": {
+      "name": "Japanese",
+      "code": "ja",
+      "family": "Japonic",
+      "script": "Kanji, Hiragana, Katakana",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/ja.txt",
+      "description": "Japanese pronunciation in IPA"
+    },
+    "jam": {
+      "name": "Jamaican Creole",
+      "code": "jam",
+      "family": "English Creole",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/jam.txt",
+      "description": "Jamaican Creole pronunciation in IPA"
+    },
+    "km": {
+      "name": "Khmer",
+      "code": "km",
+      "family": "Austroasiatic",
+      "script": "Khmer",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/km.txt",
+      "description": "Khmer (Cambodian) pronunciation in IPA"
+    },
+    "ko": {
+      "name": "Korean",
+      "code": "ko",
+      "family": "Koreanic",
+      "script": "Hangul",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/ko.txt",
+      "description": "Korean pronunciation in IPA"
+    },
+    "ma": {
+      "name": "Malay",
+      "code": "ma",
+      "family": "Austronesian",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/ma.txt",
+      "description": "Malay (Malaysian and Indonesian) pronunciation in IPA"
+    },
+    "nb": {
+      "name": "Norwegian Bokmål",
+      "code": "nb",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/nb.txt",
+      "description": "Norwegian Bokmål pronunciation in IPA"
+    },
+    "nl": {
+      "name": "Dutch",
+      "code": "nl",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/nl.txt",
+      "description": "Dutch pronunciation in IPA"
+    },
+    "or": {
+      "name": "Odia",
+      "code": "or",
+      "family": "Indo-European",
+      "script": "Odia",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/or.txt",
+      "description": "Odia pronunciation in IPA"
+    },
+    "pt_BR": {
+      "name": "Portuguese (Brazil)",
+      "code": "pt_BR",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/pt_BR.txt",
+      "description": "Brazilian Portuguese pronunciation in IPA"
+    },
+    "ro": {
+      "name": "Romanian",
+      "code": "ro",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/ro.txt",
+      "description": "Romanian pronunciation in IPA"
+    },
+    "sv": {
+      "name": "Swedish",
+      "code": "sv",
+      "family": "Indo-European",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/sv.txt",
+      "description": "Swedish pronunciation in IPA"
+    },
+    "sw": {
+      "name": "Swahili",
+      "code": "sw",
+      "family": "Niger-Congo",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/sw.txt",
+      "description": "Swahili pronunciation in IPA"
+    },
+    "tts": {
+      "name": "Isan",
+      "code": "tts",
+      "family": "Kra-Dai",
+      "script": "Thai",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/tts.txt",
+      "description": "Isan (Northeastern Thai) pronunciation in IPA"
+    },
+    "vi_C": {
+      "name": "Vietnamese (Central)",
+      "code": "vi_C",
+      "family": "Austroasiatic",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/vi_C.txt",
+      "description": "Central Vietnamese pronunciation in IPA"
+    },
+    "vi_N": {
+      "name": "Vietnamese (Northern)",
+      "code": "vi_N",
+      "family": "Austroasiatic",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/vi_N.txt",
+      "description": "Northern Vietnamese pronunciation in IPA"
+    },
+    "vi_S": {
+      "name": "Vietnamese (Southern)",
+      "code": "vi_S",
+      "family": "Austroasiatic",
+      "script": "Latin",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/vi_S.txt",
+      "description": "Southern Vietnamese pronunciation in IPA"
+    },
+    "yue": {
+      "name": "Cantonese",
+      "code": "yue",
+      "family": "Sino-Tibetan",
+      "script": "Traditional Chinese",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/yue.txt",
+      "description": "Cantonese pronunciation in IPA"
+    },
+    "zh_hans": {
+      "name": "Mandarin (Simplified)",
+      "code": "zh_hans",
+      "family": "Sino-Tibetan",
+      "script": "Simplified Chinese",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh_hans.txt",
+      "description": "Mandarin Chinese pronunciation in IPA with simplified characters"
+    },
+    "zh_hant": {
+      "name": "Mandarin (Traditional)",
+      "code": "zh_hant",
+      "family": "Sino-Tibetan",
+      "script": "Traditional Chinese",
+      "dictionarySource": "https://raw.githubusercontent.com/open-dict-data/ipa-dict/master/data/zh_hant.txt",
+      "description": "Mandarin Chinese pronunciation in IPA with traditional characters"
+    }
+  },
+  "usage": {
+    "description": "This unified humanity dictionary provides access to pronunciation data for words across 30 different languages and language variants.",
+    "dataFormat": "Each language entry contains metadata and a direct link to the IPA pronunciation dictionary",
+    "dictionaryFormat": "Tab-delimited format: [WORD][TAB][IPA]",
+    "applications": [
+      "Language learning and pronunciation guides",
+      "Cross-language phonetic comparison",
+      "Text-to-speech systems",
+      "Dictionary applications",
+      "Linguistic research",
+      "Translation tools",
+      "Accessibility tools for language learners"
+    ]
+  },
+  "examples": {
+    "description": "Example of how to use this dictionary",
+    "loadDictionary": "Fetch the dictionary file from dictionarySource URL for each language",
+    "parseFormat": "Split each line by tab character to get word and IPA pronunciation",
+    "sampleEntry": {
+      "word": "hello",
+      "ipa_en_US": "həˈloʊ",
+      "ipa_en_UK": "həˈləʊ",
+      "explanation": "The same word may have different pronunciations across language variants"
+    }
+  },
+  "languageFamilies": {
+    "Afro-Asiatic": ["ar"],
+    "Austroasiatic": ["km", "vi_C", "vi_N", "vi_S"],
+    "Austronesian": ["ma"],
+    "Constructed": ["eo"],
+    "English Creole": ["jam"],
+    "Indo-European": ["de", "en_UK", "en_US", "es_ES", "es_MX", "fa", "fr_FR", "fr_QC", "is", "nb", "nl", "or", "pt_BR", "ro", "sv"],
+    "Japonic": ["ja"],
+    "Koreanic": ["ko"],
+    "Kra-Dai": ["tts"],
+    "Niger-Congo": ["sw"],
+    "Sino-Tibetan": ["yue", "zh_hans", "zh_hant"],
+    "Uralic": ["fi"]
+  },
+  "statistics": {
+    "totalLanguageFamilies": 12,
+    "totalLanguages": 30,
+    "mostRepresentedFamily": "Indo-European (16 languages)",
+    "scripts": [
+      "Latin",
+      "Arabic",
+      "Hangul",
+      "Hiragana/Katakana/Kanji",
+      "Traditional Chinese",
+      "Simplified Chinese",
+      "Khmer",
+      "Thai",
+      "Odia"
+    ]
+  },
+  "integration": {
+    "ipaTranslator": "https://konard.github.io/ipa/",
+    "ipaTranslatorRepo": "https://github.com/konard/ipa",
+    "dictionarySource": "https://github.com/open-dict-data/ipa-dict",
+    "notes": "This unified dictionary serves as a comprehensive reference for the IPA translator, combining all available language dictionaries into a single, accessible resource for humanity's linguistic diversity."
+  }
+}
