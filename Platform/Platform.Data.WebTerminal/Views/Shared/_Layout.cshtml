@@ -42,7 +42,7 @@
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
+        @await Html.PartialAsync("_CookieConsentPartial")
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
