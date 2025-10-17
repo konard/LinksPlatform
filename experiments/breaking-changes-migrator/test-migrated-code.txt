@@ -1,0 +1,39 @@
+using System;
+
+namespace TestMigration
+{
+    public class LinksOperator
+    {
+        public int GetLink(ulong id) => 0;
+        public int CreateLink(int a, int b) => 0;
+    }
+
+    public class LinksConstants
+    {
+        public const int Continue = 1;
+        public const int Null = 0;
+    }
+
+    public class OldApiUsage
+    {
+        private LinksOperator links = new LinksOperator();
+
+        public void TestOldMethods()
+        {
+            var link = links.GetLinkById(123);
+            var constant = LinksOperationConstants.Continue;
+            var result = links.CreateLink(1, 2);
+        }
+
+        public void ProcessLinks()
+        {
+            var id = 456UL;
+            var linkData = links.GetLinkById(id);
+
+            if (linkData != LinksOperationConstants.Null)
+            {
+                Console.WriteLine("Link found");
+            }
+        }
+    }
+}
