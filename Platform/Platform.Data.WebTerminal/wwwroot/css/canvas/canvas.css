@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: #1F1F1F;
+    font-family: Verdana, sans-serif, Calibri;
+    font-size: 14px;
+    color: #959595;
+}
+
+#canvas {
+    display: block;
+    cursor: crosshair;
+}
+
+#info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 5px;
+    color: #959595;
+}
+
+.instruction {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.link-node {
+    fill: #00ADFF;
+    stroke: #00ADFF;
+    cursor: pointer;
+}
+
+.link-node:hover {
+    fill: #00C8FF;
+    stroke: #00C8FF;
+}
+
+.link-line {
+    stroke: #00C800;
+    stroke-width: 2;
+    cursor: pointer;
+}
+
+.link-line:hover {
+    stroke: #00E000;
+}
+
+.drawing-line {
+    stroke: #888;
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+}
+
+.point-link {
+    fill: #00ADFF;
+    stroke: #00ADFF;
+}
+
+.animating {
+    transition: all 0.3s ease-in-out;
+}
