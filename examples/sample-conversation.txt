@@ -1,0 +1,22 @@
+[2024-01-15 10:00:00] Alice: Good morning! How are you doing today?
+[2024-01-15 10:01:30] Bob: I'm doing great, thanks! Just working on some interesting projects.
+[2024-01-15 10:02:15] Alice: That sounds exciting! What kind of projects?
+[2024-01-15 10:03:45] Bob: I'm building a chat analysis tool that extracts personal data maps from conversations.
+[2024-01-15 10:04:30] Alice: Wow, that's fascinating! How does it work?
+[2024-01-15 10:05:20] Bob: It analyzes questions and answers, and also extracts vocabulary patterns.
+[2024-01-15 10:06:10] Alice: Can it remember if someone already asked a question?
+[2024-01-15 10:07:00] Bob: Yes! That's one of the main features. It helps track what questions have been asked before.
+[2024-01-15 10:08:00] Alice: That would be really useful when talking with many people. Do you have any documentation?
+[2024-01-15 10:09:15] Bob: I'm working on it. The tool also extracts personal vocabulary for better communication.
+[2024-01-15 10:10:30] Alice: What do you mean by personal vocabulary?
+[2024-01-15 10:11:20] Bob: It identifies words that a person uses frequently, so you can speak their language.
+[2024-01-15 10:12:00] Alice: That's brilliant! It could help with autocomplete suggestions too.
+[2024-01-15 10:13:10] Bob: Exactly! You can prioritize words that the other person commonly uses.
+[2024-01-15 10:14:00] Alice: How accurate is the question detection?
+[2024-01-15 10:15:30] Bob: It's pretty good. It looks for question marks and common question words like what, how, when, etc.
+[2024-01-15 10:16:20] Alice: Nice! When will it be ready?
+[2024-01-15 10:17:00] Bob: I'm testing it now, should be ready soon.
+[2024-01-15 10:18:10] Alice: Great, I'd love to try it out when it's ready.
+[2024-01-15 10:19:00] Bob: Sure thing! I'll let you know.
+[2024-01-15 10:20:00] Alice: Thanks! Talk to you later.
+[2024-01-15 10:20:30] Bob: See you later!
