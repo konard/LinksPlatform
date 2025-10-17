@@ -1,0 +1,19 @@
+name: Ensure Newline at EOF
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+jobs:
+  ensure-newline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check for newline at end of files
+      run: |
+        chmod +x ./ensure-newline.sh
+        ./ensure-newline.sh --check
