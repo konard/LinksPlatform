@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Platform.Data;
-using Platform.Numbers;
 
 namespace Platform.Data.Doublets.DeepDependencies
 {
@@ -124,27 +123,29 @@ namespace Platform.Data.Doublets.DeepDependencies
                 result[linkIndex] = true;
             }
 
-            var linkContents = _links.GetLink(link);
-            if (linkContents == null)
-            {
-                return;
-            }
+            var sourcePart = _links.Constants.SourcePart;
+            var targetPart = _links.Constants.TargetPart;
 
-            var source = linkContents[_links.Constants.SourcePart];
-            var target = linkContents[_links.Constants.TargetPart];
-
-            // Recursively add dependencies from source and target
-            if (!EqualityComparer<TLink>.Default.Equals(source, default(TLink)) &&
-                !EqualityComparer<TLink>.Default.Equals(source, link))
+            _links.Each(linkContents =>
             {
-                ComputeUsedByLink(source, result, visited);
-            }
+                var source = linkContents[sourcePart];
+                var target = linkContents[targetPart];
 
-            if (!EqualityComparer<TLink>.Default.Equals(target, default(TLink)) &&
-                !EqualityComparer<TLink>.Default.Equals(target, link))
-            {
-                ComputeUsedByLink(target, result, visited);
-            }
+                // Recursively add dependencies from source and target
+                if (!EqualityComparer<TLink>.Default.Equals(source, default(TLink)) &&
+                    !EqualityComparer<TLink>.Default.Equals(source, link))
+                {
+                    ComputeUsedByLink(source, result, visited);
+                }
+
+                if (!EqualityComparer<TLink>.Default.Equals(target, default(TLink)) &&
+                    !EqualityComparer<TLink>.Default.Equals(target, link))
+                {
+                    ComputeUsedByLink(target, result, visited);
+                }
+
+                return _links.Constants.Break; // We only need one result
+            }, link);
         }
 
         private void ComputeReferencingLink(TLink link, BitArray result, HashSet<TLink> visited)
@@ -162,26 +163,31 @@ namespace Platform.Data.Doublets.DeepDependencies
                 result[linkIndex] = true;
             }
 
-            // Find all links that reference this link
-            _links.Each(referrer =>
-            {
-                var linkContents = _links.GetLink(referrer);
-                if (linkContents != null)
-                {
-                    var source = linkContents[_links.Constants.SourcePart];
-                    var target = linkContents[_links.Constants.TargetPart];
+            var sourcePart = _links.Constants.SourcePart;
+            var targetPart = _links.Constants.TargetPart;
+            var indexPart = _links.Constants.IndexPart;
+            var any = _links.Constants.Any;
 
-                    if (EqualityComparer<TLink>.Default.Equals(source, link) ||
-                        EqualityComparer<TLink>.Default.Equals(target, link))
-                    {
-                        if (!EqualityComparer<TLink>.Default.Equals(referrer, link))
-                        {
-                            ComputeReferencingLink(referrer, result, visited);
-                        }
-                    }
+            // Find all links that reference this link (as source or target)
+            _links.Each(linkContents =>
+            {
+                var referrer = linkContents[indexPart];
+                if (!EqualityComparer<TLink>.Default.Equals(referrer, link))
+                {
+                    ComputeReferencingLink(referrer, result, visited);
                 }
                 return _links.Constants.Continue;
-            });
+            }, any, link, any); // Links with link as source
+
+            _links.Each(linkContents =>
+            {
+                var referrer = linkContents[indexPart];
+                if (!EqualityComparer<TLink>.Default.Equals(referrer, link))
+                {
+                    ComputeReferencingLink(referrer, result, visited);
+                }
+                return _links.Constants.Continue;
+            }, any, any, link); // Links with link as target
         }
 
         private int ConvertToInt(TLink link)

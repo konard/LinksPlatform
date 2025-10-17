@@ -21,7 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Platform.Numbers" Version="0.3.0" />
+    <PackageReference Include="Platform.Numbers" Version="0.4.1" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
   </ItemGroup>
 
 </Project>
