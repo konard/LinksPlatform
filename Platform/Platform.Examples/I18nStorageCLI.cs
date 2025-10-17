@@ -1,8 +1,10 @@
 using System;
 using System.IO;
+using Platform.Data;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Data.Doublets.Sequences.Frequencies.Cache;
+using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 
 namespace Platform.Examples
 {
@@ -25,9 +27,10 @@ namespace Platform.Examples
             try
             {
                 using (var memoryAdapter = new UInt64UnitedMemoryLinks(filename, 8 * 1024 * 1024))
-                using (var links = new UInt64Links(memoryAdapter))
                 {
-                    var frequenciesCache = new LinkFrequenciesCache<ulong>(links);
+                    ILinks<ulong> links = memoryAdapter;
+                    var totalSequenceSymbolFrequencyCounter = new TotalSequenceSymbolFrequencyCounter<ulong>(links);
+                    var frequenciesCache = new LinkFrequenciesCache<ulong>(links, totalSequenceSymbolFrequencyCounter);
                     var i18nStorage = new I18nStorage<ulong>(links, indexSequenceBeforeCreation: true, frequenciesCache);
 
                     // Store sample translations
@@ -75,6 +78,7 @@ namespace Platform.Examples
                         Console.WriteLine();
                     }
 
+                    // Count is extension method that doesn't require parameters when used on ILinks
                     Console.WriteLine($"Total links in database: {links.Count()}");
                     Console.WriteLine();
                     Console.WriteLine("All translations are stored in a single file: " + filename);
