@@ -9,8 +9,13 @@ SHA=`git rev-parse --verify HEAD`
 COMMIT_AUTHOR_EMAIL="konard@me.com"
 
 # DocFX installation
-nuget install docfx.console
-mono $(ls | grep "docfx.console.")/tools/docfx.exe docfx.json
+dotnet tool update -g docfx
+
+# Generate HTML documentation
+docfx docfx.json
+
+# Generate PDF documentation
+docfx pdf docfx.json
 
 # Clone the existing gh-pages for this repo into out/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
@@ -22,8 +27,14 @@ cd ..
 # Clean out existing contents
 rm -rf out/**/* || exit 0
 
-# Copy genereted docs site
+# Copy generated docs site
 cp -r doc/generated/site/* out
+
+# Copy generated PDF files
+if [ -d "doc/generated/pdf" ]; then
+  mkdir -p out/pdf
+  cp -r doc/generated/pdf/* out/pdf/
+fi
 
 # Now let's go have some fun with the cloned repo
 cd out
