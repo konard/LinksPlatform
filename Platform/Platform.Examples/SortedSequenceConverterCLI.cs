@@ -3,6 +3,7 @@ using System.Linq;
 using Platform.IO;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Memory.United.Specific;
+using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Unicode;
 
 namespace Platform.Examples
