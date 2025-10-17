@@ -10,6 +10,14 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Uncomment to run supervised code generation tests (issue #520)
+            //SupervisedCodeGenerationTests.RunAll();
+            //return;
+
+            // Uncomment to run supervised code generation experiment (issue #520)
+            //SupervisedCodeGenerationExperiment.Run();
+            //return;
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
