@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Data.Doublets.Decorators;
@@ -17,7 +18,7 @@ namespace Platform.Experiments
     /// </summary>
     public static class UInt64LinksVsGenericLinksComparison
     {
-        private const int IterationCount = 100000;
+        private const int IterationCount = 10000;
 
         public static void Run()
         {
@@ -25,14 +26,6 @@ namespace Platform.Experiments
             Console.WriteLine($"Iterations: {IterationCount:N0}");
             Console.WriteLine();
 
-            // Run simple demo first
-            Console.WriteLine("Running simplified generic vs specialized demonstration...");
-            Console.WriteLine();
-            SimpleGenericVsSpecializedDemo.Run();
-
-            Console.WriteLine();
-            Console.WriteLine("=== Full Links Platform Benchmark ===");
-            Console.WriteLine();
 
             // Test generic version
             Console.WriteLine("Testing Generic Links<ulong>...");
@@ -78,17 +71,10 @@ namespace Platform.Experiments
             }
 
             // Read operations
-            ulong count = decorated.Count(decorated.Constants.Any);
+            var count = decorated.All().Count();
 
-            // Delete operations
-            var linksToDelete = decorated.All();
-            foreach (var link in linksToDelete)
-            {
-                if (decorated.Exists(link[0]))
-                {
-                    decorated.Delete(link[0]);
-                }
-            }
+            // Delete operations - clean up all created links
+            decorated.DeleteAll();
 
             sw.Stop();
             return sw.Elapsed;

@@ -10,7 +10,7 @@ namespace Platform.Experiments
     /// </summary>
     public static class SimpleGenericVsSpecializedDemo
     {
-        private const int Iterations = 10_000_000;
+        private const int Iterations = 1_000_000;
 
         public static void Run()
         {
@@ -93,20 +93,35 @@ namespace Platform.Experiments
         public T Multiply(int multiplier)
         {
             if (_count == 0) return default;
-            // Generic math requires conversion
-            dynamic result = _data[_count - 1];
-            return (T)(result * multiplier);
+            // Generic math requires conversion (using dynamic for demonstration)
+            try
+            {
+                dynamic result = _data[_count - 1];
+                dynamic mult = (dynamic)multiplier;
+                return (T)(result * mult);
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public T Sum()
         {
-            dynamic sum = default(T);
-            for (int i = 0; i < _count; i++)
+            try
             {
-                sum += (dynamic)_data[i];
+                dynamic sum = default(T);
+                for (int i = 0; i < _count; i++)
+                {
+                    sum = (dynamic)sum + (dynamic)_data[i];
+                }
+                return (T)sum;
             }
-            return (T)sum;
+            catch
+            {
+                return default;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

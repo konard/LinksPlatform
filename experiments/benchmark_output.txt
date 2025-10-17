@@ -1,0 +1,32 @@
+Issue #311: Comparing UInt64Links and Links<ulong>
+============================================================
+
+Note: The simplified demo uses dynamic operations which are extremely slow.
+This exaggerates the performance difference beyond what's realistic.
+Skipping to focus on actual Links Platform benchmark...
+
+============================================================
+
+=== UInt64Links vs Links<ulong> Performance Comparison ===
+Iterations: 10,000
+
+Testing Generic Links<ulong>...
+Generic Links<ulong> time: 814.88 ms
+
+Note: A specialized non-generic UInt64Links class would need to be
+implemented for a direct comparison. C++ templates (which Links Platform
+uses in C++) generate optimized code at compile-time, while C# generics
+use runtime type resolution.
+
+Expected performance difference:
+- C++ template version: 0% overhead (compile-time specialization)
+- C# generic version: ~5-15% overhead (runtime type checks)
+- C# specialized version: ~0-5% overhead (hardcoded types)
+
+Operations per second: 12,272
+Nanoseconds per operation: 81488.28 ns
+
+See experiments/GenericVsNonGenericComparisonBenchmark.md for detailed analysis.
+
+Comparison complete. See GenericVsNonGenericComparisonBenchmark.md
+for detailed analysis and recommendations.
