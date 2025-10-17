@@ -22,6 +22,15 @@ namespace Platform.Data.WebTerminal
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            // Add authentication for viewing draft facts
+            services.AddAuthentication("FactsCookie")
+                .AddCookie("FactsCookie", options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logout";
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -41,6 +50,7 @@ namespace Platform.Data.WebTerminal
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
