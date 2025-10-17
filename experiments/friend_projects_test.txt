@@ -1,0 +1,150 @@
+================================================================================
+Friend Projects Finder - Report
+================================================================================
+
+Found 30 potential friend projects
+
+
+## amerkoleci/Vortice.Windows
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * src/Vortice.Direct3D12/Range.cs
+       https://github.com/amerkoleci/Vortice.Windows/blob/571ce9a7ab53b249e4132aef6e1285fac3dc4690/src/Vortice.Direct3D12/Range.cs
+
+## encse/adventofcode
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * 2022/Day04/Solution.cs
+       https://github.com/encse/adventofcode/blob/6192b639db8388b9c03750a02255f7c342e38435/2022/Day04/Solution.cs
+
+## simeonpilgrim/nikon-firmware-tools
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * dfr/dfr/OldCode.cs
+       https://github.com/simeonpilgrim/nikon-firmware-tools/blob/d4bcc035037d593ad2751012f8218c2c7fd9e133/dfr/dfr/OldCode.cs
+
+## RomVault/RVWorld
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * RVZstdSharp/Unsafe/range_t.cs
+       https://github.com/RomVault/RVWorld/blob/e86e3cd8f7f5b7f89ded0f56ba0a17a6fbfe0a44/RVZstdSharp/Unsafe/range_t.cs
+
+## wmjordan/Codist
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * TestProject/CS8_0.cs
+       https://github.com/wmjordan/Codist/blob/3bedc2ea6bd5aeffb395ecde3971c916fed69197/TestProject/CS8_0.cs
+
+## csinkers/ualbion
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * src/Config/AssetMapping.cs
+       https://github.com/csinkers/ualbion/blob/6d1e8240747cc9947eaee7e57f51a265919a1642/src/Config/AssetMapping.cs
+
+## StreamWhatYouHear/SWYH
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * DeveloperToolsForUPnPTechnologies/UPnP/HTTPSession.cs
+       https://github.com/StreamWhatYouHear/SWYH/blob/27e8167cac75af739852b21fa6e7bc1d41f0be7e/DeveloperToolsForUPnPTechnologies/UPnP/HTTPSession.cs
+
+## robertvazan/guerrillantp
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * GuerrillaNtp/Internals.cs
+       https://github.com/robertvazan/guerrillantp/blob/f816dae2e9bd90e5aa84f8c7f60f6489c406b426/GuerrillaNtp/Internals.cs
+
+## katalash/dstools
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * SoulsFormats/Formats/BHD5.cs
+       https://github.com/katalash/dstools/blob/4052388b0377005547fc81847cda1d82830b3567/SoulsFormats/Formats/BHD5.cs
+
+## dotnetGame/love-nes
+   Total matches: 1
+
+   - Range struct usage: 1 match(es)
+     * src/LoveNes/Bus.cs
+       https://github.com/dotnetGame/love-nes/blob/1cbbf7f8ef6bbbd265ebf8d89f4ebd3c322f1ae1/src/LoveNes/Bus.cs
+
+## AngleSharp/AngleSharp
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * src/AngleSharp/Dom/ILinkStyle.cs
+       https://github.com/AngleSharp/AngleSharp/blob/4e34252e4287898ca338050a184fd74ccb92e40a/src/AngleSharp/Dom/ILinkStyle.cs
+
+## evgeny-nadymov/telegram-wp
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * Telegram.Api/TL/TLStatedMessage.cs
+       https://github.com/evgeny-nadymov/telegram-wp/blob/fd98ac6d18637019218679b81cb92d983019014b/Telegram.Api/TL/TLStatedMessage.cs
+
+## Bobris/BTDB
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * BTDBTest/ObjectDbTableFreeContentTest.cs
+       https://github.com/Bobris/BTDB/blob/2fe2d702c34e1e1a16e5c729d638d5917f030b13/BTDBTest/ObjectDbTableFreeContentTest.cs
+
+## khalidabuhakmeh/GroupsAndFilters
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * GroupsAndFilters/Program.cs
+       https://github.com/khalidabuhakmeh/GroupsAndFilters/blob/2ff9f514343273699bf08499476fa38e96bdae11/GroupsAndFilters/Program.cs
+
+## zhuxb711/RX-Explorer
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * RX_Explorer/Interface/ILinkStorageFile.cs
+       https://github.com/zhuxb711/RX-Explorer/blob/70a17241e9a897cb8155c5f7b01acc0b48c37871/RX_Explorer/Interface/ILinkStorageFile.cs
+
+## DarthFubuMVC/fubumvc
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * src/FubuMVC.Core/Resources/Hypermedia/ILinkSource.cs
+       https://github.com/DarthFubuMVC/fubumvc/blob/6bc4722bc0a1262c9582dc332bd6e958efdb5379/src/FubuMVC.Core/Resources/Hypermedia/ILinkSource.cs
+
+## ldqk/Masuit.MyBlogs
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * src/Masuit.MyBlogs.Core/Infrastructure/Services/Interface/IServices.cs
+       https://github.com/ldqk/Masuit.MyBlogs/blob/d4b8173e2d53120cc5ba269f530744cf62009545/src/Masuit.MyBlogs.Core/Infrastructure/Services/Interface/IServices.cs
+
+## asheigithub/apple-juice-actionscript
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * ASRuntime/ASBinCode/ILinkSlot.cs
+       https://github.com/asheigithub/apple-juice-actionscript/blob/986223f0c1951c6f3e470982ae5333376f963806/ASRuntime/ASBinCode/ILinkSlot.cs
+
+## ihsoft/KAS
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * Source-API/api/ILinkStateEventListener.cs
+       https://github.com/ihsoft/KAS/blob/86f801dd571e241783486e5b9d398df0c75d904c/Source-API/api/ILinkStateEventListener.cs
+
+## unsplash-net/unsplash-net
+   Total matches: 1
+
+   - ILinks interface: 1 match(es)
+     * src/Unsplash/Models/CollectionsTypes.cs
+       https://github.com/unsplash-net/unsplash-net/blob/a9476298a9294cb008289f61bd117def3de99276/src/Unsplash/Models/CollectionsTypes.cs
+
+================================================================================
+End of Report
+================================================================================
