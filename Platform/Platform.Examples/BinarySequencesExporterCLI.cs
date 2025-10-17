@@ -25,14 +25,16 @@ namespace Platform.Examples
             }
 
             Console.WriteLine($"Opening database: {dbPath}");
-            using var links = new UnitedMemoryLinks<ulong>(dbPath);
-            var synchronizedLinks = new SynchronizedLinks<ulong>(links);
+            using (var links = new UnitedMemoryLinks<ulong>(dbPath))
+            {
+                var synchronizedLinks = new SynchronizedLinks<ulong>(links);
 
-            Console.WriteLine($"Exporting to binary sequences format: {outputPath}");
-            var exporter = new BinarySequencesExporter();
-            exporter.Export(synchronizedLinks, outputPath);
+                Console.WriteLine($"Exporting to binary sequences format: {outputPath}");
+                var exporter = new BinarySequencesExporter();
+                exporter.Export(synchronizedLinks, outputPath);
 
-            Console.WriteLine($"Export completed successfully. File saved to: {outputPath}");
+                Console.WriteLine($"Export completed successfully. File saved to: {outputPath}");
+            }
         }
     }
 }

@@ -25,14 +25,16 @@ namespace Platform.Examples
             }
 
             Console.WriteLine($"Opening/creating database: {dbPath}");
-            using var links = new UnitedMemoryLinks<ulong>(dbPath);
-            var synchronizedLinks = new SynchronizedLinks<ulong>(links);
+            using (var links = new UnitedMemoryLinks<ulong>(dbPath))
+            {
+                var synchronizedLinks = new SynchronizedLinks<ulong>(links);
 
-            Console.WriteLine($"Importing from binary sequences format: {binaryPath}");
-            var importer = new BinarySequencesImporter();
-            importer.Import(synchronizedLinks, binaryPath);
+                Console.WriteLine($"Importing from binary sequences format: {binaryPath}");
+                var importer = new BinarySequencesImporter();
+                importer.Import(synchronizedLinks, binaryPath);
 
-            Console.WriteLine($"Import completed successfully. Data loaded into: {dbPath}");
+                Console.WriteLine($"Import completed successfully. Data loaded into: {dbPath}");
+            }
         }
     }
 }
