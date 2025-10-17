@@ -1,0 +1,23 @@
+name: 'Dependency Review'
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4
+        with:
+          # Fail the action if vulnerabilities are detected
+          fail-on-severity: moderate
+          # Optional: ignore specific advisories
+          # deny-licenses: GPL-3.0, LGPL-2.0
