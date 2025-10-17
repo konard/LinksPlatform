@@ -45,7 +45,11 @@ namespace Platform.Data.WebTerminal
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Links}/{action=Infinite}/{id?}");
+                    template: "{controller=Requests}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "links",
+                    template: "links/{action=Infinite}/{id?}",
+                    defaults: new { controller = "Links" });
             });
         }
     }

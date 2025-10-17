@@ -1,0 +1,119 @@
+@model Platform.Data.WebTerminal.Models.RequestModel
+@{
+    ViewData["Title"] = "Request Details";
+}
+
+<div class="request-details">
+    <div class="request-header mb-4">
+        <h2>@Model.Content</h2>
+        <p class="text-muted">
+            Created: @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+            @if (Model.ParentRequestId.HasValue)
+            {
+                <span>| Response to: <a asp-action="Details" asp-route-id="@Model.ParentRequestId">Request #@Model.ParentRequestId</a></span>
+            }
+        </p>
+    </div>
+
+    <div class="responses-section">
+        <h3>Responses (@Model.Responses.Count)</h3>
+        <p class="text-muted">Only supportive statements shown. Each user can vote for one response per request.</p>
+
+        @if (Model.Responses.Any())
+        {
+            <div class="responses-list">
+                @foreach (var response in Model.Responses.OrderByDescending(r => r.VoteCount))
+                {
+                    <div class="response-item card mb-3 @(response.IsHidden ? "bg-light text-muted" : "")">
+                        <div class="card-body">
+                            <div class="response-content">
+                                @if (response.IsHidden)
+                                {
+                                    <p><em>[This response is hidden by governmental request]</em></p>
+                                }
+                                else
+                                {
+                                    <p>@response.Content</p>
+                                }
+                            </div>
+
+                            @if (!response.IsHidden)
+                            {
+                                <div class="response-meta">
+                                    <div class="vote-section">
+                                        <form asp-controller="Responses" asp-action="Vote" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@response.Id" />
+                                            <input type="hidden" name="requestId" value="@Model.Id" />
+                                            <input type="hidden" name="userId" value="1" /> @* TODO: Get real user ID *@
+                                            <button type="submit" class="btn btn-sm btn-outline-success">
+                                                ▲ Vote (@response.VoteCount)
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    @if (response.References.Any())
+                                    {
+                                        <div class="references mt-2">
+                                            <strong>References:</strong>
+                                            <ul class="list-unstyled">
+                                                @foreach (var reference in response.References)
+                                                {
+                                                    <li>
+                                                        <a href="@reference.Url" target="_blank">@reference.Title</a>
+                                                        <span class="badge badge-secondary">@reference.Type</span>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+
+                                    <div class="response-actions mt-2">
+                                        <a asp-controller="Responses" asp-action="Details" asp-route-id="@response.Id" class="btn btn-sm btn-link">View Details</a>
+                                        <a asp-controller="Responses" asp-action="EditHistory" asp-route-id="@response.Id" class="btn btn-sm btn-link">Edit History</a>
+                                    </div>
+                                </div>
+                            }
+
+                            <small class="text-muted">
+                                Created: @response.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                                @if (response.LastEditedAt.HasValue)
+                                {
+                                    <span>| Last edited: @response.LastEditedAt.Value.ToString("yyyy-MM-dd HH:mm")</span>
+                                }
+                            </small>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <p>No responses yet. Be the first to answer!</p>
+            </div>
+        }
+    </div>
+
+    <div class="add-response mt-4">
+        <h4>Add Your Response</h4>
+        <form asp-controller="Responses" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="requestId" value="@Model.Id" />
+            <div class="form-group">
+                <textarea name="content" class="form-control" rows="5" placeholder="Enter your response... (only supportive statements, no negative feedback)" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Response</button>
+        </form>
+    </div>
+
+    <div class="related-actions mt-4">
+        <h4>Suggest Interpretation</h4>
+        <p>If this request needs clarification, you can create a nested request for interpretation.</p>
+        <a asp-action="Create" asp-route-parentRequestId="@Model.Id" class="btn btn-secondary">Create Interpretation Request</a>
+    </div>
+
+    <div class="navigation mt-4">
+        <a asp-action="Index" class="btn btn-outline-primary">Back to All Requests</a>
+    </div>
+</div>
