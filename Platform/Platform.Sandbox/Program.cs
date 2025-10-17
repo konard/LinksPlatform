@@ -10,6 +10,11 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Issue #676: Efficient Markov algorithm with prebuilt sequences
+            MarkovAlgorithmExperiment.Run();
+
+            return;
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
