@@ -220,6 +220,9 @@ Platform/Platform.Data.Kernel/*.exe
 Platform/Platform.Data.Kernel/*.dll
 
 # Platform.Data ~ Links Database files
-*.links__pycache__/
+*.links
+
+# Python
+__pycache__/
 *.pyc
 *.pyo
