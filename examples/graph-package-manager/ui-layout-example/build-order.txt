@@ -1,0 +1,56 @@
+Graph-Based Package Manager - Build Order for Circular Dependencies
+=====================================================================
+
+Problem: ui-framework depends on layout-engine, and layout-engine depends on ui-framework
+
+Traditional tree-based approach: FAILS - cannot determine build order due to cycle
+
+Graph-based approach: SUCCESS - uses multi-stage building
+
+Build Stages:
+-------------
+
+Stage 1: Extract Interfaces
+  ├─ ui-framework/component.h      → IComponent interface
+  ├─ ui-framework/renderer.h       → IRenderer interface
+  ├─ layout-engine/layout.h        → ILayout interface
+  ├─ layout-engine/box.h           → IBox interface
+  └─ layout-engine/constraints.h   → IConstraints interface
+
+Stage 2: Compile Implementations (parallel)
+  ├─ ui-framework/component.cpp    → component.o (uses ILayout, IBox from stage 1)
+  ├─ ui-framework/renderer.cpp     → renderer.o (uses IConstraints from stage 1)
+  ├─ layout-engine/layout.cpp      → layout.o (uses IComponent from stage 1)
+  ├─ layout-engine/box.cpp         → box.o (uses IRenderer from stage 1)
+  └─ layout-engine/constraints.cpp → constraints.o
+
+Stage 3: Link Libraries
+  ├─ ui-framework.so ← link(component.o, renderer.o)
+  └─ layout-engine.so ← link(layout.o, box.o, constraints.o)
+
+Stage 4: Compile Applications
+  └─ app/main.cpp → main.o (uses both ui-framework and layout-engine)
+
+Stage 5: Link Application
+  └─ app ← link(main.o, ui-framework.so, layout-engine.so)
+
+Key Insights:
+-------------
+1. Interfaces extracted before implementation compilation
+2. Each implementation compiles against interfaces only
+3. Circular dependencies resolved at interface level
+4. Link-time resolution ensures all symbols available
+5. Incremental builds: changing implementation doesn't rebuild dependents
+
+Comparison with Tree-Based:
+---------------------------
+Tree-Based:  ui-framework + layout-engine → MERGED into single package (ui-system)
+Graph-Based: ui-framework ←→ layout-engine → Two separate packages
+
+Benefits:
+---------
+- Smaller, focused packages
+- Independent versioning
+- Parallel development
+- Clear separation of concerns
+- Easier testing and maintenance

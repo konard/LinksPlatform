@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Graph-based package manager example with circular dependencies",
+  "packages": [
+    {
+      "name": "ui-framework",
+      "version": "2.0.0",
+      "description": "UI component framework",
+      "dependencies": {
+        "layout-engine": {
+          "version": "^1.5.0",
+          "circular": true,
+          "uses": ["ILayout", "IBox", "IConstraints"]
+        }
+      },
+      "provides": {
+        "interfaces": [
+          {
+            "name": "IComponent",
+            "version": "2.0",
+            "methods": ["render", "measure", "update"]
+          },
+          {
+            "name": "IRenderer",
+            "version": "2.0",
+            "methods": ["draw", "clear", "beginFrame", "endFrame"]
+          }
+        ]
+      },
+      "files": {
+        "interfaces": ["component.h", "renderer.h"],
+        "implementation": ["component.cpp", "renderer.cpp"]
+      }
+    },
+    {
+      "name": "layout-engine",
+      "version": "1.5.0",
+      "description": "Layout calculation engine",
+      "dependencies": {
+        "ui-framework": {
+          "version": "^2.0.0",
+          "circular": true,
+          "uses": ["IComponent", "IRenderer"]
+        }
+      },
+      "provides": {
+        "interfaces": [
+          {
+            "name": "ILayout",
+            "version": "1.0",
+            "methods": ["calculateLayout", "invalidate", "measure"]
+          },
+          {
+            "name": "IBox",
+            "version": "1.0",
+            "properties": ["x", "y", "width", "height"]
+          },
+          {
+            "name": "IConstraints",
+            "version": "1.0",
+            "methods": ["addConstraint", "solve"]
+          }
+        ]
+      },
+      "files": {
+        "interfaces": ["layout.h", "box.h", "constraints.h"],
+        "implementation": ["layout.cpp", "box.cpp", "constraints.cpp"]
+      }
+    },
+    {
+      "name": "app",
+      "version": "1.0.0",
+      "description": "Application using both packages",
+      "dependencies": {
+        "ui-framework": {
+          "version": "^2.0.0",
+          "uses": ["IComponent", "IRenderer"]
+        },
+        "layout-engine": {
+          "version": "^1.5.0",
+          "uses": ["ILayout"]
+        }
+      },
+      "provides": {
+        "interfaces": []
+      },
+      "files": {
+        "interfaces": [],
+        "implementation": ["main.cpp"]
+      }
+    }
+  ],
+  "resolution": {
+    "strategy": "constraint-satisfaction",
+    "allow-cycles": true,
+    "build-strategy": "interface-first"
+  }
+}
