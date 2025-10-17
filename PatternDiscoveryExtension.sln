@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternDiscoveryExtension", "PatternDiscoveryExtension\PatternDiscoveryExtension.csproj", "{B93F8A5C-4E3F-4D7B-9C1E-8A2F3B4C5D6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternDiscoveryExtension.Tests", "PatternDiscoveryExtension.Tests\PatternDiscoveryExtension.Tests.csproj", "{C94F9A6D-5E4F-4E8C-AD2F-9B3F4C5D6E7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B93F8A5C-4E3F-4D7B-9C1E-8A2F3B4C5D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93F8A5C-4E3F-4D7B-9C1E-8A2F3B4C5D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93F8A5C-4E3F-4D7B-9C1E-8A2F3B4C5D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93F8A5C-4E3F-4D7B-9C1E-8A2F3B4C5D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94F9A6D-5E4F-4E8C-AD2F-9B3F4C5D6E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C94F9A6D-5E4F-4E8C-AD2F-9B3F4C5D6E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C94F9A6D-5E4F-4E8C-AD2F-9B3F4C5D6E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C94F9A6D-5E4F-4E8C-AD2F-9B3F4C5D6E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D94F8A5C-5E3F-4D7B-9C1E-8A2F3B4C5D6E}
+	EndGlobalSection
+EndGlobal
