@@ -41,12 +41,16 @@ namespace Platform.Data.WebTerminal.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(long source, long target)
+        public IActionResult Create(long source, long target, long? linker = null)
         {
             try
             {
-                var link = Link.Create(source, target);
-                return Json(new { success = true, id = link.ToInt(), source = source, target = target });
+                var sourceLink = Link.Restore(source);
+                var targetLink = Link.Restore(target);
+                var linkerLink = linker.HasValue ? Link.Restore(linker.Value) : Net.And;
+
+                var link = Link.Create(sourceLink, linkerLink, targetLink);
+                return Json(new { success = true, id = link.ToInt(), source = source, target = target, linker = linkerLink.ToInt() });
             }
             catch (System.Exception ex)
             {
