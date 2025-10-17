@@ -54,3 +54,140 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Universal Search Engine Styles */
+.search-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.search-container h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.search-container .subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+#filters-container {
+  margin-bottom: 1.5rem;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-row select.filter-property {
+  flex: 2;
+  min-width: 200px;
+}
+
+.filter-row .filter-arrow {
+  color: #007bff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.filter-row input.filter-min,
+.filter-row input.filter-max {
+  flex: 1;
+  min-width: 120px;
+}
+
+.filter-row .filter-remove {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.2rem;
+  border-radius: 50%;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.action-buttons button {
+  padding: 0.5rem 1.5rem;
+}
+
+#results-container {
+  margin-top: 2rem;
+}
+
+#results-container h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.results-count {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.results-count strong {
+  color: #007bff;
+}
+
+.results-list .list-group-item {
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.results-list .list-group-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.results-list .list-group-item h5 {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.results-list .list-group-item a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.results-list .list-group-item a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .filter-row {
+    flex-wrap: wrap;
+  }
+
+  .filter-row select.filter-property,
+  .filter-row input.filter-min,
+  .filter-row input.filter-max {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .filter-row .filter-arrow {
+    display: none;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}

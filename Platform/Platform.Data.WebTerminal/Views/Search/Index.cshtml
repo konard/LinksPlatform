@@ -1,0 +1,38 @@
+@model SearchResultModel
+@{
+    ViewData["Title"] = "Universal Search Engine";
+}
+
+<div class="search-container">
+    <h2>Universal Search Engine</h2>
+    <p class="subtitle">Search complex objects with adjustable filters</p>
+
+    <div id="filters-container">
+        <!-- Filter rows will be added dynamically here -->
+    </div>
+
+    <div class="action-buttons">
+        <button id="add-filter-btn" class="btn btn-primary">
+            <span>+</span> Add Filter
+        </button>
+        <button id="search-btn" class="btn btn-success">
+            <span>🔍</span> Search
+        </button>
+        <button id="clear-btn" class="btn btn-secondary">
+            <span>✕</span> Clear All
+        </button>
+    </div>
+
+    <div id="results-container">
+        <h3>Search Results</h3>
+        <div id="results-count" class="results-count"></div>
+        <div id="results-list" class="results-list"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var availableProperties = @Html.Raw(Json.Serialize(Model.AvailableProperties));
+    </script>
+    <script src="~/js/search.js"></script>
+}
