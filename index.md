@@ -6,6 +6,11 @@ Holistic system for storage and transformation of information (in development) b
 * [.NET Core](https://www.microsoft.com/net) SDK with version 2.2 or later.
 * [MonoDevelop](https://www.monodevelop.com/), [Visual Studio](https://visualstudio.microsoft.com) or any other [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) or just a [text editor](https://en.wikipedia.org/wiki/Text_editor).
 
+## Documentation
+
+* [Links Theory](doc/articles/links-theory.md) - Theoretical foundations of the Links Platform
+* [Create-Only Mode](doc/articles/create-only-mode.md) - Implementation of create-only (no deletion) mode based on the Associative Model of Data
+
 ## Links Platform's NuGet packages
 
 ### Main packages
