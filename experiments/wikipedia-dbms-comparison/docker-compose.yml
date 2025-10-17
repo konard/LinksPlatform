@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:15-alpine
+    container_name: wikipedia_postgres
+    environment:
+      POSTGRES_DB: wikipedia
+      POSTGRES_USER: wikiuser
+      POSTGRES_PASSWORD: wikipass
+      POSTGRES_INITDB_ARGS: "-E UTF8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schemas/postgresql_schema.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - "postgres"
+      - "-c"
+      - "shared_buffers=512MB"
+      - "-c"
+      - "work_mem=64MB"
+      - "-c"
+      - "maintenance_work_mem=256MB"
+      - "-c"
+      - "effective_cache_size=2GB"
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: wikipedia_mysql
+    environment:
+      MYSQL_DATABASE: wikipedia
+      MYSQL_USER: wikiuser
+      MYSQL_PASSWORD: wikipass
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./schemas/mysql_schema.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--innodb-buffer-pool-size=512M"
+      - "--innodb-log-file-size=128M"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  mysql_data:
+    driver: local
