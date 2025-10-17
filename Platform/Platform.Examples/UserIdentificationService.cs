@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Platform.Data;
+using Platform.Data.Doublets;
 using Platform.Singletons;
 
 namespace Platform.Examples
