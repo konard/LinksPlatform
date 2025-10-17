@@ -55,6 +55,35 @@ $(document).ready(function () {
     surface = $("#surface")[0];
     query = $("#query")[0];
 
+    // View mode toggle functionality
+    var viewMode = localStorage.getItem('viewMode') || 'read';
+
+    function applyViewMode(mode) {
+        var body = document.body;
+        var icon = document.getElementById('view-mode-icon');
+
+        if (mode === 'read') {
+            body.classList.remove('write-mode');
+            body.classList.add('read-mode');
+            if (icon) icon.textContent = '👁';
+        } else {
+            body.classList.remove('read-mode');
+            body.classList.add('write-mode');
+            if (icon) icon.textContent = '✎';
+        }
+
+        localStorage.setItem('viewMode', mode);
+    }
+
+    // Apply initial mode
+    applyViewMode(viewMode);
+
+    // Toggle button event listener
+    $('#view-mode-toggle').click(function() {
+        viewMode = (viewMode === 'read') ? 'write' : 'read';
+        applyViewMode(viewMode);
+    });
+
     $(".item").click(function (e) {
         if (e.which == mouseButton.left)
         {
