@@ -1,0 +1,8 @@
+# GitHub Similarity Search Tool Requirements
+
+# No external Python packages required beyond standard library
+# This tool uses GitHub CLI (gh) which must be installed separately
+
+# For development/testing:
+# pytest>=7.0.0
+# pytest-cov>=4.0.0
