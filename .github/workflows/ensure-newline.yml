@@ -1,0 +1,50 @@
+name: Ensure Newline at EOF
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+jobs:
+  ensure-newline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Check for newline at end of files
+      id: check
+      run: |
+        chmod +x ./ensure-newline.sh
+        ./ensure-newline.sh --check
+      continue-on-error: true
+
+    - name: Fix files without newline
+      if: steps.check.outcome == 'failure' && github.event_name == 'pull_request'
+      run: |
+        ./ensure-newline.sh --fix
+
+    - name: Commit fixes
+      if: steps.check.outcome == 'failure' && github.event_name == 'pull_request'
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add -A
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Add missing newlines at end of files
+
+🤖 Generated with GitHub Actions"
+          git push
+        fi
+
+    - name: Fail if check failed and not fixed
+      if: steps.check.outcome == 'failure' && github.event_name == 'push'
+      run: |
+        echo "❌ Some files are missing newline at end of file"
+        echo "Run './ensure-newline.sh --fix' locally to fix them"
+        exit 1
