@@ -221,3 +221,16 @@ Platform/Platform.Data.Kernel/*.dll
 
 # Platform.Data ~ Links Database files
 *.links
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
