@@ -17,14 +17,14 @@ namespace Examples
 
             // Initialize links storage
             using var links = new UInt64Links(new UInt64LinksOptions());
-            var service = new UserIdentificationService(links);
+            var service = new UserIdentificationService<ulong>(links);
 
             // Example 1: New user with minimal presence
             Console.WriteLine("Example 1: New user with single account");
             Console.WriteLine("----------------------------------------");
             var newUserId = 1UL;
             var newUser = service.CreateUserProfile(newUserId);
-            service.AddServiceAccount(newUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(newUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "GitHub",
                 AccountId = "newuser123",
@@ -43,7 +43,7 @@ namespace Examples
             var establishedUserId = 2UL;
             var establishedUser = service.CreateUserProfile(establishedUserId);
 
-            service.AddServiceAccount(establishedUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(establishedUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "GitHub",
                 AccountId = "developer_pro",
@@ -52,7 +52,7 @@ namespace Examples
                 IsVerified = true
             });
 
-            service.AddServiceAccount(establishedUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(establishedUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "StackOverflow",
                 AccountId = "dev_pro_999",
@@ -61,7 +61,7 @@ namespace Examples
                 IsVerified = true
             });
 
-            service.AddServiceAccount(establishedUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(establishedUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "Twitter",
                 AccountId = "@devpro",
@@ -80,7 +80,7 @@ namespace Examples
             var suspiciousUserId = 3UL;
             var suspiciousUser = service.CreateUserProfile(suspiciousUserId);
 
-            service.AddServiceAccount(suspiciousUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(suspiciousUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "Reddit",
                 AccountId = "definitely_real_user",
@@ -99,7 +99,7 @@ namespace Examples
             var averageUserId = 4UL;
             var averageUser = service.CreateUserProfile(averageUserId);
 
-            service.AddServiceAccount(averageUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(averageUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "GitHub",
                 AccountId = "casual_coder",
@@ -108,7 +108,7 @@ namespace Examples
                 IsVerified = false
             });
 
-            service.AddServiceAccount(averageUserId, new UserIdentificationService.ServiceAccount
+            service.AddServiceAccount(averageUserId, new UserIdentificationService<ulong>.ServiceAccount
             {
                 ServiceName = "LinkedIn",
                 AccountId = "john_doe_dev",

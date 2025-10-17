@@ -10,20 +10,21 @@ namespace Platform.Examples
     /// Service for identifying real users based on connected accounts and reputation data.
     /// Provides scoring mechanism to determine the probability that a user is real.
     /// </summary>
-    public class UserIdentificationService
+    /// <typeparam name="TLink">The type of link address.</typeparam>
+    public class UserIdentificationService<TLink>
     {
-        private static readonly LinksConstants<ulong> _constants = Default<LinksConstants<ulong>>.Instance;
-        private readonly ILinks<ulong> _links;
-        private readonly Dictionary<ulong, UserProfile> _userProfiles;
+        private static readonly LinksConstants<TLink> _constants = Default<LinksConstants<TLink>>.Instance;
+        private readonly ILinks<TLink> _links;
+        private readonly Dictionary<TLink, UserProfile> _userProfiles;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserIdentificationService"/> class.
+        /// Initializes a new instance of the <see cref="UserIdentificationService{TLink}"/> class.
         /// </summary>
         /// <param name="links">The links storage for persisting user data.</param>
-        public UserIdentificationService(ILinks<ulong> links)
+        public UserIdentificationService(ILinks<TLink> links)
         {
             _links = links ?? throw new ArgumentNullException(nameof(links));
-            _userProfiles = new Dictionary<ulong, UserProfile>();
+            _userProfiles = new Dictionary<TLink, UserProfile>();
         }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace Platform.Examples
             /// <summary>
             /// Gets or sets the unique identifier for the user profile.
             /// </summary>
-            public ulong UserId { get; set; }
+            public TLink UserId { get; set; }
 
             /// <summary>
             /// Gets or sets the list of connected service accounts.
@@ -88,7 +89,7 @@ namespace Platform.Examples
         /// </summary>
         /// <param name="userId">The unique identifier for the user.</param>
         /// <returns>The created user profile.</returns>
-        public UserProfile CreateUserProfile(ulong userId)
+        public UserProfile CreateUserProfile(TLink userId)
         {
             if (_userProfiles.ContainsKey(userId))
             {
@@ -112,7 +113,7 @@ namespace Platform.Examples
         /// </summary>
         /// <param name="userId">The user ID.</param>
         /// <param name="account">The service account to add.</param>
-        public void AddServiceAccount(ulong userId, ServiceAccount account)
+        public void AddServiceAccount(TLink userId, ServiceAccount account)
         {
             if (!_userProfiles.TryGetValue(userId, out var profile))
             {
@@ -134,7 +135,7 @@ namespace Platform.Examples
         /// </summary>
         /// <param name="userId">The user ID.</param>
         /// <returns>A score between 0 and 1 indicating the probability the user is real.</returns>
-        public double CalculateRealnessScore(ulong userId)
+        public double CalculateRealnessScore(TLink userId)
         {
             if (!_userProfiles.TryGetValue(userId, out var profile))
             {
@@ -227,7 +228,7 @@ namespace Platform.Examples
         /// </summary>
         /// <param name="userId">The user ID.</param>
         /// <returns>The user profile if found, null otherwise.</returns>
-        public UserProfile GetUserProfile(ulong userId)
+        public UserProfile GetUserProfile(TLink userId)
         {
             return _userProfiles.TryGetValue(userId, out var profile) ? profile : null;
         }
@@ -237,7 +238,7 @@ namespace Platform.Examples
         /// </summary>
         /// <param name="userId">The user ID.</param>
         /// <returns>A formatted string with score breakdown.</returns>
-        public string GetScoreReport(ulong userId)
+        public string GetScoreReport(TLink userId)
         {
             if (!_userProfiles.TryGetValue(userId, out var profile))
             {
