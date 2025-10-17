@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Description>Decentralized computational network (grid) with code+knowledge encyclopedia for LinksPlatform</Description>
+    <PackageId>Platform.Data.LinksCloud</PackageId>
+    <Authors>Konstantin Diachenko</Authors>
+    <Company>LinksPlatform</Company>
+    <Product>LinksCloud</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Platform.Data.Doublets" Version="*" />
+    <PackageReference Include="Platform.Communication.Protocol.Udp" Version="*" />
+    <PackageReference Include="Platform.Collections" Version="*" />
+    <PackageReference Include="Platform.Threading" Version="*" />
+  </ItemGroup>
+
+</Project>
