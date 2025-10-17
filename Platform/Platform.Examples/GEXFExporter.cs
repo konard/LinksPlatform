@@ -11,7 +11,7 @@ namespace Platform.Examples
 {
     public class GEXFExporter<TLink>
     {
-        private static readonly UncheckedConverter<TLink, long> _addressToInt64Converter = UncheckedConverter<TLink, long>.Default;
+        private static readonly CheckedConverter<TLink, long> _addressToInt64Converter = CheckedConverter<TLink, long>.Default;
 
         private readonly ILinks<TLink> _links;
 
