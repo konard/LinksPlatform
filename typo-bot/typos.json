@@ -1,0 +1,45 @@
+{
+  "typos": [
+    {
+      "incorrect": "внезависимости",
+      "correct": "независимости",
+      "description": "Russian word for 'independence' - the prefix 'вне' (meaning 'outside') is incorrect here. The correct word is 'независимости' (independence)."
+    }
+  ],
+  "settings": {
+    "max_repos_per_run": 10,
+    "default_branch": "master",
+    "pr_label": "typo-fix",
+    "skip_forks": true,
+    "file_extensions": [
+      ".md",
+      ".txt",
+      ".rst",
+      ".asciidoc",
+      ".adoc",
+      ".py",
+      ".js",
+      ".ts",
+      ".java",
+      ".c",
+      ".cpp",
+      ".h",
+      ".hpp",
+      ".cs",
+      ".rb",
+      ".go",
+      ".rs",
+      ".php",
+      ".html",
+      ".css",
+      ".json",
+      ".yaml",
+      ".yml",
+      ".xml",
+      ".toml",
+      ".ini",
+      ".sh",
+      ".bash"
+    ]
+  }
+}

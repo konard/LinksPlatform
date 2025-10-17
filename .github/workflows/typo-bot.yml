@@ -1,0 +1,67 @@
+name: TypoBot
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_repos:
+        description: 'Maximum number of repositories to process'
+        required: false
+        default: '5'
+      dry_run:
+        description: 'Dry run mode (true/false)'
+        required: false
+        default: 'true'
+  schedule:
+    # Run weekly on Sundays at 00:00 UTC
+    - cron: '0 0 * * 0'
+
+jobs:
+  fix-typos:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install GitHub CLI
+      run: |
+        type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+        sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+        sudo apt update
+        sudo apt install gh -y
+
+    - name: Configure Git
+      run: |
+        git config --global user.name "TypoBot"
+        git config --global user.email "typobot@users.noreply.github.com"
+
+    - name: Authenticate GitHub CLI
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "$GITHUB_TOKEN" | gh auth login --with-token
+
+    - name: Run TypoBot
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd typo-bot
+        python3 typo_fixer.py \
+          --config typos.json \
+          --max-repos ${{ github.event.inputs.max_repos || '5' }} \
+          ${{ github.event.inputs.dry_run == 'false' && '' || '--dry-run' }}
+
+    - name: Upload results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: typobot-results
+        path: typo-bot/*.log
+        if-no-files-found: ignore
