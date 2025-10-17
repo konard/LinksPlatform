@@ -12,6 +12,8 @@ import json
 import argparse
 import subprocess
 import re
+import shutil
+import tempfile
 from pathlib import Path
 from typing import List, Dict, Tuple
 import time
@@ -313,8 +315,8 @@ This PR fixes a typo found in {files_changed} file(s).
         """
         print(f"\nProcessing: {repo_full_name}")
 
-        # Create temp directory for cloning
-        temp_dir = f"/tmp/typobot_{repo_full_name.replace('/', '_')}"
+        # Create secure temp directory for cloning
+        temp_dir = tempfile.mkdtemp(prefix="typobot_")
 
         try:
             # Clone repository
@@ -351,7 +353,7 @@ This PR fixes a typo found in {files_changed} file(s).
         finally:
             # Cleanup
             if os.path.exists(temp_dir):
-                subprocess.run(["rm", "-rf", temp_dir], capture_output=True)
+                shutil.rmtree(temp_dir, ignore_errors=True)
 
     def run(self, max_repos: int = 10, search_query: str = None):
         """
