@@ -1,0 +1,80 @@
+@model List<LinkModel>
+<ul class="source-graph-tree">
+@foreach (var item in Model)
+{
+    <li class="graph-node">
+        <div class="node-content">
+            <span class="node-connector">→</span>
+            <a href='@Url.Action("SourceGraph", "Links", new { Id = item.Link.ToInt() })' class="node-link">
+                <partial name="LinkRefererDescription" model="item.Link" />
+            </a>
+            @if (item.ReferersModels.Count > 0)
+            {
+                <span class="referers-count" title="Number of references">[@item.ReferersModels.Count]</span>
+            }
+        </div>
+        @if (item.ReferersModels.Count > 0)
+        {
+            <partial name="SourceGraphTree" model="item.ReferersModels" />
+        }
+    </li>
+}
+</ul>
+
+<style>
+    .source-graph-tree {
+        list-style: none;
+        padding-left: 30px;
+        margin: 10px 0;
+    }
+
+    .source-graph-tree > li {
+        margin: 8px 0;
+    }
+
+    .graph-node {
+        position: relative;
+    }
+
+    .node-content {
+        padding: 8px 12px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: inline-block;
+        transition: all 0.2s;
+    }
+
+    .node-content:hover {
+        background-color: #f0f8ff;
+        border-color: #4a90e2;
+        box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+    }
+
+    .node-connector {
+        color: #4a90e2;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    .node-link {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .node-link:hover {
+        color: #4a90e2;
+    }
+
+    .referers-count {
+        margin-left: 8px;
+        color: #666;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+
+    .source-graph-tree ul {
+        border-left: 2px solid #e0e0e0;
+        margin-left: 15px;
+    }
+</style>

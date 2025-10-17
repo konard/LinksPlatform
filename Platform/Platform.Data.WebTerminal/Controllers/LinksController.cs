@@ -28,5 +28,17 @@ namespace Platform.Data.WebTerminal.Controllers
             var model = LinkModel.CreateLinkModel(link);
             return View("Infinite", model);
         }
+
+        // GET: /Links/SourceGraph
+        public IActionResult SourceGraph(long id = 0)
+        {
+            if (id == 0)
+            {
+                id = Net.Link;
+            }
+            var link = Link.Restore(id);
+            var model = LinkModel.CreateLinkModel(link);
+            return View("SourceGraph", model);
+        }
     }
 }
