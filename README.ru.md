@@ -109,3 +109,7 @@ links.Delete(link);
 https://vk.com/linksplatform
 
 https://vk.com/konard
+
+## Архив
+
+Исторические материалы раннего периода разработки (2010) доступны в [ветке archive](https://github.com/konard/LinksPlatform/tree/archive).
