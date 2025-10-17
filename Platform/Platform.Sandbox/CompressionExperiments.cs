@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Platform.Collections;
 using Platform.Threading;
 using Platform.Singletons;
@@ -1788,6 +1790,196 @@ namespace Platform.Sandbox
                         }
                     }
                 }
+            }
+        }
+
+        public struct ConcurrentCompressor
+        {
+            private readonly SynchronizedLinks<ulong> _links;
+            private Link<ulong> _maxDoublet;
+            private ulong _maxFrequency;
+            private readonly ConcurrentDictionary<Link<ulong>, ulong> _doubletsFrequencies;
+
+            public ConcurrentCompressor(SynchronizedLinks<ulong> links)
+            {
+                _links = links;
+                _maxDoublet = Link<ulong>.Null;
+                _maxFrequency = 1;
+                _doubletsFrequencies = new ConcurrentDictionary<Link<ulong>, ulong>();
+            }
+
+            /// <remarks>
+            /// Original algorithm idea: https://en.wikipedia.org/wiki/Byte_pair_encoding .
+            /// Concurrent version using parallel frequency counting.
+            /// </remarks>
+            public ulong[] Precompress0(ulong[] sequence)
+            {
+                if (sequence.IsNullOrEmpty())
+                {
+                    return null;
+                }
+
+                if (sequence.Length == 1)
+                {
+                    return sequence;
+                }
+
+                var oldLength = sequence.Length;
+                var newLength = sequence.Length;
+
+                var copy = new ulong[sequence.Length];
+                copy[0] = sequence[0];
+
+                // Parallel frequency counting for initial pass
+                var chunkSize = Math.Max(1000, sequence.Length / Environment.ProcessorCount);
+                var localFrequencies = new ConcurrentBag<Dictionary<Link<ulong>, ulong>>();
+
+                Parallel.For(1, sequence.Length, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, i =>
+                {
+                    copy[i] = sequence[i];
+                });
+
+                Parallel.ForEach(Partitioner.Create(1, sequence.Length, chunkSize), range =>
+                {
+                    var localDict = new Dictionary<Link<ulong>, ulong>();
+                    for (var i = range.Item1; i < range.Item2; i++)
+                    {
+                        var doublet = new Link<ulong>(sequence[i - 1], sequence[i]);
+                        if (localDict.TryGetValue(doublet, out ulong frequency))
+                        {
+                            localDict[doublet] = frequency + 1;
+                        }
+                        else
+                        {
+                            localDict[doublet] = 1;
+                        }
+                    }
+                    localFrequencies.Add(localDict);
+                });
+
+                // Merge local frequencies into global dictionary
+                foreach (var localDict in localFrequencies)
+                {
+                    foreach (var kvp in localDict)
+                    {
+                        _doubletsFrequencies.AddOrUpdate(kvp.Key, kvp.Value, (key, oldValue) => oldValue + kvp.Value);
+                    }
+                }
+
+                // Find initial max doublet
+                UpdateMaxDoublet();
+
+                while (!_maxDoublet.IsNull())
+                {
+                    var maxDoubletSource = _maxDoublet.Source;
+                    var maxDoubletTarget = _maxDoublet.Target;
+                    var maxDoubletResult = _links.CreateAndUpdate(maxDoubletSource, maxDoubletTarget);
+
+                    oldLength--;
+                    var oldLengthMinusTwo = oldLength - 1;
+
+                    // Substitute all usages
+                    int w = 0, r = 0;
+                    for (; r < oldLength; r++)
+                    {
+                        if (copy[r] == maxDoubletSource && copy[r + 1] == maxDoubletTarget)
+                        {
+                            if (r > 0)
+                            {
+                                var previous = copy[w - 1];
+                                DecrementFrequency(new Link<ulong>(previous, maxDoubletSource));
+                                IncrementFrequency(new Link<ulong>(previous, maxDoubletResult));
+                            }
+                            if (r < oldLengthMinusTwo)
+                            {
+                                var next = copy[r + 2];
+                                DecrementFrequency(new Link<ulong>(maxDoubletTarget, next));
+                                IncrementFrequency(new Link<ulong>(maxDoubletResult, next));
+                            }
+
+                            copy[w++] = maxDoubletResult;
+                            r++;
+                            newLength--;
+                        }
+                        else
+                        {
+                            copy[w++] = copy[r];
+                        }
+                    }
+                    copy[w] = copy[r];
+
+                    _doubletsFrequencies.TryRemove(_maxDoublet, out _);
+
+                    oldLength = newLength;
+
+                    UpdateMaxDoublet();
+                }
+
+                var final = new ulong[newLength];
+                Array.Copy(copy, final, newLength);
+
+                return final;
+            }
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            private ulong IncrementFrequency(Link<ulong> doublet)
+            {
+                return _doubletsFrequencies.AddOrUpdate(doublet, 1, (key, oldValue) => oldValue + 1);
+            }
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            private void DecrementFrequency(Link<ulong> doublet)
+            {
+                if (_doubletsFrequencies.TryGetValue(doublet, out ulong currentValue))
+                {
+                    var newValue = currentValue - 1;
+                    if (newValue == 0)
+                    {
+                        _doubletsFrequencies.TryRemove(doublet, out _);
+                    }
+                    else
+                    {
+                        _doubletsFrequencies.TryUpdate(doublet, newValue, currentValue);
+                    }
+                }
+            }
+
+            private void UpdateMaxDoublet()
+            {
+                _maxDoublet = Link<ulong>.Null;
+                _maxFrequency = 1;
+
+                // Parallel search for maximum frequency doublet
+                var localMaxes = new ConcurrentBag<(Link<ulong> doublet, ulong frequency)>();
+
+                Parallel.ForEach(_doubletsFrequencies, kvp =>
+                {
+                    if (kvp.Value > 1)
+                    {
+                        localMaxes.Add((kvp.Key, kvp.Value));
+                    }
+                });
+
+                foreach (var (doublet, frequency) in localMaxes)
+                {
+                    if (_maxFrequency < frequency)
+                    {
+                        _maxFrequency = frequency;
+                        _maxDoublet = doublet;
+                    }
+                    else if (_maxFrequency == frequency &&
+                        (doublet.Source + doublet.Target) > (_maxDoublet.Source + _maxDoublet.Target))
+                    {
+                        _maxDoublet = doublet;
+                    }
+                }
+            }
+
+            public ulong Compress(ulong[] sequence)
+            {
+                var precompressedSequence = Precompress0(sequence);
+                var balancedVariantConverter = new BalancedVariantConverter<ulong>(_links);
+                return balancedVariantConverter.Convert(precompressedSequence);
             }
         }
     }
