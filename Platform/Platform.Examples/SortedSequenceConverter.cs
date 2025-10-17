@@ -14,10 +14,10 @@ namespace Platform.Examples
     /// </summary>
     public class SortedSequenceConverter
     {
-        private readonly ILinks<ulong> _links;
+        private readonly SynchronizedLinks<ulong> _links;
         private readonly Sequences _sequences;
 
-        public SortedSequenceConverter(ILinks<ulong> links)
+        public SortedSequenceConverter(SynchronizedLinks<ulong> links)
         {
             _links = links ?? throw new ArgumentNullException(nameof(links));
             _sequences = new Sequences(links);
