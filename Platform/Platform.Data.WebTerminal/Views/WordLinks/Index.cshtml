@@ -1,0 +1,83 @@
+@model WordLinksModel
+@{
+    ViewData["Title"] = $"WordLinks - {Model.Word}";
+}
+
+<div class="word-links-view">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4">@Model.Word</h1>
+            <p class="lead">Explore where this word appears on the internet</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Search for a different word</h3>
+                </div>
+                <div class="card-body">
+                    <form method="get" asp-controller="WordLinks" asp-action="Index" class="form-inline">
+                        <input type="text" name="word" class="form-control mr-2" placeholder="Enter a word..." value="@Model.Word" style="min-width: 300px;" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Where "@Model.Word" appears on the internet</h2>
+            <p class="text-muted">Here are links to pages and resources about this word across various platforms:</p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        @foreach (var occurrence in Model.OccurrencesOnInternet)
+        {
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@occurrence.Platform</h5>
+                        <p class="card-text">@occurrence.Description</p>
+                        <a href="@occurrence.Url" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Visit Page
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h4 class="alert-heading">About WordLinks</h4>
+                <p>WordLinks is a service that provides a comprehensive view of where a word appears across the internet. It aggregates links from various platforms including dictionaries, encyclopedias, search engines, and social platforms.</p>
+                <hr>
+                <p class="mb-0">Try searching for different words to discover their presence across the web!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .word-links-view {
+        padding: 20px 0;
+    }
+
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+</style>

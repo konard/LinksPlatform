@@ -44,6 +44,10 @@ namespace Platform.Data.WebTerminal
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "wordlinks",
+                    template: "WordLinks/{word?}",
+                    defaults: new { controller = "WordLinks", action = "Index" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Links}/{action=Infinite}/{id?}");
             });
