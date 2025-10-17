@@ -1,0 +1,58 @@
+@model IEnumerable<FactModel>
+@{
+    ViewData["Title"] = "Facts Database";
+}
+
+<div class="facts-index">
+    <h2>@ViewData["Title"]</h2>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New Fact</a>
+    </p>
+
+    @if (Model.Any())
+    {
+        <div class="facts-list">
+            @foreach (var fact in Model)
+            {
+                <div class="fact-item @(fact.IsDraft ? "draft" : "")">
+                    <h3>
+                        <a asp-action="Details" asp-route-id="@fact.Id">Fact #@fact.Id</a>
+                        @if (fact.IsDraft)
+                        {
+                            <span class="badge badge-warning">Draft</span>
+                        }
+                    </h3>
+                    <p>@fact.Content</p>
+                    <p>
+                        <small>References: @fact.References.Count</small>
+                    </p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No facts available. All facts are public domain.</p>
+    }
+</div>
+
+<style>
+    .fact-item {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+    .fact-item.draft {
+        background-color: #fff3cd;
+    }
+    .badge {
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 0.8em;
+    }
+    .badge-warning {
+        background-color: #ffc107;
+        color: #000;
+    }
+</style>
