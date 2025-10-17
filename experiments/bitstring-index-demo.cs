@@ -96,7 +96,7 @@ namespace BitStringIndexExperiment
             var index = new BitStringIndex<ulong>(links, bitsPerElement: 21);
 
             // Generate sequences with varying lengths
-            var random = new Random(42);
+            var random = new System.Random(42);
             var sequenceLengths = new[] { 10, 50, 100, 500 };
 
             Console.WriteLine("Analyzing space efficiency for different sequence lengths:");
@@ -216,7 +216,7 @@ namespace BitStringIndexExperiment
 
         static ulong[][] GenerateRandomSequences(int count, int avgLength, int seed)
         {
-            var random = new Random(seed);
+            var random = new System.Random(seed);
             var sequences = new ulong[count][];
 
             for (int i = 0; i < count; i++)

@@ -205,7 +205,7 @@ namespace Platform.Examples
 
         private string[] GenerateTestSequences(int count)
         {
-            var random = new Random(42); // Fixed seed for reproducibility
+            var random = new System.Random(42); // Fixed seed for reproducibility
             var sequences = new string[count];
 
             for (int i = 0; i < count; i++)

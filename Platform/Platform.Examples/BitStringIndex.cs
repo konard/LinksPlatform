@@ -189,7 +189,8 @@ namespace Platform.Examples
             long totalBits = 0;
             foreach (var bitString in _bitStringToLink.Keys)
             {
-                totalBits += bitString.GetBitLength();
+                // Calculate bit length manually for .NET Standard 2.0 compatibility
+                totalBits += GetBitLength(bitString);
             }
 
             long averageBitsPerSequence = Count > 0 ? totalBits / Count : 0;
@@ -239,6 +240,32 @@ namespace Platform.Examples
             }
 
             return sequence;
+        }
+
+        /// <summary>
+        /// Gets the bit length of a BigInteger (.NET Standard 2.0 compatible implementation).
+        /// </summary>
+        /// <param name="value">The BigInteger to measure.</param>
+        /// <returns>The number of bits required to represent the value.</returns>
+        private static long GetBitLength(BigInteger value)
+        {
+            if (value.IsZero)
+            {
+                return 0;
+            }
+
+            // Make value positive for calculation
+            value = BigInteger.Abs(value);
+
+            // Count bits by repeatedly dividing by 2
+            long bitLength = 0;
+            while (value > 0)
+            {
+                value >>= 1;
+                bitLength++;
+            }
+
+            return bitLength;
         }
     }
 }
