@@ -1,0 +1,47 @@
+{
+  "LibraryName": "Platform.Data",
+  "CurrentVersion": "1.0.0",
+  "Versions": [
+    "1.0.0",
+    "1.1.0",
+    "2.0.0"
+  ],
+  "Rules": [
+    {
+      "Type": "MethodRename",
+      "FromVersion": "1.0.0",
+      "ToVersion": "1.1.0",
+      "Parameters": {
+        "OldMethodName": "GetLinks",
+        "NewMethodName": "GetAll"
+      }
+    },
+    {
+      "Type": "MethodRename",
+      "FromVersion": "1.1.0",
+      "ToVersion": "2.0.0",
+      "Parameters": {
+        "OldMethodName": "CreateLink",
+        "NewMethodName": "Create"
+      }
+    },
+    {
+      "Type": "NamespaceRename",
+      "FromVersion": "1.1.0",
+      "ToVersion": "2.0.0",
+      "Parameters": {
+        "OldNamespace": "Platform.Data.Core",
+        "NewNamespace": "Platform.Data"
+      }
+    },
+    {
+      "Type": "TypeRename",
+      "FromVersion": "1.1.0",
+      "ToVersion": "2.0.0",
+      "Parameters": {
+        "OldTypeName": "LinkStorage",
+        "NewTypeName": "Links"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>code-transform</AssemblyName>
+    <Description>Command-line tool for managing breaking changes through code transformations</Description>
+    <Copyright>Konstantin Diachenko</Copyright>
+    <Authors>Konstantin Diachenko</Authors>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>code-transform</ToolCommandName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Platform.CodeTransformations\Platform.CodeTransformations.csproj" />
+  </ItemGroup>
+
+</Project>
