@@ -221,3 +221,8 @@ Platform/Platform.Data.Kernel/*.dll
 
 # Platform.Data ~ Links Database files
 *.links
+
+# Discord Bot Configuration
+Platform/Platform.Data.DiscordBot/appsettings.json
+Platform/Platform.Data.DiscordBot/appsettings.*.json
+!Platform/Platform.Data.DiscordBot/appsettings.Development.json
