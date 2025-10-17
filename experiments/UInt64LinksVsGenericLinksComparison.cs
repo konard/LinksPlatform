@@ -25,6 +25,15 @@ namespace Platform.Experiments
             Console.WriteLine($"Iterations: {IterationCount:N0}");
             Console.WriteLine();
 
+            // Run simple demo first
+            Console.WriteLine("Running simplified generic vs specialized demonstration...");
+            Console.WriteLine();
+            SimpleGenericVsSpecializedDemo.Run();
+
+            Console.WriteLine();
+            Console.WriteLine("=== Full Links Platform Benchmark ===");
+            Console.WriteLine();
+
             // Test generic version
             Console.WriteLine("Testing Generic Links<ulong>...");
             var genericTime = BenchmarkGenericLinks();
@@ -45,6 +54,9 @@ namespace Platform.Experiments
             Console.WriteLine();
 
             DisplayMetrics(genericTime);
+
+            Console.WriteLine();
+            Console.WriteLine("See experiments/GenericVsNonGenericComparisonBenchmark.md for detailed analysis.");
         }
 
         private static TimeSpan BenchmarkGenericLinks()
