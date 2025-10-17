@@ -1,0 +1,84 @@
+@model DonationModel
+@{
+    ViewData["Title"] = "Create Donation";
+}
+
+<h1>Make a Donation</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="DonorName">Your Name</label>
+        <input asp-for="DonorName" class="form-control" />
+        <span asp-validation-for="DonorName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DonorEmail">Your Email</label>
+        <input asp-for="DonorEmail" class="form-control" type="email" />
+        <span asp-validation-for="DonorEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RecipientName">Recipient Name</label>
+        <input asp-for="RecipientName" class="form-control" />
+        <span asp-validation-for="RecipientName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Amount">Amount (RUB)</label>
+        <input asp-for="Amount" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaymentMethod">Payment Method</label>
+        <select asp-for="PaymentMethod" class="form-control">
+            <option value="1">Mir Card</option>
+            <option value="2">YooMoney</option>
+            <option value="3">QIWI</option>
+            <option value="4">WebMoney</option>
+            <option value="5">Bank Transfer</option>
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <input asp-for="IsRecurrent" type="checkbox" />
+            Make this a recurrent donation
+        </label>
+    </div>
+
+    <div class="form-group" id="recurrence-options" style="display: none;">
+        <label asp-for="RecurrenceType">Recurrence Frequency</label>
+        <select asp-for="RecurrenceType" class="form-control">
+            <option value="">Select frequency</option>
+            <option value="1">Weekly</option>
+            <option value="2">Monthly</option>
+            <option value="3">Yearly</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Message">Message (Optional)</label>
+        <textarea asp-for="Message" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <button type="submit" class="btn btn-primary">Complete Donation</button>
+    <a href="/" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById('IsRecurrent').addEventListener('change', function() {
+            var recurrenceOptions = document.getElementById('recurrence-options');
+            if (this.checked) {
+                recurrenceOptions.style.display = 'block';
+            } else {
+                recurrenceOptions.style.display = 'none';
+            }
+        });
+    </script>
+}

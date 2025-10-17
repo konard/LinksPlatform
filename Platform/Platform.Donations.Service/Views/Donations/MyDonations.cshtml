@@ -1,0 +1,49 @@
+@model List<DonationModel>
+@{
+    ViewData["Title"] = "My Donations";
+}
+
+<h1>My Donations</h1>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>No donations found for this email address.</p>
+    <p><a href="/Donations/Create">Make your first donation</a></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Recurrent</th>
+                <th>Next Payment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donation in Model)
+            {
+                <tr>
+                    <td>@donation.CreatedAt.ToString("d")</td>
+                    <td>@donation.RecipientName</td>
+                    <td>@donation.Amount @donation.Currency</td>
+                    <td>@donation.Status</td>
+                    <td>@(donation.IsRecurrent ? donation.RecurrenceType.ToString() : "No")</td>
+                    <td>@(donation.NextPaymentDate?.ToString("d") ?? "-")</td>
+                    <td>
+                        @if (donation.Status == DonationStatus.Scheduled)
+                        {
+                            <form asp-action="Cancel" asp-route-id="@donation.Id" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to cancel this recurrent donation?');">Cancel</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,36 @@
+@model DonationModel
+@{
+    ViewData["Title"] = "Donation Successful";
+}
+
+<div class="success-message">
+    <h1>Thank You!</h1>
+    <p>Your donation has been successfully processed.</p>
+
+    <div class="donation-details">
+        <h3>Donation Details</h3>
+        <p><strong>Amount:</strong> @Model.Amount @Model.Currency</p>
+        <p><strong>Recipient:</strong> @Model.RecipientName</p>
+        <p><strong>Transaction ID:</strong> @Model.PaymentTransactionId</p>
+        <p><strong>Payment Method:</strong> @Model.PaymentMethod</p>
+
+        @if (Model.IsRecurrent)
+        {
+            <p><strong>Recurrence:</strong> @Model.RecurrenceType</p>
+            <p><strong>Next Payment:</strong> @Model.NextPaymentDate?.ToString("d")</p>
+        }
+    </div>
+
+    @if (Model.IsRecurrent)
+    {
+        <div class="info-box">
+            <p>You have set up a recurrent donation. The next payment will be processed automatically on @Model.NextPaymentDate?.ToString("d").</p>
+            <p>You can manage or cancel your recurrent donations from the <a href="/Donations/MyDonations?email=@Model.DonorEmail">My Donations</a> page.</p>
+        </div>
+    }
+
+    <p>
+        <a href="/" class="btn btn-primary">Return to Home</a>
+        <a href="/Donations/Create" class="btn btn-secondary">Make Another Donation</a>
+    </p>
+</div>
