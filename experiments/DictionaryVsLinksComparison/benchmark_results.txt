@@ -1,0 +1,2898 @@
+// Validating benchmarks:
+//    * Assembly DictionaryVsLinksComparison, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null is located in temp. If you are running benchmarks from xUnit you need to disable shadow copy. It's not supported by design.
+
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 36 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true /p:IntermediateOutputPath="/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/obj/Release/net8.0/" /p:OutDir="/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0/" /p:OutputPath="/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0/" in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5
+// command took 8.8 sec and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true /p:IntermediateOutputPath="/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/obj/Release/net8.0/" /p:OutDir="/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0/" /p:OutputPath="/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0/" --output "/tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0/" in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5
+// command took 34.82 sec and exited with 0
+// ***** Done, took 00:00:46 (46.07 sec)   *****
+// Found 36 benchmarks:
+//   DictionaryVsLinksBenchmark.Dictionary_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Dictionary_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Dictionary_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Dictionary_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Hybrid_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Hybrid_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Hybrid_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Hybrid_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+//   DictionaryVsLinksBenchmark.Dictionary_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Dictionary_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Dictionary_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Dictionary_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Hybrid_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Hybrid_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Hybrid_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Hybrid_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+//   DictionaryVsLinksBenchmark.Dictionary_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Dictionary_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Dictionary_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Dictionary_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.LinkStorage_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Hybrid_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Hybrid_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Hybrid_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+//   DictionaryVsLinksBenchmark.Hybrid_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 108 109 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Insert(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 0 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-TRMFWC(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 2362559.00 ns, 2.3626 ms/op
+WorkloadJitting  1: 1 op, 12286322.00 ns, 12.2863 ms/op
+
+OverheadJitting  2: 16 op, 769982.00 ns, 48.1239 us/op
+WorkloadJitting  2: 16 op, 21848150.00 ns, 1.3655 ms/op
+
+WorkloadPilot    1: 16 op, 14955011.00 ns, 934.6882 us/op
+WorkloadPilot    2: 32 op, 20065422.00 ns, 627.0444 us/op
+WorkloadPilot    3: 64 op, 34333243.00 ns, 536.4569 us/op
+WorkloadPilot    4: 128 op, 81509991.00 ns, 636.7968 us/op
+WorkloadPilot    5: 256 op, 112377022.00 ns, 438.9727 us/op
+WorkloadPilot    6: 512 op, 194575743.00 ns, 380.0307 us/op
+WorkloadPilot    7: 1024 op, 415842846.00 ns, 406.0965 us/op
+WorkloadPilot    8: 2048 op, 928146095.00 ns, 453.1963 us/op
+
+OverheadWarmup   1: 2048 op, 13803.00 ns, 6.7397 ns/op
+OverheadWarmup   2: 2048 op, 9410.00 ns, 4.5947 ns/op
+OverheadWarmup   3: 2048 op, 11296.00 ns, 5.5156 ns/op
+OverheadWarmup   4: 2048 op, 9500.00 ns, 4.6387 ns/op
+OverheadWarmup   5: 2048 op, 9583.00 ns, 4.6792 ns/op
+OverheadWarmup   6: 2048 op, 9707.00 ns, 4.7397 ns/op
+OverheadWarmup   7: 2048 op, 9601.00 ns, 4.6880 ns/op
+
+OverheadActual   1: 2048 op, 9366.00 ns, 4.5732 ns/op
+OverheadActual   2: 2048 op, 16045.00 ns, 7.8345 ns/op
+OverheadActual   3: 2048 op, 12386.00 ns, 6.0479 ns/op
+OverheadActual   4: 2048 op, 11013.00 ns, 5.3774 ns/op
+OverheadActual   5: 2048 op, 9830.00 ns, 4.7998 ns/op
+OverheadActual   6: 2048 op, 9719.00 ns, 4.7456 ns/op
+OverheadActual   7: 2048 op, 9625.00 ns, 4.6997 ns/op
+OverheadActual   8: 2048 op, 12568.00 ns, 6.1367 ns/op
+OverheadActual   9: 2048 op, 12173.00 ns, 5.9438 ns/op
+OverheadActual  10: 2048 op, 12856.00 ns, 6.2773 ns/op
+OverheadActual  11: 2048 op, 9417.00 ns, 4.5981 ns/op
+OverheadActual  12: 2048 op, 9530.00 ns, 4.6533 ns/op
+OverheadActual  13: 2048 op, 15299.00 ns, 7.4702 ns/op
+OverheadActual  14: 2048 op, 9460.00 ns, 4.6191 ns/op
+OverheadActual  15: 2048 op, 12226.00 ns, 5.9697 ns/op
+OverheadActual  16: 2048 op, 13279.00 ns, 6.4839 ns/op
+OverheadActual  17: 2048 op, 10634.00 ns, 5.1924 ns/op
+OverheadActual  18: 2048 op, 9323.00 ns, 4.5522 ns/op
+OverheadActual  19: 2048 op, 12484.00 ns, 6.0957 ns/op
+OverheadActual  20: 2048 op, 11353.00 ns, 5.5435 ns/op
+
+WorkloadWarmup   1: 2048 op, 283769490.00 ns, 138.5593 us/op
+WorkloadWarmup   2: 2048 op, 330583175.00 ns, 161.4176 us/op
+WorkloadWarmup   3: 2048 op, 346533977.00 ns, 169.2060 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 2048 op, 338218138.00 ns, 165.1456 us/op
+WorkloadActual   2: 2048 op, 191458354.00 ns, 93.4855 us/op
+WorkloadActual   3: 2048 op, 202528253.00 ns, 98.8907 us/op
+WorkloadActual   4: 2048 op, 251810425.00 ns, 122.9543 us/op
+WorkloadActual   5: 2048 op, 304698977.00 ns, 148.7788 us/op
+
+// AfterActualRun
+WorkloadResult   1: 2048 op, 338206955.00 ns, 165.1401 us/op
+WorkloadResult   2: 2048 op, 191447171.00 ns, 93.4801 us/op
+WorkloadResult   3: 2048 op, 202517070.00 ns, 98.8853 us/op
+WorkloadResult   4: 2048 op, 251799242.00 ns, 122.9488 us/op
+WorkloadResult   5: 2048 op, 304687794.00 ns, 148.7733 us/op
+// GC:  24 5 0 209339104 2048
+// Threading:  0 0 2048
+
+// AfterAll
+// Benchmark Process 1849861 has exited with code 0.
+
+Mean = 125.846 us, StdErr = 13.879 us (11.03%), N = 5, StdDev = 31.034 us
+Min = 93.480 us, Q1 = 98.885 us, Median = 122.949 us, Q3 = 148.773 us, Max = 165.140 us
+IQR = 49.888 us, LowerFence = 24.053 us, UpperFence = 223.605 us
+ConfidenceInterval = [6.343 us; 245.348 us] (CI 99.9%), Margin = 119.502 us (94.96% of Mean)
+Skewness = 0.13, Kurtosis = 0.92, MValue = 2
+
+// ** Remained 35 (97.2%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 4m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Read(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 1 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-VXAJDI(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 3516407.00 ns, 3.5164 ms/op
+WorkloadJitting  1: 1 op, 17855593.00 ns, 17.8556 ms/op
+
+OverheadJitting  2: 16 op, 3896719.00 ns, 243.5449 us/op
+WorkloadJitting  2: 16 op, 53824519.00 ns, 3.3640 ms/op
+
+WorkloadPilot    1: 16 op, 29365670.00 ns, 1.8354 ms/op
+WorkloadPilot    2: 32 op, 39376023.00 ns, 1.2305 ms/op
+WorkloadPilot    3: 64 op, 91806964.00 ns, 1.4345 ms/op
+WorkloadPilot    4: 128 op, 202880632.00 ns, 1.5850 ms/op
+WorkloadPilot    5: 256 op, 400238780.00 ns, 1.5634 ms/op
+WorkloadPilot    6: 512 op, 558045505.00 ns, 1.0899 ms/op
+
+OverheadWarmup   1: 512 op, 2885.00 ns, 5.6348 ns/op
+OverheadWarmup   2: 512 op, 3252.00 ns, 6.3516 ns/op
+OverheadWarmup   3: 512 op, 2852.00 ns, 5.5703 ns/op
+OverheadWarmup   4: 512 op, 2800.00 ns, 5.4688 ns/op
+OverheadWarmup   5: 512 op, 2504.00 ns, 4.8906 ns/op
+OverheadWarmup   6: 512 op, 3532.00 ns, 6.8984 ns/op
+OverheadWarmup   7: 512 op, 2723.00 ns, 5.3184 ns/op
+
+OverheadActual   1: 512 op, 2860.00 ns, 5.5859 ns/op
+OverheadActual   2: 512 op, 2804.00 ns, 5.4766 ns/op
+OverheadActual   3: 512 op, 2900.00 ns, 5.6641 ns/op
+OverheadActual   4: 512 op, 2787.00 ns, 5.4434 ns/op
+OverheadActual   5: 512 op, 2607.00 ns, 5.0918 ns/op
+OverheadActual   6: 512 op, 3271.00 ns, 6.3887 ns/op
+OverheadActual   7: 512 op, 2667.00 ns, 5.2090 ns/op
+OverheadActual   8: 512 op, 2754.00 ns, 5.3789 ns/op
+OverheadActual   9: 512 op, 2853.00 ns, 5.5723 ns/op
+OverheadActual  10: 512 op, 2763.00 ns, 5.3965 ns/op
+OverheadActual  11: 512 op, 2712.00 ns, 5.2969 ns/op
+OverheadActual  12: 512 op, 2786.00 ns, 5.4414 ns/op
+OverheadActual  13: 512 op, 2846.00 ns, 5.5586 ns/op
+OverheadActual  14: 512 op, 2730.00 ns, 5.3320 ns/op
+OverheadActual  15: 512 op, 2745.00 ns, 5.3613 ns/op
+
+WorkloadWarmup   1: 512 op, 848574788.00 ns, 1.6574 ms/op
+WorkloadWarmup   2: 512 op, 463021822.00 ns, 904.3395 us/op
+WorkloadWarmup   3: 512 op, 125667953.00 ns, 245.4452 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 116638546.00 ns, 227.8097 us/op
+WorkloadActual   2: 512 op, 104739025.00 ns, 204.5684 us/op
+WorkloadActual   3: 512 op, 89807822.00 ns, 175.4059 us/op
+WorkloadActual   4: 512 op, 93836339.00 ns, 183.2741 us/op
+WorkloadActual   5: 512 op, 83659719.00 ns, 163.3979 us/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 116635760.00 ns, 227.8042 us/op
+WorkloadResult   2: 512 op, 104736239.00 ns, 204.5630 us/op
+WorkloadResult   3: 512 op, 89805036.00 ns, 175.4005 us/op
+WorkloadResult   4: 512 op, 93833553.00 ns, 183.2687 us/op
+WorkloadResult   5: 512 op, 83656933.00 ns, 163.3924 us/op
+// GC:  6 1 0 52335328 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 1849899 has exited with code 0.
+
+Mean = 190.886 us, StdErr = 11.410 us (5.98%), N = 5, StdDev = 25.513 us
+Min = 163.392 us, Q1 = 175.400 us, Median = 183.269 us, Q3 = 204.563 us, Max = 227.804 us
+IQR = 29.163 us, LowerFence = 131.657 us, UpperFence = 248.307 us
+ConfidenceInterval = [92.643 us; 289.129 us] (CI 99.9%), Margin = 98.243 us (51.47% of Mean)
+Skewness = 0.34, Kurtosis = 1.19, MValue = 2
+
+// ** Remained 34 (94.4%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Update(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 2 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-TZYQGY(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 571565.00 ns, 571.5650 us/op
+WorkloadJitting  1: 1 op, 7903100.00 ns, 7.9031 ms/op
+
+OverheadJitting  2: 16 op, 533405.00 ns, 33.3378 us/op
+WorkloadJitting  2: 16 op, 19938079.00 ns, 1.2461 ms/op
+
+WorkloadPilot    1: 16 op, 12555209.00 ns, 784.7006 us/op
+WorkloadPilot    2: 32 op, 30787663.00 ns, 962.1145 us/op
+WorkloadPilot    3: 64 op, 58063791.00 ns, 907.2467 us/op
+WorkloadPilot    4: 128 op, 64785381.00 ns, 506.1358 us/op
+WorkloadPilot    5: 256 op, 125471789.00 ns, 490.1242 us/op
+WorkloadPilot    6: 512 op, 263009095.00 ns, 513.6896 us/op
+WorkloadPilot    7: 1024 op, 878774757.00 ns, 858.1785 us/op
+
+OverheadWarmup   1: 1024 op, 5590.00 ns, 5.4590 ns/op
+OverheadWarmup   2: 1024 op, 4685.00 ns, 4.5752 ns/op
+OverheadWarmup   3: 1024 op, 4337.00 ns, 4.2354 ns/op
+OverheadWarmup   4: 1024 op, 5176.00 ns, 5.0547 ns/op
+OverheadWarmup   5: 1024 op, 4098.00 ns, 4.0020 ns/op
+OverheadWarmup   6: 1024 op, 3933.00 ns, 3.8408 ns/op
+OverheadWarmup   7: 1024 op, 4518.00 ns, 4.4121 ns/op
+OverheadWarmup   8: 1024 op, 4097.00 ns, 4.0010 ns/op
+
+OverheadActual   1: 1024 op, 3881.00 ns, 3.7900 ns/op
+OverheadActual   2: 1024 op, 4027.00 ns, 3.9326 ns/op
+OverheadActual   3: 1024 op, 3989.00 ns, 3.8955 ns/op
+OverheadActual   4: 1024 op, 3820.00 ns, 3.7305 ns/op
+OverheadActual   5: 1024 op, 4529.00 ns, 4.4229 ns/op
+OverheadActual   6: 1024 op, 3898.00 ns, 3.8066 ns/op
+OverheadActual   7: 1024 op, 3653.00 ns, 3.5674 ns/op
+OverheadActual   8: 1024 op, 3432.00 ns, 3.3516 ns/op
+OverheadActual   9: 1024 op, 3707.00 ns, 3.6201 ns/op
+OverheadActual  10: 1024 op, 32951.00 ns, 32.1787 ns/op
+OverheadActual  11: 1024 op, 5095.00 ns, 4.9756 ns/op
+OverheadActual  12: 1024 op, 3927.00 ns, 3.8350 ns/op
+OverheadActual  13: 1024 op, 4352.00 ns, 4.2500 ns/op
+OverheadActual  14: 1024 op, 4388.00 ns, 4.2852 ns/op
+OverheadActual  15: 1024 op, 4587.00 ns, 4.4795 ns/op
+OverheadActual  16: 1024 op, 5205.00 ns, 5.0830 ns/op
+OverheadActual  17: 1024 op, 3730.00 ns, 3.6426 ns/op
+OverheadActual  18: 1024 op, 4438.00 ns, 4.3340 ns/op
+OverheadActual  19: 1024 op, 4518.00 ns, 4.4121 ns/op
+OverheadActual  20: 1024 op, 3834.00 ns, 3.7441 ns/op
+
+WorkloadWarmup   1: 1024 op, 859323231.00 ns, 839.1828 us/op
+WorkloadWarmup   2: 1024 op, 635530588.00 ns, 620.6353 us/op
+WorkloadWarmup   3: 1024 op, 219931670.00 ns, 214.7770 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 1024 op, 204295103.00 ns, 199.5069 us/op
+WorkloadActual   2: 1024 op, 190063194.00 ns, 185.6086 us/op
+WorkloadActual   3: 1024 op, 172705324.00 ns, 168.6575 us/op
+WorkloadActual   4: 1024 op, 363593310.00 ns, 355.0716 us/op
+WorkloadActual   5: 1024 op, 205701006.00 ns, 200.8799 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1024 op, 204291095.00 ns, 199.5030 us/op
+WorkloadResult   2: 1024 op, 190059186.00 ns, 185.6047 us/op
+WorkloadResult   3: 1024 op, 172701316.00 ns, 168.6536 us/op
+WorkloadResult   4: 1024 op, 205696998.00 ns, 200.8760 us/op
+// GC:  12 2 0 104670592 1024
+// Threading:  0 0 1024
+
+// AfterAll
+// Benchmark Process 1849914 has exited with code 0.
+
+Mean = 188.659 us, StdErr = 7.508 us (3.98%), N = 4, StdDev = 15.015 us
+Min = 168.654 us, Q1 = 181.367 us, Median = 192.554 us, Q3 = 199.846 us, Max = 200.876 us
+IQR = 18.479 us, LowerFence = 153.648 us, UpperFence = 227.565 us
+ConfidenceInterval = [91.630 us; 285.689 us] (CI 99.9%), Margin = 97.030 us (51.43% of Mean)
+Skewness = -0.36, Kurtosis = 0.97, MValue = 2
+
+// ** Remained 33 (91.7%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Delete(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 3 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-JWWFSW(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 5985705.00 ns, 5.9857 ms/op
+WorkloadJitting  1: 1 op, 45729890.00 ns, 45.7299 ms/op
+
+WorkloadPilot    1: 2 op, 886744.00 ns, 443.3720 us/op
+WorkloadPilot    2: 3 op, 12693346.00 ns, 4.2311 ms/op
+WorkloadPilot    3: 4 op, 37268524.00 ns, 9.3171 ms/op
+WorkloadPilot    4: 5 op, 18118881.00 ns, 3.6238 ms/op
+WorkloadPilot    5: 6 op, 12716606.00 ns, 2.1194 ms/op
+WorkloadPilot    6: 7 op, 20517633.00 ns, 2.9311 ms/op
+WorkloadPilot    7: 8 op, 11241903.00 ns, 1.4052 ms/op
+WorkloadPilot    8: 9 op, 18604306.00 ns, 2.0671 ms/op
+WorkloadPilot    9: 10 op, 26610648.00 ns, 2.6611 ms/op
+WorkloadPilot   10: 11 op, 11533186.00 ns, 1.0485 ms/op
+WorkloadPilot   11: 12 op, 42586142.00 ns, 3.5488 ms/op
+WorkloadPilot   12: 13 op, 24742860.00 ns, 1.9033 ms/op
+WorkloadPilot   13: 14 op, 18756950.00 ns, 1.3398 ms/op
+WorkloadPilot   14: 15 op, 15309515.00 ns, 1.0206 ms/op
+WorkloadPilot   15: 16 op, 20158676.00 ns, 1.2599 ms/op
+WorkloadPilot   16: 32 op, 60878959.00 ns, 1.9025 ms/op
+WorkloadPilot   17: 64 op, 246544269.00 ns, 3.8523 ms/op
+WorkloadPilot   18: 128 op, 340350357.00 ns, 2.6590 ms/op
+WorkloadPilot   19: 256 op, 471699527.00 ns, 1.8426 ms/op
+WorkloadPilot   20: 512 op, 335054127.00 ns, 654.4026 us/op
+WorkloadPilot   21: 1024 op, 228084219.00 ns, 222.7385 us/op
+WorkloadPilot   22: 2048 op, 334195877.00 ns, 163.1816 us/op
+WorkloadPilot   23: 4096 op, 602252049.00 ns, 147.0342 us/op
+
+WorkloadWarmup   1: 4096 op, 371761853.00 ns, 90.7622 us/op
+WorkloadWarmup   2: 4096 op, 865740235.00 ns, 211.3624 us/op
+WorkloadWarmup   3: 4096 op, 780019895.00 ns, 190.4345 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 4096 op, 689253405.00 ns, 168.2748 us/op
+WorkloadActual   2: 4096 op, 1186726886.00 ns, 289.7282 us/op
+WorkloadActual   3: 4096 op, 970456818.00 ns, 236.9279 us/op
+WorkloadActual   4: 4096 op, 989680472.00 ns, 241.6212 us/op
+WorkloadActual   5: 4096 op, 889295725.00 ns, 217.1132 us/op
+
+// AfterActualRun
+WorkloadResult   1: 4096 op, 689253405.00 ns, 168.2748 us/op
+WorkloadResult   2: 4096 op, 970456818.00 ns, 236.9279 us/op
+WorkloadResult   3: 4096 op, 989680472.00 ns, 241.6212 us/op
+WorkloadResult   4: 4096 op, 889295725.00 ns, 217.1132 us/op
+// GC:  49 12 0 418677472 4096
+// Threading:  0 0 4096
+
+// AfterAll
+// Benchmark Process 1849929 has exited with code 0.
+
+Mean = 215.984 us, StdErr = 16.766 us (7.76%), N = 4, StdDev = 33.533 us
+Min = 168.275 us, Q1 = 204.904 us, Median = 227.021 us, Q3 = 238.101 us, Max = 241.621 us
+IQR = 33.198 us, LowerFence = 155.107 us, UpperFence = 287.898 us
+ConfidenceInterval = [-0.705 us; 432.673 us] (CI 99.9%), Margin = 216.689 us (100.33% of Mean)
+Skewness = -0.55, Kurtosis = 1.15, MValue = 2
+
+// ** Remained 32 (88.9%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 4m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Insert(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 4 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-SMNOBJ(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 4619008.00 ns, 4.6190 ms/op
+WorkloadJitting  1: 1 op, 25645374.00 ns, 25.6454 ms/op
+
+OverheadJitting  2: 16 op, 2988479.00 ns, 186.7799 us/op
+WorkloadJitting  2: 16 op, 35570746.00 ns, 2.2232 ms/op
+
+WorkloadPilot    1: 16 op, 55245435.00 ns, 3.4528 ms/op
+WorkloadPilot    2: 32 op, 56942419.00 ns, 1.7795 ms/op
+WorkloadPilot    3: 64 op, 135610287.00 ns, 2.1189 ms/op
+WorkloadPilot    4: 128 op, 222187150.00 ns, 1.7358 ms/op
+WorkloadPilot    5: 256 op, 276414633.00 ns, 1.0797 ms/op
+WorkloadPilot    6: 512 op, 420120015.00 ns, 820.5469 us/op
+WorkloadPilot    7: 1024 op, 1049781794.00 ns, 1.0252 ms/op
+
+OverheadWarmup   1: 1024 op, 4734.00 ns, 4.6230 ns/op
+OverheadWarmup   2: 1024 op, 4013.00 ns, 3.9189 ns/op
+OverheadWarmup   3: 1024 op, 3724.00 ns, 3.6367 ns/op
+OverheadWarmup   4: 1024 op, 7624.00 ns, 7.4453 ns/op
+OverheadWarmup   5: 1024 op, 4273.00 ns, 4.1729 ns/op
+OverheadWarmup   6: 1024 op, 5674.00 ns, 5.5410 ns/op
+OverheadWarmup   7: 1024 op, 4209.00 ns, 4.1104 ns/op
+
+OverheadActual   1: 1024 op, 4233.00 ns, 4.1338 ns/op
+OverheadActual   2: 1024 op, 4964.00 ns, 4.8477 ns/op
+OverheadActual   3: 1024 op, 4545.00 ns, 4.4385 ns/op
+OverheadActual   4: 1024 op, 5174.00 ns, 5.0527 ns/op
+OverheadActual   5: 1024 op, 5040.00 ns, 4.9219 ns/op
+OverheadActual   6: 1024 op, 4566.00 ns, 4.4590 ns/op
+OverheadActual   7: 1024 op, 4543.00 ns, 4.4365 ns/op
+OverheadActual   8: 1024 op, 4766.00 ns, 4.6543 ns/op
+OverheadActual   9: 1024 op, 4707.00 ns, 4.5967 ns/op
+OverheadActual  10: 1024 op, 4683.00 ns, 4.5732 ns/op
+OverheadActual  11: 1024 op, 5225.00 ns, 5.1025 ns/op
+OverheadActual  12: 1024 op, 4187.00 ns, 4.0889 ns/op
+OverheadActual  13: 1024 op, 4074.00 ns, 3.9785 ns/op
+OverheadActual  14: 1024 op, 4357.00 ns, 4.2549 ns/op
+OverheadActual  15: 1024 op, 3733.00 ns, 3.6455 ns/op
+OverheadActual  16: 1024 op, 4006.00 ns, 3.9121 ns/op
+OverheadActual  17: 1024 op, 5252.00 ns, 5.1289 ns/op
+OverheadActual  18: 1024 op, 5410.00 ns, 5.2832 ns/op
+OverheadActual  19: 1024 op, 5074.00 ns, 4.9551 ns/op
+OverheadActual  20: 1024 op, 4800.00 ns, 4.6875 ns/op
+
+WorkloadWarmup   1: 1024 op, 1081934099.00 ns, 1.0566 ms/op
+WorkloadWarmup   2: 1024 op, 1084725745.00 ns, 1.0593 ms/op
+WorkloadWarmup   3: 1024 op, 257441642.00 ns, 251.4079 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 1024 op, 168922778.00 ns, 164.9637 us/op
+WorkloadActual   2: 1024 op, 352421078.00 ns, 344.1612 us/op
+WorkloadActual   3: 1024 op, 177155613.00 ns, 173.0035 us/op
+WorkloadActual   4: 1024 op, 130071672.00 ns, 127.0231 us/op
+WorkloadActual   5: 1024 op, 131948909.00 ns, 128.8564 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1024 op, 168918083.00 ns, 164.9591 us/op
+WorkloadResult   2: 1024 op, 177150918.00 ns, 172.9989 us/op
+WorkloadResult   3: 1024 op, 130066977.00 ns, 127.0185 us/op
+WorkloadResult   4: 1024 op, 131944214.00 ns, 128.8518 us/op
+// GC:  19 6 0 164193664 1024
+// Threading:  0 0 1024
+
+// AfterAll
+// Benchmark Process 1849966 has exited with code 0.
+
+Mean = 148.457 us, StdErr = 11.967 us (8.06%), N = 4, StdDev = 23.935 us
+Min = 127.019 us, Q1 = 128.393 us, Median = 146.905 us, Q3 = 166.969 us, Max = 172.999 us
+IQR = 38.576 us, LowerFence = 70.530 us, UpperFence = 224.832 us
+ConfidenceInterval = [-6.208 us; 303.122 us] (CI 99.9%), Margin = 154.665 us (104.18% of Mean)
+Skewness = 0.03, Kurtosis = 0.61, MValue = 2
+
+// ** Remained 31 (86.1%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 4m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Read(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 5 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-BSGHPR(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 489952.00 ns, 489.9520 us/op
+WorkloadJitting  1: 1 op, 21494146.00 ns, 21.4941 ms/op
+
+OverheadJitting  2: 16 op, 467495.00 ns, 29.2184 us/op
+WorkloadJitting  2: 16 op, 25055193.00 ns, 1.5659 ms/op
+
+WorkloadPilot    1: 16 op, 17623810.00 ns, 1.1015 ms/op
+WorkloadPilot    2: 32 op, 40980703.00 ns, 1.2806 ms/op
+WorkloadPilot    3: 64 op, 73911764.00 ns, 1.1549 ms/op
+WorkloadPilot    4: 128 op, 124871757.00 ns, 975.5606 us/op
+WorkloadPilot    5: 256 op, 418248004.00 ns, 1.6338 ms/op
+WorkloadPilot    6: 512 op, 519309007.00 ns, 1.0143 ms/op
+
+OverheadWarmup   1: 512 op, 2490.00 ns, 4.8633 ns/op
+OverheadWarmup   2: 512 op, 2563.00 ns, 5.0059 ns/op
+OverheadWarmup   3: 512 op, 2704.00 ns, 5.2813 ns/op
+OverheadWarmup   4: 512 op, 2049.00 ns, 4.0020 ns/op
+OverheadWarmup   5: 512 op, 2050.00 ns, 4.0039 ns/op
+OverheadWarmup   6: 512 op, 2122.00 ns, 4.1445 ns/op
+OverheadWarmup   7: 512 op, 3800.00 ns, 7.4219 ns/op
+OverheadWarmup   8: 512 op, 1967.00 ns, 3.8418 ns/op
+
+OverheadActual   1: 512 op, 2319.00 ns, 4.5293 ns/op
+OverheadActual   2: 512 op, 2693.00 ns, 5.2598 ns/op
+OverheadActual   3: 512 op, 3220.00 ns, 6.2891 ns/op
+OverheadActual   4: 512 op, 2462.00 ns, 4.8086 ns/op
+OverheadActual   5: 512 op, 2705.00 ns, 5.2832 ns/op
+OverheadActual   6: 512 op, 3170.00 ns, 6.1914 ns/op
+OverheadActual   7: 512 op, 2560.00 ns, 5.0000 ns/op
+OverheadActual   8: 512 op, 2913.00 ns, 5.6895 ns/op
+OverheadActual   9: 512 op, 3040.00 ns, 5.9375 ns/op
+OverheadActual  10: 512 op, 3000.00 ns, 5.8594 ns/op
+OverheadActual  11: 512 op, 2088.00 ns, 4.0781 ns/op
+OverheadActual  12: 512 op, 3082.00 ns, 6.0195 ns/op
+OverheadActual  13: 512 op, 2334.00 ns, 4.5586 ns/op
+OverheadActual  14: 512 op, 2121.00 ns, 4.1426 ns/op
+OverheadActual  15: 512 op, 2959.00 ns, 5.7793 ns/op
+OverheadActual  16: 512 op, 3029.00 ns, 5.9160 ns/op
+OverheadActual  17: 512 op, 2549.00 ns, 4.9785 ns/op
+OverheadActual  18: 512 op, 2627.00 ns, 5.1309 ns/op
+OverheadActual  19: 512 op, 3307.00 ns, 6.4590 ns/op
+OverheadActual  20: 512 op, 2543.00 ns, 4.9668 ns/op
+
+WorkloadWarmup   1: 512 op, 369325735.00 ns, 721.3393 us/op
+WorkloadWarmup   2: 512 op, 395205582.00 ns, 771.8859 us/op
+WorkloadWarmup   3: 512 op, 384125248.00 ns, 750.2446 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 398640729.00 ns, 778.5952 us/op
+WorkloadActual   2: 512 op, 338431061.00 ns, 660.9982 us/op
+WorkloadActual   3: 512 op, 439315118.00 ns, 858.0373 us/op
+WorkloadActual   4: 512 op, 161113871.00 ns, 314.6755 us/op
+WorkloadActual   5: 512 op, 129754741.00 ns, 253.4272 us/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 398638030.00 ns, 778.5899 us/op
+WorkloadResult   2: 512 op, 338428362.00 ns, 660.9929 us/op
+WorkloadResult   3: 512 op, 439312419.00 ns, 858.0321 us/op
+WorkloadResult   4: 512 op, 161111172.00 ns, 314.6703 us/op
+WorkloadResult   5: 512 op, 129752042.00 ns, 253.4220 us/op
+// GC:  10 3 0 86205152 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 1849992 has exited with code 0.
+
+Mean = 573.141 us, StdErr = 122.498 us (21.37%), N = 5, StdDev = 273.915 us
+Min = 253.422 us, Q1 = 314.670 us, Median = 660.993 us, Q3 = 778.590 us, Max = 858.032 us
+IQR = 463.920 us, LowerFence = -381.209 us, UpperFence = 1,474.469 us
+ConfidenceInterval = [-481.607 us; 1,627.890 us] (CI 99.9%), Margin = 1,054.749 us (184.03% of Mean)
+Skewness = -0.17, Kurtosis = 0.83, MValue = 2
+
+// ** Remained 30 (83.3%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Update(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 6 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-NSMBQS(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1933581.00 ns, 1.9336 ms/op
+WorkloadJitting  1: 1 op, 21241253.00 ns, 21.2413 ms/op
+
+OverheadJitting  2: 16 op, 637408.00 ns, 39.8380 us/op
+WorkloadJitting  2: 16 op, 31018338.00 ns, 1.9386 ms/op
+
+WorkloadPilot    1: 16 op, 25572831.00 ns, 1.5983 ms/op
+WorkloadPilot    2: 32 op, 36122636.00 ns, 1.1288 ms/op
+WorkloadPilot    3: 64 op, 69588339.00 ns, 1.0873 ms/op
+WorkloadPilot    4: 128 op, 127111979.00 ns, 993.0623 us/op
+WorkloadPilot    5: 256 op, 250831412.00 ns, 979.8102 us/op
+WorkloadPilot    6: 512 op, 519374423.00 ns, 1.0144 ms/op
+
+OverheadWarmup   1: 512 op, 2266.00 ns, 4.4258 ns/op
+OverheadWarmup   2: 512 op, 2186.00 ns, 4.2695 ns/op
+OverheadWarmup   3: 512 op, 2450.00 ns, 4.7852 ns/op
+OverheadWarmup   4: 512 op, 2173.00 ns, 4.2441 ns/op
+OverheadWarmup   5: 512 op, 2832.00 ns, 5.5313 ns/op
+OverheadWarmup   6: 512 op, 2810.00 ns, 5.4883 ns/op
+
+OverheadActual   1: 512 op, 3012.00 ns, 5.8828 ns/op
+OverheadActual   2: 512 op, 2703.00 ns, 5.2793 ns/op
+OverheadActual   3: 512 op, 3193.00 ns, 6.2363 ns/op
+OverheadActual   4: 512 op, 2263.00 ns, 4.4199 ns/op
+OverheadActual   5: 512 op, 2173.00 ns, 4.2441 ns/op
+OverheadActual   6: 512 op, 2000.00 ns, 3.9063 ns/op
+OverheadActual   7: 512 op, 1984.00 ns, 3.8750 ns/op
+OverheadActual   8: 512 op, 2015.00 ns, 3.9355 ns/op
+OverheadActual   9: 512 op, 2084.00 ns, 4.0703 ns/op
+OverheadActual  10: 512 op, 2124.00 ns, 4.1484 ns/op
+OverheadActual  11: 512 op, 2115.00 ns, 4.1309 ns/op
+OverheadActual  12: 512 op, 2059.00 ns, 4.0215 ns/op
+OverheadActual  13: 512 op, 2187.00 ns, 4.2715 ns/op
+OverheadActual  14: 512 op, 2279.00 ns, 4.4512 ns/op
+OverheadActual  15: 512 op, 2816.00 ns, 5.5000 ns/op
+OverheadActual  16: 512 op, 3207.00 ns, 6.2637 ns/op
+OverheadActual  17: 512 op, 2196.00 ns, 4.2891 ns/op
+OverheadActual  18: 512 op, 2534.00 ns, 4.9492 ns/op
+OverheadActual  19: 512 op, 2420.00 ns, 4.7266 ns/op
+OverheadActual  20: 512 op, 2349.00 ns, 4.5879 ns/op
+
+WorkloadWarmup   1: 512 op, 430062682.00 ns, 839.9662 us/op
+WorkloadWarmup   2: 512 op, 437943630.00 ns, 855.3587 us/op
+WorkloadWarmup   3: 512 op, 469141882.00 ns, 916.2927 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 485665721.00 ns, 948.5659 us/op
+WorkloadActual   2: 512 op, 422374613.00 ns, 824.9504 us/op
+WorkloadActual   3: 512 op, 550736512.00 ns, 1.0757 ms/op
+WorkloadActual   4: 512 op, 261507719.00 ns, 510.7573 us/op
+WorkloadActual   5: 512 op, 175775608.00 ns, 343.3117 us/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 485663491.50 ns, 948.5615 us/op
+WorkloadResult   2: 512 op, 422372383.50 ns, 824.9461 us/op
+WorkloadResult   3: 512 op, 550734282.50 ns, 1.0757 ms/op
+WorkloadResult   4: 512 op, 261505489.50 ns, 510.7529 us/op
+WorkloadResult   5: 512 op, 175773378.50 ns, 343.3074 us/op
+// GC:  10 3 0 86205824 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 1850009 has exited with code 0.
+
+Mean = 740.644 us, StdErr = 136.619 us (18.45%), N = 5, StdDev = 305.489 us
+Min = 343.307 us, Q1 = 510.753 us, Median = 824.946 us, Q3 = 948.562 us, Max = 1,075.653 us
+IQR = 437.809 us, LowerFence = -145.960 us, UpperFence = 1,605.274 us
+ConfidenceInterval = [-435.685 us; 1,916.973 us] (CI 99.9%), Margin = 1,176.329 us (158.83% of Mean)
+Skewness = -0.19, Kurtosis = 0.97, MValue = 2
+
+// ** Remained 29 (80.6%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Delete(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 7 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-SSVZWW(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1793454.00 ns, 1.7935 ms/op
+WorkloadJitting  1: 1 op, 24691598.00 ns, 24.6916 ms/op
+
+OverheadJitting  2: 16 op, 3765609.00 ns, 235.3506 us/op
+WorkloadJitting  2: 16 op, 26269321.00 ns, 1.6418 ms/op
+
+WorkloadPilot    1: 16 op, 20652040.00 ns, 1.2908 ms/op
+WorkloadPilot    2: 32 op, 33530274.00 ns, 1.0478 ms/op
+WorkloadPilot    3: 64 op, 62905784.00 ns, 982.9029 us/op
+WorkloadPilot    4: 128 op, 94872835.00 ns, 741.1940 us/op
+WorkloadPilot    5: 256 op, 189420870.00 ns, 739.9253 us/op
+WorkloadPilot    6: 512 op, 323636471.00 ns, 632.1025 us/op
+WorkloadPilot    7: 1024 op, 621629981.00 ns, 607.0605 us/op
+
+OverheadWarmup   1: 1024 op, 4746.00 ns, 4.6348 ns/op
+OverheadWarmup   2: 1024 op, 4604.00 ns, 4.4961 ns/op
+OverheadWarmup   3: 1024 op, 3548.00 ns, 3.4648 ns/op
+OverheadWarmup   4: 1024 op, 4423.00 ns, 4.3193 ns/op
+OverheadWarmup   5: 1024 op, 3948.00 ns, 3.8555 ns/op
+OverheadWarmup   6: 1024 op, 4798.00 ns, 4.6855 ns/op
+OverheadWarmup   7: 1024 op, 4264.00 ns, 4.1641 ns/op
+
+OverheadActual   1: 1024 op, 4105.00 ns, 4.0088 ns/op
+OverheadActual   2: 1024 op, 5078.00 ns, 4.9590 ns/op
+OverheadActual   3: 1024 op, 3870.00 ns, 3.7793 ns/op
+OverheadActual   4: 1024 op, 3540.00 ns, 3.4570 ns/op
+OverheadActual   5: 1024 op, 4031.00 ns, 3.9365 ns/op
+OverheadActual   6: 1024 op, 3694.00 ns, 3.6074 ns/op
+OverheadActual   7: 1024 op, 3590.00 ns, 3.5059 ns/op
+OverheadActual   8: 1024 op, 3420.00 ns, 3.3398 ns/op
+OverheadActual   9: 1024 op, 3525.00 ns, 3.4424 ns/op
+OverheadActual  10: 1024 op, 4310.00 ns, 4.2090 ns/op
+OverheadActual  11: 1024 op, 3482.00 ns, 3.4004 ns/op
+OverheadActual  12: 1024 op, 3872.00 ns, 3.7813 ns/op
+OverheadActual  13: 1024 op, 4367.00 ns, 4.2646 ns/op
+OverheadActual  14: 1024 op, 3542.00 ns, 3.4590 ns/op
+OverheadActual  15: 1024 op, 3602.00 ns, 3.5176 ns/op
+OverheadActual  16: 1024 op, 3726.00 ns, 3.6387 ns/op
+OverheadActual  17: 1024 op, 3561.00 ns, 3.4775 ns/op
+OverheadActual  18: 1024 op, 3480.00 ns, 3.3984 ns/op
+OverheadActual  19: 1024 op, 4420.00 ns, 4.3164 ns/op
+OverheadActual  20: 1024 op, 15673.00 ns, 15.3057 ns/op
+
+WorkloadWarmup   1: 1024 op, 746936518.00 ns, 729.4302 us/op
+WorkloadWarmup   2: 1024 op, 414387865.00 ns, 404.6756 us/op
+WorkloadWarmup   3: 1024 op, 248560350.00 ns, 242.7347 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 1024 op, 190322585.00 ns, 185.8619 us/op
+WorkloadActual   2: 1024 op, 199319176.00 ns, 194.6476 us/op
+WorkloadActual   3: 1024 op, 170514548.00 ns, 166.5181 us/op
+WorkloadActual   4: 1024 op, 156593841.00 ns, 152.9237 us/op
+WorkloadActual   5: 1024 op, 181507443.00 ns, 177.2534 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1024 op, 190318875.00 ns, 185.8583 us/op
+WorkloadResult   2: 1024 op, 199315466.00 ns, 194.6440 us/op
+WorkloadResult   3: 1024 op, 170510838.00 ns, 166.5145 us/op
+WorkloadResult   4: 1024 op, 156590131.00 ns, 152.9200 us/op
+WorkloadResult   5: 1024 op, 181503733.00 ns, 177.2497 us/op
+// GC:  20 6 0 172410240 1024
+// Threading:  0 0 1024
+
+// AfterAll
+// Benchmark Process 1850019 has exited with code 0.
+
+Mean = 175.437 us, StdErr = 7.306 us (4.16%), N = 5, StdDev = 16.336 us
+Min = 152.920 us, Q1 = 166.514 us, Median = 177.250 us, Q3 = 185.858 us, Max = 194.644 us
+IQR = 19.344 us, LowerFence = 137.499 us, UpperFence = 214.874 us
+ConfidenceInterval = [112.534 us; 238.340 us] (CI 99.9%), Margin = 62.903 us (35.85% of Mean)
+Skewness = -0.18, Kurtosis = 1.16, MValue = 2
+
+// ** Remained 28 (77.8%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Insert(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 8 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-GDQDSG(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 591239.00 ns, 591.2390 us/op
+WorkloadJitting  1: 1 op, 9018220.00 ns, 9.0182 ms/op
+
+OverheadJitting  2: 16 op, 512141.00 ns, 32.0088 us/op
+WorkloadJitting  2: 16 op, 17596124.00 ns, 1.0998 ms/op
+
+WorkloadPilot    1: 16 op, 13530960.00 ns, 845.6850 us/op
+WorkloadPilot    2: 32 op, 22294710.00 ns, 696.7097 us/op
+WorkloadPilot    3: 64 op, 42255049.00 ns, 660.2351 us/op
+WorkloadPilot    4: 128 op, 68426669.00 ns, 534.5834 us/op
+WorkloadPilot    5: 256 op, 129102222.00 ns, 504.3056 us/op
+WorkloadPilot    6: 512 op, 235541906.00 ns, 460.0428 us/op
+WorkloadPilot    7: 1024 op, 488426719.00 ns, 476.9792 us/op
+WorkloadPilot    8: 2048 op, 1664887267.00 ns, 812.9332 us/op
+
+OverheadWarmup   1: 2048 op, 20782.00 ns, 10.1475 ns/op
+OverheadWarmup   2: 2048 op, 11062.00 ns, 5.4014 ns/op
+OverheadWarmup   3: 2048 op, 10676.00 ns, 5.2129 ns/op
+OverheadWarmup   4: 2048 op, 11060.00 ns, 5.4004 ns/op
+OverheadWarmup   5: 2048 op, 10748.00 ns, 5.2480 ns/op
+OverheadWarmup   6: 2048 op, 16434.00 ns, 8.0244 ns/op
+OverheadWarmup   7: 2048 op, 11452.00 ns, 5.5918 ns/op
+
+OverheadActual   1: 2048 op, 11132.00 ns, 5.4355 ns/op
+OverheadActual   2: 2048 op, 15632.00 ns, 7.6328 ns/op
+OverheadActual   3: 2048 op, 10096.00 ns, 4.9297 ns/op
+OverheadActual   4: 2048 op, 10074.00 ns, 4.9189 ns/op
+OverheadActual   5: 2048 op, 13426.00 ns, 6.5557 ns/op
+OverheadActual   6: 2048 op, 10178.00 ns, 4.9697 ns/op
+OverheadActual   7: 2048 op, 10212.00 ns, 4.9863 ns/op
+OverheadActual   8: 2048 op, 10092.00 ns, 4.9277 ns/op
+OverheadActual   9: 2048 op, 15212.00 ns, 7.4277 ns/op
+OverheadActual  10: 2048 op, 13674.00 ns, 6.6768 ns/op
+OverheadActual  11: 2048 op, 9900.00 ns, 4.8340 ns/op
+OverheadActual  12: 2048 op, 14366.00 ns, 7.0146 ns/op
+OverheadActual  13: 2048 op, 15816.00 ns, 7.7227 ns/op
+OverheadActual  14: 2048 op, 15564.00 ns, 7.5996 ns/op
+OverheadActual  15: 2048 op, 9992.00 ns, 4.8789 ns/op
+OverheadActual  16: 2048 op, 26778.00 ns, 13.0752 ns/op
+OverheadActual  17: 2048 op, 12978.00 ns, 6.3369 ns/op
+OverheadActual  18: 2048 op, 13288.00 ns, 6.4883 ns/op
+OverheadActual  19: 2048 op, 15498.00 ns, 7.5674 ns/op
+OverheadActual  20: 2048 op, 10292.00 ns, 5.0254 ns/op
+
+WorkloadWarmup   1: 2048 op, 987684999.00 ns, 482.2681 us/op
+WorkloadWarmup   2: 2048 op, 826837417.00 ns, 403.7292 us/op
+WorkloadWarmup   3: 2048 op, 726252036.00 ns, 354.6153 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 2048 op, 1009730889.00 ns, 493.0327 us/op
+WorkloadActual   2: 2048 op, 701455837.00 ns, 342.5077 us/op
+WorkloadActual   3: 2048 op, 506452836.00 ns, 247.2914 us/op
+WorkloadActual   4: 2048 op, 546880778.00 ns, 267.0316 us/op
+WorkloadActual   5: 2048 op, 614308911.00 ns, 299.9555 us/op
+
+// AfterActualRun
+WorkloadResult   1: 2048 op, 701442704.00 ns, 342.5013 us/op
+WorkloadResult   2: 2048 op, 506439703.00 ns, 247.2850 us/op
+WorkloadResult   3: 2048 op, 546867645.00 ns, 267.0252 us/op
+WorkloadResult   4: 2048 op, 614295778.00 ns, 299.9491 us/op
+// GC:  64 31 0 537789152 2048
+// Threading:  0 0 2048
+
+// AfterAll
+// Benchmark Process 1850032 has exited with code 0.
+
+Mean = 289.190 us, StdErr = 20.827 us (7.20%), N = 4, StdDev = 41.654 us
+Min = 247.285 us, Q1 = 262.090 us, Median = 283.487 us, Q3 = 310.587 us, Max = 342.501 us
+IQR = 48.497 us, LowerFence = 189.345 us, UpperFence = 383.333 us
+ConfidenceInterval = [20.023 us; 558.358 us] (CI 99.9%), Margin = 269.168 us (93.08% of Mean)
+Skewness = 0.24, Kurtosis = 0.95, MValue = 2
+
+// ** Remained 27 (75.0%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Read(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 9 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-EDUDER(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1796483.00 ns, 1.7965 ms/op
+WorkloadJitting  1: 1 op, 31312878.00 ns, 31.3129 ms/op
+
+OverheadJitting  2: 16 op, 806700.00 ns, 50.4188 us/op
+WorkloadJitting  2: 16 op, 44060652.00 ns, 2.7538 ms/op
+
+WorkloadPilot    1: 16 op, 37719328.00 ns, 2.3575 ms/op
+WorkloadPilot    2: 32 op, 58771227.00 ns, 1.8366 ms/op
+WorkloadPilot    3: 64 op, 108260862.00 ns, 1.6916 ms/op
+WorkloadPilot    4: 128 op, 192052514.00 ns, 1.5004 ms/op
+WorkloadPilot    5: 256 op, 358287449.00 ns, 1.3996 ms/op
+WorkloadPilot    6: 512 op, 543131089.00 ns, 1.0608 ms/op
+
+OverheadWarmup   1: 512 op, 7136.00 ns, 13.9375 ns/op
+OverheadWarmup   2: 512 op, 2961.00 ns, 5.7832 ns/op
+OverheadWarmup   3: 512 op, 3275.00 ns, 6.3965 ns/op
+OverheadWarmup   4: 512 op, 3011.00 ns, 5.8809 ns/op
+OverheadWarmup   5: 512 op, 3292.00 ns, 6.4297 ns/op
+OverheadWarmup   6: 512 op, 2891.00 ns, 5.6465 ns/op
+
+OverheadActual   1: 512 op, 4205.00 ns, 8.2129 ns/op
+OverheadActual   2: 512 op, 4407.00 ns, 8.6074 ns/op
+OverheadActual   3: 512 op, 3144.00 ns, 6.1406 ns/op
+OverheadActual   4: 512 op, 4058.00 ns, 7.9258 ns/op
+OverheadActual   5: 512 op, 4440.00 ns, 8.6719 ns/op
+OverheadActual   6: 512 op, 4010.00 ns, 7.8320 ns/op
+OverheadActual   7: 512 op, 3468.00 ns, 6.7734 ns/op
+OverheadActual   8: 512 op, 2914.00 ns, 5.6914 ns/op
+OverheadActual   9: 512 op, 2713.00 ns, 5.2988 ns/op
+OverheadActual  10: 512 op, 4284.00 ns, 8.3672 ns/op
+OverheadActual  11: 512 op, 4143.00 ns, 8.0918 ns/op
+OverheadActual  12: 512 op, 4262.00 ns, 8.3242 ns/op
+OverheadActual  13: 512 op, 5106.00 ns, 9.9727 ns/op
+OverheadActual  14: 512 op, 2970.00 ns, 5.8008 ns/op
+OverheadActual  15: 512 op, 3103.00 ns, 6.0605 ns/op
+OverheadActual  16: 512 op, 3665.00 ns, 7.1582 ns/op
+OverheadActual  17: 512 op, 3016.00 ns, 5.8906 ns/op
+OverheadActual  18: 512 op, 2921.00 ns, 5.7051 ns/op
+OverheadActual  19: 512 op, 4207.00 ns, 8.2168 ns/op
+OverheadActual  20: 512 op, 4500.00 ns, 8.7891 ns/op
+
+WorkloadWarmup   1: 512 op, 281425251.00 ns, 549.6587 us/op
+WorkloadWarmup   2: 512 op, 299808176.00 ns, 585.5628 us/op
+WorkloadWarmup   3: 512 op, 203185157.00 ns, 396.8460 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 230848481.00 ns, 450.8759 us/op
+WorkloadActual   2: 512 op, 219804168.00 ns, 429.3050 us/op
+WorkloadActual   3: 512 op, 200989621.00 ns, 392.5579 us/op
+WorkloadActual   4: 512 op, 239265871.00 ns, 467.3162 us/op
+WorkloadActual   5: 512 op, 260413634.00 ns, 508.6204 us/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 230844447.00 ns, 450.8681 us/op
+WorkloadResult   2: 512 op, 219800134.00 ns, 429.2971 us/op
+WorkloadResult   3: 512 op, 200985587.00 ns, 392.5500 us/op
+WorkloadResult   4: 512 op, 239261837.00 ns, 467.3083 us/op
+WorkloadResult   5: 512 op, 260409600.00 ns, 508.6125 us/op
+// GC:  16 7 0 134447840 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 1850082 has exited with code 0.
+
+Mean = 449.727 us, StdErr = 19.319 us (4.30%), N = 5, StdDev = 43.199 us
+Min = 392.550 us, Q1 = 429.297 us, Median = 450.868 us, Q3 = 467.308 us, Max = 508.613 us
+IQR = 38.011 us, LowerFence = 372.280 us, UpperFence = 524.325 us
+ConfidenceInterval = [283.385 us; 616.070 us] (CI 99.9%), Margin = 166.343 us (36.99% of Mean)
+Skewness = 0.04, Kurtosis = 1.32, MValue = 2
+
+// ** Remained 26 (72.2%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Update(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 10 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-UIXQUQ(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 684012.00 ns, 684.0120 us/op
+WorkloadJitting  1: 1 op, 9051820.00 ns, 9.0518 ms/op
+
+OverheadJitting  2: 16 op, 433602.00 ns, 27.1001 us/op
+WorkloadJitting  2: 16 op, 18245224.00 ns, 1.1403 ms/op
+
+WorkloadPilot    1: 16 op, 15038646.00 ns, 939.9154 us/op
+WorkloadPilot    2: 32 op, 32864199.00 ns, 1.0270 ms/op
+WorkloadPilot    3: 64 op, 50970937.00 ns, 796.4209 us/op
+WorkloadPilot    4: 128 op, 110305417.00 ns, 861.7611 us/op
+WorkloadPilot    5: 256 op, 189426356.00 ns, 739.9467 us/op
+WorkloadPilot    6: 512 op, 356530834.00 ns, 696.3493 us/op
+WorkloadPilot    7: 1024 op, 741218608.00 ns, 723.8463 us/op
+
+OverheadWarmup   1: 1024 op, 4193.00 ns, 4.0947 ns/op
+OverheadWarmup   2: 1024 op, 4594.00 ns, 4.4863 ns/op
+OverheadWarmup   3: 1024 op, 3968.00 ns, 3.8750 ns/op
+OverheadWarmup   4: 1024 op, 4456.00 ns, 4.3516 ns/op
+OverheadWarmup   5: 1024 op, 4401.00 ns, 4.2979 ns/op
+
+OverheadActual   1: 1024 op, 3826.00 ns, 3.7363 ns/op
+OverheadActual   2: 1024 op, 4530.00 ns, 4.4238 ns/op
+OverheadActual   3: 1024 op, 3939.00 ns, 3.8467 ns/op
+OverheadActual   4: 1024 op, 4277.00 ns, 4.1768 ns/op
+OverheadActual   5: 1024 op, 3572.00 ns, 3.4883 ns/op
+OverheadActual   6: 1024 op, 3450.00 ns, 3.3691 ns/op
+OverheadActual   7: 1024 op, 3420.00 ns, 3.3398 ns/op
+OverheadActual   8: 1024 op, 3394.00 ns, 3.3145 ns/op
+OverheadActual   9: 1024 op, 3453.00 ns, 3.3721 ns/op
+OverheadActual  10: 1024 op, 3447.00 ns, 3.3662 ns/op
+OverheadActual  11: 1024 op, 3441.00 ns, 3.3604 ns/op
+OverheadActual  12: 1024 op, 4440.00 ns, 4.3359 ns/op
+OverheadActual  13: 1024 op, 3433.00 ns, 3.3525 ns/op
+OverheadActual  14: 1024 op, 3446.00 ns, 3.3652 ns/op
+OverheadActual  15: 1024 op, 3435.00 ns, 3.3545 ns/op
+OverheadActual  16: 1024 op, 3427.00 ns, 3.3467 ns/op
+OverheadActual  17: 1024 op, 3420.00 ns, 3.3398 ns/op
+OverheadActual  18: 1024 op, 3407.00 ns, 3.3271 ns/op
+OverheadActual  19: 1024 op, 3457.00 ns, 3.3760 ns/op
+
+WorkloadWarmup   1: 1024 op, 912647008.00 ns, 891.2568 us/op
+WorkloadWarmup   2: 1024 op, 904318752.00 ns, 883.1238 us/op
+WorkloadWarmup   3: 1024 op, 475867478.00 ns, 464.7143 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 1024 op, 333483145.00 ns, 325.6671 us/op
+WorkloadActual   2: 1024 op, 393038013.00 ns, 383.8262 us/op
+WorkloadActual   3: 1024 op, 420216777.00 ns, 410.3679 us/op
+WorkloadActual   4: 1024 op, 176430677.00 ns, 172.2956 us/op
+WorkloadActual   5: 1024 op, 185606509.00 ns, 181.2564 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1024 op, 333479698.00 ns, 325.6638 us/op
+WorkloadResult   2: 1024 op, 393034566.00 ns, 383.8228 us/op
+WorkloadResult   3: 1024 op, 420213330.00 ns, 410.3646 us/op
+WorkloadResult   4: 1024 op, 176427230.00 ns, 172.2922 us/op
+WorkloadResult   5: 1024 op, 185603062.00 ns, 181.2530 us/op
+// GC:  32 15 0 268894944 1024
+// Threading:  0 0 1024
+
+// AfterAll
+// Benchmark Process 1850132 has exited with code 0.
+
+Mean = 294.679 us, StdErr = 50.067 us (16.99%), N = 5, StdDev = 111.953 us
+Min = 172.292 us, Q1 = 181.253 us, Median = 325.664 us, Q3 = 383.823 us, Max = 410.365 us
+IQR = 202.570 us, LowerFence = -122.602 us, UpperFence = 687.678 us
+ConfidenceInterval = [-136.412 us; 725.770 us] (CI 99.9%), Margin = 431.091 us (146.29% of Mean)
+Skewness = -0.14, Kurtosis = 0.81, MValue = 2
+
+// ** Remained 25 (69.4%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 3m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=1000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Delete(N: 1000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 11 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-PZKALJ(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 594306.00 ns, 594.3060 us/op
+WorkloadJitting  1: 1 op, 11743385.00 ns, 11.7434 ms/op
+
+OverheadJitting  2: 16 op, 547129.00 ns, 34.1956 us/op
+WorkloadJitting  2: 16 op, 22141560.00 ns, 1.3838 ms/op
+
+WorkloadPilot    1: 16 op, 17022173.00 ns, 1.0639 ms/op
+WorkloadPilot    2: 32 op, 38473457.00 ns, 1.2023 ms/op
+WorkloadPilot    3: 64 op, 51529525.00 ns, 805.1488 us/op
+WorkloadPilot    4: 128 op, 88395363.00 ns, 690.5888 us/op
+WorkloadPilot    5: 256 op, 171500943.00 ns, 669.9256 us/op
+WorkloadPilot    6: 512 op, 345558715.00 ns, 674.9194 us/op
+WorkloadPilot    7: 1024 op, 783073151.00 ns, 764.7199 us/op
+
+OverheadWarmup   1: 1024 op, 3667.00 ns, 3.5811 ns/op
+OverheadWarmup   2: 1024 op, 3757.00 ns, 3.6689 ns/op
+OverheadWarmup   3: 1024 op, 3406.00 ns, 3.3262 ns/op
+OverheadWarmup   4: 1024 op, 3393.00 ns, 3.3135 ns/op
+OverheadWarmup   5: 1024 op, 4160.00 ns, 4.0625 ns/op
+OverheadWarmup   6: 1024 op, 3402.00 ns, 3.3223 ns/op
+
+OverheadActual   1: 1024 op, 4766.00 ns, 4.6543 ns/op
+OverheadActual   2: 1024 op, 3957.00 ns, 3.8643 ns/op
+OverheadActual   3: 1024 op, 3552.00 ns, 3.4688 ns/op
+OverheadActual   4: 1024 op, 3397.00 ns, 3.3174 ns/op
+OverheadActual   5: 1024 op, 3370.00 ns, 3.2910 ns/op
+OverheadActual   6: 1024 op, 4183.00 ns, 4.0850 ns/op
+OverheadActual   7: 1024 op, 4435.00 ns, 4.3311 ns/op
+OverheadActual   8: 1024 op, 3458.00 ns, 3.3770 ns/op
+OverheadActual   9: 1024 op, 4427.00 ns, 4.3232 ns/op
+OverheadActual  10: 1024 op, 3411.00 ns, 3.3311 ns/op
+OverheadActual  11: 1024 op, 3410.00 ns, 3.3301 ns/op
+OverheadActual  12: 1024 op, 4256.00 ns, 4.1563 ns/op
+OverheadActual  13: 1024 op, 3391.00 ns, 3.3115 ns/op
+OverheadActual  14: 1024 op, 3377.00 ns, 3.2979 ns/op
+OverheadActual  15: 1024 op, 3377.00 ns, 3.2979 ns/op
+OverheadActual  16: 1024 op, 3390.00 ns, 3.3105 ns/op
+OverheadActual  17: 1024 op, 3770.00 ns, 3.6816 ns/op
+OverheadActual  18: 1024 op, 3420.00 ns, 3.3398 ns/op
+OverheadActual  19: 1024 op, 4155.00 ns, 4.0576 ns/op
+OverheadActual  20: 1024 op, 3403.00 ns, 3.3232 ns/op
+
+WorkloadWarmup   1: 1024 op, 752908082.00 ns, 735.2618 us/op
+WorkloadWarmup   2: 1024 op, 467707518.00 ns, 456.7456 us/op
+WorkloadWarmup   3: 1024 op, 199651658.00 ns, 194.9723 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 1024 op, 405873410.00 ns, 396.3608 us/op
+WorkloadActual   2: 1024 op, 359328907.00 ns, 350.9071 us/op
+WorkloadActual   3: 1024 op, 392933583.00 ns, 383.7242 us/op
+WorkloadActual   4: 1024 op, 481234207.00 ns, 469.9553 us/op
+WorkloadActual   5: 1024 op, 451946546.00 ns, 441.3540 us/op
+
+// AfterActualRun
+WorkloadResult   1: 1024 op, 405869971.00 ns, 396.3574 us/op
+WorkloadResult   2: 1024 op, 359325468.00 ns, 350.9038 us/op
+WorkloadResult   3: 1024 op, 392930144.00 ns, 383.7208 us/op
+WorkloadResult   4: 1024 op, 481230768.00 ns, 469.9519 us/op
+WorkloadResult   5: 1024 op, 451943107.00 ns, 441.3507 us/op
+// GC:  32 15 0 268895616 1024
+// Threading:  0 0 1024
+
+// AfterAll
+// Benchmark Process 1850184 has exited with code 0.
+
+Mean = 408.457 us, StdErr = 21.136 us (5.17%), N = 5, StdDev = 47.261 us
+Min = 350.904 us, Q1 = 383.721 us, Median = 396.357 us, Q3 = 441.351 us, Max = 469.952 us
+IQR = 57.630 us, LowerFence = 297.276 us, UpperFence = 527.795 us
+ConfidenceInterval = [226.473 us; 590.441 us] (CI 99.9%), Margin = 181.984 us (44.55% of Mean)
+Skewness = 0.11, Kurtosis = 1.08, MValue = 2
+
+// ** Remained 24 (66.7%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Insert(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 12 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-UQTUGV(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1736498.00 ns, 1.7365 ms/op
+WorkloadJitting  1: 1 op, 11845203.00 ns, 11.8452 ms/op
+
+OverheadJitting  2: 16 op, 1880644.00 ns, 117.5403 us/op
+WorkloadJitting  2: 16 op, 47701938.00 ns, 2.9814 ms/op
+
+WorkloadPilot    1: 16 op, 37760430.00 ns, 2.3600 ms/op
+WorkloadPilot    2: 32 op, 70226695.00 ns, 2.1946 ms/op
+WorkloadPilot    3: 64 op, 134444426.00 ns, 2.1007 ms/op
+WorkloadPilot    4: 128 op, 314767941.00 ns, 2.4591 ms/op
+WorkloadPilot    5: 256 op, 515416878.00 ns, 2.0133 ms/op
+
+OverheadWarmup   1: 256 op, 2150.00 ns, 8.3984 ns/op
+OverheadWarmup   2: 256 op, 2123.00 ns, 8.2930 ns/op
+OverheadWarmup   3: 256 op, 1785.00 ns, 6.9727 ns/op
+OverheadWarmup   4: 256 op, 1810.00 ns, 7.0703 ns/op
+OverheadWarmup   5: 256 op, 1572.00 ns, 6.1406 ns/op
+OverheadWarmup   6: 256 op, 1619.00 ns, 6.3242 ns/op
+OverheadWarmup   7: 256 op, 1866.00 ns, 7.2891 ns/op
+OverheadWarmup   8: 256 op, 1980.00 ns, 7.7344 ns/op
+OverheadWarmup   9: 256 op, 1932.00 ns, 7.5469 ns/op
+
+OverheadActual   1: 256 op, 1910.00 ns, 7.4609 ns/op
+OverheadActual   2: 256 op, 2047.00 ns, 7.9961 ns/op
+OverheadActual   3: 256 op, 2085.00 ns, 8.1445 ns/op
+OverheadActual   4: 256 op, 2086.00 ns, 8.1484 ns/op
+OverheadActual   5: 256 op, 2450.00 ns, 9.5703 ns/op
+OverheadActual   6: 256 op, 1798.00 ns, 7.0234 ns/op
+OverheadActual   7: 256 op, 2117.00 ns, 8.2695 ns/op
+OverheadActual   8: 256 op, 2150.00 ns, 8.3984 ns/op
+OverheadActual   9: 256 op, 2602.00 ns, 10.1641 ns/op
+OverheadActual  10: 256 op, 1904.00 ns, 7.4375 ns/op
+OverheadActual  11: 256 op, 2064.00 ns, 8.0625 ns/op
+OverheadActual  12: 256 op, 2466.00 ns, 9.6328 ns/op
+OverheadActual  13: 256 op, 2596.00 ns, 10.1406 ns/op
+OverheadActual  14: 256 op, 2086.00 ns, 8.1484 ns/op
+OverheadActual  15: 256 op, 2524.00 ns, 9.8594 ns/op
+OverheadActual  16: 256 op, 1948.00 ns, 7.6094 ns/op
+OverheadActual  17: 256 op, 2694.00 ns, 10.5234 ns/op
+OverheadActual  18: 256 op, 2378.00 ns, 9.2891 ns/op
+OverheadActual  19: 256 op, 2582.00 ns, 10.0859 ns/op
+OverheadActual  20: 256 op, 2952.00 ns, 11.5313 ns/op
+
+WorkloadWarmup   1: 256 op, 682455533.00 ns, 2.6658 ms/op
+WorkloadWarmup   2: 256 op, 655088294.00 ns, 2.5589 ms/op
+WorkloadWarmup   3: 256 op, 483762626.00 ns, 1.8897 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 391455222.00 ns, 1.5291 ms/op
+WorkloadActual   2: 256 op, 304550725.00 ns, 1.1897 ms/op
+WorkloadActual   3: 256 op, 327017804.00 ns, 1.2774 ms/op
+WorkloadActual   4: 256 op, 310673788.00 ns, 1.2136 ms/op
+WorkloadActual   5: 256 op, 289221716.00 ns, 1.1298 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 304548591.50 ns, 1.1896 ms/op
+WorkloadResult   2: 256 op, 327015670.50 ns, 1.2774 ms/op
+WorkloadResult   3: 256 op, 310671654.50 ns, 1.2136 ms/op
+WorkloadResult   4: 256 op, 289219582.50 ns, 1.1298 ms/op
+// GC:  23 23 23 115581408 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850238 has exited with code 0.
+
+Mean = 1.203 ms, StdErr = 0.031 ms (2.54%), N = 4, StdDev = 0.061 ms
+Min = 1.130 ms, Q1 = 1.175 ms, Median = 1.202 ms, Q3 = 1.230 ms, Max = 1.277 ms
+IQR = 0.055 ms, LowerFence = 1.092 ms, UpperFence = 1.312 ms
+ConfidenceInterval = [0.808 ms; 1.597 ms] (CI 99.9%), Margin = 0.395 ms (32.82% of Mean)
+Skewness = 0.03, Kurtosis = 1.07, MValue = 2
+
+// ** Remained 23 (63.9%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Read(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 13 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-PPQBVK(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1821323.00 ns, 1.8213 ms/op
+WorkloadJitting  1: 1 op, 16052970.00 ns, 16.0530 ms/op
+
+OverheadJitting  2: 16 op, 1689277.00 ns, 105.5798 us/op
+WorkloadJitting  2: 16 op, 93854610.00 ns, 5.8659 ms/op
+
+WorkloadPilot    1: 16 op, 52849694.00 ns, 3.3031 ms/op
+WorkloadPilot    2: 32 op, 105028574.00 ns, 3.2821 ms/op
+WorkloadPilot    3: 64 op, 228205490.00 ns, 3.5657 ms/op
+WorkloadPilot    4: 128 op, 429391952.00 ns, 3.3546 ms/op
+WorkloadPilot    5: 256 op, 829861388.00 ns, 3.2416 ms/op
+
+OverheadWarmup   1: 256 op, 1912.00 ns, 7.4688 ns/op
+OverheadWarmup   2: 256 op, 2152.00 ns, 8.4063 ns/op
+OverheadWarmup   3: 256 op, 1944.00 ns, 7.5938 ns/op
+OverheadWarmup   4: 256 op, 2149.00 ns, 8.3945 ns/op
+OverheadWarmup   5: 256 op, 2281.00 ns, 8.9102 ns/op
+OverheadWarmup   6: 256 op, 1827.00 ns, 7.1367 ns/op
+
+OverheadActual   1: 256 op, 2591.00 ns, 10.1211 ns/op
+OverheadActual   2: 256 op, 4890.00 ns, 19.1016 ns/op
+OverheadActual   3: 256 op, 2378.00 ns, 9.2891 ns/op
+OverheadActual   4: 256 op, 1863.00 ns, 7.2773 ns/op
+OverheadActual   5: 256 op, 2228.00 ns, 8.7031 ns/op
+OverheadActual   6: 256 op, 2329.00 ns, 9.0977 ns/op
+OverheadActual   7: 256 op, 1699.00 ns, 6.6367 ns/op
+OverheadActual   8: 256 op, 1510.00 ns, 5.8984 ns/op
+OverheadActual   9: 256 op, 2100.00 ns, 8.2031 ns/op
+OverheadActual  10: 256 op, 2466.00 ns, 9.6328 ns/op
+OverheadActual  11: 256 op, 2368.00 ns, 9.2500 ns/op
+OverheadActual  12: 256 op, 2527.00 ns, 9.8711 ns/op
+OverheadActual  13: 256 op, 2307.00 ns, 9.0117 ns/op
+OverheadActual  14: 256 op, 1646.00 ns, 6.4297 ns/op
+OverheadActual  15: 256 op, 2023.00 ns, 7.9023 ns/op
+OverheadActual  16: 256 op, 1931.00 ns, 7.5430 ns/op
+OverheadActual  17: 256 op, 1796.00 ns, 7.0156 ns/op
+OverheadActual  18: 256 op, 2452.00 ns, 9.5781 ns/op
+OverheadActual  19: 256 op, 2336.00 ns, 9.1250 ns/op
+OverheadActual  20: 256 op, 1799.00 ns, 7.0273 ns/op
+
+WorkloadWarmup   1: 256 op, 1136729741.00 ns, 4.4404 ms/op
+WorkloadWarmup   2: 256 op, 267551314.00 ns, 1.0451 ms/op
+WorkloadWarmup   3: 256 op, 465863359.00 ns, 1.8198 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 814964878.00 ns, 3.1835 ms/op
+WorkloadActual   2: 256 op, 540262333.00 ns, 2.1104 ms/op
+WorkloadActual   3: 256 op, 640642026.00 ns, 2.5025 ms/op
+WorkloadActual   4: 256 op, 463085397.00 ns, 1.8089 ms/op
+WorkloadActual   5: 256 op, 289530192.00 ns, 1.1310 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 814962610.50 ns, 3.1834 ms/op
+WorkloadResult   2: 256 op, 540260065.50 ns, 2.1104 ms/op
+WorkloadResult   3: 256 op, 640639758.50 ns, 2.5025 ms/op
+WorkloadResult   4: 256 op, 463083129.50 ns, 1.8089 ms/op
+WorkloadResult   5: 256 op, 289527924.50 ns, 1.1310 ms/op
+// GC:  23 23 23 115581408 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850265 has exited with code 0.
+
+Mean = 2.147 ms, StdErr = 0.343 ms (15.96%), N = 5, StdDev = 0.766 ms
+Min = 1.131 ms, Q1 = 1.809 ms, Median = 2.110 ms, Q3 = 2.502 ms, Max = 3.183 ms
+IQR = 0.694 ms, LowerFence = 0.769 ms, UpperFence = 3.543 ms
+ConfidenceInterval = [-0.803 ms; 5.098 ms] (CI 99.9%), Margin = 2.951 ms (137.41% of Mean)
+Skewness = 0.03, Kurtosis = 1.3, MValue = 2
+
+// ** Remained 22 (61.1%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Update(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 14 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-BJZPLD(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 731020.00 ns, 731.0200 us/op
+WorkloadJitting  1: 1 op, 10733085.00 ns, 10.7331 ms/op
+
+OverheadJitting  2: 16 op, 603847.00 ns, 37.7404 us/op
+WorkloadJitting  2: 16 op, 70698362.00 ns, 4.4186 ms/op
+
+WorkloadPilot    1: 16 op, 48505001.00 ns, 3.0316 ms/op
+WorkloadPilot    2: 32 op, 166043915.00 ns, 5.1889 ms/op
+WorkloadPilot    3: 64 op, 298942862.00 ns, 4.6710 ms/op
+WorkloadPilot    4: 128 op, 473604437.00 ns, 3.7000 ms/op
+WorkloadPilot    5: 256 op, 759487313.00 ns, 2.9667 ms/op
+
+OverheadWarmup   1: 256 op, 9577.00 ns, 37.4102 ns/op
+OverheadWarmup   2: 256 op, 3943.00 ns, 15.4023 ns/op
+OverheadWarmup   3: 256 op, 3738.00 ns, 14.6016 ns/op
+OverheadWarmup   4: 256 op, 3305.00 ns, 12.9102 ns/op
+OverheadWarmup   5: 256 op, 4220.00 ns, 16.4844 ns/op
+OverheadWarmup   6: 256 op, 3808.00 ns, 14.8750 ns/op
+OverheadWarmup   7: 256 op, 3845.00 ns, 15.0195 ns/op
+OverheadWarmup   8: 256 op, 3618.00 ns, 14.1328 ns/op
+
+OverheadActual   1: 256 op, 4045.00 ns, 15.8008 ns/op
+OverheadActual   2: 256 op, 3565.00 ns, 13.9258 ns/op
+OverheadActual   3: 256 op, 3823.00 ns, 14.9336 ns/op
+OverheadActual   4: 256 op, 3545.00 ns, 13.8477 ns/op
+OverheadActual   5: 256 op, 3740.00 ns, 14.6094 ns/op
+OverheadActual   6: 256 op, 2735.00 ns, 10.6836 ns/op
+OverheadActual   7: 256 op, 3490.00 ns, 13.6328 ns/op
+OverheadActual   8: 256 op, 3478.00 ns, 13.5859 ns/op
+OverheadActual   9: 256 op, 3948.00 ns, 15.4219 ns/op
+OverheadActual  10: 256 op, 3825.00 ns, 14.9414 ns/op
+OverheadActual  11: 256 op, 3428.00 ns, 13.3906 ns/op
+OverheadActual  12: 256 op, 2717.00 ns, 10.6133 ns/op
+OverheadActual  13: 256 op, 2266.00 ns, 8.8516 ns/op
+OverheadActual  14: 256 op, 2782.00 ns, 10.8672 ns/op
+OverheadActual  15: 256 op, 3088.00 ns, 12.0625 ns/op
+OverheadActual  16: 256 op, 2844.00 ns, 11.1094 ns/op
+OverheadActual  17: 256 op, 2204.00 ns, 8.6094 ns/op
+OverheadActual  18: 256 op, 2348.00 ns, 9.1719 ns/op
+OverheadActual  19: 256 op, 2096.00 ns, 8.1875 ns/op
+OverheadActual  20: 256 op, 2920.00 ns, 11.4063 ns/op
+
+WorkloadWarmup   1: 256 op, 496968480.00 ns, 1.9413 ms/op
+WorkloadWarmup   2: 256 op, 522764047.00 ns, 2.0420 ms/op
+WorkloadWarmup   3: 256 op, 616433150.00 ns, 2.4079 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 556146613.00 ns, 2.1724 ms/op
+WorkloadActual   2: 256 op, 670026309.00 ns, 2.6173 ms/op
+WorkloadActual   3: 256 op, 641360798.00 ns, 2.5053 ms/op
+WorkloadActual   4: 256 op, 653238692.00 ns, 2.5517 ms/op
+WorkloadActual   5: 256 op, 442916451.00 ns, 1.7301 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 556143355.00 ns, 2.1724 ms/op
+WorkloadResult   2: 256 op, 670023051.00 ns, 2.6173 ms/op
+WorkloadResult   3: 256 op, 641357540.00 ns, 2.5053 ms/op
+WorkloadResult   4: 256 op, 653235434.00 ns, 2.5517 ms/op
+WorkloadResult   5: 256 op, 442913193.00 ns, 1.7301 ms/op
+// GC:  23 23 23 115580736 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850309 has exited with code 0.
+
+Mean = 2.315 ms, StdErr = 0.165 ms (7.14%), N = 5, StdDev = 0.369 ms
+Min = 1.730 ms, Q1 = 2.172 ms, Median = 2.505 ms, Q3 = 2.552 ms, Max = 2.617 ms
+IQR = 0.379 ms, LowerFence = 1.604 ms, UpperFence = 3.121 ms
+ConfidenceInterval = [0.893 ms; 3.738 ms] (CI 99.9%), Margin = 1.423 ms (61.44% of Mean)
+Skewness = -0.62, Kurtosis = 1.4, MValue = 2
+
+// ** Remained 21 (58.3%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Delete(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 15 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-VRPLJA(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 621304.00 ns, 621.3040 us/op
+WorkloadJitting  1: 1 op, 22492357.00 ns, 22.4924 ms/op
+
+OverheadJitting  2: 16 op, 1929304.00 ns, 120.5815 us/op
+WorkloadJitting  2: 16 op, 90780601.00 ns, 5.6738 ms/op
+
+WorkloadPilot    1: 16 op, 65783634.00 ns, 4.1115 ms/op
+WorkloadPilot    2: 32 op, 104183483.00 ns, 3.2557 ms/op
+WorkloadPilot    3: 64 op, 160592608.00 ns, 2.5093 ms/op
+WorkloadPilot    4: 128 op, 381864317.00 ns, 2.9833 ms/op
+WorkloadPilot    5: 256 op, 547104346.00 ns, 2.1371 ms/op
+
+OverheadWarmup   1: 256 op, 2088.00 ns, 8.1563 ns/op
+OverheadWarmup   2: 256 op, 1525.00 ns, 5.9570 ns/op
+OverheadWarmup   3: 256 op, 1458.00 ns, 5.6953 ns/op
+OverheadWarmup   4: 256 op, 1624.00 ns, 6.3438 ns/op
+OverheadWarmup   5: 256 op, 2033.00 ns, 7.9414 ns/op
+OverheadWarmup   6: 256 op, 1617.00 ns, 6.3164 ns/op
+OverheadWarmup   7: 256 op, 1464.00 ns, 5.7188 ns/op
+OverheadWarmup   8: 256 op, 1475.00 ns, 5.7617 ns/op
+OverheadWarmup   9: 256 op, 1718.00 ns, 6.7109 ns/op
+OverheadWarmup  10: 256 op, 2098.00 ns, 8.1953 ns/op
+
+OverheadActual   1: 256 op, 1710.00 ns, 6.6797 ns/op
+OverheadActual   2: 256 op, 1750.00 ns, 6.8359 ns/op
+OverheadActual   3: 256 op, 1831.00 ns, 7.1523 ns/op
+OverheadActual   4: 256 op, 1837.00 ns, 7.1758 ns/op
+OverheadActual   5: 256 op, 1666.00 ns, 6.5078 ns/op
+OverheadActual   6: 256 op, 1934.00 ns, 7.5547 ns/op
+OverheadActual   7: 256 op, 1650.00 ns, 6.4453 ns/op
+OverheadActual   8: 256 op, 1709.00 ns, 6.6758 ns/op
+OverheadActual   9: 256 op, 1670.00 ns, 6.5234 ns/op
+OverheadActual  10: 256 op, 1532.00 ns, 5.9844 ns/op
+OverheadActual  11: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadActual  12: 256 op, 1307.00 ns, 5.1055 ns/op
+OverheadActual  13: 256 op, 1217.00 ns, 4.7539 ns/op
+OverheadActual  14: 256 op, 1374.00 ns, 5.3672 ns/op
+OverheadActual  15: 256 op, 1298.00 ns, 5.0703 ns/op
+OverheadActual  16: 256 op, 1433.00 ns, 5.5977 ns/op
+OverheadActual  17: 256 op, 1893.00 ns, 7.3945 ns/op
+OverheadActual  18: 256 op, 1464.00 ns, 5.7188 ns/op
+OverheadActual  19: 256 op, 1309.00 ns, 5.1133 ns/op
+OverheadActual  20: 256 op, 1443.00 ns, 5.6367 ns/op
+
+WorkloadWarmup   1: 256 op, 635028919.00 ns, 2.4806 ms/op
+WorkloadWarmup   2: 256 op, 564726208.00 ns, 2.2060 ms/op
+WorkloadWarmup   3: 256 op, 304721772.00 ns, 1.1903 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 266569279.00 ns, 1.0413 ms/op
+WorkloadActual   2: 256 op, 267720188.00 ns, 1.0458 ms/op
+WorkloadActual   3: 256 op, 312140979.00 ns, 1.2193 ms/op
+WorkloadActual   4: 256 op, 330932496.00 ns, 1.2927 ms/op
+WorkloadActual   5: 256 op, 290654880.00 ns, 1.1354 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 266567688.00 ns, 1.0413 ms/op
+WorkloadResult   2: 256 op, 267718597.00 ns, 1.0458 ms/op
+WorkloadResult   3: 256 op, 312139388.00 ns, 1.2193 ms/op
+WorkloadResult   4: 256 op, 330930905.00 ns, 1.2927 ms/op
+WorkloadResult   5: 256 op, 290653289.00 ns, 1.1354 ms/op
+// GC:  23 23 23 115580736 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850326 has exited with code 0.
+
+Mean = 1.147 ms, StdErr = 0.049 ms (4.27%), N = 5, StdDev = 0.110 ms
+Min = 1.041 ms, Q1 = 1.046 ms, Median = 1.135 ms, Q3 = 1.219 ms, Max = 1.293 ms
+IQR = 0.174 ms, LowerFence = 0.785 ms, UpperFence = 1.480 ms
+ConfidenceInterval = [0.725 ms; 1.569 ms] (CI 99.9%), Margin = 0.422 ms (36.78% of Mean)
+Skewness = 0.19, Kurtosis = 0.98, MValue = 2
+
+// ** Remained 20 (55.6%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Insert(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 16 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-OIHZQK(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1820703.00 ns, 1.8207 ms/op
+WorkloadJitting  1: 1 op, 11908836.00 ns, 11.9088 ms/op
+
+OverheadJitting  2: 16 op, 1727654.00 ns, 107.9784 us/op
+WorkloadJitting  2: 16 op, 52706508.00 ns, 3.2942 ms/op
+
+WorkloadPilot    1: 16 op, 42057596.00 ns, 2.6286 ms/op
+WorkloadPilot    2: 32 op, 77729808.00 ns, 2.4291 ms/op
+WorkloadPilot    3: 64 op, 136460874.00 ns, 2.1322 ms/op
+WorkloadPilot    4: 128 op, 277659482.00 ns, 2.1692 ms/op
+WorkloadPilot    5: 256 op, 560896658.00 ns, 2.1910 ms/op
+
+OverheadWarmup   1: 256 op, 1942.00 ns, 7.5859 ns/op
+OverheadWarmup   2: 256 op, 1658.00 ns, 6.4766 ns/op
+OverheadWarmup   3: 256 op, 1561.00 ns, 6.0977 ns/op
+OverheadWarmup   4: 256 op, 1433.00 ns, 5.5977 ns/op
+OverheadWarmup   5: 256 op, 1553.00 ns, 6.0664 ns/op
+OverheadWarmup   6: 256 op, 1733.00 ns, 6.7695 ns/op
+OverheadWarmup   7: 256 op, 1598.00 ns, 6.2422 ns/op
+OverheadWarmup   8: 256 op, 1311.00 ns, 5.1211 ns/op
+OverheadWarmup   9: 256 op, 1277.00 ns, 4.9883 ns/op
+OverheadWarmup  10: 256 op, 1450.00 ns, 5.6641 ns/op
+
+OverheadActual   1: 256 op, 2064.00 ns, 8.0625 ns/op
+OverheadActual   2: 256 op, 1723.00 ns, 6.7305 ns/op
+OverheadActual   3: 256 op, 2034.00 ns, 7.9453 ns/op
+OverheadActual   4: 256 op, 1743.00 ns, 6.8086 ns/op
+OverheadActual   5: 256 op, 1633.00 ns, 6.3789 ns/op
+OverheadActual   6: 256 op, 2112.00 ns, 8.2500 ns/op
+OverheadActual   7: 256 op, 1960.00 ns, 7.6563 ns/op
+OverheadActual   8: 256 op, 1389.00 ns, 5.4258 ns/op
+OverheadActual   9: 256 op, 1665.00 ns, 6.5039 ns/op
+OverheadActual  10: 256 op, 1997.00 ns, 7.8008 ns/op
+OverheadActual  11: 256 op, 1777.00 ns, 6.9414 ns/op
+OverheadActual  12: 256 op, 2010.00 ns, 7.8516 ns/op
+OverheadActual  13: 256 op, 1411.00 ns, 5.5117 ns/op
+OverheadActual  14: 256 op, 1490.00 ns, 5.8203 ns/op
+OverheadActual  15: 256 op, 1563.00 ns, 6.1055 ns/op
+OverheadActual  16: 256 op, 1310.00 ns, 5.1172 ns/op
+OverheadActual  17: 256 op, 1605.00 ns, 6.2695 ns/op
+OverheadActual  18: 256 op, 1783.00 ns, 6.9648 ns/op
+OverheadActual  19: 256 op, 1334.00 ns, 5.2109 ns/op
+OverheadActual  20: 256 op, 1196.00 ns, 4.6719 ns/op
+
+WorkloadWarmup   1: 256 op, 621397268.00 ns, 2.4273 ms/op
+WorkloadWarmup   2: 256 op, 602730574.00 ns, 2.3544 ms/op
+WorkloadWarmup   3: 256 op, 540967681.00 ns, 2.1132 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 834836667.00 ns, 3.2611 ms/op
+WorkloadActual   2: 256 op, 637101141.00 ns, 2.4887 ms/op
+WorkloadActual   3: 256 op, 520123004.00 ns, 2.0317 ms/op
+WorkloadActual   4: 256 op, 568804795.00 ns, 2.2219 ms/op
+WorkloadActual   5: 256 op, 440971794.00 ns, 1.7225 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 637099447.00 ns, 2.4887 ms/op
+WorkloadResult   2: 256 op, 520121310.00 ns, 2.0317 ms/op
+WorkloadResult   3: 256 op, 568803101.00 ns, 2.2219 ms/op
+WorkloadResult   4: 256 op, 440970100.00 ns, 1.7225 ms/op
+// GC:  39 39 39 181541184 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850337 has exited with code 0.
+
+Mean = 2.116 ms, StdErr = 0.161 ms (7.62%), N = 4, StdDev = 0.322 ms
+Min = 1.723 ms, Q1 = 1.954 ms, Median = 2.127 ms, Q3 = 2.289 ms, Max = 2.489 ms
+IQR = 0.334 ms, LowerFence = 1.453 ms, UpperFence = 2.790 ms
+ConfidenceInterval = [0.032 ms; 4.200 ms] (CI 99.9%), Margin = 2.084 ms (98.48% of Mean)
+Skewness = -0.07, Kurtosis = 1, MValue = 2
+
+// ** Remained 19 (52.8%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Read(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 17 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-FIXQHF(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1923176.00 ns, 1.9232 ms/op
+WorkloadJitting  1: 1 op, 41525181.00 ns, 41.5252 ms/op
+
+WorkloadPilot    1: 2 op, 26909429.00 ns, 13.4547 ms/op
+WorkloadPilot    2: 3 op, 19339304.00 ns, 6.4464 ms/op
+WorkloadPilot    3: 4 op, 23153017.00 ns, 5.7883 ms/op
+WorkloadPilot    4: 5 op, 32695298.00 ns, 6.5391 ms/op
+WorkloadPilot    5: 6 op, 30598368.00 ns, 5.0997 ms/op
+WorkloadPilot    6: 7 op, 43687557.00 ns, 6.2411 ms/op
+WorkloadPilot    7: 8 op, 80884813.00 ns, 10.1106 ms/op
+WorkloadPilot    8: 9 op, 44793433.00 ns, 4.9770 ms/op
+WorkloadPilot    9: 10 op, 35205046.00 ns, 3.5205 ms/op
+WorkloadPilot   10: 11 op, 37664782.00 ns, 3.4241 ms/op
+WorkloadPilot   11: 12 op, 37766180.00 ns, 3.1472 ms/op
+WorkloadPilot   12: 13 op, 47041990.00 ns, 3.6186 ms/op
+WorkloadPilot   13: 14 op, 59037997.00 ns, 4.2170 ms/op
+WorkloadPilot   14: 15 op, 73564605.00 ns, 4.9043 ms/op
+WorkloadPilot   15: 16 op, 69319475.00 ns, 4.3325 ms/op
+WorkloadPilot   16: 32 op, 144703109.00 ns, 4.5220 ms/op
+WorkloadPilot   17: 64 op, 285729357.00 ns, 4.4645 ms/op
+WorkloadPilot   18: 128 op, 494793536.00 ns, 3.8656 ms/op
+WorkloadPilot   19: 256 op, 520960553.00 ns, 2.0350 ms/op
+
+WorkloadWarmup   1: 256 op, 422649711.00 ns, 1.6510 ms/op
+WorkloadWarmup   2: 256 op, 493834241.00 ns, 1.9290 ms/op
+WorkloadWarmup   3: 256 op, 390703936.00 ns, 1.5262 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 454197820.00 ns, 1.7742 ms/op
+WorkloadActual   2: 256 op, 490327628.00 ns, 1.9153 ms/op
+WorkloadActual   3: 256 op, 618415314.00 ns, 2.4157 ms/op
+WorkloadActual   4: 256 op, 552840794.00 ns, 2.1595 ms/op
+WorkloadActual   5: 256 op, 507783422.00 ns, 1.9835 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 454197820.00 ns, 1.7742 ms/op
+WorkloadResult   2: 256 op, 490327628.00 ns, 1.9153 ms/op
+WorkloadResult   3: 256 op, 618415314.00 ns, 2.4157 ms/op
+WorkloadResult   4: 256 op, 552840794.00 ns, 2.1595 ms/op
+WorkloadResult   5: 256 op, 507783422.00 ns, 1.9835 ms/op
+// GC:  39 39 39 191787328 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850411 has exited with code 0.
+
+Mean = 2.050 ms, StdErr = 0.111 ms (5.39%), N = 5, StdDev = 0.247 ms
+Min = 1.774 ms, Q1 = 1.915 ms, Median = 1.984 ms, Q3 = 2.160 ms, Max = 2.416 ms
+IQR = 0.244 ms, LowerFence = 1.549 ms, UpperFence = 2.526 ms
+ConfidenceInterval = [1.098 ms; 3.001 ms] (CI 99.9%), Margin = 0.952 ms (46.43% of Mean)
+Skewness = 0.35, Kurtosis = 1.3, MValue = 2
+
+// ** Remained 18 (50.0%) benchmark(s) to run. Estimated finish 2025-10-17 4:43 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Update(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 18 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-GHKZUC(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 655277.00 ns, 655.2770 us/op
+WorkloadJitting  1: 1 op, 23161345.00 ns, 23.1613 ms/op
+
+OverheadJitting  2: 16 op, 1648945.00 ns, 103.0591 us/op
+WorkloadJitting  2: 16 op, 58895014.00 ns, 3.6809 ms/op
+
+WorkloadPilot    1: 16 op, 29904024.00 ns, 1.8690 ms/op
+WorkloadPilot    2: 32 op, 64389249.00 ns, 2.0122 ms/op
+WorkloadPilot    3: 64 op, 140327190.00 ns, 2.1926 ms/op
+WorkloadPilot    4: 128 op, 253940233.00 ns, 1.9839 ms/op
+WorkloadPilot    5: 256 op, 571454399.00 ns, 2.2322 ms/op
+
+OverheadWarmup   1: 256 op, 1703.00 ns, 6.6523 ns/op
+OverheadWarmup   2: 256 op, 1497.00 ns, 5.8477 ns/op
+OverheadWarmup   3: 256 op, 2078.00 ns, 8.1172 ns/op
+OverheadWarmup   4: 256 op, 1742.00 ns, 6.8047 ns/op
+OverheadWarmup   5: 256 op, 2357.00 ns, 9.2070 ns/op
+OverheadWarmup   6: 256 op, 1960.00 ns, 7.6563 ns/op
+
+OverheadActual   1: 256 op, 1815.00 ns, 7.0898 ns/op
+OverheadActual   2: 256 op, 2132.00 ns, 8.3281 ns/op
+OverheadActual   3: 256 op, 2092.00 ns, 8.1719 ns/op
+OverheadActual   4: 256 op, 1608.00 ns, 6.2813 ns/op
+OverheadActual   5: 256 op, 1533.00 ns, 5.9883 ns/op
+OverheadActual   6: 256 op, 1872.00 ns, 7.3125 ns/op
+OverheadActual   7: 256 op, 1978.00 ns, 7.7266 ns/op
+OverheadActual   8: 256 op, 1383.00 ns, 5.4023 ns/op
+OverheadActual   9: 256 op, 1928.00 ns, 7.5313 ns/op
+OverheadActual  10: 256 op, 1666.00 ns, 6.5078 ns/op
+OverheadActual  11: 256 op, 2060.00 ns, 8.0469 ns/op
+OverheadActual  12: 256 op, 1909.00 ns, 7.4570 ns/op
+OverheadActual  13: 256 op, 1786.00 ns, 6.9766 ns/op
+OverheadActual  14: 256 op, 1477.00 ns, 5.7695 ns/op
+OverheadActual  15: 256 op, 1524.00 ns, 5.9531 ns/op
+OverheadActual  16: 256 op, 1447.00 ns, 5.6523 ns/op
+OverheadActual  17: 256 op, 1939.00 ns, 7.5742 ns/op
+OverheadActual  18: 256 op, 1850.00 ns, 7.2266 ns/op
+OverheadActual  19: 256 op, 1990.00 ns, 7.7734 ns/op
+OverheadActual  20: 256 op, 1860.00 ns, 7.2656 ns/op
+
+WorkloadWarmup   1: 256 op, 536185790.00 ns, 2.0945 ms/op
+WorkloadWarmup   2: 256 op, 498514126.00 ns, 1.9473 ms/op
+WorkloadWarmup   3: 256 op, 498739101.00 ns, 1.9482 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 576732604.00 ns, 2.2529 ms/op
+WorkloadActual   2: 256 op, 498674665.00 ns, 1.9479 ms/op
+WorkloadActual   3: 256 op, 327676955.00 ns, 1.2800 ms/op
+WorkloadActual   4: 256 op, 307311181.00 ns, 1.2004 ms/op
+WorkloadActual   5: 256 op, 182435262.00 ns, 712.6377 us/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 576730749.00 ns, 2.2529 ms/op
+WorkloadResult   2: 256 op, 498672810.00 ns, 1.9479 ms/op
+WorkloadResult   3: 256 op, 327675100.00 ns, 1.2800 ms/op
+WorkloadResult   4: 256 op, 307309326.00 ns, 1.2004 ms/op
+WorkloadResult   5: 256 op, 182433407.00 ns, 712.6305 us/op
+// GC:  39 39 39 191787328 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850462 has exited with code 0.
+
+Mean = 1.479 ms, StdErr = 0.276 ms (18.66%), N = 5, StdDev = 0.617 ms
+Min = 0.713 ms, Q1 = 1.200 ms, Median = 1.280 ms, Q3 = 1.948 ms, Max = 2.253 ms
+IQR = 0.748 ms, LowerFence = 0.079 ms, UpperFence = 3.069 ms
+ConfidenceInterval = [-0.897 ms; 3.855 ms] (CI 99.9%), Margin = 2.376 ms (160.69% of Mean)
+Skewness = 0.07, Kurtosis = 1.05, MValue = 2
+
+// ** Remained 17 (47.2%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 2m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Delete(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 19 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-PDRSNC(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 726513.00 ns, 726.5130 us/op
+WorkloadJitting  1: 1 op, 9166991.00 ns, 9.1670 ms/op
+
+OverheadJitting  2: 16 op, 503405.00 ns, 31.4628 us/op
+WorkloadJitting  2: 16 op, 38929447.00 ns, 2.4331 ms/op
+
+WorkloadPilot    1: 16 op, 27397813.00 ns, 1.7124 ms/op
+WorkloadPilot    2: 32 op, 55450876.00 ns, 1.7328 ms/op
+WorkloadPilot    3: 64 op, 114893511.00 ns, 1.7952 ms/op
+WorkloadPilot    4: 128 op, 214099539.00 ns, 1.6727 ms/op
+WorkloadPilot    5: 256 op, 489741042.00 ns, 1.9131 ms/op
+WorkloadPilot    6: 512 op, 766808799.00 ns, 1.4977 ms/op
+
+OverheadWarmup   1: 512 op, 6493.00 ns, 12.6816 ns/op
+OverheadWarmup   2: 512 op, 2658.00 ns, 5.1914 ns/op
+OverheadWarmup   3: 512 op, 3375.00 ns, 6.5918 ns/op
+OverheadWarmup   4: 512 op, 2893.00 ns, 5.6504 ns/op
+OverheadWarmup   5: 512 op, 2635.00 ns, 5.1465 ns/op
+OverheadWarmup   6: 512 op, 3195.00 ns, 6.2402 ns/op
+OverheadWarmup   7: 512 op, 2476.00 ns, 4.8359 ns/op
+
+OverheadActual   1: 512 op, 2817.00 ns, 5.5020 ns/op
+OverheadActual   2: 512 op, 3629.00 ns, 7.0879 ns/op
+OverheadActual   3: 512 op, 3743.00 ns, 7.3105 ns/op
+OverheadActual   4: 512 op, 2579.00 ns, 5.0371 ns/op
+OverheadActual   5: 512 op, 3890.00 ns, 7.5977 ns/op
+OverheadActual   6: 512 op, 3807.00 ns, 7.4355 ns/op
+OverheadActual   7: 512 op, 3478.00 ns, 6.7930 ns/op
+OverheadActual   8: 512 op, 3341.00 ns, 6.5254 ns/op
+OverheadActual   9: 512 op, 3553.00 ns, 6.9395 ns/op
+OverheadActual  10: 512 op, 2597.00 ns, 5.0723 ns/op
+OverheadActual  11: 512 op, 2525.00 ns, 4.9316 ns/op
+OverheadActual  12: 512 op, 3420.00 ns, 6.6797 ns/op
+OverheadActual  13: 512 op, 4094.00 ns, 7.9961 ns/op
+OverheadActual  14: 512 op, 3375.00 ns, 6.5918 ns/op
+OverheadActual  15: 512 op, 4026.00 ns, 7.8633 ns/op
+OverheadActual  16: 512 op, 4023.00 ns, 7.8574 ns/op
+OverheadActual  17: 512 op, 3249.00 ns, 6.3457 ns/op
+OverheadActual  18: 512 op, 3705.00 ns, 7.2363 ns/op
+OverheadActual  19: 512 op, 4044.00 ns, 7.8984 ns/op
+OverheadActual  20: 512 op, 3291.00 ns, 6.4277 ns/op
+
+WorkloadWarmup   1: 512 op, 313006003.00 ns, 611.3398 us/op
+WorkloadWarmup   2: 512 op, 379577890.00 ns, 741.3631 us/op
+WorkloadWarmup   3: 512 op, 506719750.00 ns, 989.6870 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 649079971.00 ns, 1.2677 ms/op
+WorkloadActual   2: 512 op, 383748911.00 ns, 749.5096 us/op
+WorkloadActual   3: 512 op, 352620726.00 ns, 688.7124 us/op
+WorkloadActual   4: 512 op, 457857697.00 ns, 894.2533 us/op
+WorkloadActual   5: 512 op, 899453386.00 ns, 1.7567 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 649076455.50 ns, 1.2677 ms/op
+WorkloadResult   2: 512 op, 383745395.50 ns, 749.5027 us/op
+WorkloadResult   3: 512 op, 352617210.50 ns, 688.7055 us/op
+WorkloadResult   4: 512 op, 457854181.50 ns, 894.2464 us/op
+WorkloadResult   5: 512 op, 899449870.50 ns, 1.7567 ms/op
+// GC:  78 78 78 383573920 512
+// Threading:  0 0 512
+
+// AfterAll
+// Benchmark Process 1850527 has exited with code 0.
+
+Mean = 1.071 ms, StdErr = 0.199 ms (18.55%), N = 5, StdDev = 0.444 ms
+Min = 0.689 ms, Q1 = 0.750 ms, Median = 0.894 ms, Q3 = 1.268 ms, Max = 1.757 ms
+IQR = 0.518 ms, LowerFence = -0.028 ms, UpperFence = 2.045 ms
+ConfidenceInterval = [-0.640 ms; 2.782 ms] (CI 99.9%), Margin = 1.711 ms (159.69% of Mean)
+Skewness = 0.53, Kurtosis = 1.31, MValue = 2
+
+// ** Remained 16 (44.4%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Insert(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 20 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-JMGWHZ(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 584611.00 ns, 584.6110 us/op
+WorkloadJitting  1: 1 op, 13487661.00 ns, 13.4877 ms/op
+
+OverheadJitting  2: 16 op, 509222.00 ns, 31.8264 us/op
+WorkloadJitting  2: 16 op, 51297540.00 ns, 3.2061 ms/op
+
+WorkloadPilot    1: 16 op, 57009027.00 ns, 3.5631 ms/op
+WorkloadPilot    2: 32 op, 88854062.00 ns, 2.7767 ms/op
+WorkloadPilot    3: 64 op, 158942834.00 ns, 2.4835 ms/op
+WorkloadPilot    4: 128 op, 316906872.00 ns, 2.4758 ms/op
+WorkloadPilot    5: 256 op, 649050676.00 ns, 2.5354 ms/op
+
+OverheadWarmup   1: 256 op, 2086.00 ns, 8.1484 ns/op
+OverheadWarmup   2: 256 op, 1704.00 ns, 6.6563 ns/op
+OverheadWarmup   3: 256 op, 1575.00 ns, 6.1523 ns/op
+OverheadWarmup   4: 256 op, 1404.00 ns, 5.4844 ns/op
+OverheadWarmup   5: 256 op, 1399.00 ns, 5.4648 ns/op
+OverheadWarmup   6: 256 op, 1724.00 ns, 6.7344 ns/op
+OverheadWarmup   7: 256 op, 1296.00 ns, 5.0625 ns/op
+OverheadWarmup   8: 256 op, 1337.00 ns, 5.2227 ns/op
+OverheadWarmup   9: 256 op, 1337.00 ns, 5.2227 ns/op
+
+OverheadActual   1: 256 op, 1293.00 ns, 5.0508 ns/op
+OverheadActual   2: 256 op, 1297.00 ns, 5.0664 ns/op
+OverheadActual   3: 256 op, 1358.00 ns, 5.3047 ns/op
+OverheadActual   4: 256 op, 2388.00 ns, 9.3281 ns/op
+OverheadActual   5: 256 op, 2340.00 ns, 9.1406 ns/op
+OverheadActual   6: 256 op, 2067.00 ns, 8.0742 ns/op
+OverheadActual   7: 256 op, 2123.00 ns, 8.2930 ns/op
+OverheadActual   8: 256 op, 2060.00 ns, 8.0469 ns/op
+OverheadActual   9: 256 op, 2025.00 ns, 7.9102 ns/op
+OverheadActual  10: 256 op, 2045.00 ns, 7.9883 ns/op
+OverheadActual  11: 256 op, 2052.00 ns, 8.0156 ns/op
+OverheadActual  12: 256 op, 2122.00 ns, 8.2891 ns/op
+OverheadActual  13: 256 op, 2163.00 ns, 8.4492 ns/op
+OverheadActual  14: 256 op, 1973.00 ns, 7.7070 ns/op
+OverheadActual  15: 256 op, 2622.00 ns, 10.2422 ns/op
+OverheadActual  16: 256 op, 2112.00 ns, 8.2500 ns/op
+OverheadActual  17: 256 op, 2142.00 ns, 8.3672 ns/op
+OverheadActual  18: 256 op, 2140.00 ns, 8.3594 ns/op
+OverheadActual  19: 256 op, 1985.00 ns, 7.7539 ns/op
+OverheadActual  20: 256 op, 1958.00 ns, 7.6484 ns/op
+
+WorkloadWarmup   1: 256 op, 984252117.00 ns, 3.8447 ms/op
+WorkloadWarmup   2: 256 op, 640427699.00 ns, 2.5017 ms/op
+WorkloadWarmup   3: 256 op, 396698440.00 ns, 1.5496 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 355569867.00 ns, 1.3889 ms/op
+WorkloadActual   2: 256 op, 354379528.00 ns, 1.3843 ms/op
+WorkloadActual   3: 256 op, 322670244.00 ns, 1.2604 ms/op
+WorkloadActual   4: 256 op, 390810783.00 ns, 1.5266 ms/op
+WorkloadActual   5: 256 op, 357265574.00 ns, 1.3956 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 355567803.50 ns, 1.3889 ms/op
+WorkloadResult   2: 256 op, 354377464.50 ns, 1.3843 ms/op
+WorkloadResult   3: 256 op, 322668180.50 ns, 1.2604 ms/op
+WorkloadResult   4: 256 op, 357263510.50 ns, 1.3956 ms/op
+// GC:  63 63 63 297130048 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850565 has exited with code 0.
+
+Mean = 1.357 ms, StdErr = 0.032 ms (2.39%), N = 4, StdDev = 0.065 ms
+Min = 1.260 ms, Q1 = 1.353 ms, Median = 1.387 ms, Q3 = 1.391 ms, Max = 1.396 ms
+IQR = 0.037 ms, LowerFence = 1.297 ms, UpperFence = 1.447 ms
+ConfidenceInterval = [0.939 ms; 1.776 ms] (CI 99.9%), Margin = 0.418 ms (30.83% of Mean)
+Skewness = -0.74, Kurtosis = 1.3, MValue = 2
+
+// ** Remained 15 (41.7%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Read(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 21 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-FIIULK(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 686352.00 ns, 686.3520 us/op
+WorkloadJitting  1: 1 op, 16165218.00 ns, 16.1652 ms/op
+
+OverheadJitting  2: 16 op, 510491.00 ns, 31.9057 us/op
+WorkloadJitting  2: 16 op, 64739377.00 ns, 4.0462 ms/op
+
+WorkloadPilot    1: 16 op, 66563450.00 ns, 4.1602 ms/op
+WorkloadPilot    2: 32 op, 103118266.00 ns, 3.2224 ms/op
+WorkloadPilot    3: 64 op, 246877481.00 ns, 3.8575 ms/op
+WorkloadPilot    4: 128 op, 492811711.00 ns, 3.8501 ms/op
+WorkloadPilot    5: 256 op, 813886937.00 ns, 3.1792 ms/op
+
+OverheadWarmup   1: 256 op, 4782.00 ns, 18.6797 ns/op
+OverheadWarmup   2: 256 op, 2428.00 ns, 9.4844 ns/op
+OverheadWarmup   3: 256 op, 2297.00 ns, 8.9727 ns/op
+OverheadWarmup   4: 256 op, 2105.00 ns, 8.2227 ns/op
+OverheadWarmup   5: 256 op, 2906.00 ns, 11.3516 ns/op
+OverheadWarmup   6: 256 op, 3027.00 ns, 11.8242 ns/op
+OverheadWarmup   7: 256 op, 2298.00 ns, 8.9766 ns/op
+OverheadWarmup   8: 256 op, 2610.00 ns, 10.1953 ns/op
+OverheadWarmup   9: 256 op, 2193.00 ns, 8.5664 ns/op
+
+OverheadActual   1: 256 op, 1922.00 ns, 7.5078 ns/op
+OverheadActual   2: 256 op, 2188.00 ns, 8.5469 ns/op
+OverheadActual   3: 256 op, 2328.00 ns, 9.0938 ns/op
+OverheadActual   4: 256 op, 2430.00 ns, 9.4922 ns/op
+OverheadActual   5: 256 op, 2073.00 ns, 8.0977 ns/op
+OverheadActual   6: 256 op, 2223.00 ns, 8.6836 ns/op
+OverheadActual   7: 256 op, 2513.00 ns, 9.8164 ns/op
+OverheadActual   8: 256 op, 2623.00 ns, 10.2461 ns/op
+OverheadActual   9: 256 op, 2220.00 ns, 8.6719 ns/op
+OverheadActual  10: 256 op, 2808.00 ns, 10.9688 ns/op
+OverheadActual  11: 256 op, 2114.00 ns, 8.2578 ns/op
+OverheadActual  12: 256 op, 2000.00 ns, 7.8125 ns/op
+OverheadActual  13: 256 op, 2562.00 ns, 10.0078 ns/op
+OverheadActual  14: 256 op, 3405.00 ns, 13.3008 ns/op
+OverheadActual  15: 256 op, 2105.00 ns, 8.2227 ns/op
+OverheadActual  16: 256 op, 2130.00 ns, 8.3203 ns/op
+OverheadActual  17: 256 op, 2017.00 ns, 7.8789 ns/op
+OverheadActual  18: 256 op, 2758.00 ns, 10.7734 ns/op
+OverheadActual  19: 256 op, 2398.00 ns, 9.3672 ns/op
+OverheadActual  20: 256 op, 6236.00 ns, 24.3594 ns/op
+
+WorkloadWarmup   1: 256 op, 475994919.00 ns, 1.8594 ms/op
+WorkloadWarmup   2: 256 op, 390684489.00 ns, 1.5261 ms/op
+WorkloadWarmup   3: 256 op, 337219642.00 ns, 1.3173 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 317734897.00 ns, 1.2412 ms/op
+WorkloadActual   2: 256 op, 567371942.00 ns, 2.2163 ms/op
+WorkloadActual   3: 256 op, 524494448.00 ns, 2.0488 ms/op
+WorkloadActual   4: 256 op, 865751398.00 ns, 3.3818 ms/op
+WorkloadActual   5: 256 op, 332427319.00 ns, 1.2985 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 317732621.50 ns, 1.2411 ms/op
+WorkloadResult   2: 256 op, 567369666.50 ns, 2.2163 ms/op
+WorkloadResult   3: 256 op, 524492172.50 ns, 2.0488 ms/op
+WorkloadResult   4: 256 op, 865749122.50 ns, 3.3818 ms/op
+WorkloadResult   5: 256 op, 332425043.50 ns, 1.2985 ms/op
+// GC:  63 63 63 297130048 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850581 has exited with code 0.
+
+Mean = 2.037 ms, StdErr = 0.389 ms (19.07%), N = 5, StdDev = 0.869 ms
+Min = 1.241 ms, Q1 = 1.299 ms, Median = 2.049 ms, Q3 = 2.216 ms, Max = 3.382 ms
+IQR = 0.918 ms, LowerFence = -0.078 ms, UpperFence = 3.593 ms
+ConfidenceInterval = [-1.308 ms; 5.383 ms] (CI 99.9%), Margin = 3.346 ms (164.22% of Mean)
+Skewness = 0.47, Kurtosis = 1.39, MValue = 2
+
+// ** Remained 14 (38.9%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Update(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 22 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-CVSUQE(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 911903.00 ns, 911.9030 us/op
+WorkloadJitting  1: 1 op, 30563132.00 ns, 30.5631 ms/op
+
+OverheadJitting  2: 16 op, 935984.00 ns, 58.4990 us/op
+WorkloadJitting  2: 16 op, 94424785.00 ns, 5.9015 ms/op
+
+WorkloadPilot    1: 16 op, 69919382.00 ns, 4.3700 ms/op
+WorkloadPilot    2: 32 op, 109139912.00 ns, 3.4106 ms/op
+WorkloadPilot    3: 64 op, 251145618.00 ns, 3.9242 ms/op
+WorkloadPilot    4: 128 op, 481577602.00 ns, 3.7623 ms/op
+WorkloadPilot    5: 256 op, 810671914.00 ns, 3.1667 ms/op
+
+OverheadWarmup   1: 256 op, 5817.00 ns, 22.7227 ns/op
+OverheadWarmup   2: 256 op, 2177.00 ns, 8.5039 ns/op
+OverheadWarmup   3: 256 op, 2350.00 ns, 9.1797 ns/op
+OverheadWarmup   4: 256 op, 1907.00 ns, 7.4492 ns/op
+OverheadWarmup   5: 256 op, 4902.00 ns, 19.1484 ns/op
+OverheadWarmup   6: 256 op, 1841.00 ns, 7.1914 ns/op
+
+OverheadActual   1: 256 op, 2516.00 ns, 9.8281 ns/op
+OverheadActual   2: 256 op, 1932.00 ns, 7.5469 ns/op
+OverheadActual   3: 256 op, 2097.00 ns, 8.1914 ns/op
+OverheadActual   4: 256 op, 1805.00 ns, 7.0508 ns/op
+OverheadActual   5: 256 op, 2551.00 ns, 9.9648 ns/op
+OverheadActual   6: 256 op, 1840.00 ns, 7.1875 ns/op
+OverheadActual   7: 256 op, 1790.00 ns, 6.9922 ns/op
+OverheadActual   8: 256 op, 2279.00 ns, 8.9023 ns/op
+OverheadActual   9: 256 op, 1792.00 ns, 7.0000 ns/op
+OverheadActual  10: 256 op, 1748.00 ns, 6.8281 ns/op
+OverheadActual  11: 256 op, 1738.00 ns, 6.7891 ns/op
+OverheadActual  12: 256 op, 1751.00 ns, 6.8398 ns/op
+OverheadActual  13: 256 op, 1735.00 ns, 6.7773 ns/op
+OverheadActual  14: 256 op, 1748.00 ns, 6.8281 ns/op
+OverheadActual  15: 256 op, 1813.00 ns, 7.0820 ns/op
+OverheadActual  16: 256 op, 2387.00 ns, 9.3242 ns/op
+OverheadActual  17: 256 op, 1749.00 ns, 6.8320 ns/op
+OverheadActual  18: 256 op, 1744.00 ns, 6.8125 ns/op
+OverheadActual  19: 256 op, 1805.00 ns, 7.0508 ns/op
+OverheadActual  20: 256 op, 1789.00 ns, 6.9883 ns/op
+
+WorkloadWarmup   1: 256 op, 308969139.00 ns, 1.2069 ms/op
+WorkloadWarmup   2: 256 op, 315433306.00 ns, 1.2322 ms/op
+WorkloadWarmup   3: 256 op, 342874550.00 ns, 1.3394 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 359451784.00 ns, 1.4041 ms/op
+WorkloadActual   2: 256 op, 366828478.00 ns, 1.4329 ms/op
+WorkloadActual   3: 256 op, 349924055.00 ns, 1.3669 ms/op
+WorkloadActual   4: 256 op, 290191495.00 ns, 1.1336 ms/op
+WorkloadActual   5: 256 op, 298175410.00 ns, 1.1647 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 359449985.50 ns, 1.4041 ms/op
+WorkloadResult   2: 256 op, 366826679.50 ns, 1.4329 ms/op
+WorkloadResult   3: 256 op, 349922256.50 ns, 1.3669 ms/op
+WorkloadResult   4: 256 op, 290189696.50 ns, 1.1336 ms/op
+WorkloadResult   5: 256 op, 298173611.50 ns, 1.1647 ms/op
+// GC:  63 63 63 297130048 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850647 has exited with code 0.
+
+Mean = 1.300 ms, StdErr = 0.063 ms (4.83%), N = 5, StdDev = 0.141 ms
+Min = 1.134 ms, Q1 = 1.165 ms, Median = 1.367 ms, Q3 = 1.404 ms, Max = 1.433 ms
+IQR = 0.239 ms, LowerFence = 0.806 ms, UpperFence = 1.763 ms
+ConfidenceInterval = [0.759 ms; 1.842 ms] (CI 99.9%), Margin = 0.541 ms (41.61% of Mean)
+Skewness = -0.25, Kurtosis = 0.8, MValue = 2
+
+// ** Remained 13 (36.1%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=5000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 112 113 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Delete(N: 5000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 23 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-MZJYBA(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 1129770.00 ns, 1.1298 ms/op
+WorkloadJitting  1: 1 op, 56021814.00 ns, 56.0218 ms/op
+
+WorkloadPilot    1: 2 op, 29844307.00 ns, 14.9222 ms/op
+WorkloadPilot    2: 3 op, 15564435.00 ns, 5.1881 ms/op
+WorkloadPilot    3: 4 op, 20827487.00 ns, 5.2069 ms/op
+WorkloadPilot    4: 5 op, 24182927.00 ns, 4.8366 ms/op
+WorkloadPilot    5: 6 op, 24946691.00 ns, 4.1578 ms/op
+WorkloadPilot    6: 7 op, 31311811.00 ns, 4.4731 ms/op
+WorkloadPilot    7: 8 op, 32524445.00 ns, 4.0656 ms/op
+WorkloadPilot    8: 9 op, 33658513.00 ns, 3.7398 ms/op
+WorkloadPilot    9: 10 op, 42238689.00 ns, 4.2239 ms/op
+WorkloadPilot   10: 11 op, 44968663.00 ns, 4.0881 ms/op
+WorkloadPilot   11: 12 op, 49944891.00 ns, 4.1621 ms/op
+WorkloadPilot   12: 13 op, 151363966.00 ns, 11.6434 ms/op
+WorkloadPilot   13: 14 op, 148055503.00 ns, 10.5754 ms/op
+WorkloadPilot   14: 15 op, 66872709.00 ns, 4.4582 ms/op
+WorkloadPilot   15: 16 op, 70335296.00 ns, 4.3960 ms/op
+WorkloadPilot   16: 32 op, 135712910.00 ns, 4.2410 ms/op
+WorkloadPilot   17: 64 op, 302791557.00 ns, 4.7311 ms/op
+WorkloadPilot   18: 128 op, 1281037023.00 ns, 10.0081 ms/op
+
+WorkloadWarmup   1: 128 op, 486333910.00 ns, 3.7995 ms/op
+WorkloadWarmup   2: 128 op, 547542895.00 ns, 4.2777 ms/op
+WorkloadWarmup   3: 128 op, 424599731.00 ns, 3.3172 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 187167008.00 ns, 1.4622 ms/op
+WorkloadActual   2: 128 op, 187139094.00 ns, 1.4620 ms/op
+WorkloadActual   3: 128 op, 182184632.00 ns, 1.4233 ms/op
+WorkloadActual   4: 128 op, 253536867.00 ns, 1.9808 ms/op
+WorkloadActual   5: 128 op, 200797581.00 ns, 1.5687 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 187167008.00 ns, 1.4622 ms/op
+WorkloadResult   2: 128 op, 187139094.00 ns, 1.4620 ms/op
+WorkloadResult   3: 128 op, 182184632.00 ns, 1.4233 ms/op
+WorkloadResult   4: 128 op, 200797581.00 ns, 1.5687 ms/op
+// GC:  31 31 31 148564384 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 1850663 has exited with code 0.
+
+Mean = 1.479 ms, StdErr = 0.031 ms (2.11%), N = 4, StdDev = 0.063 ms
+Min = 1.423 ms, Q1 = 1.452 ms, Median = 1.462 ms, Q3 = 1.489 ms, Max = 1.569 ms
+IQR = 0.037 ms, LowerFence = 1.398 ms, UpperFence = 1.544 ms
+ConfidenceInterval = [1.075 ms; 1.883 ms] (CI 99.9%), Margin = 0.404 ms (27.31% of Mean)
+Skewness = 0.55, Kurtosis = 1.22, MValue = 2
+
+// ** Remained 12 (33.3%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Insert(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 24 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-HZBZHD(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 949723.00 ns, 949.7230 us/op
+WorkloadJitting  1: 1 op, 11910477.00 ns, 11.9105 ms/op
+
+OverheadJitting  2: 16 op, 602285.00 ns, 37.6428 us/op
+WorkloadJitting  2: 16 op, 38439386.00 ns, 2.4025 ms/op
+
+WorkloadPilot    1: 16 op, 41583419.00 ns, 2.5990 ms/op
+WorkloadPilot    2: 32 op, 78304332.00 ns, 2.4470 ms/op
+WorkloadPilot    3: 64 op, 142083546.00 ns, 2.2201 ms/op
+WorkloadPilot    4: 128 op, 284558447.00 ns, 2.2231 ms/op
+WorkloadPilot    5: 256 op, 702106712.00 ns, 2.7426 ms/op
+
+OverheadWarmup   1: 256 op, 2397.00 ns, 9.3633 ns/op
+OverheadWarmup   2: 256 op, 2320.00 ns, 9.0625 ns/op
+OverheadWarmup   3: 256 op, 2011.00 ns, 7.8555 ns/op
+OverheadWarmup   4: 256 op, 2003.00 ns, 7.8242 ns/op
+OverheadWarmup   5: 256 op, 2119.00 ns, 8.2773 ns/op
+OverheadWarmup   6: 256 op, 1794.00 ns, 7.0078 ns/op
+OverheadWarmup   7: 256 op, 1759.00 ns, 6.8711 ns/op
+OverheadWarmup   8: 256 op, 1657.00 ns, 6.4727 ns/op
+OverheadWarmup   9: 256 op, 1656.00 ns, 6.4688 ns/op
+OverheadWarmup  10: 256 op, 1532.00 ns, 5.9844 ns/op
+
+OverheadActual   1: 256 op, 2110.00 ns, 8.2422 ns/op
+OverheadActual   2: 256 op, 1931.00 ns, 7.5430 ns/op
+OverheadActual   3: 256 op, 29360.00 ns, 114.6875 ns/op
+OverheadActual   4: 256 op, 1836.00 ns, 7.1719 ns/op
+OverheadActual   5: 256 op, 1956.00 ns, 7.6406 ns/op
+OverheadActual   6: 256 op, 1819.00 ns, 7.1055 ns/op
+OverheadActual   7: 256 op, 1777.00 ns, 6.9414 ns/op
+OverheadActual   8: 256 op, 1681.00 ns, 6.5664 ns/op
+OverheadActual   9: 256 op, 1340.00 ns, 5.2344 ns/op
+OverheadActual  10: 256 op, 1991.00 ns, 7.7773 ns/op
+OverheadActual  11: 256 op, 1727.00 ns, 6.7461 ns/op
+OverheadActual  12: 256 op, 1625.00 ns, 6.3477 ns/op
+OverheadActual  13: 256 op, 1745.00 ns, 6.8164 ns/op
+OverheadActual  14: 256 op, 1562.00 ns, 6.1016 ns/op
+OverheadActual  15: 256 op, 1771.00 ns, 6.9180 ns/op
+OverheadActual  16: 256 op, 1638.00 ns, 6.3984 ns/op
+OverheadActual  17: 256 op, 1684.00 ns, 6.5781 ns/op
+OverheadActual  18: 256 op, 1730.00 ns, 6.7578 ns/op
+OverheadActual  19: 256 op, 1703.00 ns, 6.6523 ns/op
+OverheadActual  20: 256 op, 1685.00 ns, 6.5820 ns/op
+
+WorkloadWarmup   1: 256 op, 674906982.00 ns, 2.6364 ms/op
+WorkloadWarmup   2: 256 op, 715665624.00 ns, 2.7956 ms/op
+WorkloadWarmup   3: 256 op, 319185288.00 ns, 1.2468 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 265491888.00 ns, 1.0371 ms/op
+WorkloadActual   2: 256 op, 231322210.00 ns, 903.6024 us/op
+WorkloadActual   3: 256 op, 201813855.00 ns, 788.3354 us/op
+WorkloadActual   4: 256 op, 210747979.00 ns, 823.2343 us/op
+WorkloadActual   5: 256 op, 255968677.00 ns, 999.8776 us/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 265490150.50 ns, 1.0371 ms/op
+WorkloadResult   2: 256 op, 231320472.50 ns, 903.5956 us/op
+WorkloadResult   3: 256 op, 201812117.50 ns, 788.3286 us/op
+WorkloadResult   4: 256 op, 210746241.50 ns, 823.2275 us/op
+WorkloadResult   5: 256 op, 255966939.50 ns, 999.8709 us/op
+// GC:  56 56 56 241192416 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850701 has exited with code 0.
+
+Mean = 910.419 us, StdErr = 48.269 us (5.30%), N = 5, StdDev = 107.932 us
+Min = 788.329 us, Q1 = 823.228 us, Median = 903.596 us, Q3 = 999.871 us, Max = 1,037.071 us
+IQR = 176.643 us, LowerFence = 558.262 us, UpperFence = 1,264.836 us
+ConfidenceInterval = [494.811 us; 1,326.027 us] (CI 99.9%), Margin = 415.608 us (45.65% of Mean)
+Skewness = 0.04, Kurtosis = 0.89, MValue = 2
+
+// ** Remained 11 (30.6%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Read(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 25 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-CILRVP(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 764469.00 ns, 764.4690 us/op
+WorkloadJitting  1: 1 op, 15169536.00 ns, 15.1695 ms/op
+
+OverheadJitting  2: 16 op, 837232.00 ns, 52.3270 us/op
+WorkloadJitting  2: 16 op, 63495031.00 ns, 3.9684 ms/op
+
+WorkloadPilot    1: 16 op, 51924042.00 ns, 3.2453 ms/op
+WorkloadPilot    2: 32 op, 100013548.00 ns, 3.1254 ms/op
+WorkloadPilot    3: 64 op, 213478533.00 ns, 3.3356 ms/op
+WorkloadPilot    4: 128 op, 407534561.00 ns, 3.1839 ms/op
+WorkloadPilot    5: 256 op, 734856832.00 ns, 2.8705 ms/op
+
+OverheadWarmup   1: 256 op, 4584.00 ns, 17.9063 ns/op
+OverheadWarmup   2: 256 op, 2206.00 ns, 8.6172 ns/op
+OverheadWarmup   3: 256 op, 2627.00 ns, 10.2617 ns/op
+OverheadWarmup   4: 256 op, 2707.00 ns, 10.5742 ns/op
+OverheadWarmup   5: 256 op, 1882.00 ns, 7.3516 ns/op
+OverheadWarmup   6: 256 op, 2311.00 ns, 9.0273 ns/op
+OverheadWarmup   7: 256 op, 1755.00 ns, 6.8555 ns/op
+
+OverheadActual   1: 256 op, 2568.00 ns, 10.0313 ns/op
+OverheadActual   2: 256 op, 2383.00 ns, 9.3086 ns/op
+OverheadActual   3: 256 op, 2271.00 ns, 8.8711 ns/op
+OverheadActual   4: 256 op, 2280.00 ns, 8.9063 ns/op
+OverheadActual   5: 256 op, 19593.00 ns, 76.5352 ns/op
+OverheadActual   6: 256 op, 2358.00 ns, 9.2109 ns/op
+OverheadActual   7: 256 op, 2501.00 ns, 9.7695 ns/op
+OverheadActual   8: 256 op, 2813.00 ns, 10.9883 ns/op
+OverheadActual   9: 256 op, 1770.00 ns, 6.9141 ns/op
+OverheadActual  10: 256 op, 4905.00 ns, 19.1602 ns/op
+OverheadActual  11: 256 op, 2467.00 ns, 9.6367 ns/op
+OverheadActual  12: 256 op, 1723.00 ns, 6.7305 ns/op
+OverheadActual  13: 256 op, 2362.00 ns, 9.2266 ns/op
+OverheadActual  14: 256 op, 2624.00 ns, 10.2500 ns/op
+OverheadActual  15: 256 op, 2136.00 ns, 8.3438 ns/op
+OverheadActual  16: 256 op, 2378.00 ns, 9.2891 ns/op
+OverheadActual  17: 256 op, 2255.00 ns, 8.8086 ns/op
+OverheadActual  18: 256 op, 2440.00 ns, 9.5313 ns/op
+OverheadActual  19: 256 op, 1674.00 ns, 6.5391 ns/op
+OverheadActual  20: 256 op, 2489.00 ns, 9.7227 ns/op
+
+WorkloadWarmup   1: 256 op, 301830379.00 ns, 1.1790 ms/op
+WorkloadWarmup   2: 256 op, 287054130.00 ns, 1.1213 ms/op
+WorkloadWarmup   3: 256 op, 325122704.00 ns, 1.2700 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 227921844.00 ns, 890.3197 us/op
+WorkloadActual   2: 256 op, 221703719.00 ns, 866.0302 us/op
+WorkloadActual   3: 256 op, 300375336.00 ns, 1.1733 ms/op
+WorkloadActual   4: 256 op, 373811389.00 ns, 1.4602 ms/op
+WorkloadActual   5: 256 op, 265256637.00 ns, 1.0362 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 227919463.50 ns, 890.3104 us/op
+WorkloadResult   2: 256 op, 221701338.50 ns, 866.0209 us/op
+WorkloadResult   3: 256 op, 300372955.50 ns, 1.1733 ms/op
+WorkloadResult   4: 256 op, 373809008.50 ns, 1.4602 ms/op
+WorkloadResult   5: 256 op, 265254256.50 ns, 1.0361 ms/op
+// GC:  56 56 56 241192416 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850718 has exited with code 0.
+
+Mean = 1.085 ms, StdErr = 0.109 ms (10.03%), N = 5, StdDev = 0.243 ms
+Min = 0.866 ms, Q1 = 0.890 ms, Median = 1.036 ms, Q3 = 1.173 ms, Max = 1.460 ms
+IQR = 0.283 ms, LowerFence = 0.466 ms, UpperFence = 1.598 ms
+ConfidenceInterval = [0.148 ms; 2.022 ms] (CI 99.9%), Margin = 0.937 ms (86.34% of Mean)
+Skewness = 0.49, Kurtosis = 1.35, MValue = 2
+
+// ** Remained 10 (27.8%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Update(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 26 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-DHDZMF(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 784497.00 ns, 784.4970 us/op
+WorkloadJitting  1: 1 op, 10243235.00 ns, 10.2432 ms/op
+
+OverheadJitting  2: 16 op, 629134.00 ns, 39.3209 us/op
+WorkloadJitting  2: 16 op, 47483137.00 ns, 2.9677 ms/op
+
+WorkloadPilot    1: 16 op, 49032103.00 ns, 3.0645 ms/op
+WorkloadPilot    2: 32 op, 90294486.00 ns, 2.8217 ms/op
+WorkloadPilot    3: 64 op, 181578520.00 ns, 2.8372 ms/op
+WorkloadPilot    4: 128 op, 436012498.00 ns, 3.4063 ms/op
+WorkloadPilot    5: 256 op, 675697235.00 ns, 2.6394 ms/op
+
+OverheadWarmup   1: 256 op, 1708.00 ns, 6.6719 ns/op
+OverheadWarmup   2: 256 op, 1382.00 ns, 5.3984 ns/op
+OverheadWarmup   3: 256 op, 1351.00 ns, 5.2773 ns/op
+OverheadWarmup   4: 256 op, 1313.00 ns, 5.1289 ns/op
+OverheadWarmup   5: 256 op, 1473.00 ns, 5.7539 ns/op
+OverheadWarmup   6: 256 op, 1518.00 ns, 5.9297 ns/op
+OverheadWarmup   7: 256 op, 1653.00 ns, 6.4570 ns/op
+OverheadWarmup   8: 256 op, 1235.00 ns, 4.8242 ns/op
+OverheadWarmup   9: 256 op, 1203.00 ns, 4.6992 ns/op
+OverheadWarmup  10: 256 op, 1330.00 ns, 5.1953 ns/op
+
+OverheadActual   1: 256 op, 1453.00 ns, 5.6758 ns/op
+OverheadActual   2: 256 op, 1394.00 ns, 5.4453 ns/op
+OverheadActual   3: 256 op, 1388.00 ns, 5.4219 ns/op
+OverheadActual   4: 256 op, 1410.00 ns, 5.5078 ns/op
+OverheadActual   5: 256 op, 1447.00 ns, 5.6523 ns/op
+OverheadActual   6: 256 op, 1274.00 ns, 4.9766 ns/op
+OverheadActual   7: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadActual   8: 256 op, 1182.00 ns, 4.6172 ns/op
+OverheadActual   9: 256 op, 1390.00 ns, 5.4297 ns/op
+OverheadActual  10: 256 op, 1359.00 ns, 5.3086 ns/op
+OverheadActual  11: 256 op, 1631.00 ns, 6.3711 ns/op
+OverheadActual  12: 256 op, 1293.00 ns, 5.0508 ns/op
+OverheadActual  13: 256 op, 1493.00 ns, 5.8320 ns/op
+OverheadActual  14: 256 op, 1445.00 ns, 5.6445 ns/op
+OverheadActual  15: 256 op, 1242.00 ns, 4.8516 ns/op
+OverheadActual  16: 256 op, 1593.00 ns, 6.2227 ns/op
+OverheadActual  17: 256 op, 1348.00 ns, 5.2656 ns/op
+OverheadActual  18: 256 op, 1685.00 ns, 6.5820 ns/op
+OverheadActual  19: 256 op, 1353.00 ns, 5.2852 ns/op
+OverheadActual  20: 256 op, 1400.00 ns, 5.4688 ns/op
+
+WorkloadWarmup   1: 256 op, 597103127.00 ns, 2.3324 ms/op
+WorkloadWarmup   2: 256 op, 640063683.00 ns, 2.5002 ms/op
+WorkloadWarmup   3: 256 op, 639080313.00 ns, 2.4964 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 584559460.00 ns, 2.2834 ms/op
+WorkloadActual   2: 256 op, 587760965.00 ns, 2.2959 ms/op
+WorkloadActual   3: 256 op, 319564945.00 ns, 1.2483 ms/op
+WorkloadActual   4: 256 op, 246068631.00 ns, 961.2056 us/op
+WorkloadActual   5: 256 op, 237103403.00 ns, 926.1852 us/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 584558063.00 ns, 2.2834 ms/op
+WorkloadResult   2: 256 op, 587759568.00 ns, 2.2959 ms/op
+WorkloadResult   3: 256 op, 319563548.00 ns, 1.2483 ms/op
+WorkloadResult   4: 256 op, 246067234.00 ns, 961.2001 us/op
+WorkloadResult   5: 256 op, 237102006.00 ns, 926.1797 us/op
+// GC:  56 56 56 241192416 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850757 has exited with code 0.
+
+Mean = 1.543 ms, StdErr = 0.310 ms (20.09%), N = 5, StdDev = 0.693 ms
+Min = 0.926 ms, Q1 = 0.961 ms, Median = 1.248 ms, Q3 = 2.283 ms, Max = 2.296 ms
+IQR = 1.322 ms, LowerFence = -1.022 ms, UpperFence = 4.267 ms
+ConfidenceInterval = [-1.125 ms; 4.211 ms] (CI 99.9%), Margin = 2.668 ms (172.94% of Mean)
+Skewness = 0.23, Kurtosis = 0.77, MValue = 2
+
+// ** Remained 9 (25.0%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 1m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Dictionary_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Dictionary_Delete(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 27 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-TTXBKI(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 669807.00 ns, 669.8070 us/op
+WorkloadJitting  1: 1 op, 11239747.00 ns, 11.2397 ms/op
+
+OverheadJitting  2: 16 op, 431547.00 ns, 26.9717 us/op
+WorkloadJitting  2: 16 op, 52361176.00 ns, 3.2726 ms/op
+
+WorkloadPilot    1: 16 op, 38624956.00 ns, 2.4141 ms/op
+WorkloadPilot    2: 32 op, 83613358.00 ns, 2.6129 ms/op
+WorkloadPilot    3: 64 op, 279591989.00 ns, 4.3686 ms/op
+WorkloadPilot    4: 128 op, 369212443.00 ns, 2.8845 ms/op
+WorkloadPilot    5: 256 op, 651869803.00 ns, 2.5464 ms/op
+
+OverheadWarmup   1: 256 op, 1751.00 ns, 6.8398 ns/op
+OverheadWarmup   2: 256 op, 1429.00 ns, 5.5820 ns/op
+OverheadWarmup   3: 256 op, 1383.00 ns, 5.4023 ns/op
+OverheadWarmup   4: 256 op, 1391.00 ns, 5.4336 ns/op
+OverheadWarmup   5: 256 op, 1383.00 ns, 5.4023 ns/op
+OverheadWarmup   6: 256 op, 1347.00 ns, 5.2617 ns/op
+OverheadWarmup   7: 256 op, 1660.00 ns, 6.4844 ns/op
+OverheadWarmup   8: 256 op, 1437.00 ns, 5.6133 ns/op
+
+OverheadActual   1: 256 op, 15459.00 ns, 60.3867 ns/op
+OverheadActual   2: 256 op, 1434.00 ns, 5.6016 ns/op
+OverheadActual   3: 256 op, 1843.00 ns, 7.1992 ns/op
+OverheadActual   4: 256 op, 1399.00 ns, 5.4648 ns/op
+OverheadActual   5: 256 op, 1452.00 ns, 5.6719 ns/op
+OverheadActual   6: 256 op, 1294.00 ns, 5.0547 ns/op
+OverheadActual   7: 256 op, 1268.00 ns, 4.9531 ns/op
+OverheadActual   8: 256 op, 1324.00 ns, 5.1719 ns/op
+OverheadActual   9: 256 op, 1350.00 ns, 5.2734 ns/op
+OverheadActual  10: 256 op, 1304.00 ns, 5.0938 ns/op
+OverheadActual  11: 256 op, 1749.00 ns, 6.8320 ns/op
+OverheadActual  12: 256 op, 1636.00 ns, 6.3906 ns/op
+OverheadActual  13: 256 op, 1305.00 ns, 5.0977 ns/op
+OverheadActual  14: 256 op, 1319.00 ns, 5.1523 ns/op
+OverheadActual  15: 256 op, 1742.00 ns, 6.8047 ns/op
+OverheadActual  16: 256 op, 1265.00 ns, 4.9414 ns/op
+OverheadActual  17: 256 op, 1366.00 ns, 5.3359 ns/op
+OverheadActual  18: 256 op, 1300.00 ns, 5.0781 ns/op
+OverheadActual  19: 256 op, 1337.00 ns, 5.2227 ns/op
+OverheadActual  20: 256 op, 1804.00 ns, 7.0469 ns/op
+
+WorkloadWarmup   1: 256 op, 682968914.00 ns, 2.6678 ms/op
+WorkloadWarmup   2: 256 op, 626828603.00 ns, 2.4485 ms/op
+WorkloadWarmup   3: 256 op, 285098829.00 ns, 1.1137 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 246845568.00 ns, 964.2405 us/op
+WorkloadActual   2: 256 op, 249326733.00 ns, 973.9326 us/op
+WorkloadActual   3: 256 op, 263559466.00 ns, 1.0295 ms/op
+WorkloadActual   4: 256 op, 253354444.00 ns, 989.6658 us/op
+WorkloadActual   5: 256 op, 308206171.00 ns, 1.2039 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 246844210.00 ns, 964.2352 us/op
+WorkloadResult   2: 256 op, 249325375.00 ns, 973.9272 us/op
+WorkloadResult   3: 256 op, 263558108.00 ns, 1.0295 ms/op
+WorkloadResult   4: 256 op, 253353086.00 ns, 989.6605 us/op
+// GC:  56 56 56 241192416 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850777 has exited with code 0.
+
+Mean = 989.337 us, StdErr = 14.384 us (1.45%), N = 4, StdDev = 28.767 us
+Min = 964.235 us, Q1 = 971.504 us, Median = 981.794 us, Q3 = 999.626 us, Max = 1,029.524 us
+IQR = 28.122 us, LowerFence = 929.321 us, UpperFence = 1,041.809 us
+ConfidenceInterval = [803.444 us; 1,175.230 us] (CI 99.9%), Margin = 185.893 us (18.79% of Mean)
+Skewness = 0.48, Kurtosis = 1.12, MValue = 2
+
+// ** Remained 8 (22.2%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 0m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Insert(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 28 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-CLJVQG(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 873283.00 ns, 873.2830 us/op
+WorkloadJitting  1: 1 op, 10373211.00 ns, 10.3732 ms/op
+
+OverheadJitting  2: 16 op, 440930.00 ns, 27.5581 us/op
+WorkloadJitting  2: 16 op, 37181616.00 ns, 2.3239 ms/op
+
+WorkloadPilot    1: 16 op, 37265998.00 ns, 2.3291 ms/op
+WorkloadPilot    2: 32 op, 72413474.00 ns, 2.2629 ms/op
+WorkloadPilot    3: 64 op, 152700900.00 ns, 2.3860 ms/op
+WorkloadPilot    4: 128 op, 381417349.00 ns, 2.9798 ms/op
+WorkloadPilot    5: 256 op, 716589368.00 ns, 2.7992 ms/op
+
+OverheadWarmup   1: 256 op, 2022.00 ns, 7.8984 ns/op
+OverheadWarmup   2: 256 op, 1742.00 ns, 6.8047 ns/op
+OverheadWarmup   3: 256 op, 1388.00 ns, 5.4219 ns/op
+OverheadWarmup   4: 256 op, 1880.00 ns, 7.3438 ns/op
+OverheadWarmup   5: 256 op, 2150.00 ns, 8.3984 ns/op
+OverheadWarmup   6: 256 op, 1907.00 ns, 7.4492 ns/op
+OverheadWarmup   7: 256 op, 1177.00 ns, 4.5977 ns/op
+OverheadWarmup   8: 256 op, 2076.00 ns, 8.1094 ns/op
+OverheadWarmup   9: 256 op, 1365.00 ns, 5.3320 ns/op
+
+OverheadActual   1: 256 op, 1718.00 ns, 6.7109 ns/op
+OverheadActual   2: 256 op, 1827.00 ns, 7.1367 ns/op
+OverheadActual   3: 256 op, 2346.00 ns, 9.1641 ns/op
+OverheadActual   4: 256 op, 2017.00 ns, 7.8789 ns/op
+OverheadActual   5: 256 op, 1536.00 ns, 6.0000 ns/op
+OverheadActual   6: 256 op, 1691.00 ns, 6.6055 ns/op
+OverheadActual   7: 256 op, 1939.00 ns, 7.5742 ns/op
+OverheadActual   8: 256 op, 1334.00 ns, 5.2109 ns/op
+OverheadActual   9: 256 op, 1598.00 ns, 6.2422 ns/op
+OverheadActual  10: 256 op, 1368.00 ns, 5.3438 ns/op
+OverheadActual  11: 256 op, 1447.00 ns, 5.6523 ns/op
+OverheadActual  12: 256 op, 1574.00 ns, 6.1484 ns/op
+OverheadActual  13: 256 op, 1364.00 ns, 5.3281 ns/op
+OverheadActual  14: 256 op, 1921.00 ns, 7.5039 ns/op
+OverheadActual  15: 256 op, 1435.00 ns, 5.6055 ns/op
+OverheadActual  16: 256 op, 1696.00 ns, 6.6250 ns/op
+OverheadActual  17: 256 op, 1380.00 ns, 5.3906 ns/op
+OverheadActual  18: 256 op, 1403.00 ns, 5.4805 ns/op
+OverheadActual  19: 256 op, 2452.00 ns, 9.5781 ns/op
+OverheadActual  20: 256 op, 1292.00 ns, 5.0469 ns/op
+
+WorkloadWarmup   1: 256 op, 619222252.00 ns, 2.4188 ms/op
+WorkloadWarmup   2: 256 op, 664762560.00 ns, 2.5967 ms/op
+WorkloadWarmup   3: 256 op, 419764206.00 ns, 1.6397 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 372662374.00 ns, 1.4557 ms/op
+WorkloadActual   2: 256 op, 387698358.00 ns, 1.5144 ms/op
+WorkloadActual   3: 256 op, 353828912.00 ns, 1.3821 ms/op
+WorkloadActual   4: 256 op, 419585396.00 ns, 1.6390 ms/op
+WorkloadActual   5: 256 op, 413409122.00 ns, 1.6149 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 372660788.00 ns, 1.4557 ms/op
+WorkloadResult   2: 256 op, 387696772.00 ns, 1.5144 ms/op
+WorkloadResult   3: 256 op, 353827326.00 ns, 1.3821 ms/op
+WorkloadResult   4: 256 op, 419583810.00 ns, 1.6390 ms/op
+WorkloadResult   5: 256 op, 413407536.00 ns, 1.6149 ms/op
+// GC:  84 83 83 378918848 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850795 has exited with code 0.
+
+Mean = 1.521 ms, StdErr = 0.048 ms (3.16%), N = 5, StdDev = 0.108 ms
+Min = 1.382 ms, Q1 = 1.456 ms, Median = 1.514 ms, Q3 = 1.615 ms, Max = 1.639 ms
+IQR = 0.159 ms, LowerFence = 1.217 ms, UpperFence = 1.854 ms
+ConfidenceInterval = [1.107 ms; 1.936 ms] (CI 99.9%), Margin = 0.414 ms (27.24% of Mean)
+Skewness = -0.08, Kurtosis = 0.99, MValue = 2
+
+// ** Remained 7 (19.4%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 0m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Read(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 29 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-XRFNFT(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 641758.00 ns, 641.7580 us/op
+WorkloadJitting  1: 1 op, 12997234.00 ns, 12.9972 ms/op
+
+OverheadJitting  2: 16 op, 521843.00 ns, 32.6152 us/op
+WorkloadJitting  2: 16 op, 54844046.00 ns, 3.4278 ms/op
+
+WorkloadPilot    1: 16 op, 51910048.00 ns, 3.2444 ms/op
+WorkloadPilot    2: 32 op, 113503908.00 ns, 3.5470 ms/op
+WorkloadPilot    3: 64 op, 220344192.00 ns, 3.4429 ms/op
+WorkloadPilot    4: 128 op, 669929048.00 ns, 5.2338 ms/op
+
+OverheadWarmup   1: 128 op, 1248.00 ns, 9.7500 ns/op
+OverheadWarmup   2: 128 op, 1021.00 ns, 7.9766 ns/op
+OverheadWarmup   3: 128 op, 1005.00 ns, 7.8516 ns/op
+OverheadWarmup   4: 128 op, 1084.00 ns, 8.4688 ns/op
+OverheadWarmup   5: 128 op, 1039.00 ns, 8.1172 ns/op
+OverheadWarmup   6: 128 op, 1063.00 ns, 8.3047 ns/op
+OverheadWarmup   7: 128 op, 960.00 ns, 7.5000 ns/op
+
+OverheadActual   1: 128 op, 1187.00 ns, 9.2734 ns/op
+OverheadActual   2: 128 op, 1144.00 ns, 8.9375 ns/op
+OverheadActual   3: 128 op, 1306.00 ns, 10.2031 ns/op
+OverheadActual   4: 128 op, 878.00 ns, 6.8594 ns/op
+OverheadActual   5: 128 op, 1050.00 ns, 8.2031 ns/op
+OverheadActual   6: 128 op, 1055.00 ns, 8.2422 ns/op
+OverheadActual   7: 128 op, 994.00 ns, 7.7656 ns/op
+OverheadActual   8: 128 op, 1120.00 ns, 8.7500 ns/op
+OverheadActual   9: 128 op, 1050.00 ns, 8.2031 ns/op
+OverheadActual  10: 128 op, 1208.00 ns, 9.4375 ns/op
+OverheadActual  11: 128 op, 985.00 ns, 7.6953 ns/op
+OverheadActual  12: 128 op, 990.00 ns, 7.7344 ns/op
+OverheadActual  13: 128 op, 998.00 ns, 7.7969 ns/op
+OverheadActual  14: 128 op, 1060.00 ns, 8.2813 ns/op
+OverheadActual  15: 128 op, 975.00 ns, 7.6172 ns/op
+OverheadActual  16: 128 op, 937.00 ns, 7.3203 ns/op
+OverheadActual  17: 128 op, 1050.00 ns, 8.2031 ns/op
+OverheadActual  18: 128 op, 1316.00 ns, 10.2813 ns/op
+OverheadActual  19: 128 op, 1382.00 ns, 10.7969 ns/op
+OverheadActual  20: 128 op, 1037.00 ns, 8.1016 ns/op
+
+WorkloadWarmup   1: 128 op, 417594398.00 ns, 3.2625 ms/op
+WorkloadWarmup   2: 128 op, 412445291.00 ns, 3.2222 ms/op
+WorkloadWarmup   3: 128 op, 715987906.00 ns, 5.5937 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 392757081.00 ns, 3.0684 ms/op
+WorkloadActual   2: 128 op, 389003361.00 ns, 3.0391 ms/op
+WorkloadActual   3: 128 op, 150494348.00 ns, 1.1757 ms/op
+WorkloadActual   4: 128 op, 273906187.00 ns, 2.1399 ms/op
+WorkloadActual   5: 128 op, 332386343.00 ns, 2.5968 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 392756031.00 ns, 3.0684 ms/op
+WorkloadResult   2: 128 op, 389002311.00 ns, 3.0391 ms/op
+WorkloadResult   3: 128 op, 150493298.00 ns, 1.1757 ms/op
+WorkloadResult   4: 128 op, 273905137.00 ns, 2.1399 ms/op
+WorkloadResult   5: 128 op, 332385293.00 ns, 2.5968 ms/op
+// GC:  40 39 39 199716072 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 1850815 has exited with code 0.
+
+Mean = 2.404 ms, StdErr = 0.351 ms (14.59%), N = 5, StdDev = 0.784 ms
+Min = 1.176 ms, Q1 = 2.140 ms, Median = 2.597 ms, Q3 = 3.039 ms, Max = 3.068 ms
+IQR = 0.899 ms, LowerFence = 0.791 ms, UpperFence = 4.388 ms
+ConfidenceInterval = [-0.616 ms; 5.424 ms] (CI 99.9%), Margin = 3.020 ms (125.62% of Mean)
+Skewness = -0.55, Kurtosis = 1.4, MValue = 2
+
+// ** Remained 6 (16.7%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 0m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Update: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Update(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 30 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-XDIYIM(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 795440.00 ns, 795.4400 us/op
+WorkloadJitting  1: 1 op, 15743527.00 ns, 15.7435 ms/op
+
+OverheadJitting  2: 16 op, 584929.00 ns, 36.5581 us/op
+WorkloadJitting  2: 16 op, 91604342.00 ns, 5.7253 ms/op
+
+WorkloadPilot    1: 16 op, 77541909.00 ns, 4.8464 ms/op
+WorkloadPilot    2: 32 op, 158720182.00 ns, 4.9600 ms/op
+WorkloadPilot    3: 64 op, 310128093.00 ns, 4.8458 ms/op
+WorkloadPilot    4: 128 op, 741128814.00 ns, 5.7901 ms/op
+
+OverheadWarmup   1: 128 op, 5094.00 ns, 39.7969 ns/op
+OverheadWarmup   2: 128 op, 2022.00 ns, 15.7969 ns/op
+OverheadWarmup   3: 128 op, 1400.00 ns, 10.9375 ns/op
+OverheadWarmup   4: 128 op, 1408.00 ns, 11.0000 ns/op
+OverheadWarmup   5: 128 op, 1376.00 ns, 10.7500 ns/op
+OverheadWarmup   6: 128 op, 1372.00 ns, 10.7188 ns/op
+OverheadWarmup   7: 128 op, 2256.00 ns, 17.6250 ns/op
+OverheadWarmup   8: 128 op, 1540.00 ns, 12.0313 ns/op
+
+OverheadActual   1: 128 op, 1476.00 ns, 11.5313 ns/op
+OverheadActual   2: 128 op, 2088.00 ns, 16.3125 ns/op
+OverheadActual   3: 128 op, 1976.00 ns, 15.4375 ns/op
+OverheadActual   4: 128 op, 1648.00 ns, 12.8750 ns/op
+OverheadActual   5: 128 op, 1488.00 ns, 11.6250 ns/op
+OverheadActual   6: 128 op, 1612.00 ns, 12.5938 ns/op
+OverheadActual   7: 128 op, 2042.00 ns, 15.9531 ns/op
+OverheadActual   8: 128 op, 1314.00 ns, 10.2656 ns/op
+OverheadActual   9: 128 op, 1828.00 ns, 14.2813 ns/op
+OverheadActual  10: 128 op, 1820.00 ns, 14.2188 ns/op
+OverheadActual  11: 128 op, 1368.00 ns, 10.6875 ns/op
+OverheadActual  12: 128 op, 1684.00 ns, 13.1563 ns/op
+OverheadActual  13: 128 op, 1482.00 ns, 11.5781 ns/op
+OverheadActual  14: 128 op, 1820.00 ns, 14.2188 ns/op
+OverheadActual  15: 128 op, 1508.00 ns, 11.7813 ns/op
+OverheadActual  16: 128 op, 1398.00 ns, 10.9219 ns/op
+OverheadActual  17: 128 op, 1368.00 ns, 10.6875 ns/op
+OverheadActual  18: 128 op, 1306.00 ns, 10.2031 ns/op
+OverheadActual  19: 128 op, 1402.00 ns, 10.9531 ns/op
+OverheadActual  20: 128 op, 1374.00 ns, 10.7344 ns/op
+
+WorkloadWarmup   1: 128 op, 551505326.00 ns, 4.3086 ms/op
+WorkloadWarmup   2: 128 op, 580655195.00 ns, 4.5364 ms/op
+WorkloadWarmup   3: 128 op, 489226883.00 ns, 3.8221 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 468990792.00 ns, 3.6640 ms/op
+WorkloadActual   2: 128 op, 532407199.00 ns, 4.1594 ms/op
+WorkloadActual   3: 128 op, 550793346.00 ns, 4.3031 ms/op
+WorkloadActual   4: 128 op, 366284607.00 ns, 2.8616 ms/op
+WorkloadActual   5: 128 op, 480034802.00 ns, 3.7503 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 468989294.00 ns, 3.6640 ms/op
+WorkloadResult   2: 128 op, 532405701.00 ns, 4.1594 ms/op
+WorkloadResult   3: 128 op, 550791848.00 ns, 4.3031 ms/op
+WorkloadResult   4: 128 op, 366283109.00 ns, 2.8616 ms/op
+WorkloadResult   5: 128 op, 480033304.00 ns, 3.7503 ms/op
+// GC:  42 42 42 199702768 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 1850825 has exited with code 0.
+
+Mean = 3.748 ms, StdErr = 0.252 ms (6.72%), N = 5, StdDev = 0.564 ms
+Min = 2.862 ms, Q1 = 3.664 ms, Median = 3.750 ms, Q3 = 4.159 ms, Max = 4.303 ms
+IQR = 0.495 ms, LowerFence = 2.921 ms, UpperFence = 4.903 ms
+ConfidenceInterval = [1.578 ms; 5.918 ms] (CI 99.9%), Margin = 2.170 ms (57.90% of Mean)
+Skewness = -0.51, Kurtosis = 1.47, MValue = 2
+
+// ** Remained 5 (13.9%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 0m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.LinkStorage_Delete: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.LinkStorage_Delete(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 31 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-DEBWMF(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 939514.00 ns, 939.5140 us/op
+WorkloadJitting  1: 1 op, 34165233.00 ns, 34.1652 ms/op
+
+WorkloadPilot    1: 2 op, 20128783.00 ns, 10.0644 ms/op
+WorkloadPilot    2: 3 op, 35434736.00 ns, 11.8116 ms/op
+WorkloadPilot    3: 4 op, 43371034.00 ns, 10.8428 ms/op
+WorkloadPilot    4: 5 op, 54043369.00 ns, 10.8087 ms/op
+WorkloadPilot    5: 6 op, 59064356.00 ns, 9.8441 ms/op
+WorkloadPilot    6: 7 op, 65003044.00 ns, 9.2861 ms/op
+WorkloadPilot    7: 8 op, 36164931.00 ns, 4.5206 ms/op
+WorkloadPilot    8: 9 op, 35638861.00 ns, 3.9599 ms/op
+WorkloadPilot    9: 10 op, 36691236.00 ns, 3.6691 ms/op
+WorkloadPilot   10: 11 op, 44683002.00 ns, 4.0621 ms/op
+WorkloadPilot   11: 12 op, 48106128.00 ns, 4.0088 ms/op
+WorkloadPilot   12: 13 op, 42438590.00 ns, 3.2645 ms/op
+WorkloadPilot   13: 14 op, 46785080.00 ns, 3.3418 ms/op
+WorkloadPilot   14: 15 op, 54318011.00 ns, 3.6212 ms/op
+WorkloadPilot   15: 16 op, 66355193.00 ns, 4.1472 ms/op
+WorkloadPilot   16: 32 op, 98328710.00 ns, 3.0728 ms/op
+WorkloadPilot   17: 64 op, 267822205.00 ns, 4.1847 ms/op
+WorkloadPilot   18: 128 op, 282225288.00 ns, 2.2049 ms/op
+WorkloadPilot   19: 256 op, 516025032.00 ns, 2.0157 ms/op
+
+WorkloadWarmup   1: 256 op, 676927446.00 ns, 2.6442 ms/op
+WorkloadWarmup   2: 256 op, 454211340.00 ns, 1.7743 ms/op
+WorkloadWarmup   3: 256 op, 476322251.00 ns, 1.8606 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 465673971.00 ns, 1.8190 ms/op
+WorkloadActual   2: 256 op, 482709879.00 ns, 1.8856 ms/op
+WorkloadActual   3: 256 op, 387874843.00 ns, 1.5151 ms/op
+WorkloadActual   4: 256 op, 603728384.00 ns, 2.3583 ms/op
+WorkloadActual   5: 256 op, 680075559.00 ns, 2.6565 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 465673971.00 ns, 1.8190 ms/op
+WorkloadResult   2: 256 op, 482709879.00 ns, 1.8856 ms/op
+WorkloadResult   3: 256 op, 387874843.00 ns, 1.5151 ms/op
+WorkloadResult   4: 256 op, 603728384.00 ns, 2.3583 ms/op
+WorkloadResult   5: 256 op, 680075559.00 ns, 2.6565 ms/op
+// GC:  83 82 82 399410056 256
+// Threading:  0 0 256
+
+// AfterAll
+// Benchmark Process 1850847 has exited with code 0.
+
+Mean = 2.047 ms, StdErr = 0.204 ms (9.95%), N = 5, StdDev = 0.455 ms
+Min = 1.515 ms, Q1 = 1.819 ms, Median = 1.886 ms, Q3 = 2.358 ms, Max = 2.657 ms
+IQR = 0.539 ms, LowerFence = 1.010 ms, UpperFence = 3.167 ms
+ConfidenceInterval = [0.294 ms; 3.800 ms] (CI 99.9%), Margin = 1.753 ms (85.66% of Mean)
+Skewness = 0.19, Kurtosis = 1.07, MValue = 2
+
+// ** Remained 4 (11.1%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 0m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Insert: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Insert(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 32 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-JWZJOS(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 913534.00 ns, 913.5340 us/op
+WorkloadJitting  1: 1 op, 30004987.00 ns, 30.0050 ms/op
+
+OverheadJitting  2: 16 op, 920025.00 ns, 57.5016 us/op
+WorkloadJitting  2: 16 op, 105089158.00 ns, 6.5681 ms/op
+
+WorkloadPilot    1: 16 op, 79867372.00 ns, 4.9917 ms/op
+WorkloadPilot    2: 32 op, 165299925.00 ns, 5.1656 ms/op
+WorkloadPilot    3: 64 op, 400401476.00 ns, 6.2563 ms/op
+WorkloadPilot    4: 128 op, 547820870.00 ns, 4.2799 ms/op
+
+OverheadWarmup   1: 128 op, 1240.00 ns, 9.6875 ns/op
+OverheadWarmup   2: 128 op, 1049.00 ns, 8.1953 ns/op
+OverheadWarmup   3: 128 op, 958.00 ns, 7.4844 ns/op
+OverheadWarmup   4: 128 op, 1069.00 ns, 8.3516 ns/op
+OverheadWarmup   5: 128 op, 960.00 ns, 7.5000 ns/op
+OverheadWarmup   6: 128 op, 1186.00 ns, 9.2656 ns/op
+OverheadWarmup   7: 128 op, 861.00 ns, 6.7266 ns/op
+
+OverheadActual   1: 128 op, 1011.00 ns, 7.8984 ns/op
+OverheadActual   2: 128 op, 1436.00 ns, 11.2188 ns/op
+OverheadActual   3: 128 op, 1513.00 ns, 11.8203 ns/op
+OverheadActual   4: 128 op, 1145.00 ns, 8.9453 ns/op
+OverheadActual   5: 128 op, 914.00 ns, 7.1406 ns/op
+OverheadActual   6: 128 op, 967.00 ns, 7.5547 ns/op
+OverheadActual   7: 128 op, 954.00 ns, 7.4531 ns/op
+OverheadActual   8: 128 op, 912.00 ns, 7.1250 ns/op
+OverheadActual   9: 128 op, 1386.00 ns, 10.8281 ns/op
+OverheadActual  10: 128 op, 1005.00 ns, 7.8516 ns/op
+OverheadActual  11: 128 op, 960.00 ns, 7.5000 ns/op
+OverheadActual  12: 128 op, 918.00 ns, 7.1719 ns/op
+OverheadActual  13: 128 op, 900.00 ns, 7.0313 ns/op
+OverheadActual  14: 128 op, 920.00 ns, 7.1875 ns/op
+OverheadActual  15: 128 op, 913.00 ns, 7.1328 ns/op
+OverheadActual  16: 128 op, 1186.00 ns, 9.2656 ns/op
+OverheadActual  17: 128 op, 889.00 ns, 6.9453 ns/op
+OverheadActual  18: 128 op, 897.00 ns, 7.0078 ns/op
+OverheadActual  19: 128 op, 886.00 ns, 6.9219 ns/op
+OverheadActual  20: 128 op, 889.00 ns, 6.9453 ns/op
+
+WorkloadWarmup   1: 128 op, 505182757.00 ns, 3.9467 ms/op
+WorkloadWarmup   2: 128 op, 552516597.00 ns, 4.3165 ms/op
+WorkloadWarmup   3: 128 op, 447922854.00 ns, 3.4994 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 330676156.00 ns, 2.5834 ms/op
+WorkloadActual   2: 128 op, 294931568.00 ns, 2.3042 ms/op
+WorkloadActual   3: 128 op, 315081224.00 ns, 2.4616 ms/op
+WorkloadActual   4: 128 op, 330189095.00 ns, 2.5796 ms/op
+WorkloadActual   5: 128 op, 430905261.00 ns, 3.3664 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 330675219.00 ns, 2.5834 ms/op
+WorkloadResult   2: 128 op, 294930631.00 ns, 2.3041 ms/op
+WorkloadResult   3: 128 op, 315080287.00 ns, 2.4616 ms/op
+WorkloadResult   4: 128 op, 330188158.00 ns, 2.5796 ms/op
+// GC:  48 47 46 310117728 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 1850872 has exited with code 0.
+
+Mean = 2.482 ms, StdErr = 0.066 ms (2.65%), N = 4, StdDev = 0.131 ms
+Min = 2.304 ms, Q1 = 2.422 ms, Median = 2.521 ms, Q3 = 2.581 ms, Max = 2.583 ms
+IQR = 0.158 ms, LowerFence = 2.185 ms, UpperFence = 2.818 ms
+ConfidenceInterval = [1.633 ms; 3.332 ms] (CI 99.9%), Margin = 0.850 ms (34.23% of Mean)
+Skewness = -0.41, Kurtosis = 1, MValue = 2
+
+// ** Remained 3 (8.3%) benchmark(s) to run. Estimated finish 2025-10-17 4:42 (0h 0m from now) **
+// **************************
+// Benchmark: DictionaryVsLinksBenchmark.Hybrid_Read: Job-FFCJWS(IterationCount=5, WarmupCount=3) [N=10000]
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet c5c19fdf-aa2f-40c3-b697-100efba98fb5.dll --anonymousPipes 110 111 --benchmarkName "DictionaryVsLinksComparison.DictionaryVsLinksBenchmark.Hybrid_Read(N: 10000)" --job "IterationCount=5, WarmupCount=3" --benchmarkId 33 in /tmp/gh-issue-solver-1760664513227/experiments/DictionaryVsLinksComparison/bin/Release/net8.0/c5c19fdf-aa2f-40c3-b697-100efba98fb5/bin/Release/net8.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.14.0
+// Runtime=.NET 8.0.21 (8.0.2125.47513), X64 RyuJIT SSE3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=SSE3 VectorSize=128
+// Job: Job-KHLZXK(IterationCount=5, WarmupCount=3)
+
+OverheadJitting  1: 1 op, 712055.00 ns, 712.0550 us/op
+WorkloadJitting  1: 1 op, 27551334.00 ns, 27.5513 ms/op
+
+OverheadJitting  2: 16 op, 731088.00 ns, 45.6930 us/op
+WorkloadJitting  2: 16 op, 129661110.00 ns, 8.1038 ms/op
+
+WorkloadPilot    1: 16 op, 135360870.00 ns, 8.4601 ms/op
+WorkloadPilot    2: 32 op, 229688867.00 ns, 7.1778 ms/op
+WorkloadPilot    3: 64 op, 417147731.00 ns, 6.5179 ms/op
+WorkloadPilot    4: 128 op, 745214691.00 ns, 5.8220 ms/op
+
+OverheadWarmup   1: 128 op, 4868.00 ns, 38.0313 ns/op
+OverheadWarmup   2: 128 op, 1193.00 ns, 9.3203 ns/op
+OverheadWarmup   3: 128 op, 1663.00 ns, 12.9922 ns/op
+OverheadWarmup   4: 128 op, 1257.00 ns, 9.8203 ns/op
+OverheadWarmup   5: 128 op, 1806.00 ns, 14.1094 ns/op
+OverheadWarmup   6: 128 op, 1588.00 ns, 12.4063 ns/op
+
+OverheadActual   1: 128 op, 1459.00 ns, 11.3984 ns/op
+OverheadActual   2: 128 op, 1489.00 ns, 11.6328 ns/op
+OverheadActual   3: 128 op, 1658.00 ns, 12.9531 ns/op
+OverheadActual   4: 128 op, 1145.00 ns, 8.9453 ns/op
+OverheadActual   5: 128 op, 1208.00 ns, 9.4375 ns/op
+OverheadActual   6: 128 op, 1165.00 ns, 9.1016 ns/op
+OverheadActual   7: 128 op, 1160.00 ns, 9.0625 ns/op
+OverheadActual   8: 128 op, 1180.00 ns, 9.2188 ns/op
+OverheadActual   9: 128 op, 1192.00 ns, 9.3125 ns/op
+OverheadActual  10: 128 op, 1200.00 ns, 9.3750 ns/op
+OverheadActual  11: 128 op, 1257.00 ns, 9.8203 ns/op
+OverheadActual  12: 128 op, 1240.00 ns, 9.6875 ns/op
+OverheadActual  13: 128 op, 1167.00 ns, 9.1172 ns/op
+OverheadActual  14: 128 op, 1202.00 ns, 9.3906 ns/op
+OverheadActual  15: 128 op, 1243.00 ns, 9.7109 ns/op
+
+WorkloadWarmup   1: 128 op, 339894298.00 ns, 2.6554 ms/op
+WorkloadWarmup   2: 128 op, 463729601.00 ns, 3.6229 ms/op
+WorkloadWarmup   3: 128 op, 425137392.00 ns, 3.3214 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 432520082.00 ns, 3.3791 ms/op
+WorkloadActual   2: 128 op, 342621355.00 ns, 2.6767 ms/op
+WorkloadActual   3: 128 op, 315969688.00 ns, 2.4685 ms/op
+WorkloadActual   4: 128 op, 432762911.00 ns, 3.3810 ms/op
+WorkloadActual   5: 128 op, 808703640.00 ns, 6.3180 ms/op
+
+// AfterActualRun
