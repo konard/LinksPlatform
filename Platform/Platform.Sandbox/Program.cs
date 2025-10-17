@@ -50,6 +50,7 @@ namespace Platform.Sandbox
 
             //new CSVExporterCLI().Run(args);
             //new FileIndexerCLI().Run(args);
+            //new SequenceUnfoldIndexCLI().Run(args);
 
             //DllImportTest.Test();
 
