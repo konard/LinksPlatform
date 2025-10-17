@@ -221,3 +221,8 @@ Platform/Platform.Data.Kernel/*.dll
 
 # Platform.Data ~ Links Database files
 *.links
+
+# Python virtual environments
+.venv/
+venv/
+env/

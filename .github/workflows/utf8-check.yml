@@ -1,0 +1,34 @@
+name: UTF-8 Encoding Check
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  check-encoding:
+    name: Check UTF-8 Encoding
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install chardet
+
+    - name: Check UTF-8 encoding
+      run: |
+        python .github/scripts/check-utf8-encoding.py
+
+    - name: Report results
+      if: failure()
+      run: |
+        echo "::error::Some files are not encoded in UTF-8. Please convert them to UTF-8 encoding."
