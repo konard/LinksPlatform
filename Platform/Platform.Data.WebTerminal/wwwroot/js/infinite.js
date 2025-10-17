@@ -33,6 +33,7 @@ var querySpaceEntered = false;
 var queryForcedToShow = true;
 var ctrlKeyIsPressed = false;
 var altKeyIsPressed = false;
+var isTwitterView = false;
 
 jQuery.fn.extend({
     disableSelection: function () {
@@ -180,6 +181,20 @@ $(document).ready(function () {
     MoveToItem(GetFirstItem());
 
     Refresh();
+
+    // View toggle functionality
+    $("#view-toggle").click(function () {
+        isTwitterView = !isTwitterView;
+        if (isTwitterView) {
+            $("body").addClass("twitter-view");
+            $(this).text("Infinite View");
+        } else {
+            $("body").removeClass("twitter-view");
+            $(this).text("Switch View");
+            // Restore position when switching back to infinite view
+            RefreshPosition();
+        }
+    });
 });
 
 $(window).resize(function () {

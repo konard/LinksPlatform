@@ -164,16 +164,109 @@ ul
 	font: 20px Sans-serif, Arial, Helvetica;
 	font-weight: lighter;
 	font-variant: small-caps;
-	
+
 	/*
 	padding: 7px 0px 0px 37px;
 	font: 16px Sans-serif, Arial, Helvetica;
 	*/
-	
+
 	font-style: italic;
 	background-color: rgba(31, 31, 31, 0.6);
 	-webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 7px;
     /*text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);*/
+}
+
+/* View toggle button */
+#view-toggle
+{
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 10;
+	background: #888;
+	border: 1px solid transparent;
+	padding: 10px 15px;
+	color: #EEE;
+	font: 14px Sans-serif, Arial, Helvetica;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 1px 0 0 rgba(255, 255, 255, 0.1);
+    -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 1px 0 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+#view-toggle:hover
+{
+	background: #999;
+}
+
+/* Twitter-like flat tree view styles */
+body.twitter-view #surface
+{
+	display: block;
+	left: 50% !important;
+	transform: translateX(-50%);
+	width: 700px;
+	margin: 0 auto;
+}
+
+body.twitter-view ul
+{
+	padding-left: 0;
+}
+
+body.twitter-view li
+{
+	position: relative;
+	padding-left: 40px;
+	margin-bottom: 10px;
+}
+
+body.twitter-view li:before
+{
+	content: '';
+	position: absolute;
+	left: 15px;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: #444;
+}
+
+body.twitter-view li:last-child:before
+{
+	bottom: 50%;
+}
+
+body.twitter-view li:after
+{
+	content: '';
+	position: absolute;
+	left: 15px;
+	top: 20px;
+	width: 15px;
+	height: 2px;
+	background: #444;
+}
+
+body.twitter-view > #surface > ul > li
+{
+	padding-left: 0;
+}
+
+body.twitter-view > #surface > ul > li:before,
+body.twitter-view > #surface > ul > li:after
+{
+	display: none;
+}
+
+body.twitter-view .item,
+body.twitter-view .item a
+{
+	width: 100%;
+	box-sizing: border-box;
 }
