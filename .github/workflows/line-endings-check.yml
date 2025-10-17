@@ -1,0 +1,89 @@
+name: Line Endings Check
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+jobs:
+  check-line-endings:
+    runs-on: ubuntu-latest
+    name: Check Line Endings
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for CRLF line endings
+        run: |
+          echo "Checking for files with CRLF line endings..."
+
+          # Find all text files (excluding binary files and .git directory)
+          # Check if they have CRLF line endings
+          files_with_crlf=()
+
+          # Use git to find all tracked files
+          while IFS= read -r file; do
+            # Skip binary files and specific patterns
+            if [[ "$file" == *.dll ]] || [[ "$file" == *.exe ]] || \
+               [[ "$file" == *.png ]] || [[ "$file" == *.jpg ]] || \
+               [[ "$file" == *.jpeg ]] || [[ "$file" == *.gif ]] || \
+               [[ "$file" == *.ico ]] || [[ "$file" == *.woff* ]] || \
+               [[ "$file" == *.ttf ]] || [[ "$file" == *.eot ]] || \
+               [[ "$file" == *.so ]] || [[ "$file" == *.dylib ]]; then
+              continue
+            fi
+
+            # Windows-specific files are allowed to have CRLF
+            if [[ "$file" == *.bat ]] || [[ "$file" == *.cmd ]] || [[ "$file" == *.ps1 ]]; then
+              # Check if these files have CRLF (they should)
+              if ! file "$file" | grep -q "CRLF"; then
+                echo "⚠️  Warning: Windows script file '$file' should have CRLF line endings"
+              fi
+              continue
+            fi
+
+            # Check if the file exists and is a regular file
+            if [ -f "$file" ]; then
+              # Check if file has CRLF line endings
+              if file "$file" | grep -q "CRLF"; then
+                files_with_crlf+=("$file")
+              fi
+            fi
+          done < <(git ls-files)
+
+          # Report results
+          if [ ${#files_with_crlf[@]} -gt 0 ]; then
+            echo "❌ Error: Found ${#files_with_crlf[@]} file(s) with CRLF line endings:"
+            printf '%s\n' "${files_with_crlf[@]}"
+            echo ""
+            echo "Please convert these files to use LF line endings."
+            echo "You can use dos2unix or configure your git settings:"
+            echo "  git config core.autocrlf input"
+            echo ""
+            echo "Or convert files manually:"
+            echo "  dos2unix <filename>"
+            exit 1
+          else
+            echo "✅ All text files have correct line endings (LF)"
+          fi
+
+      - name: Verify .gitattributes is present
+        run: |
+          if [ ! -f ".gitattributes" ]; then
+            echo "❌ Error: .gitattributes file is missing"
+            exit 1
+          fi
+          echo "✅ .gitattributes file is present"
+
+      - name: Check .gitattributes rules
+        run: |
+          echo "Checking .gitattributes configuration..."
+          if grep -q "eol=lf" .gitattributes; then
+            echo "✅ .gitattributes contains LF line ending rules"
+          else
+            echo "⚠️  Warning: .gitattributes does not specify line ending rules"
+          fi
