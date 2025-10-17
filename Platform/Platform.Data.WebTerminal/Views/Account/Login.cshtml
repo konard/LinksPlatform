@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-page">
+    <h2>@ViewData["Title"]</h2>
+    <p>Login to view draft facts (facts without references).</p>
+
+    <form asp-action="Login" method="post">
+        <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a asp-controller="Facts" asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+
+    <div class="info-box">
+        <hr />
+        <p class="text-muted">
+            <small>
+                <strong>Note:</strong> This is a simple demo login. In production, proper authentication should be implemented.
+            </small>
+        </p>
+    </div>
+</div>
+
+<style>
+    .login-page {
+        max-width: 400px;
+        margin: 50px auto;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        color: white;
+    }
+    .btn-primary {
+        background-color: #007bff;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+    .text-danger {
+        color: #dc3545;
+    }
+    .text-muted {
+        color: #6c757d;
+    }
+</style>
