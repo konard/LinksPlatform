@@ -1,0 +1,121 @@
+Graph-Based Package Manager - Version Resolution Example
+=========================================================
+
+Scenario: Resolving versions for circular dependencies
+
+Dependency Graph:
+-----------------
+app v1.0.0 requires:
+  ├─ ui-framework ^2.0.0
+  └─ layout-engine ^1.5.0
+
+ui-framework v2.0.0 requires:
+  └─ layout-engine ^1.5.0 (circular)
+
+layout-engine v1.5.0 requires:
+  └─ ui-framework ^2.0.0 (circular)
+
+Available Versions:
+-------------------
+ui-framework: [1.0.0, 1.5.0, 2.0.0, 2.1.0, 2.2.0]
+layout-engine: [1.0.0, 1.2.0, 1.5.0, 1.6.0, 1.7.0]
+
+Constraints:
+------------
+1. app requires ui-framework >= 2.0.0, < 3.0.0
+2. app requires layout-engine >= 1.5.0, < 2.0.0
+3. ui-framework 2.0.0 requires layout-engine >= 1.5.0, < 2.0.0
+4. layout-engine 1.5.0 requires ui-framework >= 2.0.0, < 3.0.0
+
+Resolution Process:
+-------------------
+Step 1: Initialize with latest compatible versions
+  ui-framework: 2.2.0
+  layout-engine: 1.7.0
+
+Step 2: Check constraints
+  ✓ app → ui-framework 2.2.0 (satisfies ^2.0.0)
+  ✓ app → layout-engine 1.7.0 (satisfies ^1.5.0)
+  ✓ ui-framework 2.2.0 → layout-engine 1.7.0 (satisfies ^1.5.0)
+  ✓ layout-engine 1.7.0 → ui-framework 2.2.0 (satisfies ^2.0.0)
+
+Step 3: Verify circular compatibility
+  ✓ ui-framework 2.2.0 interface compatible with layout-engine 1.7.0
+  ✓ layout-engine 1.7.0 interface compatible with ui-framework 2.2.0
+
+Final Resolution:
+-----------------
+✓ ui-framework: 2.2.0
+✓ layout-engine: 1.7.0
+✓ app: 1.0.0
+
+Lock File (package-graph.lock):
+--------------------------------
+{
+  "resolved": {
+    "ui-framework": {
+      "version": "2.2.0",
+      "interface-version": "2.0",
+      "hash": "sha256:abc123..."
+    },
+    "layout-engine": {
+      "version": "1.7.0",
+      "interface-version": "1.0",
+      "hash": "sha256:def456..."
+    },
+    "app": {
+      "version": "1.0.0",
+      "hash": "sha256:ghi789..."
+    }
+  },
+  "circular-dependencies": [
+    ["ui-framework", "layout-engine"]
+  ],
+  "build-order": [
+    {
+      "stage": 1,
+      "action": "extract-interfaces",
+      "packages": ["ui-framework", "layout-engine"]
+    },
+    {
+      "stage": 2,
+      "action": "compile-implementations",
+      "packages": ["ui-framework", "layout-engine"]
+    },
+    {
+      "stage": 3,
+      "action": "link-libraries",
+      "packages": ["ui-framework", "layout-engine"]
+    },
+    {
+      "stage": 4,
+      "action": "compile-app",
+      "packages": ["app"]
+    },
+    {
+      "stage": 5,
+      "action": "link-app",
+      "packages": ["app"]
+    }
+  ]
+}
+
+Comparison with Tree-Based Resolution:
+--------------------------------------
+Tree-Based Manager:
+  ERROR: Circular dependency detected between ui-framework and layout-engine
+  SUGGESTION: Merge packages or refactor to remove cycle
+  RESULT: Development friction, larger packages
+
+Graph-Based Manager:
+  SUCCESS: Resolved all constraints
+  PACKAGES: 2 independent packages
+  RESULT: Clean architecture, maintainable code
+
+Edge Cases Handled:
+-------------------
+1. Version conflicts detected and reported clearly
+2. Interface compatibility checked separately from implementation
+3. Multiple circular dependency chains supported
+4. Deadlock detection in constraint satisfaction
+5. Incremental updates respect circular constraints
