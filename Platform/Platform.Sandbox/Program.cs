@@ -10,6 +10,11 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Bit String Variations Experiments (Issue #663)
+            // Uncomment to run the experiments demonstrating bitmap and sector-based storage
+            BitStringExperiments.RunAllExperiments();
+            return;
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
