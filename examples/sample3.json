@@ -1,0 +1,13 @@
+{
+  "id": 3,
+  "name": "Bob Johnson",
+  "email": "bob@example.com",
+  "age": 35,
+  "isActive": true,
+  "address": {
+    "street": "789 Pine Rd",
+    "city": "Chicago",
+    "zipCode": "60601"
+  },
+  "tags": ["architect"]
+}
