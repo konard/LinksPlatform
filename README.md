@@ -1,5 +1,13 @@
-[![Build status](https://travis-ci.org/Konard/LinksPlatform.svg?branch=master "Build status")](https://travis-ci.org/Konard/LinksPlatform)
+# LinksPlatform Archive
 
-# LinksPlatform ([русская версия](https://github.com/Konard/LinksPlatform/blob/master/README.ru.md))
+This branch contains archived historical materials from the LinksPlatform project.
 
-English version of this README page is moved to [our organization's page](https://github.com/linksplatform).
+## Contents
+
+- **28.03.2010-04.11.2010** - Early implementation of the Links concept from 2010
+
+## Note
+
+For the current active development, please see the [master branch](https://github.com/konard/LinksPlatform/tree/master).
+
+The main project has moved to: https://github.com/linksplatform
