@@ -1,0 +1,17 @@
+The quick brown fox jumps over the lazy dog.
+The five boxing wizards jump quickly.
+Pack my box with five dozen liquor jugs.
+
+To be, or not to be, that is the question:
+Whether 'tis nobler in the mind to suffer
+The slings and arrows of outrageous fortune,
+Or to take arms against a sea of troubles.
+
+To implement a new feature:
+To test your implementation:
+To deploy to production:
+To debug the application:
+
+The art of programming requires patience.
+The best code is code that works.
+The secret to success is practice.
