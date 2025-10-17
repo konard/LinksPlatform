@@ -1,3 +1,11 @@
+/* Example code commented out due to package version compatibility
+ * This example requires newer versions of Platform.Data.Doublets
+ *
+ * To use this example:
+ * 1. Update Platform.Sandbox.csproj to reference newer Platform.Data.Doublets
+ * 2. Uncomment this file
+ * 3. Build and run
+
 using System;
 using Platform.Data;
 using Platform.Data.Doublets;
@@ -146,3 +154,4 @@ namespace Platform.Sandbox
         }
     }
 }
+*/

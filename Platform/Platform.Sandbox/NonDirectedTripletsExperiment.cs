@@ -22,10 +22,10 @@ namespace Platform.Sandbox
     /// </para>
     /// </summary>
     /// <typeparam name="TLinkAddress">The type of link address.</typeparam>
-    public class NonDirectedTriplets<TLinkAddress> : ILinks<TLinkAddress>
+    public class NonDirectedTriplets<TLinkAddress>
         where TLinkAddress : struct, IComparable<TLinkAddress>
     {
-        private readonly ILinks<TLinkAddress> _innerLinks;
+        private readonly ILinks<TLinkAddress, LinksConstants<TLinkAddress>> _innerLinks;
         private readonly IComparer<TLinkAddress> _comparer;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Platform.Sandbox
         /// </para>
         /// </summary>
         /// <param name="innerLinks">The underlying triplet links implementation.</param>
-        public NonDirectedTriplets(ILinks<TLinkAddress> innerLinks)
+        public NonDirectedTriplets(ILinks<TLinkAddress, LinksConstants<TLinkAddress>> innerLinks)
         {
             _innerLinks = innerLinks ?? throw new ArgumentNullException(nameof(innerLinks));
             _comparer = Comparer<TLinkAddress>.Default;
