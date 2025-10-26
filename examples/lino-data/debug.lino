@@ -1,0 +1,17 @@
+# Simple Lino file for debugging
+# As mentioned in issue #590: "Good for debug"
+
+# Basic link
+A B
+
+# Named link
+link1 (C D)
+
+# Reference
+link2: link1
+
+# Triplet
+E F G
+
+# Multiple values
+data (value1 value2 value3)
