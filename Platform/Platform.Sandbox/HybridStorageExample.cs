@@ -29,7 +29,7 @@ namespace Platform.Sandbox
         /// to reconstruct any historical state.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        private struct StateTransition
+        public struct StateTransition
         {
             public long Timestamp;
             public ulong LinkAddress;
@@ -40,7 +40,7 @@ namespace Platform.Sandbox
             public TransitionType Type;
         }
 
-        private enum TransitionType : byte
+        public enum TransitionType : byte
         {
             Create = 1,
             Update = 2,
