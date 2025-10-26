@@ -18,7 +18,7 @@ namespace Platform.Sandbox
     /// This example shows the concept from issue #645:
     /// https://github.com/konard/LinksPlatform/issues/645
     /// </summary>
-    public class HybridStorageExample
+    public class HybridStorageExample : IDisposable
     {
         private const string ArchiveFileName = "archive.links";
         private const string StateLogFileName = "state-transitions.log";
@@ -147,14 +147,16 @@ namespace Platform.Sandbox
                 return transitions;
             }
 
-            using var reader = new BinaryReader(File.OpenRead(StateLogFileName));
-            var transitionSize = Marshal.SizeOf<StateTransition>();
-
-            while (reader.BaseStream.Position < reader.BaseStream.Length)
+            using (var reader = new BinaryReader(File.OpenRead(StateLogFileName)))
             {
-                var bytes = reader.ReadBytes(transitionSize);
-                var transition = BytesToStruct<StateTransition>(bytes);
-                transitions.Add(transition);
+                var transitionSize = Marshal.SizeOf<StateTransition>();
+
+                while (reader.BaseStream.Position < reader.BaseStream.Length)
+                {
+                    var bytes = reader.ReadBytes(transitionSize);
+                    var transition = BytesToStruct<StateTransition>(bytes);
+                    transitions.Add(transition);
+                }
             }
 
             return transitions;
@@ -210,58 +212,59 @@ namespace Platform.Sandbox
             Console.WriteLine("Demonstrating: Store mutable data in RAM, and immutable data on Disk");
             Console.WriteLine();
 
-            using var hybrid = new HybridStorageExample("test-archive.links");
-
-            // Create current state links in RAM (mutable state Sn)
-            Console.WriteLine("1. Creating current state in RAM (Sn)...");
-            using (var currentLinks = hybrid.CreateCurrentStateLinks())
+            using (var hybrid = new HybridStorageExample("test-archive.links"))
             {
-                Console.WriteLine($"   RAM storage initialized: {currentLinks.Count()} links");
+                // Create current state links in RAM (mutable state Sn)
+                Console.WriteLine("1. Creating current state in RAM (Sn)...");
+                using (var currentLinks = hybrid.CreateCurrentStateLinks())
+                {
+                    Console.WriteLine($"   RAM storage initialized: {currentLinks.Count()} links");
 
-                // Create some links
-                var link1 = currentLinks.Create();
-                Console.WriteLine($"   Created link: {link1}");
-                hybrid.LogTransition(link1, 0, 0, 0, 0, TransitionType.Create);
+                    // Create some links
+                    var link1 = currentLinks.Create();
+                    Console.WriteLine($"   Created link: {link1}");
+                    hybrid.LogTransition(link1, 0, 0, 0, 0, TransitionType.Create);
 
-                var link2 = currentLinks.Create();
-                Console.WriteLine($"   Created link: {link2}");
-                hybrid.LogTransition(link2, 0, 0, 0, 0, TransitionType.Create);
+                    var link2 = currentLinks.Create();
+                    Console.WriteLine($"   Created link: {link2}");
+                    hybrid.LogTransition(link2, 0, 0, 0, 0, TransitionType.Create);
 
-                // Update a link (state transition X→Y)
-                Console.WriteLine($"   Updating link {link1} to reference {link2}...");
-                currentLinks.Update(link1, link2, link2);
-                hybrid.LogTransition(link1, 0, 0, link2, link2, TransitionType.Update);
+                    // Update a link (state transition X→Y)
+                    Console.WriteLine($"   Updating link {link1} to reference {link2}...");
+                    currentLinks.Update(link1, link2, link2);
+                    hybrid.LogTransition(link1, 0, 0, link2, link2, TransitionType.Update);
 
-                Console.WriteLine($"   Current state: {currentLinks.Count()} links in RAM");
+                    Console.WriteLine($"   Current state: {currentLinks.Count()} links in RAM");
+                }
+
+                // Archive the current state to disk
+                Console.WriteLine();
+                Console.WriteLine("2. Archiving state Sn to disk (becomes S(n-1))...");
+                hybrid.ArchiveCurrentState();
+
+                // Read the transition log
+                Console.WriteLine();
+                Console.WriteLine("3. Reading state transition log (X→Y transitions)...");
+                var transitions = hybrid.ReadTransitionLog();
+                Console.WriteLine($"   Found {transitions.Count} state transitions:");
+                foreach (var transition in transitions)
+                {
+                    var timestamp = new DateTime(transition.Timestamp);
+                    Console.WriteLine($"   - {timestamp:HH:mm:ss.fff}: {transition.Type} Link#{transition.LinkAddress}");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("=== Summary ===");
+                Console.WriteLine("- Mutable data (current state Sn) stored in RAM for fast access");
+                Console.WriteLine("- Immutable data (archived states) stored on Disk for persistence");
+                Console.WriteLine("- State transitions logged for complete audit trail and reconstruction");
+                Console.WriteLine();
+                Console.WriteLine("This architecture allows:");
+                Console.WriteLine("  • Fast operations on current data (RAM)");
+                Console.WriteLine("  • Historical states preserved (Disk)");
+                Console.WriteLine("  • Time-travel queries via transition log");
+                Console.WriteLine("  • Efficient memory usage (old states archived)");
             }
-
-            // Archive the current state to disk
-            Console.WriteLine();
-            Console.WriteLine("2. Archiving state Sn to disk (becomes S(n-1))...");
-            hybrid.ArchiveCurrentState();
-
-            // Read the transition log
-            Console.WriteLine();
-            Console.WriteLine("3. Reading state transition log (X→Y transitions)...");
-            var transitions = hybrid.ReadTransitionLog();
-            Console.WriteLine($"   Found {transitions.Count} state transitions:");
-            foreach (var transition in transitions)
-            {
-                var timestamp = new DateTime(transition.Timestamp);
-                Console.WriteLine($"   - {timestamp:HH:mm:ss.fff}: {transition.Type} Link#{transition.LinkAddress}");
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("=== Summary ===");
-            Console.WriteLine("- Mutable data (current state Sn) stored in RAM for fast access");
-            Console.WriteLine("- Immutable data (archived states) stored on Disk for persistence");
-            Console.WriteLine("- State transitions logged for complete audit trail and reconstruction");
-            Console.WriteLine();
-            Console.WriteLine("This architecture allows:");
-            Console.WriteLine("  • Fast operations on current data (RAM)");
-            Console.WriteLine("  • Historical states preserved (Disk)");
-            Console.WriteLine("  • Time-travel queries via transition log");
-            Console.WriteLine("  • Efficient memory usage (old states archived)");
         }
     }
 }
