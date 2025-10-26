@@ -164,7 +164,7 @@ namespace Platform.Sandbox.StoredQueries
                     var query = queryObj as dynamic;
                     if (query != null)
                     {
-                        _queriesById.TryRemove(query.Id, out _);
+                        _queriesById.TryRemove(query.Id, out object removedQuery);
                     }
                     return true;
                 }
