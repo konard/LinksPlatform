@@ -10,6 +10,10 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Run the Hybrid Storage Example (Issue #645)
+            // Uncomment to demonstrate storing mutable data in RAM and immutable data on Disk
+            // HybridStorageExample.Run();
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
