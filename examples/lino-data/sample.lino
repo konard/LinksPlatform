@@ -1,0 +1,56 @@
+# Sample Lino (Links Notation) File
+# This file demonstrates various Lino syntax patterns
+
+# Simple doublets (2-tuple links)
+papa loves mama
+son loves mama
+daughter loves mama
+
+# Named links with identifiers
+lovesMama (loves mama)
+papa lovesMama
+son lovesMama
+daughter lovesMama
+
+# Triplets (3-tuple links)
+papa has car
+mama has house
+son has bike
+
+# N-tuple links with multiple values
+family (papa mama son daughter)
+relationship (papa loves mama)
+
+# References to existing links
+all: family
+
+# Hierarchical relationships
+papa (name John age 45)
+mama (name Mary age 42)
+son (name Tom age 15)
+daughter (name Alice age 12)
+
+# Complex nested structures
+happyFamily (family are happy)
+livingTogether (family lives house)
+
+# Multiple links describing same entities
+papa works office
+mama works hospital
+son studies school
+daughter studies school
+
+# Links with descriptive values
+car (color red brand Toyota year 2020)
+house (type apartment rooms 3 city NewYork)
+bike (color blue type mountain)
+
+# Abstract concepts
+love (emotion positive strong)
+family (concept social important)
+
+# References and aliases
+father: papa
+mother: mama
+child1: son
+child2: daughter
