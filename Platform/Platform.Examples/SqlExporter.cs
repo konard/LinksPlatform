@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using Platform.Data;
+using Platform.Data.Doublets;
 
 namespace Platform.Examples
 {

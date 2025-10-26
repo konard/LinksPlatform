@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Platform.Data;
+using Platform.Data.Doublets;
 using Platform.Converters;
 
 namespace Platform.Examples

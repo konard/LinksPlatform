@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Platform.Data;
+using Platform.Data.Doublets;
 
 namespace Platform.Examples
 {
@@ -117,6 +118,6 @@ namespace Platform.Examples
         /// <summary>
         /// Gets the substructure links managed by this mapper.
         /// </summary>
-        public IReadOnlySet<TLink> SubstructureLinks => _substructureLinks;
+        public HashSet<TLink> SubstructureLinks => _substructureLinks;
     }
 }
