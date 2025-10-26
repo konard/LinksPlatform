@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Platform.Examples;
 using Platform.Threading;
+using Platform.Sandbox.Experiments;
 
 namespace Platform.Sandbox
 {
@@ -10,6 +11,11 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Run Copy-On-Write Database Example (Issue #603)
+            RunCopyOnWriteExamples.Run();
+
+            return;
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
