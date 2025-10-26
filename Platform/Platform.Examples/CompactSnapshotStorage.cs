@@ -53,9 +53,8 @@ namespace Platform.Examples
             // Count usages (how many times each link is referenced)
             foreach (var linkAddress in linkAddresses)
             {
-                var link = _links.GetLink(linkAddress);
-                var source = _links.GetSource(link);
-                var target = _links.GetTarget(link);
+                var source = _links.GetSource(linkAddress);
+                var target = _links.GetTarget(linkAddress);
 
                 // Count source usage
                 if (!usageCounts.ContainsKey(source))
@@ -199,9 +198,8 @@ namespace Platform.Examples
 
         private void WriteLinkInByteSpace(BinaryWriter writer, TLink linkAddress, Dictionary<TLink, TLink> addressMapping)
         {
-            var link = _links.GetLink(linkAddress);
-            var source = _links.GetSource(link);
-            var target = _links.GetTarget(link);
+            var source = _links.GetSource(linkAddress);
+            var target = _links.GetTarget(linkAddress);
 
             // Map to new addresses
             var newSource = addressMapping.ContainsKey(source) ? addressMapping[source] : source;
@@ -214,9 +212,8 @@ namespace Platform.Examples
 
         private void WriteLinkInUShortSpace(BinaryWriter writer, TLink linkAddress, Dictionary<TLink, TLink> addressMapping)
         {
-            var link = _links.GetLink(linkAddress);
-            var source = _links.GetSource(link);
-            var target = _links.GetTarget(link);
+            var source = _links.GetSource(linkAddress);
+            var target = _links.GetTarget(linkAddress);
 
             var newSource = addressMapping.ContainsKey(source) ? addressMapping[source] : source;
             var newTarget = addressMapping.ContainsKey(target) ? addressMapping[target] : target;
@@ -228,9 +225,8 @@ namespace Platform.Examples
 
         private void WriteLinkInUIntSpace(BinaryWriter writer, TLink linkAddress, Dictionary<TLink, TLink> addressMapping)
         {
-            var link = _links.GetLink(linkAddress);
-            var source = _links.GetSource(link);
-            var target = _links.GetTarget(link);
+            var source = _links.GetSource(linkAddress);
+            var target = _links.GetTarget(linkAddress);
 
             var newSource = addressMapping.ContainsKey(source) ? addressMapping[source] : source;
             var newTarget = addressMapping.ContainsKey(target) ? addressMapping[target] : target;
@@ -242,9 +238,8 @@ namespace Platform.Examples
 
         private void WriteLinkInULongSpace(BinaryWriter writer, TLink linkAddress, Dictionary<TLink, TLink> addressMapping)
         {
-            var link = _links.GetLink(linkAddress);
-            var source = _links.GetSource(link);
-            var target = _links.GetTarget(link);
+            var source = _links.GetSource(linkAddress);
+            var target = _links.GetTarget(linkAddress);
 
             var newSource = addressMapping.ContainsKey(source) ? addressMapping[source] : source;
             var newTarget = addressMapping.ContainsKey(target) ? addressMapping[target] : target;
