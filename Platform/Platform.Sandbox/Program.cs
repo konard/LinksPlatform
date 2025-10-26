@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Platform.Examples;
 using Platform.Threading;
+using Platform.Sandbox.AlgorithmGeneration;
 
 namespace Platform.Sandbox
 {
@@ -10,6 +11,15 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Algorithm Generation Experiment (Issue #614)
+            AlgorithmGenerationExperiment.Run();
+            Console.WriteLine("\nPress any key to continue to data structure example...");
+            Console.ReadKey();
+            AlgorithmGenerationExperiment.RunDataStructureExample();
+            Console.WriteLine("\nPress any key to exit...");
+            Console.ReadKey();
+            return;
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
