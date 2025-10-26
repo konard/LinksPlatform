@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Platform.Examples;
 using Platform.Numbers;
+using Platform.Data.Doublets;
 
 namespace Platform.Experiments
 {

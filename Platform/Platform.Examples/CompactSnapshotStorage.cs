@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Platform.Numbers;
+using Platform.Data.Doublets;
+using Platform.Converters;
 
 namespace Platform.Examples
 {
@@ -158,12 +160,12 @@ namespace Platform.Examples
             for (int i = 0; i < orderedLinks.Count; i++)
             {
                 var oldAddress = orderedLinks[i];
-                var newAddress = Arithmetic<TLink>.Add(zero, Arithmetic<TLink>.Convert(i));
+                var newAddress = Arithmetic.Add(zero, (TLink)(object)i);
                 addressMapping[oldAddress] = newAddress;
             }
 
             // Write byte address space (first 256 links)
-            int byteSpaceCount = Math.Min(orderedLinks.Count, ByteAddressSpace);
+            int byteSpaceCount = System.Math.Min(orderedLinks.Count, ByteAddressSpace);
             writer.Write(byteSpaceCount);
             for (int i = 0; i < byteSpaceCount; i++)
             {
@@ -171,7 +173,7 @@ namespace Platform.Examples
             }
 
             // Write ushort address space (next 65,536 links)
-            int ushortSpaceCount = Math.Min(Math.Max(0, orderedLinks.Count - ByteAddressSpace), UShortAddressSpace);
+            int ushortSpaceCount = System.Math.Min(System.Math.Max(0, orderedLinks.Count - ByteAddressSpace), UShortAddressSpace);
             writer.Write(ushortSpaceCount);
             for (int i = ByteAddressSpace; i < ByteAddressSpace + ushortSpaceCount; i++)
             {
@@ -179,7 +181,7 @@ namespace Platform.Examples
             }
 
             // Write uint address space (next 4,294,967,296 links)
-            long uintSpaceCount = Math.Min(Math.Max(0L, orderedLinks.Count - ByteAddressSpace - UShortAddressSpace), UIntAddressSpace);
+            long uintSpaceCount = System.Math.Min(System.Math.Max(0L, orderedLinks.Count - ByteAddressSpace - UShortAddressSpace), UIntAddressSpace);
             writer.Write((int)uintSpaceCount);
             for (long i = ByteAddressSpace + UShortAddressSpace; i < ByteAddressSpace + UShortAddressSpace + uintSpaceCount; i++)
             {
@@ -187,7 +189,7 @@ namespace Platform.Examples
             }
 
             // Write ulong address space (remaining links)
-            long ulongSpaceCount = Math.Max(0L, orderedLinks.Count - ByteAddressSpace - UShortAddressSpace - uintSpaceCount);
+            long ulongSpaceCount = System.Math.Max(0L, orderedLinks.Count - ByteAddressSpace - UShortAddressSpace - uintSpaceCount);
             writer.Write(ulongSpaceCount);
             for (long i = ByteAddressSpace + UShortAddressSpace + uintSpaceCount; i < orderedLinks.Count; i++)
             {
@@ -330,66 +332,42 @@ namespace Platform.Examples
         // Conversion helpers
         private byte ConvertToByte(TLink value)
         {
-            return Arithmetic<TLink>.ConvertToType<byte>(value);
+            return (byte)(object)value;
         }
 
         private ushort ConvertToUShort(TLink value)
         {
-            return Arithmetic<TLink>.ConvertToType<ushort>(value);
+            return (ushort)(object)value;
         }
 
         private uint ConvertToUInt(TLink value)
         {
-            return Arithmetic<TLink>.ConvertToType<uint>(value);
+            return (uint)(object)value;
         }
 
         private ulong ConvertToULong(TLink value)
         {
-            return Arithmetic<TLink>.ConvertToType<ulong>(value);
+            return (ulong)(object)value;
         }
 
         private TLink ConvertFromByte(byte value)
         {
-            return Arithmetic<TLink>.Convert(value);
+            return (TLink)(object)value;
         }
 
         private TLink ConvertFromUShort(ushort value)
         {
-            return Arithmetic<TLink>.Convert(value);
+            return (TLink)(object)value;
         }
 
         private TLink ConvertFromUInt(uint value)
         {
-            return Arithmetic<TLink>.Convert(value);
+            return (TLink)(object)value;
         }
 
         private TLink ConvertFromULong(ulong value)
         {
-            return Arithmetic<TLink>.Convert(value);
+            return (TLink)(object)value;
         }
-    }
-
-    /// <summary>
-    /// Interface for working with Links storage.
-    /// This is a minimal interface needed for CompactSnapshotStorage.
-    /// </summary>
-    public interface ILinks<TLink>
-    {
-        ILinksConstants<TLink> Constants { get; }
-        TLink GetIndex(IList<TLink> link);
-        IList<TLink> GetLink(TLink index);
-        TLink GetSource(IList<TLink> link);
-        TLink GetTarget(IList<TLink> link);
-        TLink GetOrCreate(TLink source, TLink target);
-        TLink Each(Func<IList<TLink>, TLink> handler);
-    }
-
-    /// <summary>
-    /// Constants used by Links storage.
-    /// </summary>
-    public interface ILinksConstants<TLink>
-    {
-        TLink Continue { get; }
-        TLink Break { get; }
     }
 }
