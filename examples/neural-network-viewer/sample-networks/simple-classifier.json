@@ -1,0 +1,52 @@
+{
+  "name": "Simple Classifier",
+  "description": "A basic classifier with 4 input features, 2 hidden layers, and 3 output classes",
+  "layers": [
+    {
+      "name": "input",
+      "type": "input",
+      "size": 4
+    },
+    {
+      "name": "hidden1",
+      "type": "dense",
+      "size": 6,
+      "activation": "relu",
+      "weights": [
+        [0.5, -0.3, 0.8, 0.2, -0.4, 0.6],
+        [0.7, 0.4, -0.5, 0.9, 0.1, -0.2],
+        [-0.6, 0.8, 0.3, -0.7, 0.5, 0.4],
+        [0.2, -0.5, 0.7, 0.3, -0.8, 0.6]
+      ],
+      "biases": [0.1, -0.05, 0.15, -0.1, 0.2, 0.05]
+    },
+    {
+      "name": "hidden2",
+      "type": "dense",
+      "size": 4,
+      "activation": "relu",
+      "weights": [
+        [0.6, -0.4, 0.7, 0.3],
+        [0.5, 0.6, -0.3, 0.8],
+        [-0.7, 0.4, 0.5, -0.2],
+        [0.8, -0.5, 0.2, 0.6],
+        [0.3, 0.7, -0.4, 0.5],
+        [-0.4, 0.3, 0.8, -0.6]
+      ],
+      "biases": [0.05, -0.1, 0.1, 0.0]
+    },
+    {
+      "name": "output",
+      "type": "dense",
+      "size": 3,
+      "activation": "softmax",
+      "weights": [
+        [0.7, -0.3, 0.5],
+        [-0.4, 0.8, 0.2],
+        [0.6, 0.3, -0.7],
+        [0.5, -0.6, 0.4]
+      ],
+      "biases": [0.0, 0.0, 0.0]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "XOR Neural Network",
+  "description": "A simple 2-3-1 network that learns the XOR function",
+  "layers": [
+    {
+      "name": "input",
+      "type": "input",
+      "size": 2
+    },
+    {
+      "name": "hidden",
+      "type": "dense",
+      "size": 3,
+      "activation": "relu",
+      "weights": [
+        [0.8, -0.6, 0.9],
+        [0.7, 0.8, -0.5]
+      ],
+      "biases": [0.1, -0.2, 0.15]
+    },
+    {
+      "name": "output",
+      "type": "dense",
+      "size": 1,
+      "activation": "sigmoid",
+      "weights": [
+        [0.9],
+        [-0.8],
+        [0.7]
+      ],
+      "biases": [0.0]
+    }
+  ]
+}
