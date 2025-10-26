@@ -10,6 +10,12 @@ namespace Platform.Sandbox
     {
         public static void Main(string[] args)
         {
+            // Pattern Recognition Experiment (Issue #628)
+            PatternRecognitionTest.RunAll();
+            PatternRecognitionExperiment.RunAll();
+
+            return;
+
             //ThreadHelpers.InvokeWithExtendedMaxStackSize(() =>
             //{
             //    args = new string[] { @"F:\Архив Википедии\ru\xml\ruwiki-20151202-pages-articles.xml", "page" };
