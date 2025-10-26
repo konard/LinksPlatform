@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>LinksPlatform's Platform.Transformer.Prototype - A better translator architecture using AST and Doublets</Description>
+    <Copyright>Konstantin Diachenko</Copyright>
+    <AssemblyTitle>Platform.Transformer.Prototype</AssemblyTitle>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Konstantin Diachenko</Authors>
+    <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
+    <AssemblyName>Platform.Transformer.Prototype</AssemblyName>
+    <PackageId>Platform.Transformer.Prototype</PackageId>
+    <PackageTags>LinksPlatform;Transformer;AST;Doublets;CodeTranslation</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Avatar-rainbow.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Konard/LinksPlatform</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/Konard/LinksPlatform</RepositoryUrl>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
+  </ItemGroup>
+
+</Project>
