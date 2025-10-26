@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>LinksPlatform's Platform.Attributes Class Library</Description>
+    <Copyright>Konstantin Diachenko</Copyright>
+    <AssemblyTitle>Platform.Attributes</AssemblyTitle>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Konstantin Diachenko</Authors>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <AssemblyName>Platform.Attributes</AssemblyName>
+    <PackageId>Platform.Attributes</PackageId>
+    <PackageTags>LinksPlatform;Attributes;Experimental</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Avatar-rainbow.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Konard/LinksPlatform/tree/master/Platform/Platform.Attributes</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Konard/LinksPlatform/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/Konard/LinksPlatform</RepositoryUrl>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+</Project>
