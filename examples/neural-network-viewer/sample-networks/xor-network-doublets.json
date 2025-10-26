@@ -1,0 +1,322 @@
+{
+  "doublets": {
+    "links": [
+      {
+        "id": 1,
+        "source": 1,
+        "target": 1,
+        "metadata": {
+          "type": "NetworkType"
+        }
+      },
+      {
+        "id": 2,
+        "source": 2,
+        "target": 2,
+        "metadata": {
+          "type": "LayerType"
+        }
+      },
+      {
+        "id": 3,
+        "source": 3,
+        "target": 3,
+        "metadata": {
+          "type": "NeuronType"
+        }
+      },
+      {
+        "id": 4,
+        "source": 4,
+        "target": 4,
+        "metadata": {
+          "type": "ConnectionType"
+        }
+      },
+      {
+        "id": 5,
+        "source": 5,
+        "target": 5,
+        "metadata": {
+          "type": "WeightType"
+        }
+      },
+      {
+        "id": 6,
+        "source": 6,
+        "target": 6,
+        "metadata": {
+          "type": "BiasType"
+        }
+      },
+      {
+        "id": 7,
+        "source": 7,
+        "target": 7,
+        "metadata": {
+          "type": "Network",
+          "name": "XOR Neural Network"
+        }
+      },
+      {
+        "id": 8,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 0,
+          "name": "input",
+          "layer_type": "input",
+          "size": 2,
+          "activation": null
+        }
+      },
+      {
+        "id": 9,
+        "source": 8,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 0,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 10,
+        "source": 8,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 0,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 11,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 1,
+          "name": "hidden",
+          "layer_type": "dense",
+          "size": 3,
+          "activation": "relu"
+        }
+      },
+      {
+        "id": 12,
+        "source": 11,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 13,
+        "source": 11,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 14,
+        "source": 11,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 2
+        }
+      },
+      {
+        "id": 15,
+        "source": 12,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 16,
+        "source": 9,
+        "target": 12,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.8,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 17,
+        "source": 10,
+        "target": 12,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.7,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 18,
+        "source": 13,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.2
+        }
+      },
+      {
+        "id": 19,
+        "source": 9,
+        "target": 13,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.6,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 20,
+        "source": 10,
+        "target": 13,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.8,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 21,
+        "source": 14,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.15
+        }
+      },
+      {
+        "id": 22,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 2,
+          "name": "output",
+          "layer_type": "dense",
+          "size": 1,
+          "activation": "sigmoid"
+        }
+      },
+      {
+        "id": 23,
+        "source": 22,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 24,
+        "source": 23,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.0
+        }
+      },
+      {
+        "id": 25,
+        "source": 12,
+        "target": 23,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.9,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 26,
+        "source": 13,
+        "target": 23,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.8,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 27,
+        "source": 14,
+        "target": 23,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.7,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      }
+    ]
+  },
+  "network": {
+    "root": 7,
+    "layers": [
+      {
+        "link_id": 8,
+        "name": "input",
+        "neurons": [
+          {
+            "link_id": 9,
+            "index": 0
+          },
+          {
+            "link_id": 10,
+            "index": 1
+          }
+        ]
+      },
+      {
+        "link_id": 11,
+        "name": "hidden",
+        "neurons": [
+          {
+            "link_id": 12,
+            "index": 0
+          },
+          {
+            "link_id": 13,
+            "index": 1
+          },
+          {
+            "link_id": 14,
+            "index": 2
+          }
+        ]
+      },
+      {
+        "link_id": 22,
+        "name": "output",
+        "neurons": [
+          {
+            "link_id": 23,
+            "index": 0
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1842 @@
+{
+  "doublets": {
+    "links": [
+      {
+        "id": 1,
+        "source": 1,
+        "target": 1,
+        "metadata": {
+          "type": "NetworkType"
+        }
+      },
+      {
+        "id": 2,
+        "source": 2,
+        "target": 2,
+        "metadata": {
+          "type": "LayerType"
+        }
+      },
+      {
+        "id": 3,
+        "source": 3,
+        "target": 3,
+        "metadata": {
+          "type": "NeuronType"
+        }
+      },
+      {
+        "id": 4,
+        "source": 4,
+        "target": 4,
+        "metadata": {
+          "type": "ConnectionType"
+        }
+      },
+      {
+        "id": 5,
+        "source": 5,
+        "target": 5,
+        "metadata": {
+          "type": "WeightType"
+        }
+      },
+      {
+        "id": 6,
+        "source": 6,
+        "target": 6,
+        "metadata": {
+          "type": "BiasType"
+        }
+      },
+      {
+        "id": 7,
+        "source": 7,
+        "target": 7,
+        "metadata": {
+          "type": "Network",
+          "name": "Deep Neural Network"
+        }
+      },
+      {
+        "id": 8,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 0,
+          "name": "input",
+          "layer_type": "input",
+          "size": 3,
+          "activation": null
+        }
+      },
+      {
+        "id": 9,
+        "source": 8,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 0,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 10,
+        "source": 8,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 0,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 11,
+        "source": 8,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 0,
+          "neuron_index": 2
+        }
+      },
+      {
+        "id": 12,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 1,
+          "name": "hidden1",
+          "layer_type": "dense",
+          "size": 8,
+          "activation": "relu"
+        }
+      },
+      {
+        "id": 13,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 14,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 15,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 2
+        }
+      },
+      {
+        "id": 16,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 3
+        }
+      },
+      {
+        "id": 17,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 4
+        }
+      },
+      {
+        "id": 18,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 5
+        }
+      },
+      {
+        "id": 19,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 6
+        }
+      },
+      {
+        "id": 20,
+        "source": 12,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 1,
+          "neuron_index": 7
+        }
+      },
+      {
+        "id": 21,
+        "source": 13,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 22,
+        "source": 9,
+        "target": 13,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 23,
+        "source": 10,
+        "target": 13,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 24,
+        "source": 11,
+        "target": 13,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 25,
+        "source": 14,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.05
+        }
+      },
+      {
+        "id": 26,
+        "source": 9,
+        "target": 14,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.2,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 27,
+        "source": 10,
+        "target": 14,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 28,
+        "source": 11,
+        "target": 14,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 29,
+        "source": 15,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 30,
+        "source": 9,
+        "target": 15,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 31,
+        "source": 10,
+        "target": 15,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 32,
+        "source": 11,
+        "target": 15,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 0,
+          "to_layer": 1
+        }
+      },
+      {
+        "id": 33,
+        "source": 16,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.0
+        }
+      },
+      {
+        "id": 34,
+        "source": 17,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.1
+        }
+      },
+      {
+        "id": 35,
+        "source": 18,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.05
+        }
+      },
+      {
+        "id": 36,
+        "source": 19,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 37,
+        "source": 20,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.05
+        }
+      },
+      {
+        "id": 38,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 2,
+          "name": "hidden2",
+          "layer_type": "dense",
+          "size": 6,
+          "activation": "relu"
+        }
+      },
+      {
+        "id": 39,
+        "source": 38,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 40,
+        "source": 38,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 41,
+        "source": 38,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 2
+        }
+      },
+      {
+        "id": 42,
+        "source": 38,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 3
+        }
+      },
+      {
+        "id": 43,
+        "source": 38,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 4
+        }
+      },
+      {
+        "id": 44,
+        "source": 38,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 2,
+          "neuron_index": 5
+        }
+      },
+      {
+        "id": 45,
+        "source": 39,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.05
+        }
+      },
+      {
+        "id": 46,
+        "source": 13,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 47,
+        "source": 14,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 48,
+        "source": 15,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 49,
+        "source": 16,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 50,
+        "source": 17,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 51,
+        "source": 18,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 52,
+        "source": 19,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 53,
+        "source": 20,
+        "target": 39,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 54,
+        "source": 40,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.1
+        }
+      },
+      {
+        "id": 55,
+        "source": 13,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 56,
+        "source": 14,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 57,
+        "source": 15,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 58,
+        "source": 16,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 59,
+        "source": 17,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 60,
+        "source": 18,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 61,
+        "source": 19,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 62,
+        "source": 20,
+        "target": 40,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 63,
+        "source": 41,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 64,
+        "source": 13,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 65,
+        "source": 14,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 66,
+        "source": 15,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 67,
+        "source": 16,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 68,
+        "source": 17,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 69,
+        "source": 18,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 70,
+        "source": 19,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 71,
+        "source": 20,
+        "target": 41,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 72,
+        "source": 42,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.0
+        }
+      },
+      {
+        "id": 73,
+        "source": 13,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 74,
+        "source": 14,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 75,
+        "source": 15,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 76,
+        "source": 16,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 77,
+        "source": 17,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.7,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 78,
+        "source": 18,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 79,
+        "source": 19,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 80,
+        "source": 20,
+        "target": 42,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 81,
+        "source": 43,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.05
+        }
+      },
+      {
+        "id": 82,
+        "source": 13,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 83,
+        "source": 14,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.1,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 84,
+        "source": 15,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 85,
+        "source": 16,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 86,
+        "source": 17,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.1,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 87,
+        "source": 18,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 88,
+        "source": 19,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.6,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 89,
+        "source": 20,
+        "target": 43,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 90,
+        "source": 44,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 91,
+        "source": 13,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 92,
+        "source": 14,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 93,
+        "source": 15,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 94,
+        "source": 16,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 95,
+        "source": 17,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 96,
+        "source": 18,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 97,
+        "source": 19,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 98,
+        "source": 20,
+        "target": 44,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 1,
+          "to_layer": 2
+        }
+      },
+      {
+        "id": 99,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 3,
+          "name": "hidden3",
+          "layer_type": "dense",
+          "size": 4,
+          "activation": "relu"
+        }
+      },
+      {
+        "id": 100,
+        "source": 99,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 3,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 101,
+        "source": 99,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 3,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 102,
+        "source": 99,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 3,
+          "neuron_index": 2
+        }
+      },
+      {
+        "id": 103,
+        "source": 99,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 3,
+          "neuron_index": 3
+        }
+      },
+      {
+        "id": 104,
+        "source": 100,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 105,
+        "source": 39,
+        "target": 100,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 106,
+        "source": 40,
+        "target": 100,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 107,
+        "source": 41,
+        "target": 100,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 108,
+        "source": 42,
+        "target": 100,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 109,
+        "source": 43,
+        "target": 100,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 110,
+        "source": 44,
+        "target": 100,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 111,
+        "source": 101,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.05
+        }
+      },
+      {
+        "id": 112,
+        "source": 39,
+        "target": 101,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 113,
+        "source": 40,
+        "target": 101,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 114,
+        "source": 41,
+        "target": 101,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 115,
+        "source": 42,
+        "target": 101,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 116,
+        "source": 43,
+        "target": 101,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 117,
+        "source": 44,
+        "target": 101,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 118,
+        "source": 102,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.05
+        }
+      },
+      {
+        "id": 119,
+        "source": 39,
+        "target": 102,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 120,
+        "source": 40,
+        "target": 102,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.3,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 121,
+        "source": 41,
+        "target": 102,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 122,
+        "source": 42,
+        "target": 102,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 123,
+        "source": 43,
+        "target": 102,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 124,
+        "source": 44,
+        "target": 102,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 125,
+        "source": 103,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 126,
+        "source": 39,
+        "target": 103,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 127,
+        "source": 40,
+        "target": 103,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 128,
+        "source": 41,
+        "target": 103,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.2,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 129,
+        "source": 42,
+        "target": 103,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 130,
+        "source": 43,
+        "target": 103,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.2,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 131,
+        "source": 44,
+        "target": 103,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.6,
+          "from_layer": 2,
+          "to_layer": 3
+        }
+      },
+      {
+        "id": 132,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 4,
+          "name": "hidden4",
+          "layer_type": "dense",
+          "size": 3,
+          "activation": "relu"
+        }
+      },
+      {
+        "id": 133,
+        "source": 132,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 4,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 134,
+        "source": 132,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 4,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 135,
+        "source": 132,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 4,
+          "neuron_index": 2
+        }
+      },
+      {
+        "id": 136,
+        "source": 133,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.0
+        }
+      },
+      {
+        "id": 137,
+        "source": 100,
+        "target": 133,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 138,
+        "source": 101,
+        "target": 133,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 139,
+        "source": 102,
+        "target": 133,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 140,
+        "source": 103,
+        "target": 133,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 141,
+        "source": 134,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": -0.1
+        }
+      },
+      {
+        "id": 142,
+        "source": 100,
+        "target": 134,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.4,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 143,
+        "source": 101,
+        "target": 134,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.3,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 144,
+        "source": 102,
+        "target": 134,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 145,
+        "source": 103,
+        "target": 134,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.6,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 146,
+        "source": 135,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.1
+        }
+      },
+      {
+        "id": 147,
+        "source": 100,
+        "target": 135,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.6,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 148,
+        "source": 101,
+        "target": 135,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 149,
+        "source": 102,
+        "target": 135,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 150,
+        "source": 103,
+        "target": 135,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 3,
+          "to_layer": 4
+        }
+      },
+      {
+        "id": 151,
+        "source": 7,
+        "target": 2,
+        "metadata": {
+          "type": "Layer",
+          "index": 5,
+          "name": "output",
+          "layer_type": "dense",
+          "size": 2,
+          "activation": "sigmoid"
+        }
+      },
+      {
+        "id": 152,
+        "source": 151,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 5,
+          "neuron_index": 0
+        }
+      },
+      {
+        "id": 153,
+        "source": 151,
+        "target": 3,
+        "metadata": {
+          "type": "Neuron",
+          "layer_index": 5,
+          "neuron_index": 1
+        }
+      },
+      {
+        "id": 154,
+        "source": 152,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.0
+        }
+      },
+      {
+        "id": 155,
+        "source": 133,
+        "target": 152,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.7,
+          "from_layer": 4,
+          "to_layer": 5
+        }
+      },
+      {
+        "id": 156,
+        "source": 134,
+        "target": 152,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.6,
+          "from_layer": 4,
+          "to_layer": 5
+        }
+      },
+      {
+        "id": 157,
+        "source": 135,
+        "target": 152,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.5,
+          "from_layer": 4,
+          "to_layer": 5
+        }
+      },
+      {
+        "id": 158,
+        "source": 153,
+        "target": 6,
+        "metadata": {
+          "type": "Bias",
+          "value": 0.0
+        }
+      },
+      {
+        "id": 159,
+        "source": 133,
+        "target": 153,
+        "metadata": {
+          "type": "Connection",
+          "weight": -0.5,
+          "from_layer": 4,
+          "to_layer": 5
+        }
+      },
+      {
+        "id": 160,
+        "source": 134,
+        "target": 153,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.7,
+          "from_layer": 4,
+          "to_layer": 5
+        }
+      },
+      {
+        "id": 161,
+        "source": 135,
+        "target": 153,
+        "metadata": {
+          "type": "Connection",
+          "weight": 0.4,
+          "from_layer": 4,
+          "to_layer": 5
+        }
+      }
+    ]
+  },
+  "network": {
+    "root": 7,
+    "layers": [
+      {
+        "link_id": 8,
+        "name": "input",
+        "neurons": [
+          {
+            "link_id": 9,
+            "index": 0
+          },
+          {
+            "link_id": 10,
+            "index": 1
+          },
+          {
+            "link_id": 11,
+            "index": 2
+          }
+        ]
+      },
+      {
+        "link_id": 12,
+        "name": "hidden1",
+        "neurons": [
+          {
+            "link_id": 13,
+            "index": 0
+          },
+          {
+            "link_id": 14,
+            "index": 1
+          },
+          {
+            "link_id": 15,
+            "index": 2
+          },
+          {
+            "link_id": 16,
+            "index": 3
+          },
+          {
+            "link_id": 17,
+            "index": 4
+          },
+          {
+            "link_id": 18,
+            "index": 5
+          },
+          {
+            "link_id": 19,
+            "index": 6
+          },
+          {
+            "link_id": 20,
+            "index": 7
+          }
+        ]
+      },
+      {
+        "link_id": 38,
+        "name": "hidden2",
+        "neurons": [
+          {
+            "link_id": 39,
+            "index": 0
+          },
+          {
+            "link_id": 40,
+            "index": 1
+          },
+          {
+            "link_id": 41,
+            "index": 2
+          },
+          {
+            "link_id": 42,
+            "index": 3
+          },
+          {
+            "link_id": 43,
+            "index": 4
+          },
+          {
+            "link_id": 44,
+            "index": 5
+          }
+        ]
+      },
+      {
+        "link_id": 99,
+        "name": "hidden3",
+        "neurons": [
+          {
+            "link_id": 100,
+            "index": 0
+          },
+          {
+            "link_id": 101,
+            "index": 1
+          },
+          {
+            "link_id": 102,
+            "index": 2
+          },
+          {
+            "link_id": 103,
+            "index": 3
+          }
+        ]
+      },
+      {
+        "link_id": 132,
+        "name": "hidden4",
+        "neurons": [
+          {
+            "link_id": 133,
+            "index": 0
+          },
+          {
+            "link_id": 134,
+            "index": 1
+          },
+          {
+            "link_id": 135,
+            "index": 2
+          }
+        ]
+      },
+      {
+        "link_id": 151,
+        "name": "output",
+        "neurons": [
+          {
+            "link_id": 152,
+            "index": 0
+          },
+          {
+            "link_id": 153,
+            "index": 1
+          }
+        ]
+      }
+    ]
+  }
+}

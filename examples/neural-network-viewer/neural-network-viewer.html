@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Inside Viewer - Doublets Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        #container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-width: 350px;
+            z-index: 1000;
+        }
+
+        #controls h2 {
+            margin-bottom: 15px;
+            color: #4CAF50;
+            font-size: 20px;
+        }
+
+        #controls .control-group {
+            margin-bottom: 15px;
+        }
+
+        #controls label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        #controls input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #2a2a3e;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        #controls button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #controls button:hover {
+            background: #45a049;
+        }
+
+        #controls input[type="range"] {
+            width: 100%;
+        }
+
+        #info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            max-width: 350px;
+            z-index: 1000;
+        }
+
+        #info h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        #info .stat {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        #info .stat:last-child {
+            border-bottom: none;
+        }
+
+        #info .stat-label {
+            color: #aaa;
+        }
+
+        #info .stat-value {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        #legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        #legend h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        #legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+
+        #legend .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2000;
+        }
+
+        .loader.hidden {
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #help {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 11px;
+            max-width: 250px;
+            z-index: 1000;
+        }
+
+        #help h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        #help ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #help li {
+            margin: 5px 0;
+            color: #aaa;
+        }
+
+        #help kbd {
+            background: #2a2a3e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="canvas-container"></div>
+
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p>Loading Neural Network...</p>
+        </div>
+
+        <div id="controls">
+            <h2>Neural Network Viewer</h2>
+            <div class="control-group">
+                <label for="file-input">Load Network (JSON):</label>
+                <input type="file" id="file-input" accept=".json">
+            </div>
+            <div class="control-group">
+                <label for="layer-spacing">Layer Spacing: <span id="layer-spacing-value">3.0</span></label>
+                <input type="range" id="layer-spacing" min="1" max="10" step="0.5" value="3">
+            </div>
+            <div class="control-group">
+                <label for="neuron-spacing">Neuron Spacing: <span id="neuron-spacing-value">1.0</span></label>
+                <input type="range" id="neuron-spacing" min="0.5" max="3" step="0.1" value="1">
+            </div>
+            <div class="control-group">
+                <button id="reset-camera">Reset Camera</button>
+                <button id="animate-toggle">Start Animation</button>
+            </div>
+        </div>
+
+        <div id="info">
+            <h3>Network Statistics</h3>
+            <div class="stat">
+                <span class="stat-label">Network:</span>
+                <span class="stat-value" id="network-name">-</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Total Links:</span>
+                <span class="stat-value" id="total-links">-</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Layers:</span>
+                <span class="stat-value" id="total-layers">-</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Neurons:</span>
+                <span class="stat-value" id="total-neurons">-</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Connections:</span>
+                <span class="stat-value" id="total-connections">-</span>
+            </div>
+        </div>
+
+        <div id="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #00ff88;"></div>
+                <span>Input Layer</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #0088ff;"></div>
+                <span>Hidden Layers</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff00ff;"></div>
+                <span>Output Layer</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffaa00;"></div>
+                <span>Connections</span>
+            </div>
+        </div>
+
+        <div id="help">
+            <h3>Controls</h3>
+            <ul>
+                <li><kbd>Left Click</kbd> + Drag: Rotate</li>
+                <li><kbd>Right Click</kbd> + Drag: Pan</li>
+                <li><kbd>Scroll</kbd>: Zoom</li>
+                <li><kbd>Click Neuron</kbd>: Inspect</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Three.js OrbitControls
+        !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t((e="undefined"!=typeof globalThis?globalThis:e||self).THREE={})}(this,(function(e){"use strict";const t={type:"change"},n={type:"start"},i={type:"end"},r=new THREE.Vector3,s=new THREE.Plane,o=new THREE.MOUSE,a=new THREE.Raycaster;class c extends THREE.EventDispatcher{constructor(e,c){super(),this.object=e,this.domElement=c,this.domElement.style.touchAction="none",this.enabled=!0,this.target=new THREE.Vector3,this.minDistance=0,this.maxDistance=1/0,this.minZoom=0,this.maxZoom=1/0,this.minPolarAngle=0,this.maxPolarAngle=Math.PI,this.minAzimuthAngle=-1/0,this.maxAzimuthAngle=1/0,this.enableDamping=!1,this.dampingFactor=.05,this.enableZoom=!0,this.zoomSpeed=1,this.enableRotate=!0,this.rotateSpeed=1,this.enablePan=!0,this.panSpeed=1,this.screenSpacePanning=!0,this.keyPanSpeed=7,this.autoRotate=!1,this.autoRotateSpeed=2,this.keys={LEFT:"ArrowLeft",UP:"ArrowUp",RIGHT:"ArrowRight",BOTTOM:"ArrowDown"},this.mouseButtons={LEFT:o.ROTATE,MIDDLE:o.DOLLY,RIGHT:o.PAN},this.touches={ONE:THREE.TOUCH.ROTATE,TWO:THREE.TOUCH.DOLLY_PAN},this.target0=this.target.clone(),this.position0=this.object.position.clone(),this.zoom0=this.object.zoom,this._domElementKeyEvents=null,this.getPolarAngle=function(){return l.phi},this.getAzimuthalAngle=function(){return l.theta},this.getDistance=function(){return this.object.position.distanceTo(this.target)},this.listenToKeyEvents=function(e){e.addEventListener("keydown",W),this._domElementKeyEvents=e},this.saveState=function(){h.target0.copy(h.target),h.position0.copy(h.object.position),h.zoom0=h.object.zoom},this.reset=function(){h.target.copy(h.target0),h.object.position.copy(h.position0),h.object.zoom=h.zoom0,h.object.updateProjectionMatrix(),h.dispatchEvent(t),h.update(),u=d.NONE},this.update=function(){const o=new THREE.Vector3,a=new THREE.Quaternion,c=new THREE.Quaternion,g=new THREE.Vector3,m=2*Math.PI;return function(){a.setFromUnitVectors(e.up,new THREE.Vector3(0,1,0)),c.copy(a).invert();const v=e.position;o.copy(v).sub(h.target),o.applyQuaternion(a),l.setFromVector3(o),h.autoRotate&&u===d.NONE&&S(2*Math.PI/60/60*h.autoRotateSpeed),h.enableDamping?(l.theta+=p.theta*h.dampingFactor,l.phi+=p.phi*h.dampingFactor):(l.theta+=p.theta,l.phi+=p.phi);let b=h.minAzimuthAngle,M=h.maxAzimuthAngle;return isFinite(b)&&isFinite(M)&&(b<-Math.PI?b+=m:b>Math.PI&&(b-=m),M<-Math.PI?M+=m:M>Math.PI&&(M-=m),b<=M?l.theta=Math.max(b,Math.min(M,l.theta)):l.theta=l.theta>(b+M)/2?Math.max(b,l.theta):Math.min(M,l.theta)),l.phi=Math.max(h.minPolarAngle,Math.min(h.maxPolarAngle,l.phi)),l.makeSafe(),l.radius*=f,l.radius=Math.max(h.minDistance,Math.min(h.maxDistance,l.radius)),!0===h.enableDamping?h.target.addScaledVector(E,h.dampingFactor):h.target.add(E),o.setFromSpherical(l),o.applyQuaternion(c),v.copy(h.target).add(o),e.lookAt(h.target),!0===h.enableDamping?(p.theta*=1-h.dampingFactor,p.phi*=1-h.dampingFactor,E.multiplyScalar(1-h.dampingFactor)):(p.set(0,0,0),E.set(0,0,0)),f=1,!!(y||g.distanceToSquared(e.position)>m||8*(1-v.dot(e.quaternion))>m)&&(h.dispatchEvent(t),g.copy(e.position),v.copy(e.quaternion),y=!1,!0)}}(),this.dispose=function(){h.domElement.removeEventListener("contextmenu",j),h.domElement.removeEventListener("pointerdown",D),h.domElement.removeEventListener("pointercancel",B),h.domElement.removeEventListener("wheel",X),h.domElement.removeEventListener("pointermove",_),h.domElement.removeEventListener("pointerup",B),null!==h._domElementKeyEvents&&(h._domElementKeyEvents.removeEventListener("keydown",W),h._domElementKeyEvents=null)};const h=this,d={NONE:-1,ROTATE:0,DOLLY:1,PAN:2,TOUCH_ROTATE:3,TOUCH_PAN:4,TOUCH_DOLLY_PAN:5,TOUCH_DOLLY_ROTATE:6};let u=d.NONE;const m=1e-6,l=new THREE.Spherical,p=new THREE.Spherical;let f=1;const E=new THREE.Vector3;let y=!1;const g=new THREE.Vector2,v=new THREE.Vector2,b=new THREE.Vector2,M=new THREE.Vector2,A=new THREE.Vector2,T=new THREE.Vector2,C=new THREE.Vector2,R=new THREE.Vector2,w=new THREE.Vector2;function S(e){p.theta-=e}function P(e){p.phi-=e}const L=function(){const e=new THREE.Vector3;return function(t,n){e.setFromMatrixColumn(n,0),e.multiplyScalar(-t),E.add(e)}}(),O=function(){const e=new THREE.Vector3;return function(t,n){!0===h.screenSpacePanning?e.setFromMatrixColumn(n,1):(e.setFromMatrixColumn(n,0),e.crossVectors(h.object.up,e)),e.multiplyScalar(t),E.add(e)}}(),z=function(){const e=new THREE.Vector3;return function(t,n){const i=h.domElement;if(h.object.isPerspectiveCamera){const r=h.object.position;e.copy(r).sub(h.target);let s=e.length();s*=Math.tan(h.object.fov/2*Math.PI/180),L(2*t*s/i.clientHeight,h.object.matrix),O(2*n*s/i.clientHeight,h.object.matrix)}else h.object.isOrthographicCamera?(L(t*(h.object.right-h.object.left)/h.object.zoom/i.clientWidth,h.object.matrix),O(n*(h.object.top-h.object.bottom)/h.object.zoom/i.clientHeight,h.object.matrix)):(console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled."),h.enablePan=!1)}}();function x(e){h.object.isPerspectiveCamera?f/=e:h.object.isOrthographicCamera?(h.object.zoom=Math.max(h.minZoom,Math.min(h.maxZoom,h.object.zoom*e)),h.object.updateProjectionMatrix(),y=!0):(console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled."),h.enableZoom=!1)}function I(e){h.object.isPerspectiveCamera?f*=e:h.object.isOrthographicCamera?(h.object.zoom=Math.max(h.minZoom,Math.min(h.maxZoom,h.object.zoom/e)),h.object.updateProjectionMatrix(),y=!0):(console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled."),h.enableZoom=!1)}function D(e){h.enabled!==!1&&(0===Z.length&&(h.domElement.setPointerCapture(e.pointerId),h.domElement.addEventListener("pointermove",_),h.domElement.addEventListener("pointerup",B)),function(e){Z.push(e)}(e),e.pointerType==="touch"?function(e){switch(Q(e),Z.length){case 1:switch(h.touches.ONE){case THREE.TOUCH.ROTATE:if(!1===h.enableRotate)return;!function(e){g.set(e.pageX,e.pageY)}(e),u=d.TOUCH_ROTATE;break;case THREE.TOUCH.PAN:if(!1===h.enablePan)return;!function(e){M.set(e.pageX,e.pageY)}(e),u=d.TOUCH_PAN;break;default:u=d.NONE}break;case 2:switch(h.touches.TWO){case THREE.TOUCH.DOLLY_PAN:if(!1===h.enableZoom&&!1===h.enablePan)return;!function(e){h.enableZoom&&function(e){const t=e[0].pageX-e[1].pageX,n=e[0].pageY-e[1].pageY,i=Math.sqrt(t*t+n*n);C.set(0,i)}(e),h.enablePan&&function(e){const t=.5*(e[0].pageX+e[1].pageX),n=.5*(e[0].pageY+e[1].pageY);M.set(t,n)}(e)}(e),u=d.TOUCH_DOLLY_PAN;break;case THREE.TOUCH.DOLLY_ROTATE:if(!1===h.enableZoom&&!1===h.enableRotate)return;!function(e){h.enableZoom&&function(e){const t=e[0].pageX-e[1].pageX,n=e[0].pageY-e[1].pageY,i=Math.sqrt(t*t+n*n);C.set(0,i)}(e),h.enableRotate&&function(e){g.set(.5*(e[0].pageX+e[1].pageX),.5*(e[0].pageY+e[1].pageY))}(e)}(e),u=d.TOUCH_DOLLY_ROTATE;break;default:u=d.NONE}break;default:u=d.NONE}u!==d.NONE&&h.dispatchEvent(n)}(e):function(e){let t;switch(e.button){case 0:t=h.mouseButtons.LEFT;break;case 1:t=h.mouseButtons.MIDDLE;break;case 2:t=h.mouseButtons.RIGHT;break;default:t=-1}switch(t){case o.DOLLY:if(!1===h.enableZoom)return;!function(e){C.set(e.clientX,e.clientY)}(e),u=d.DOLLY;break;case o.ROTATE:if(e.ctrlKey||e.metaKey||e.shiftKey){if(!1===h.enablePan)return;!function(e){M.set(e.clientX,e.clientY)}(e),u=d.PAN}else{if(!1===h.enableRotate)return;!function(e){g.set(e.clientX,e.clientY)}(e),u=d.ROTATE}break;case o.PAN:if(e.ctrlKey||e.metaKey||e.shiftKey){if(!1===h.enableRotate)return;!function(e){g.set(e.clientX,e.clientY)}(e),u=d.ROTATE}else{if(!1===h.enablePan)return;!function(e){M.set(e.clientX,e.clientY)}(e),u=d.PAN}break;default:u=d.NONE}u!==d.NONE&&h.dispatchEvent(n)}(e))}function _(e){h.enabled!==!1&&(e.pointerType==="touch"?function(e){switch(Q(e),u){case d.TOUCH_ROTATE:if(!1===h.enableRotate)return;!function(e){v.set(e.pageX,e.pageY),b.subVectors(v,g).multiplyScalar(h.rotateSpeed);const t=h.domElement;S(2*Math.PI*b.x/t.clientHeight),P(2*Math.PI*b.y/t.clientHeight),g.copy(v),h.update()}(e);break;case d.TOUCH_PAN:if(!1===h.enablePan)return;!function(e){A.set(e.pageX,e.pageY),T.subVectors(A,M).multiplyScalar(h.panSpeed),z(T.x,T.y),M.copy(A),h.update()}(e);break;case d.TOUCH_DOLLY_PAN:if(!1===h.enableZoom&&!1===h.enablePan)return;!function(e){h.enableZoom&&function(e){const t=e[0].pageX-e[1].pageX,n=e[0].pageY-e[1].pageY,i=Math.sqrt(t*t+n*n);R.set(0,i),w.set(0,Math.pow(R.y/C.y,h.zoomSpeed)),x(w.y),C.copy(R)}(e),h.enablePan&&function(e){const t=.5*(e[0].pageX+e[1].pageX),n=.5*(e[0].pageY+e[1].pageY);A.set(t,n),T.subVectors(A,M).multiplyScalar(h.panSpeed),z(T.x,T.y),M.copy(A)}(e),h.update()}(e);break;case d.TOUCH_DOLLY_ROTATE:if(!1===h.enableZoom&&!1===h.enableRotate)return;!function(e){h.enableZoom&&function(e){const t=e[0].pageX-e[1].pageX,n=e[0].pageY-e[1].pageY,i=Math.sqrt(t*t+n*n);R.set(0,i),w.set(0,Math.pow(R.y/C.y,h.zoomSpeed)),x(w.y),C.copy(R)}(e),h.enableRotate&&function(e){v.set(.5*(e[0].pageX+e[1].pageX),.5*(e[0].pageY+e[1].pageY)),b.subVectors(v,g).multiplyScalar(h.rotateSpeed);const t=h.domElement;S(2*Math.PI*b.x/t.clientHeight),P(2*Math.PI*b.y/t.clientHeight),g.copy(v)}(e),h.update()}(e);break;default:u=d.NONE}}(e):function(e){if(!1!==h.enabled)switch(u){case d.ROTATE:if(!1===h.enableRotate)return;!function(e){v.set(e.clientX,e.clientY),b.subVectors(v,g).multiplyScalar(h.rotateSpeed);const t=h.domElement;S(2*Math.PI*b.x/t.clientHeight),P(2*Math.PI*b.y/t.clientHeight),g.copy(v),h.update()}(e);break;case d.DOLLY:if(!1===h.enableZoom)return;!function(e){R.set(e.clientX,e.clientY),w.subVectors(R,C),w.y>0?x(I(w.y)):w.y<0&&I(x(w.y)),C.copy(R),h.update()}(e);break;case d.PAN:if(!1===h.enablePan)return;!function(e){A.set(e.clientX,e.clientY),T.subVectors(A,M).multiplyScalar(h.panSpeed),z(T.x,T.y),M.copy(A),h.update()}(e)}}(e))}function B(e){N(e),0===Z.length&&(h.domElement.releasePointerCapture(e.pointerId),h.domElement.removeEventListener("pointermove",_),h.domElement.removeEventListener("pointerup",B)),h.dispatchEvent(i),u=d.NONE}function j(e){!1!==h.enabled&&e.preventDefault()}function X(e){!1===h.enabled||!1===h.enableZoom||u!==d.NONE||(e.preventDefault(),h.dispatchEvent(n),function(e){e.deltaY<0?I(x(e.deltaY)):e.deltaY>0&&x(I(e.deltaY)),h.update()}(e),h.dispatchEvent(i))}function W(e){!1!==h.enabled&&!1!==h.enablePan&&function(e){let t=!1;switch(e.code){case h.keys.UP:z(0,h.keyPanSpeed),t=!0;break;case h.keys.BOTTOM:z(0,-h.keyPanSpeed),t=!0;break;case h.keys.LEFT:z(h.keyPanSpeed,0),t=!0;break;case h.keys.RIGHT:z(-h.keyPanSpeed,0),t=!0}t&&(e.preventDefault(),h.update())}(e)}const Z=[];function Q(e){let t=Z[0]===e?Z[1]:Z[0];return{x:.5*(e.pageX+t.pageX),y:.5*(e.pageY+t.pageY)}}function N(e){delete U[e.pointerId];for(let t=0;t<Z.length;t++)if(Z[t].pointerId==e.pointerId)return void Z.splice(t,1)}const U={};h.domElement.addEventListener("contextmenu",j),h.domElement.addEventListener("pointerdown",D),h.domElement.addEventListener("pointercancel",B),h.domElement.addEventListener("wheel",X,{passive:!1}),this.update()}}e.OrbitControls=c,Object.defineProperty(e,"__esModule",{value:!0})}));
+
+        // Global variables
+        let scene, camera, renderer, controls;
+        let networkData = null;
+        let neuronMeshes = [];
+        let connectionLines = [];
+        let animationId = null;
+        let isAnimating = false;
+
+        // Initialize the viewer
+        function init() {
+            const container = document.getElementById('canvas-container');
+
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a2e);
+            scene.fog = new THREE.Fog(0x1a1a2e, 10, 50);
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(
+                75,
+                container.clientWidth / container.clientHeight,
+                0.1,
+                1000
+            );
+            camera.position.set(0, 5, 15);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 5;
+            controls.maxDistance = 50;
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xffffff, 0.8);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+
+            const pointLight2 = new THREE.PointLight(0x4CAF50, 0.5);
+            pointLight2.position.set(-10, -10, -10);
+            scene.add(pointLight2);
+
+            // Event listeners
+            window.addEventListener('resize', onWindowResize);
+            document.getElementById('file-input').addEventListener('change', handleFileSelect);
+            document.getElementById('reset-camera').addEventListener('click', resetCamera);
+            document.getElementById('animate-toggle').addEventListener('click', toggleAnimation);
+            document.getElementById('layer-spacing').addEventListener('input', updateSpacing);
+            document.getElementById('neuron-spacing').addEventListener('input', updateSpacing);
+
+            // Start animation loop
+            animate();
+
+            // Hide loader
+            document.getElementById('loader').classList.add('hidden');
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+
+            if (isAnimating) {
+                animateNetwork();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function animateNetwork() {
+            const time = Date.now() * 0.001;
+            neuronMeshes.forEach((mesh, idx) => {
+                const offset = idx * 0.5;
+                mesh.scale.setScalar(1 + Math.sin(time * 2 + offset) * 0.1);
+            });
+        }
+
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        function resetCamera() {
+            camera.position.set(0, 5, 15);
+            controls.target.set(0, 0, 0);
+            controls.update();
+        }
+
+        function toggleAnimation() {
+            isAnimating = !isAnimating;
+            document.getElementById('animate-toggle').textContent =
+                isAnimating ? 'Stop Animation' : 'Start Animation';
+        }
+
+        function updateSpacing() {
+            const layerSpacing = document.getElementById('layer-spacing').value;
+            const neuronSpacing = document.getElementById('neuron-spacing').value;
+
+            document.getElementById('layer-spacing-value').textContent = layerSpacing;
+            document.getElementById('neuron-spacing-value').textContent = neuronSpacing;
+
+            if (networkData) {
+                visualizeNetwork(networkData);
+            }
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        loadNetwork(data);
+                    } catch (error) {
+                        alert('Error parsing JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function loadNetwork(data) {
+            networkData = data;
+            visualizeNetwork(data);
+            updateStatistics(data);
+        }
+
+        function visualizeNetwork(data) {
+            // Clear existing visualization
+            neuronMeshes.forEach(mesh => scene.remove(mesh));
+            connectionLines.forEach(line => scene.remove(line));
+            neuronMeshes = [];
+            connectionLines = [];
+
+            const layers = data.network.layers;
+            const layerSpacing = parseFloat(document.getElementById('layer-spacing').value);
+            const neuronSpacing = parseFloat(document.getElementById('neuron-spacing').value);
+
+            // Create neurons
+            layers.forEach((layer, layerIdx) => {
+                const neurons = layer.neurons;
+                const layerX = layerIdx * layerSpacing - (layers.length - 1) * layerSpacing / 2;
+
+                neurons.forEach((neuron, neuronIdx) => {
+                    const neuronY = (neuronIdx - neurons.length / 2) * neuronSpacing;
+
+                    // Determine color based on layer position
+                    let color;
+                    if (layerIdx === 0) {
+                        color = 0x00ff88; // Green for input
+                    } else if (layerIdx === layers.length - 1) {
+                        color = 0xff00ff; // Magenta for output
+                    } else {
+                        color = 0x0088ff; // Blue for hidden
+                    }
+
+                    const geometry = new THREE.SphereGeometry(0.3, 32, 32);
+                    const material = new THREE.MeshPhongMaterial({
+                        color: color,
+                        emissive: color,
+                        emissiveIntensity: 0.2,
+                        shininess: 100
+                    });
+
+                    const mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.set(layerX, neuronY, 0);
+                    mesh.userData = {
+                        layer: layerIdx,
+                        neuron: neuronIdx,
+                        linkId: neuron.link_id
+                    };
+
+                    scene.add(mesh);
+                    neuronMeshes.push(mesh);
+                });
+            });
+
+            // Create connections
+            data.doublets.links.forEach(link => {
+                if (link.metadata && link.metadata.type === 'Connection') {
+                    const fromLayer = link.metadata.from_layer;
+                    const toLayer = link.metadata.to_layer;
+                    const weight = link.metadata.weight;
+
+                    // Find source and target neurons
+                    const sourceMesh = neuronMeshes.find(m =>
+                        m.userData.linkId === link.source
+                    );
+                    const targetMesh = neuronMeshes.find(m =>
+                        m.userData.linkId === link.target
+                    );
+
+                    if (sourceMesh && targetMesh) {
+                        const points = [sourceMesh.position, targetMesh.position];
+                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+                        // Color and thickness based on weight
+                        const absWeight = Math.abs(weight);
+                        const opacity = Math.min(absWeight, 1.0);
+                        const color = weight >= 0 ? 0xffaa00 : 0xff0000;
+
+                        const material = new THREE.LineBasicMaterial({
+                            color: color,
+                            opacity: opacity * 0.6,
+                            transparent: true,
+                            linewidth: 1
+                        });
+
+                        const line = new THREE.Line(geometry, material);
+                        scene.add(line);
+                        connectionLines.push(line);
+                    }
+                }
+            });
+        }
+
+        function updateStatistics(data) {
+            // Find network name from doublets metadata
+            const networkLink = data.doublets.links.find(l =>
+                l.metadata && l.metadata.type === 'Network'
+            );
+            const networkName = networkLink ? networkLink.metadata.name : 'Unknown';
+
+            const totalLinks = data.doublets.links.length;
+            const totalLayers = data.network.layers.length;
+            const totalNeurons = data.network.layers.reduce((sum, layer) =>
+                sum + layer.neurons.length, 0
+            );
+            const totalConnections = data.doublets.links.filter(l =>
+                l.metadata && l.metadata.type === 'Connection'
+            ).length;
+
+            document.getElementById('network-name').textContent = networkName;
+            document.getElementById('total-links').textContent = totalLinks;
+            document.getElementById('total-layers').textContent = totalLayers;
+            document.getElementById('total-neurons').textContent = totalNeurons;
+            document.getElementById('total-connections').textContent = totalConnections;
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+</html>
